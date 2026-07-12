@@ -56,12 +56,14 @@ app.get('/sitemap-lang.xml', (req, res) => res.sendFile(path.join(__dirname, 'si
 app.get('/sitemap-index.xml', (req, res) => res.sendFile(path.join(__dirname, 'sitemap-index.xml')));
 app.get('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, 'robots.txt')));
 
-// SEO-friendly clean URLs for tool/compare/lang pages (folder-based, served via static index.html)
-// e.g. /tools/compress-pdf/ -> /tools/compress-pdf/index.html (handled automatically by express.static)
-// Redirect non-trailing-slash tool URLs to canonical trailing-slash version (avoids duplicate content)
-app.get(['/tools/:slug', '/compare/:slug', '/lang/:slug'], (req, res, next) => {
-  if (!req.path.endsWith('/')) {
-    return res.redirect(301, req.path + '/');
+// SEO-friendly clean URLs redirection
+// Redirect non-trailing-slash URLs to canonical trailing-slash version (avoids duplicate content)
+app.use((req, res, next) => {
+  if (req.path.indexOf('.') === -1 && !req.path.startsWith('/api/')) {
+    if (!req.path.endsWith('/')) {
+      const query = req.url.slice(req.path.length);
+      return res.redirect(301, req.path + '/' + query);
+    }
   }
   next();
 });

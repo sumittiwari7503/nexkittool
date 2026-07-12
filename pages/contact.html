@@ -33,15 +33,15 @@
 
       <div class="contact-item">
         <div class="contact-item-icon">📧</div>
-        <div class="contact-item-text"><strong>General Support</strong><span>nexkittool@gmail.com</span></div>
+        <div class="contact-item-text"><strong>General Support</strong><span>support@nexkittool.com</span></div>
       </div>
       <div class="contact-item">
         <div class="contact-item-icon">💡</div>
-        <div class="contact-item-text"><strong>Tool Suggestions</strong><span>nexkittool@gmail.com</span></div>
+        <div class="contact-item-text"><strong>Tool Suggestions</strong><span>support@nexkittool.com</span></div>
       </div>
       <div class="contact-item">
         <div class="contact-item-icon">🐛</div>
-        <div class="contact-item-text"><strong>Bug Reports</strong><span>nexkittool@gmail.com</span></div>
+        <div class="contact-item-text"><strong>Bug Reports</strong><span>support@nexkittool.com</span></div>
       </div>
       <div class="contact-item">
         <div class="contact-item-icon">👨‍💻</div>
@@ -54,7 +54,7 @@
 
       <div style="margin-top:24px;background:linear-gradient(135deg,#f0ebff,#fff4f0);border-radius:12px;padding:20px;border:1px solid #e5e7eb">
         <div style="font-weight:800;margin-bottom:6px;color:#111827">⚡ Quick Response</div>
-        <p style="color:#6b7280;font-size:.9rem;margin:0">Email us at <a href="mailto:nexkittool@gmail.com" style="color:#6c47ff;font-weight:700">nexkittool@gmail.com</a> — we reply within 24 hours, usually faster!</p>
+        <p style="color:#6b7280;font-size:.9rem;margin:0">Email us at <a href="mailto:support@nexkittool.com" style="color:#6c47ff;font-weight:700">support@nexkittool.com</a> — we reply within 24 hours, usually faster!</p>
       </div>
 
       <div style="margin-top:20px">
@@ -94,8 +94,15 @@
 <footer class="footer">
   <div class="container">
     <div class="footer-bottom" style="border-top:none">
-      <p>© 2025 Nexkittool. Built with ❤️ by Sumit Tiwari. All rights reserved.</p>
-      <div class="footer-bottom-links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+      <p>© 2026 Nexkittool. Built with ❤️ by Sumit Tiwari. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        <a href="disclaimer.html">Disclaimer</a>
+        <a href="cookies.html">Cookies Policy</a>
+        <a href="editorial.html">Editorial Policy</a>
+      </div>
     </div>
   </div>
 </footer>
@@ -108,7 +115,7 @@ function sendContact(e) {
   const subject = document.getElementById('cSubject').value;
   const msg = document.getElementById('cMsg').value;
   // Open mailto with prefilled content
-  const mailtoLink = `mailto:nexkittool@gmail.com?subject=${encodeURIComponent('[Nexkittool] ' + subject + ' from ' + name)}&body=${encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + msg)}`;
+  const mailtoLink = `mailto:support@nexkittool.com?subject=${encodeURIComponent('[Nexkittool] ' + subject + ' from ' + name)}&body=${encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + msg)}`;
   window.location.href = mailtoLink;
   document.getElementById('contactMsg').style.display = 'block';
   e.target.reset();

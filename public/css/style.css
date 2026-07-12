@@ -541,3 +541,29 @@ img.loaded { opacity: 1; }
   body { font-size: 12pt; color: #000; }
   a { color: #000; }
 }
+
+/* ── COOKIE CONSENT CMP BANNER ── */
+.cookie-banner {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  max-width: 420px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  z-index: 10000;
+  animation: slideInUp 0.4s ease-out;
+}
+.cookie-banner-content h3 { font-size: 1.1rem; font-weight: 800; color: #1a1a2e; margin-bottom: 8px; }
+.cookie-banner-content p { font-size: 0.88rem; color: #4b5563; line-height: 1.6; margin-bottom: 16px; }
+.cookie-banner-content a { color: #6c47ff; font-weight: 600; text-decoration: underline; }
+.cookie-banner-btns { display: flex; gap: 12px; }
+.cb-btn { flex: 1; padding: 10px 16px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; border: none; cursor: pointer; transition: all 0.2s; }
+.cb-btn-sec { background: #f3f4f6; color: #4b5563; }
+.cb-btn-sec:hover { background: #e5e7eb; }
+.cb-btn-prim { background: linear-gradient(135deg, #6c47ff, #ff6b47); color: #fff; }
+.cb-btn-prim:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(108,71,255,0.2); }
+@keyframes slideInUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@media (max-width: 480px) { .cookie-banner { left: 16px; right: 16px; bottom: 16px; } }

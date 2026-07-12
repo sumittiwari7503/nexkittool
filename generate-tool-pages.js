@@ -1197,15 +1197,15 @@ const MASTER_TEMPLATE = `<!DOCTYPE html>
 <title>{{TITLE}}</title>
 <meta name="description" content="{{METADESC}}">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<link rel="canonical" href="https://nexkittool.com/{{SLUG}}/">
+<link rel="canonical" href="https://nexkittool.com/tools/{{SLUG}}/">
 
 <!-- Alternate Alternate SEO -->
-<link rel="alternate" hreflang="x-default" href="https://nexkittool.com/{{SLUG}}/">
-<link rel="alternate" hreflang="en" href="https://nexkittool.com/{{SLUG}}/">
+<link rel="alternate" hreflang="x-default" href="https://nexkittool.com/tools/{{SLUG}}/">
+<link rel="alternate" hreflang="en" href="https://nexkittool.com/tools/{{SLUG}}/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://nexkittool.com/{{SLUG}}/">
+<meta property="og:url" content="https://nexkittool.com/tools/{{SLUG}}/">
 <meta property="og:title" content="{{TITLE}}">
 <meta property="og:description" content="{{METADESC}}">
 <meta property="og:image" content="https://nexkittool.com/public/img/og-image.png">
@@ -1340,7 +1340,7 @@ const MASTER_TEMPLATE = `<!DOCTYPE html>
 <footer class="footer" role="contentinfo">
   <div class="container">
     <div class="footer-bottom">
-      <p>© 2026 NexKitTool. All rights reserved. | <a href="/pages/privacy.html">Privacy</a> · <a href="/pages/terms.html">Terms</a> · <a href="/pages/contact.html">Contact</a> · <a href="/pages/disclaimer.html">Disclaimer</a> · <a href="/pages/cookies.html">Cookies</a> · <a href="/pages/editorial.html">Editorial Policy</a></p>
+      <p>© 2026 Nexkittool. All rights reserved. | <a href="/pages/privacy.html">Privacy</a> · <a href="/pages/terms.html">Terms</a> · <a href="/pages/contact.html">Contact</a> · <a href="/pages/disclaimer.html">Disclaimer</a> · <a href="/pages/cookies.html">Cookies Policy</a> · <a href="/pages/editorial.html">Editorial Policy</a></p>
     </div>
   </div>
 </footer>
@@ -1361,7 +1361,8 @@ function generatePage(slug) {
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://nexkittool.com/" },
-      { "@type": "ListItem", "position": 2, "name": config.name, "item": `https://nexkittool.com/${slug}/` }
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://nexkittool.com/tools/" },
+      { "@type": "ListItem", "position": 3, "name": config.name, "item": `https://nexkittool.com/tools/${slug}/` }
     ]
   };
 
@@ -1388,7 +1389,7 @@ function generatePage(slug) {
       "price": "0",
       "priceCurrency": "USD"
     },
-    "url": `https://nexkittool.com/${slug}/`
+    "url": `https://nexkittool.com/tools/${slug}/`
   };
 
   const schemasHtml = `
@@ -1414,7 +1415,7 @@ function generatePage(slug) {
   const relatedHtml = config.related.map(relSlug => {
     const relConfig = TOOLS_CONFIG[relSlug];
     if (!relConfig) return '';
-    return `<a href="/${relSlug}/" class="related-card"><span>${relConfig.icon}</span><p>${relConfig.name}</p></a>`;
+    return `<a href="/tools/${relSlug}/" class="related-card"><span>${relConfig.icon}</span><p>${relConfig.name}</p></a>`;
   }).join('');
 
   let pageContent = MASTER_TEMPLATE
@@ -1438,7 +1439,7 @@ function generatePage(slug) {
     .replace(/{{SCHEMAS}}/g, schemasHtml);
 
   // Write out file
-  const outDir = path.join(__dirname, slug);
+  const outDir = path.join(__dirname, 'tools', slug);
   if (!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir, { recursive: true });
   }

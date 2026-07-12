@@ -596,7 +596,7 @@ const MASTER_BLOG_TEMPLATE = `<!DOCTYPE html>
 <footer class="footer" role="contentinfo">
   <div class="container">
     <div class="footer-bottom">
-      <p>© 2026 NexKitTool. All rights reserved. | <a href="/pages/privacy.html">Privacy</a> · <a href="/pages/terms.html">Terms</a> · <a href="/pages/contact.html">Contact</a> · <a href="/pages/disclaimer.html">Disclaimer</a> · <a href="/pages/cookies.html">Cookies</a> · <a href="/pages/editorial.html">Editorial Policy</a></p>
+      <p>© 2026 Nexkittool. All rights reserved. | <a href="/pages/privacy.html">Privacy</a> · <a href="/pages/terms.html">Terms</a> · <a href="/pages/contact.html">Contact</a> · <a href="/pages/disclaimer.html">Disclaimer</a> · <a href="/pages/cookies.html">Cookies Policy</a> · <a href="/pages/editorial.html">Editorial Policy</a></p>
     </div>
   </div>
 </footer>
@@ -628,8 +628,8 @@ function generateBlog(slug) {
     "@type": "Article",
     "headline": config.title,
     "description": config.metaDesc,
-    "author": { "@type": "Organization", "name": "NexKitTool" },
-    "publisher": { "@type": "Organization", "name": "NexKitTool", "url": "https://nexkittool.com" },
+    "author": { "@type": "Person", "name": "Sumit Tiwari", "jobTitle": "Founder & Developer", "url": "https://nexkittool.com/pages/about.html" },
+    "publisher": { "@type": "Organization", "name": "Nexkittool", "url": "https://nexkittool.com" },
     "datePublished": "2026-07-12",
     "dateModified": "2026-07-12",
     "mainEntityOfPage": `https://nexkittool.com/blog/${slug}.html`
@@ -755,7 +755,7 @@ categories.forEach(cat => {
 <footer class="footer" role="contentinfo">
   <div class="container">
     <div class="footer-bottom">
-      <p>© 2026 NexKitTool. All rights reserved. | <a href="/pages/privacy.html">Privacy</a> · <a href="/pages/terms.html">Terms</a> · <a href="/pages/contact.html">Contact</a> · <a href="/pages/disclaimer.html">Disclaimer</a> · <a href="/pages/cookies.html">Cookies</a> · <a href="/pages/editorial.html">Editorial Policy</a></p>
+      <p>© 2026 Nexkittool. All rights reserved. | <a href="/pages/privacy.html">Privacy</a> · <a href="/pages/terms.html">Terms</a> · <a href="/pages/contact.html">Contact</a> · <a href="/pages/disclaimer.html">Disclaimer</a> · <a href="/pages/cookies.html">Cookies Policy</a> · <a href="/pages/editorial.html">Editorial Policy</a></p>
     </div>
   </div>
 </footer>

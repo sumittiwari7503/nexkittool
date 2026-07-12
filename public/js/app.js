@@ -1028,4 +1028,31 @@ document.addEventListener('DOMContentLoaded', () => {
   updateNavUser();
   // generate initial password
   setTimeout(genPass, 100);
+
+  // CMP Cookie Consent check
+  const consent = localStorage.getItem('cookieConsent');
+  if (!consent) {
+    const banner = document.getElementById('cookieBanner');
+    if (banner) banner.style.display = 'block';
+  } else if (consent === 'accepted') {
+    enableTracking();
+  }
 });
+
+// Cookie Consent CMP Functions
+window.setCookieConsent = function(status) {
+  localStorage.setItem('cookieConsent', status);
+  const banner = document.getElementById('cookieBanner');
+  if (banner) banner.style.display = 'none';
+  if (status === 'accepted') {
+    enableTracking();
+  }
+};
+function enableTracking() {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'update', {
+    'analytics_storage': 'granted',
+    'ad_storage': 'granted'
+  });
+}

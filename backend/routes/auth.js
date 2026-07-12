@@ -19,7 +19,7 @@ function getTransporter() {
   return nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.GMAIL_USER || 'nexkittool@gmail.com',
+      user: process.env.GMAIL_USER || 'support@nexkittool.com',
       pass: process.env.GMAIL_APP_PASS   // 16-char Gmail App Password
     }
   });
@@ -29,7 +29,7 @@ async function sendMail(to, subject, html) {
   try {
     const transporter = getTransporter();
     await transporter.sendMail({
-      from: `"Nexkittool" <${process.env.GMAIL_USER || 'nexkittool@gmail.com'}>`,
+      from: `"Nexkittool" <${process.env.GMAIL_USER || 'support@nexkittool.com'}>`,
       to, subject, html
     });
     return true;
@@ -56,7 +56,7 @@ function welcomeEmailHtml(name, verifyLink) {
       <p style="color:#9ca3af;font-size:.82rem;text-align:center">This link expires in 24 hours. If you didn't sign up, ignore this email.</p>
     </div>
     <div style="background:#f9fafb;padding:16px;text-align:center;border-top:1px solid #e5e7eb">
-      <p style="color:#9ca3af;font-size:.78rem;margin:0">© 2025 Nexkittool · nexkittool@gmail.com</p>
+      <p style="color:#9ca3af;font-size:.78rem;margin:0">© 2026 Nexkittool · support@nexkittool.com</p>
     </div>
   </div>`;
 }
@@ -76,7 +76,7 @@ function resetEmailHtml(name, resetLink) {
       <p style="color:#9ca3af;font-size:.82rem;text-align:center">This link expires in 1 hour. If you didn't request this, you can safely ignore this email.</p>
     </div>
     <div style="background:#f9fafb;padding:16px;text-align:center;border-top:1px solid #e5e7eb">
-      <p style="color:#9ca3af;font-size:.78rem;margin:0">© 2025 Nexkittool · nexkittool@gmail.com</p>
+      <p style="color:#9ca3af;font-size:.78rem;margin:0">© 2026 Nexkittool · support@nexkittool.com</p>
     </div>
   </div>`;
 }

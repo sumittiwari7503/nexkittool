@@ -500,6 +500,8 @@ const BLOG_CONFIG = {
 const MASTER_BLOG_TEMPLATE = `<!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google AdSense Auto Ads Tag -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4453210706928025" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{TITLE}} | NexKitTool Blog</title>
@@ -697,6 +699,8 @@ categories.forEach(cat => {
   const catTemplate = `<!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google AdSense Auto Ads Tag -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4453210706928025" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${catName} Archives | NexKitTool Blog</title>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog Admin – Nexkittool</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root { --primary: #6c47ff; --secondary: #ff6b47; --bg: #f9fafb; --card: #fff; --text: #111827; --muted: #6b7280; --border: #e5e7eb; --danger: #dc2626; --success: #059669; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* LOGIN */
+  .login-screen {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 24px;
+  }
+  .login-card {
+    background: #fff; border-radius: 20px; padding: 40px; width: 100%; max-width: 420px;
+    border: 1px solid var(--border); box-shadow: 0 8px 40px rgba(0,0,0,.08);
+    text-align: center;
+  }
+  .login-card h1 { font-size: 1.8rem; font-weight: 900; margin-bottom: 6px; }
+  .login-card p { color: var(--muted); margin-bottom: 28px; }
+  .input-group { margin-bottom: 16px; text-align: left; }
+  .input-group label { font-size: .85rem; font-weight: 600; color: var(--muted); display: block; margin-bottom: 6px; }
+  .input-group input {
+    width: 100%; padding: 12px 16px; border-radius: 10px;
+    border: 2px solid var(--border); font-size: 1rem; font-family: inherit;
+    outline: none; transition: border .2s;
+  }
+  .input-group input:focus { border-color: var(--primary); }
+  .btn-primary {
+    width: 100%; padding: 13px; background: linear-gradient(135deg,#6c47ff,#ff6b47);
+    color: #fff; border: none; border-radius: 10px; font-size: 1rem;
+    font-weight: 700; cursor: pointer; font-family: inherit; margin-top: 4px;
+    transition: opacity .2s;
+  }
+  .btn-primary:hover { opacity: .9; }
+  .btn-primary:disabled { opacity: .6; cursor: not-allowed; }
+
+  /* ADMIN LAYOUT */
+  .admin-layout { display: none; }
+  .admin-layout.active { display: flex; min-height: 100vh; }
+
+  .sidebar {
+    width: 240px; background: #fff; border-right: 1px solid var(--border);
+    padding: 24px 16px; display: flex; flex-direction: column; gap: 4px;
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }
+  .sidebar .logo { font-size: 1.3rem; font-weight: 900; padding: 8px 12px 20px; background: linear-gradient(135deg,#6c47ff,#ff6b47); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .nav-item {
+    padding: 10px 14px; border-radius: 10px; font-size: .9rem;
+    font-weight: 600; color: var(--muted); cursor: pointer; transition: all .15s;
+    display: flex; align-items: center; gap: 10px; border: none; background: none;
+    font-family: inherit; width: 100%; text-align: left; text-decoration: none;
+  }
+  .nav-item:hover { background: var(--bg); color: var(--text); }
+  .nav-item.active { background: #f0ebff; color: var(--primary); }
+  .sidebar-spacer { flex: 1; }
+  .logout-btn { color: var(--danger) !important; }
+
+  .main-content { flex: 1; padding: 32px; overflow-y: auto; }
+  .page-header { margin-bottom: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; gap: 16px; }
+  .page-title { font-size: 1.6rem; font-weight: 800; }
+  .page-subtitle { color: var(--muted); font-size: .9rem; margin-top: 2px; }
+
+  /* STATS */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .stat-card { background: #fff; border-radius: 14px; padding: 20px 24px; border: 1px solid var(--border); }
+  .stat-label { font-size: .8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
+  .stat-value { font-size: 2rem; font-weight: 900; color: var(--text); }
+  .stat-card.accent { background: linear-gradient(135deg,#6c47ff,#ff6b47); border: none; }
+  .stat-card.accent .stat-label, .stat-card.accent .stat-value { color: #fff; }
+
+  /* POSTS TABLE */
+  .posts-table { background: #fff; border-radius: 14px; border: 1px solid var(--border); overflow: hidden; }
+  .table-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .table-search input {
+    padding: 8px 14px; border-radius: 8px; border: 2px solid var(--border);
+    font-size: .9rem; font-family: inherit; outline: none; width: 240px;
+  }
+  .table-search input:focus { border-color: var(--primary); }
+  table { width: 100%; border-collapse: collapse; }
+  th { padding: 12px 16px; text-align: left; font-size: .78rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; background: var(--bg); border-bottom: 1px solid var(--border); }
+  td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: .88rem; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafafa; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 50px;
+    font-size: .75rem; font-weight: 700;
+  }
+  .badge.published { background: #d1fae5; color: var(--success); }
+  .badge.draft { background: #fef3c7; color: #d97706; }
+  .action-btns { display: flex; gap: 8px; }
+  .btn-sm {
+    padding: 6px 12px; border-radius: 7px; font-size: .8rem; font-weight: 600;
+    cursor: pointer; font-family: inherit; border: none; transition: opacity .15s;
+  }
+  .btn-sm:hover { opacity: .8; }
+  .btn-edit { background: #f0ebff; color: var(--primary); }
+  .btn-delete { background: #fee2e2; color: var(--danger); }
+  .btn-view { background: var(--bg); color: var(--muted); border: 1px solid var(--border) !important; }
+
+  /* EDITOR */
+  .editor-panel { display: none; }
+  .editor-panel.active { display: block; }
+  .posts-panel { display: none; }
+  .posts-panel.active { display: block; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 20px; }
+  .form-group.full { grid-column: 1/-1; }
+  .form-group label { display: block; font-size: .85rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 11px 14px; border-radius: 10px;
+    border: 2px solid var(--border); font-size: .95rem;
+    font-family: inherit; outline: none; transition: border .2s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
+  .form-group textarea { resize: vertical; min-height: 320px; line-height: 1.6; }
+  .form-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-outline {
+    padding: 11px 22px; border-radius: 10px; border: 2px solid var(--border);
+    background: #fff; color: var(--text); font-size: .95rem; font-weight: 600;
+    cursor: pointer; font-family: inherit; transition: all .15s;
+  }
+  .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+  .editor-card { background: #fff; border-radius: 14px; border: 1px solid var(--border); padding: 28px; }
+
+  /* Toggle */
+  .toggle-wrap { display: flex; align-items: center; gap: 12px; }
+  .toggle { position: relative; width: 48px; height: 26px; }
+  .toggle input { display: none; }
+  .toggle-slider {
+    position: absolute; inset: 0; background: var(--border); border-radius: 50px;
+    cursor: pointer; transition: background .2s;
+  }
+  .toggle-slider::after {
+    content: ''; position: absolute; width: 20px; height: 20px; background: #fff;
+    border-radius: 50%; top: 3px; left: 3px; transition: transform .2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,.15);
+  }
+  .toggle input:checked + .toggle-slider { background: var(--primary); }
+  .toggle input:checked + .toggle-slider::after { transform: translateX(22px); }
+
+  .toast {
+    position: fixed; bottom: 24px; right: 24px;
+    padding: 12px 20px; border-radius: 10px;
+    font-size: .9rem; font-weight: 600; color: #fff;
+    opacity: 0; transform: translateY(10px);
+    transition: all .3s; pointer-events: none; z-index: 9999;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.success { background: var(--success); }
+  .toast.error { background: var(--danger); }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .form-grid { grid-template-columns: 1fr; }
+    .main-content { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div style="font-size:2.5rem;margin-bottom:12px">🔐</div>
+    <h1>Blog Admin</h1>
+    <p>Enter your admin key to continue</p>
+    <div class="input-group">
+      <label>Admin Key</label>
+      <input type="password" id="adminKeyInput" placeholder="Your PRO_SECRET key" onkeydown="if(event.key==='Enter')login()">
+    </div>
+    <button class="btn-primary" onclick="login()">Sign In →</button>
+    <p style="margin-top:16px;font-size:.8rem;color:var(--muted)">This is the PRO_SECRET value from your .env file.</p>
+  </div>
+</div>
+
+<!-- ADMIN LAYOUT -->
+<div class="admin-layout" id="adminLayout">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">⚡ Nexkittool</div>
+    <button class="nav-item active" onclick="showPanel('posts')" id="navPosts">📝 All Posts</button>
+    <button class="nav-item" onclick="showPanel('editor')" id="navEditor">✏️ New Post</button>
+    <a href="/pages/blog.html" target="_blank" class="nav-item">👁️ View Blog</a>
+    <div class="sidebar-spacer"></div>
+    <button class="nav-item logout-btn" onclick="logout()">🚪 Logout</button>
+  </div>
+
+  <!-- Main -->
+  <div class="main-content">
+
+    <!-- POSTS PANEL -->
+    <div class="posts-panel active" id="postsPanel">
+      <div class="page-header">
+        <div>
+          <div class="page-title">All Posts</div>
+          <div class="page-subtitle">Manage your blog content</div>
+        </div>
+        <button class="btn-primary" style="width:auto;padding:11px 22px" onclick="showPanel('editor')">+ New Post</button>
+      </div>
+
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card accent"><div class="stat-label">Total Posts</div><div class="stat-value" id="statTotal">—</div></div>
+        <div class="stat-card"><div class="stat-label">Published</div><div class="stat-value" id="statPublished">—</div></div>
+        <div class="stat-card"><div class="stat-label">Drafts</div><div class="stat-value" id="statDraft">—</div></div>
+        <div class="stat-card"><div class="stat-label">Total Views</div><div class="stat-value" id="statViews">—</div></div>
+      </div>
+
+      <div class="posts-table">
+        <div class="table-header">
+          <strong>Posts</strong>
+          <div class="table-search"><input type="text" placeholder="Search posts..." oninput="filterTable(this.value)"></div>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>Title</th><th>Category</th><th>Status</th><th>Views</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody id="postsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDITOR PANEL -->
+    <div class="editor-panel" id="editorPanel">
+      <div class="page-header">
+        <div>
+          <div class="page-title" id="editorTitle">New Post</div>
+          <div class="page-subtitle">Write and publish your article</div>
+        </div>
+        <button class="btn-outline" onclick="showPanel('posts')">← Back to Posts</button>
+      </div>
+
+      <div class="editor-card">
+        <input type="hidden" id="editingId">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Post Title *</label>
+            <input type="text" id="postTitle" placeholder="Enter a compelling title...">
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="postCategory">
+              <option>PDF Tools</option>
+              <option>Image Tools</option>
+              <option>AI Tools</option>
+              <option>Tips</option>
+              <option>Guides</option>
+              <option>News</option>
+              <option>General</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tags (comma separated)</label>
+            <input type="text" id="postTags" placeholder="pdf, tools, free">
+          </div>
+          <div class="form-group full">
+            <label>Excerpt (short description)</label>
+            <input type="text" id="postExcerpt" placeholder="A short summary shown on the blog listing page...">
+          </div>
+          <div class="form-group full">
+            <label>Content (HTML supported) *</label>
+            <textarea id="postContent" placeholder="Write your article content here. You can use HTML tags like &lt;h2&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;strong&gt; etc."></textarea>
+          </div>
+          <div class="form-group full">
+            <div class="toggle-wrap">
+              <label class="toggle"><input type="checkbox" id="postPublished" checked><div class="toggle-slider"></div></label>
+              <span style="font-weight:600">Publish immediately</span>
+              <span style="color:var(--muted);font-size:.85rem">(uncheck to save as draft)</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-primary" style="width:auto;padding:12px 28px" onclick="savePost()" id="saveBtn">💾 Save Post</button>
+          <button class="btn-outline" onclick="clearEditor()">✕ Clear</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = '/api/blog';
+let adminKey = '';
+let allPosts = [];
+
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function login() {
+  const key = document.getElementById('adminKeyInput').value.trim();
+  if (!key) return;
+  adminKey = key;
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminLayout').classList.add('active');
+  loadPosts();
+}
+
+function logout() {
+  adminKey = '';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('adminLayout').classList.remove('active');
+  document.getElementById('adminKeyInput').value = '';
+}
+
+function showPanel(panel) {
+  document.getElementById('postsPanel').classList.toggle('active', panel === 'posts');
+  document.getElementById('editorPanel').classList.toggle('active', panel === 'editor');
+  document.getElementById('navPosts').classList.toggle('active', panel === 'posts');
+  document.getElementById('navEditor').classList.toggle('active', panel === 'editor');
+  if (panel === 'editor' && !document.getElementById('editingId').value) {
+    document.getElementById('editorTitle').textContent = 'New Post';
+    clearEditor();
+  }
+}
+
+async function loadPosts() {
+  try {
+    const res = await fetch(`${API}/admin/posts`, { headers: { 'x-admin-key': adminKey } });
+    if (res.status === 401) { showToast('Invalid admin key', 'error'); logout(); return; }
+    const data = await res.json();
+    allPosts = data.posts || [];
+    renderTable(allPosts);
+    updateStats(allPosts);
+  } catch(e) {
+    showToast('Failed to load posts', 'error');
+  }
+}
+
+function updateStats(posts) {
+  const published = posts.filter(p => p.published).length;
+  const totalViews = posts.reduce((sum, p) => sum + (p.views || 0), 0);
+  document.getElementById('statTotal').textContent = posts.length;
+  document.getElementById('statPublished').textContent = published;
+  document.getElementById('statDraft').textContent = posts.length - published;
+  document.getElementById('statViews').textContent = totalViews.toLocaleString();
+}
+
+function renderTable(posts) {
+  const tbody = document.getElementById('postsTableBody');
+  if (!posts.length) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--muted)">No posts yet. Create your first one!</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = posts.map(p => `
+    <tr>
+      <td style="max-width:280px"><strong>${p.title}</strong><div style="font-size:.78rem;color:var(--muted);margin-top:2px">/pages/blog.html?post=${p.slug}</div></td>
+      <td>${p.category}</td>
+      <td><span class="badge ${p.published ? 'published' : 'draft'}">${p.published ? 'Published' : 'Draft'}</span></td>
+      <td>${(p.views || 0).toLocaleString()}</td>
+      <td>${new Date(p.createdAt).toLocaleDateString('en-IN')}</td>
+      <td>
+        <div class="action-btns">
+          <button class="btn-sm btn-edit" onclick="editPost('${p.id}')">✏️ Edit</button>
+          <button class="btn-sm btn-delete" onclick="deletePost('${p.id}', '${p.title.replace(/'/g,"\\'")}')">🗑️</button>
+          <a href="/pages/blog.html?post=${p.slug}" target="_blank" class="btn-sm btn-view" style="text-decoration:none">👁️</a>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function filterTable(q) {
+  const filtered = q ? allPosts.filter(p =>
+    p.title.toLowerCase().includes(q.toLowerCase()) ||
+    p.category.toLowerCase().includes(q.toLowerCase())
+  ) : allPosts;
+  renderTable(filtered);
+}
+
+function editPost(id) {
+  const post = allPosts.find(p => p.id === id);
+  if (!post) return;
+  document.getElementById('editingId').value = id;
+  document.getElementById('editorTitle').textContent = 'Edit Post';
+  document.getElementById('postTitle').value = post.title;
+  document.getElementById('postCategory').value = post.category;
+  document.getElementById('postTags').value = (post.tags || []).join(', ');
+  document.getElementById('postExcerpt').value = post.excerpt || '';
+  document.getElementById('postContent').value = post.content;
+  document.getElementById('postPublished').checked = post.published;
+  showPanel('editor');
+  window.scrollTo(0, 0);
+}
+
+async function savePost() {
+  const id = document.getElementById('editingId').value;
+  const title = document.getElementById('postTitle').value.trim();
+  const content = document.getElementById('postContent').value.trim();
+  if (!title || !content) { showToast('Title and content are required', 'error'); return; }
+
+  const body = {
+    title,
+    content,
+    excerpt: document.getElementById('postExcerpt').value.trim(),
+    category: document.getElementById('postCategory').value,
+    tags: document.getElementById('postTags').value,
+    published: document.getElementById('postPublished').checked
+  };
+
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true; btn.textContent = 'Saving...';
+
+  try {
+    const url = id ? `${API}/admin/posts/${id}` : `${API}/admin/posts`;
+    const method = id ? 'PUT' : 'POST';
+    const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json', 'x-admin-key': adminKey }, body: JSON.stringify(body) });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+    showToast(id ? 'Post updated!' : 'Post published!');
+    clearEditor();
+    await loadPosts();
+    showPanel('posts');
+  } catch(e) {
+    showToast(e.message || 'Save failed', 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = '💾 Save Post';
+  }
+}
+
+async function deletePost(id, title) {
+  if (!confirm(`Delete "${title}"?\n\nThis cannot be undone.`)) return;
+  try {
+    const res = await fetch(`${API}/admin/posts/${id}`, { method: 'DELETE', headers: { 'x-admin-key': adminKey } });
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.error);
+    showToast('Post deleted');
+    await loadPosts();
+  } catch(e) {
+    showToast('Delete failed', 'error');
+  }
+}
+
+function clearEditor() {
+  document.getElementById('editingId').value = '';
+  document.getElementById('postTitle').value = '';
+  document.getElementById('postTags').value = '';
+  document.getElementById('postExcerpt').value = '';
+  document.getElementById('postContent').value = '';
+  document.getElementById('postPublished').checked = true;
+  document.getElementById('postCategory').value = 'General';
+}
+</script>
+</body>
+</html>

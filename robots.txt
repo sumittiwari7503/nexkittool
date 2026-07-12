@@ -1,0 +1,51 @@
+# ==========================================
+# Nexkittool - robots.txt
+# Last updated: 2026-06-28
+# ==========================================
+
+# All search engines
+User-agent: *
+Allow: /
+Allow: /blog/
+Allow: /pages/
+Allow: /tools/
+Allow: /compare/
+Allow: /lang/
+
+# Block private/backend paths
+Disallow: /node_modules/
+Disallow: /backend/
+Disallow: /.env
+Disallow: /api/
+Disallow: /reset-password.html
+Disallow: /pages/blog-admin.html
+Disallow: /*?*utm_
+Disallow: /*?*ref=
+Disallow: /*?*fbclid=
+Disallow: /*?*gclid=
+
+# Allow CSS and JS for rendering
+Allow: /public/css/
+Allow: /public/js/
+
+# Crawl delay (optional - helps shared hosting)
+Crawl-delay: 1
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+
+User-agent: Googlebot-Image
+Allow: /public/img/
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Sitemap locations
+Sitemap: https://nexkittool.com/sitemap.xml
+Sitemap: https://nexkittool.com/sitemap-blog.xml
+Sitemap: https://nexkittool.com/sitemap-index.xml
+Sitemap: https://nexkittool.com/sitemap-lang.xml

@@ -1,0 +1,21 @@
+{
+  "name": "Nexkittool - Free Online Tools",
+  "short_name": "Nexkittool",
+  "description": "35+ free online tools for PDF conversion, image editing, AI writing and productivity",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6c47ff",
+  "icons": [
+    {
+      "src": "/public/img/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/public/img/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

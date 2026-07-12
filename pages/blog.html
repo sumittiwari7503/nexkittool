@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog – Nexkittool | Free Tools Tips & Guides</title>
+<meta name="description" content="Tips, tutorials and guides on PDF tools, image editing, AI writing and more — from the Nexkittool team.">
+<link rel="canonical" href="https://nexkittool.com/pages/blog.html">
+<link rel="stylesheet" href="../public/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+  :root {
+    --primary: #6c47ff;
+    --secondary: #ff6b47;
+    --bg: #f9fafb;
+    --card: #fff;
+    --text: #111827;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+
+  /* NAV */
+  .blog-nav {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 8px rgba(0,0,0,.06);
+  }
+  .blog-nav .logo { font-size: 1.3rem; font-weight: 900; text-decoration: none; background: linear-gradient(135deg,#6c47ff,#ff6b47); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .blog-nav .back { color: var(--muted); text-decoration: none; font-size: .9rem; display: flex; align-items: center; gap: 4px; }
+  .blog-nav .back:hover { color: var(--primary); }
+  .blog-nav .spacer { flex: 1; }
+
+  /* HERO */
+  .blog-hero {
+    background: linear-gradient(135deg, #6c47ff 0%, #ff6b47 100%);
+    padding: 60px 24px;
+    text-align: center;
+    color: #fff;
+  }
+  .blog-hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 12px; }
+  .blog-hero p { font-size: 1.1rem; opacity: .85; max-width: 500px; margin: 0 auto 28px; }
+  .search-bar {
+    display: flex;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,.15);
+  }
+  .search-bar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 14px 20px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--text);
+  }
+  .search-bar button {
+    background: linear-gradient(135deg,#6c47ff,#ff6b47);
+    border: none;
+    padding: 14px 22px;
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+
+  /* FILTERS */
+  .blog-filters {
+    max-width: 1100px;
+    margin: 32px auto 0;
+    padding: 0 24px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-label { font-size: .85rem; color: var(--muted); font-weight: 600; }
+  .filter-btn {
+    padding: 7px 16px;
+    border-radius: 50px;
+    border: 2px solid var(--border);
+    background: #fff;
+    color: var(--muted);
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: inherit;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: #f0ebff;
+  }
+
+  /* GRID */
+  .blog-grid {
+    max-width: 1100px;
+    margin: 32px auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  /* CARD */
+  .post-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform .2s, box-shadow .2s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+  .post-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(108,71,255,.12); }
+  .card-thumb {
+    height: 160px;
+    background: linear-gradient(135deg, #6c47ff20, #ff6b4720);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+  }
+  .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+  .card-category {
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 8px;
+  }
+  .card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; line-height: 1.4; color: var(--text); }
+  .card-excerpt { font-size: .9rem; color: var(--muted); line-height: 1.6; flex: 1; }
+  .card-footer {
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .8rem;
+    color: var(--muted);
+  }
+  .card-footer .read-more {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: .85rem;
+  }
+
+  /* PAGINATION */
+  .pagination {
+    max-width: 1100px;
+    margin: 8px auto 48px;
+    padding: 0 24px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  .page-btn {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all .2s;
+  }
+  .page-btn:hover, .page-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+  /* SKELETON */
+  .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  .skel-card { background: #fff; border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+  .skel-thumb { height: 160px; }
+  .skel-body { padding: 20px; }
+  .skel-line { height: 14px; margin-bottom: 10px; }
+  .skel-line.short { width: 40%; }
+  .skel-line.med { width: 70%; }
+
+  /* EMPTY */
+  .empty-state { grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--muted); }
+  .empty-state .emoji { font-size: 4rem; margin-bottom: 16px; }
+  .empty-state h3 { color: var(--text); margin-bottom: 8px; }
+
+  /* POST PAGE */
+  .post-page { display: none; }
+  .post-page.active { display: block; }
+  .blog-list-page.hidden { display: none; }
+  .post-container { max-width: 780px; margin: 40px auto; padding: 0 24px 60px; }
+  .post-header { margin-bottom: 32px; }
+  .post-category-tag {
+    display: inline-block;
+    background: #f0ebff;
+    color: var(--primary);
+    font-size: .78rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 50px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .post-title { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900; line-height: 1.25; color: var(--text); margin-bottom: 16px; }
+  .post-meta { color: var(--muted); font-size: .88rem; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .post-content { line-height: 1.85; font-size: 1.05rem; color: #374151; }
+  .post-content h2 { font-size: 1.5rem; font-weight: 800; margin: 32px 0 12px; color: var(--text); }
+  .post-content h3 { font-size: 1.2rem; font-weight: 700; margin: 24px 0 10px; color: var(--text); }
+  .post-content p { margin-bottom: 18px; }
+  .post-content ul, .post-content ol { padding-left: 24px; margin-bottom: 18px; }
+  .post-content li { margin-bottom: 8px; }
+  .post-content a { color: var(--primary); }
+  .post-content strong { font-weight: 700; }
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+    margin-bottom: 32px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 1rem;
+    font-family: inherit;
+    padding: 0;
+  }
+  .back-btn:hover { opacity: .8; }
+  .post-divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+  .post-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+  .tag {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 5px 14px;
+    font-size: .8rem;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: #111; color: #fff;
+    padding: 12px 20px; border-radius: 10px;
+    font-size: .9rem; font-weight: 600;
+    opacity: 0; transform: translateY(10px);
+    transition: all .3s; pointer-events: none; z-index: 9999;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 600px) {
+    .blog-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="blog-nav">
+  <a href="/" class="logo">⚡ Nexkittool</a>
+  <a href="/" class="back">← Back to Tools</a>
+  <div class="spacer"></div>
+  <a href="/pages/blog-admin.html" style="font-size:.85rem;color:var(--muted);text-decoration:none;">Admin</a>
+</nav>
+
+<!-- BLOG LIST PAGE -->
+<div class="blog-list-page" id="blogListPage">
+  <!-- Hero -->
+  <div class="blog-hero">
+    <h1>📝 Nexkittool Blog</h1>
+    <p>Tips, tutorials and guides to help you work smarter with our free tools.</p>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search articles..." />
+      <button onclick="doSearch()">🔍</button>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="blog-filters">
+    <span class="filter-label">Category:</span>
+    <button class="filter-btn active" onclick="filterBy('')" data-cat="">All</button>
+    <div id="categoryFilters"></div>
+  </div>
+
+  <!-- Grid -->
+  <div class="blog-grid" id="blogGrid">
+    <!-- Skeletons -->
+    <div class="skel-card"><div class="skeleton skel-thumb"></div><div class="skel-body"><div class="skeleton skel-line short"></div><div class="skeleton skel-line med"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line med"></div></div></div>
+    <div class="skel-card"><div class="skeleton skel-thumb"></div><div class="skel-body"><div class="skeleton skel-line short"></div><div class="skeleton skel-line med"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line med"></div></div></div>
+    <div class="skel-card"><div class="skeleton skel-thumb"></div><div class="skel-body"><div class="skeleton skel-line short"></div><div class="skeleton skel-line med"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line med"></div></div></div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" id="pagination"></div>
+</div>
+
+<!-- SINGLE POST PAGE -->
+<div class="post-page" id="postPage">
+  <div class="post-container">
+    <button class="back-btn" onclick="showList()">← Back to Blog</button>
+    <article id="postContent"></article>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = '/api/blog';
+let currentPage = 1;
+let currentCategory = '';
+let currentSearch = '';
+
+const categoryEmojis = {
+  'PDF Tools': '📄', 'Image Tools': '🖼️', 'AI Tools': '🤖',
+  'General': '📝', 'Tips': '💡', 'Guides': '🗺️', 'News': '📢'
+};
+
+function getCategoryEmoji(cat) { return categoryEmojis[cat] || '📝'; }
+
+function formatDate(iso) {
+  return new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+async function loadCategories() {
+  try {
+    const res = await fetch(`${API}/categories`);
+    const data = await res.json();
+    const container = document.getElementById('categoryFilters');
+    container.innerHTML = data.categories.map(cat =>
+      `<button class="filter-btn" onclick="filterBy('${cat}')" data-cat="${cat}">${getCategoryEmoji(cat)} ${cat}</button>`
+    ).join('');
+  } catch(e) {}
+}
+
+async function loadPosts(page = 1, category = '', search = '') {
+  currentPage = page;
+  currentCategory = category;
+  currentSearch = search;
+
+  const grid = document.getElementById('blogGrid');
+  grid.innerHTML = [1,2,3].map(() =>
+    `<div class="skel-card"><div class="skeleton skel-thumb"></div><div class="skel-body"><div class="skeleton skel-line short"></div><div class="skeleton skel-line med"></div><div class="skeleton skel-line"></div></div></div>`
+  ).join('');
+
+  try {
+    const params = new URLSearchParams({ page, limit: 9, category, search });
+    const res = await fetch(`${API}/posts?${params}`);
+    const data = await res.json();
+
+    if (!data.posts || data.posts.length === 0) {
+      grid.innerHTML = `<div class="empty-state"><div class="emoji">🔍</div><h3>No articles found</h3><p>Try a different search or category.</p></div>`;
+      document.getElementById('pagination').innerHTML = '';
+      return;
+    }
+
+    grid.innerHTML = data.posts.map(post => `
+      <a class="post-card" onclick="openPost('${post.slug}'); return false;" href="/pages/blog.html?post=${post.slug}">
+        <div class="card-thumb">${getCategoryEmoji(post.category)}</div>
+        <div class="card-body">
+          <div class="card-category">${post.category}</div>
+          <div class="card-title">${post.title}</div>
+          <div class="card-excerpt">${post.excerpt}</div>
+        </div>
+        <div class="card-footer">
+          <span>📅 ${formatDate(post.createdAt)}</span>
+          <span class="read-more">Read →</span>
+        </div>
+      </a>
+    `).join('');
+
+    renderPagination(data.pages, page);
+  } catch(e) {
+    grid.innerHTML = `<div class="empty-state"><div class="emoji">⚠️</div><h3>Couldn't load posts</h3><p>Please try again later.</p></div>`;
+  }
+}
+
+function renderPagination(pages, current) {
+  const container = document.getElementById('pagination');
+  if (pages <= 1) { container.innerHTML = ''; return; }
+  container.innerHTML = Array.from({length: pages}, (_, i) => i + 1)
+    .map(p => `<button class="page-btn ${p === current ? 'active' : ''}" onclick="loadPosts(${p}, '${currentCategory}', '${currentSearch}')">${p}</button>`)
+    .join('');
+}
+
+function filterBy(cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.cat === cat);
+  });
+  loadPosts(1, cat, currentSearch);
+}
+
+function doSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  loadPosts(1, currentCategory, q);
+}
+
+document.getElementById('searchInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doSearch();
+});
+
+async function openPost(slug) {
+  document.getElementById('postPage').innerHTML = `<div class="post-container"><div style="text-align:center;padding:80px;color:#6b7280">Loading...</div></div>`;
+  document.getElementById('blogListPage').classList.add('hidden');
+  document.getElementById('postPage').classList.add('active');
+  window.scrollTo(0, 0);
+
+  try {
+    const res = await fetch(`${API}/posts/${slug}`);
+    const data = await res.json();
+    const p = data.post;
+
+    document.title = `${p.title} – Nexkittool Blog`;
+
+    document.getElementById('postPage').innerHTML = `
+      <div class="post-container">
+        <button class="back-btn" onclick="showList()">← Back to Blog</button>
+        <article>
+          <div class="post-header">
+            <span class="post-category-tag">${getCategoryEmoji(p.category)} ${p.category}</span>
+            <h1 class="post-title">${p.title}</h1>
+            <div class="post-meta">
+              <span>✍️ ${p.author}</span>
+              <span>📅 ${formatDate(p.createdAt)}</span>
+              <span>👁️ ${p.views} views</span>
+            </div>
+          </div>
+          <hr class="post-divider">
+          <div class="post-content">${p.content}</div>
+          <div class="post-tags">${(p.tags || []).map(t => `<span class="tag">#${t}</span>`).join('')}</div>
+        </article>
+      </div>
+    `;
+  } catch(e) {
+    showToast('Failed to load post');
+    showList();
+  }
+}
+
+function showList() {
+  document.getElementById('blogListPage').classList.remove('hidden');
+  document.getElementById('postPage').classList.remove('active');
+  document.getElementById('postPage').innerHTML = '';
+  document.title = 'Blog – Nexkittool';
+  window.scrollTo(0, 0);
+}
+
+// Check URL for post param
+const urlParams = new URLSearchParams(window.location.search);
+const postSlug = urlParams.get('post');
+
+loadCategories();
+if (postSlug) {
+  openPost(postSlug);
+} else {
+  loadPosts();
+}
+</script>
+</body>
+</html>

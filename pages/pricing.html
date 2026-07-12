@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing - Nexkittool Pro | ₹99/month</title>
+<meta name="description" content="Upgrade to Nexkittool Pro for just ₹99/month. UPI payment accepted. Get no ads, unlimited AI, 100MB files.">
+<link rel="stylesheet" href="../public/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+.pay-box{background:#fff;border:2px solid #e5e7eb;border-radius:20px;padding:32px;text-align:center;max-width:480px;margin:0 auto}
+.pay-box.active{border-color:#6c47ff;box-shadow:0 8px 32px rgba(108,71,255,0.15)}
+.upi-qr{width:220px;height:220px;border:3px solid #e5e7eb;border-radius:16px;margin:0 auto 16px;display:block}
+.upi-id{background:#f0ecff;color:#6c47ff;padding:10px 20px;border-radius:8px;font-weight:700;font-size:1rem;margin:12px 0;display:inline-block;cursor:pointer;letter-spacing:.5px}
+.plan-tabs{display:flex;gap:12px;justify-content:center;margin:32px 0 28px;flex-wrap:wrap}
+.plan-tab{padding:14px 32px;border:2px solid #e5e7eb;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;background:#fff;transition:all .2s;position:relative}
+.plan-tab.active{border-color:#6c47ff;background:#6c47ff;color:#fff}
+.plan-tab .badge{position:absolute;top:-10px;right:-10px;background:#ff6b47;color:#fff;font-size:.7rem;padding:3px 8px;border-radius:20px;font-weight:700}
+.verify-box{background:#f9fafb;border:2px solid #e5e7eb;border-radius:16px;padding:24px;margin-top:24px}
+.verify-box input{width:100%;padding:12px 16px;border:2px solid #e5e7eb;border-radius:10px;font-size:1rem;outline:none;margin:10px 0;transition:border-color .2s}
+.verify-box input:focus{border-color:#6c47ff}
+.btn-verify{width:100%;padding:14px;background:linear-gradient(135deg,#6c47ff,#ff6b47);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:8px;transition:all .2s}
+.btn-verify:hover{opacity:.9;transform:translateY(-1px)}
+.success-box{background:linear-gradient(135deg,#d1fae5,#a7f3d0);border:2px solid #059669;border-radius:16px;padding:32px;text-align:center;display:none}
+.success-icon{font-size:4rem;margin-bottom:12px}
+.steps{display:flex;flex-direction:column;gap:12px;margin:24px 0;text-align:left}
+.step{display:flex;align-items:flex-start;gap:14px;background:#fff;border-radius:12px;padding:14px 16px;border:1px solid #e5e7eb}
+.step-num{width:28px;height:28px;background:linear-gradient(135deg,#6c47ff,#ff6b47);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0;margin-top:1px}
+.step-text strong{display:block;font-size:.95rem;margin-bottom:3px}
+.step-text span{font-size:.85rem;color:#6b7280}
+.amount-badge{display:inline-block;background:linear-gradient(135deg,#6c47ff,#ff6b47);color:#fff;padding:8px 24px;border-radius:50px;font-size:1.6rem;font-weight:900;margin:12px 0}
+.upi-apps{display:flex;justify-content:center;gap:16px;margin:16px 0;flex-wrap:wrap}
+.upi-app{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.75rem;color:#6b7280;font-weight:600}
+.upi-app-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;border:1px solid #e5e7eb;background:#fff}
+.copied-msg{font-size:.8rem;color:#059669;font-weight:600;display:none;margin-top:4px}
+</style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">Nexkittool</span></a>
+      <div class="nav-links">
+        <a href="../index.html#ai-tools">AI Tools</a>
+        <a href="../index.html#image-tools">Image</a>
+        <a href="../index.html#pdf-tools">PDF</a>
+        <a href="../index.html#utility-tools">Utilities</a>
+      </div>
+      <div class="nav-auth-btns" id="navAuthBtns">
+        <button class="btn-login" onclick="openAuthModal('login')">Login</button>
+        <button class="btn-signup" onclick="openAuthModal('signup')">Sign Up Free</button>
+      </div>
+      <div class="nav-user" id="navUserArea" style="display:none">
+        <div class="nav-user-dropdown" id="navUserDropdown">
+          <div style="display:flex;align-items:center;gap:10px;cursor:pointer" onclick="toggleUserDropdown()">
+            <div class="nav-avatar" id="navAvatarText">U</div>
+            <div><div id="navUserName" class="nav-user-name">User</div><div id="navUserPlan" style="font-size:.75rem;color:#6c47ff;font-weight:600">Free</div></div>
+          </div>
+          <div class="nav-user-dropdown-menu" id="userDropdownMenu">
+            <a href="dashboard.html">👤 Dashboard</a>
+            <button onclick="doLogout()">🚪 Logout</button>
+          </div>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+<div class="mobile-nav" id="mobileNav">
+  <a href="../index.html">🏠 Home</a>
+</div>
+
+<!-- HERO -->
+<div class="pricing-hero">
+  <div class="container">
+    <h1 class="hero-title">Simple <span class="gradient-text">Pricing</span></h1>
+    <p style="color:#6b7280;font-size:1.1rem;margin-top:10px">Pay via UPI — Instant Pro activation 🚀</p>
+  </div>
+</div>
+
+<div class="container" style="padding-bottom:80px">
+
+  <!-- PLAN SELECTOR -->
+  <div class="plan-tabs">
+    <div class="plan-tab active" id="tabPro" onclick="selectPlan('pro')">
+      🚀 Pro
+      <div style="font-size:.85rem;font-weight:600;margin-top:4px">₹99 / month</div>
+    </div>
+    <div class="plan-tab" id="tabBiz" onclick="selectPlan('business')">
+      🏢 Business
+      <span class="badge">BEST</span>
+      <div style="font-size:.85rem;font-weight:600;margin-top:4px">₹245 / month</div>
+    </div>
+  </div>
+
+  <!-- FEATURES COMPARISON -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:40px;max-width:900px;margin-left:auto;margin-right:auto">
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:24px">
+      <div style="font-size:1.1rem;font-weight:800;margin-bottom:4px">🆓 Free</div>
+      <div style="font-size:2rem;font-weight:900;color:#6b7280">₹0</div>
+      <ul style="list-style:none;margin-top:16px;font-size:.88rem">
+        <li style="padding:7px 0;border-bottom:1px solid #f3f4f6">✅ 35+ Tools</li>
+        <li style="padding:7px 0;border-bottom:1px solid #f3f4f6">✅ 25MB file limit</li>
+        <li style="padding:7px 0;border-bottom:1px solid #f3f4f6">✅ 30 AI req/hour</li>
+        <li style="padding:7px 0;border-bottom:1px solid #f3f4f6;color:#dc2626">❌ Ads shown</li>
+        <li style="padding:7px 0;color:#dc2626">❌ No batch processing</li>
+      </ul>
+    </div>
+    <div style="background:#fff;border:2px solid #6c47ff;border-radius:16px;padding:24px;position:relative" id="proCard">
+      <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#6c47ff,#ff6b47);color:#fff;padding:4px 16px;border-radius:20px;font-size:.78rem;font-weight:700;white-space:nowrap">⭐ SELECTED</div>
+      <div style="font-size:1.1rem;font-weight:800;margin-bottom:4px">🚀 Pro</div>
+      <div style="font-size:2rem;font-weight:900;color:#6c47ff">₹99<span style="font-size:1rem;color:#6b7280;font-weight:400">/mo</span></div>
+      <ul style="list-style:none;margin-top:16px;font-size:.88rem">
+        <li style="padding:7px 0;border-bottom:1px solid #f3f4f6">✅ Everything Free</li>
+        <li style="padding:7px 0;border-bottom:1px solid #f3f4f6">✅ <strong>No Ads</strong></li>
+        <li style="padding:7px 0;border-bottom:1px solid #f3f4f6">✅ 100MB file limit</li>
+        <li style="padding:7px 0;border-bottom:1px solid #f3f4f6">✅ Unlimited AI</li>
+        <li style="padding:7px 0">✅ Priority Support</li>
+      </ul>
+    </div>
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:24px" id="bizCard">
+      <div style="font-size:1.1rem;font-weight:800;margin-bottom:4px">🏢 Business</div>
+      <div style="font-size:2rem;font-weight:900;color:#6c47ff">₹245<span style="font-size:1rem;color:#6b7280;font-weight:400">/mo</span></div>
+      <ul style="list-style:none;margin-top:16px;font-size:.88rem">
+        <li style="padding:7px 0;border-bottom:1px solid #f3f4f6">✅ Everything Pro</li>
+        <li style="padding:7px 0;border-bottom:1px solid #f3f4f6">✅ 10 Team Members</li>
+        <li style="padding:7px 0;border-bottom:1px solid #f3f4f6">✅ 500MB file limit</li>
+        <li style="padding:7px 0;border-bottom:1px solid #f3f4f6">✅ API Access</li>
+        <li style="padding:7px 0">✅ Dedicated Support</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PAYMENT BOX -->
+  <div class="pay-box active" id="payBox">
+    <div id="successBox" class="success-box">
+      <div class="success-icon">🎉</div>
+      <h2 style="font-size:1.6rem;font-weight:900;color:#059669;margin-bottom:8px">Payment Verified!</h2>
+      <p style="color:#065f46;margin-bottom:20px">Welcome to <strong>Nexkittool Pro</strong>! Your account has been upgraded.</p>
+      <a href="../index.html" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#059669,#00d4aa);color:#fff;border-radius:50px;font-weight:800;font-size:1rem">🚀 Start Using Pro Tools</a>
+    </div>
+
+    <div id="paymentFlow">
+      <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:6px">Pay via UPI</h2>
+      <p style="color:#6b7280;font-size:.9rem;margin-bottom:20px">Scan QR or use UPI ID below</p>
+
+      <!-- AMOUNT -->
+      <div class="amount-badge" id="amountBadge">₹99</div>
+      <div style="font-size:.85rem;color:#6b7280;margin-bottom:20px" id="planName">Nexkittool Pro — 1 Month</div>
+
+      <!-- UPI APPS -->
+      <div class="upi-apps">
+        <div class="upi-app" onclick="openUPI('gpay')">
+          <div class="upi-app-icon">🟡</div>
+          <span>GPay</span>
+        </div>
+        <div class="upi-app" onclick="openUPI('phonepe')">
+          <div class="upi-app-icon">🟣</div>
+          <span>PhonePe</span>
+        </div>
+        <div class="upi-app" onclick="openUPI('paytm')">
+          <div class="upi-app-icon">🔵</div>
+          <span>Paytm</span>
+        </div>
+        <div class="upi-app" onclick="openUPI('bhim')">
+          <div class="upi-app-icon">🟠</div>
+          <span>BHIM</span>
+        </div>
+        <div class="upi-app" onclick="openUPI('any')">
+          <div class="upi-app-icon">📱</div>
+          <span>Any UPI</span>
+        </div>
+      </div>
+
+      <!-- QR CODE -->
+      <div style="margin:20px 0">
+        <p style="font-size:.85rem;color:#6b7280;margin-bottom:12px">📷 Scan QR Code:</p>
+        <img id="upiQR" class="upi-qr" src="" alt="UPI QR Code">
+        <p style="font-size:.75rem;color:#9ca3af;margin-top:8px">QR Code automatically shows correct amount</p>
+      </div>
+
+      <!-- UPI ID -->
+      <p style="font-size:.85rem;color:#6b7280;margin-bottom:8px">Or pay directly to UPI ID:</p>
+      <div class="upi-id" onclick="copyUPI()" title="Click to copy">
+        75034962@ybl
+        <span style="font-size:.75rem;opacity:.7;margin-left:6px">📋</span>
+      </div>
+      <div class="copied-msg" id="copiedMsg">✅ UPI ID copied!</div>
+
+      <!-- STEPS -->
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>Scan QR or Copy UPI ID</strong>
+            <span>Open GPay, PhonePe, Paytm or any UPI app</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>Send exact amount</strong>
+            <span id="stepAmount">Send ₹99 — add your email in remarks/note</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <strong>Enter Transaction ID below</strong>
+            <span>Get it from your UPI app payment history</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VERIFY FORM -->
+      <div class="verify-box">
+        <h3 style="font-size:1rem;font-weight:800;margin-bottom:4px">✅ Verify Your Payment</h3>
+        <p style="font-size:.82rem;color:#6b7280;margin-bottom:8px">Enter details after paying to activate Pro instantly</p>
+        <input type="email" id="verifyEmail" placeholder="Your email (same as account)">
+        <input type="text" id="verifyTxn" placeholder="UPI Transaction ID (e.g. 123456789012)" maxlength="40">
+        <input type="text" id="verifyName" placeholder="Your full name">
+        <button class="btn-verify" onclick="verifyPayment()">🚀 Activate Pro Now</button>
+        <p style="font-size:.78rem;color:#9ca3af;margin-top:10px">⏱️ Activation within 5 minutes • Support: nexkittool@gmail.com</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUST BADGES -->
+  <div style="text-align:center;margin-top:32px">
+    <p style="color:#6b7280;font-size:.9rem;margin-bottom:16px">🔒 100% Secure • Instant Activation • Cancel Anytime</p>
+    <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap">
+      <span style="background:#f9fafb;border:1px solid #e5e7eb;padding:8px 16px;border-radius:8px;font-size:.85rem;font-weight:600">🟡 Google Pay</span>
+      <span style="background:#f9fafb;border:1px solid #e5e7eb;padding:8px 16px;border-radius:8px;font-size:.85rem;font-weight:600">🟣 PhonePe</span>
+      <span style="background:#f9fafb;border:1px solid #e5e7eb;padding:8px 16px;border-radius:8px;font-size:.85rem;font-weight:600">🔵 Paytm</span>
+      <span style="background:#f9fafb;border:1px solid #e5e7eb;padding:8px 16px;border-radius:8px;font-size:.85rem;font-weight:600">🟠 BHIM UPI</span>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div style="max-width:640px;margin:48px auto 0">
+    <h2 style="font-size:1.4rem;font-weight:800;text-align:center;margin-bottom:24px">Common Questions</h2>
+    <div id="faqList"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div style="text-align:center;padding:24px 0 8px;font-size:.83rem;color:#9ca3af;line-height:1.9">
+      <div>📍 Noida, Uttar Pradesh, India 🇮🇳 &nbsp;|&nbsp; ✉️ <a href="mailto:nexkittool@gmail.com" style="color:#9ca3af;text-decoration:none">nexkittool@gmail.com</a> &nbsp;|&nbsp; 👨‍💻 Sumit Tiwari</div>
+    </div>
+    <div class="footer-bottom" style="border-top:none">
+      <p>© 2025 Nexkittool. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="../public/js/tools-data.js"></script>
+<script src="../public/js/auth.js"></script>
+<script>
+// ===== CONFIG =====
+const UPI_ID = '75034962@ybl';
+const UPI_NAME = 'Nexkittool';
+const PLANS = {
+  pro: { amount: 99, label: 'Nexkittool Pro — 1 Month', step: 'Send ₹99 — add your email in remarks/note' },
+  business: { amount: 245, label: 'Nexkittool Business — 1 Month', step: 'Send ₹245 — add your email in remarks/note' }
+};
+let currentPlan = 'pro';
+
+function selectPlan(plan) {
+  currentPlan = plan;
+  const p = PLANS[plan];
+
+  // Update tabs
+  document.getElementById('tabPro').classList.toggle('active', plan === 'pro');
+  document.getElementById('tabBiz').classList.toggle('active', plan === 'business');
+
+  // Update cards highlight
+  document.getElementById('proCard').style.borderColor = plan === 'pro' ? '#6c47ff' : '#e5e7eb';
+  document.getElementById('bizCard').style.borderColor = plan === 'business' ? '#6c47ff' : '#e5e7eb';
+
+  // Update amount
+  document.getElementById('amountBadge').textContent = '₹' + p.amount;
+  document.getElementById('planName').textContent = p.label;
+  document.getElementById('stepAmount').textContent = p.step;
+
+  // Update QR
+  updateQR(p.amount);
+}
+
+function updateQR(amount) {
+  // UPI QR using free QR API with UPI deep link
+  const upiLink = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(UPI_NAME)}&am=${amount}&cu=INR&tn=${encodeURIComponent('Nexkittool Pro')}`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiLink)}&bgcolor=ffffff&color=1a1a2e&margin=10`;
+  document.getElementById('upiQR').src = qrUrl;
+}
+
+function openUPI(app) {
+  const amount = PLANS[currentPlan].amount;
+  const upiLink = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(UPI_NAME)}&am=${amount}&cu=INR&tn=${encodeURIComponent('Nexkittool Pro')}`;
+  window.location.href = upiLink;
+  showToast('Opening ' + app + '... If not opened, scan QR code.', 'info');
+}
+
+function copyUPI() {
+  navigator.clipboard.writeText(UPI_ID).then(() => {
+    document.getElementById('copiedMsg').style.display = 'block';
+    setTimeout(() => document.getElementById('copiedMsg').style.display = 'none', 2500);
+    showToast('UPI ID copied! ✅', 'success');
+  });
+}
+
+function verifyPayment() {
+  const email = document.getElementById('verifyEmail').value.trim();
+  const txn = document.getElementById('verifyTxn').value.trim();
+  const name = document.getElementById('verifyName').value.trim();
+
+  if (!email || !txn || !name) {
+    showToast('Please fill all fields!', 'error');
+    return;
+  }
+  if (!email.includes('@')) {
+    showToast('Enter valid email!', 'error');
+    return;
+  }
+  if (txn.length < 8) {
+    showToast('Enter valid Transaction ID!', 'error');
+    return;
+  }
+
+  const btn = document.querySelector('.btn-verify');
+  btn.textContent = '⏳ Verifying...';
+  btn.disabled = true;
+
+  // Save to localStorage as pro user
+  setTimeout(() => {
+    // Activate Pro in Auth system
+    const user = Auth.getCurrentUser();
+    if (user) {
+      Auth.upgradeToPro(user.id);
+    }
+
+    // Also save pending verification (admin can check)
+    const verifications = JSON.parse(localStorage.getItem('nexkittool_verifications') || '[]');
+    verifications.push({
+      email, txn, name, plan: currentPlan,
+      amount: PLANS[currentPlan].amount,
+      date: new Date().toISOString()
+    });
+    localStorage.setItem('nexkittool_verifications', JSON.stringify(verifications));
+
+    // Save pro status by email
+    const proUsers = JSON.parse(localStorage.getItem('nexkittool_pro_users') || '{}');
+    proUsers[email] = {
+      plan: currentPlan, txn, name,
+      amount: PLANS[currentPlan].amount,
+      activatedAt: new Date().toISOString()
+    };
+    localStorage.setItem('nexkittool_pro_users', JSON.stringify(proUsers));
+
+    // Show success
+    document.getElementById('paymentFlow').style.display = 'none';
+    document.getElementById('successBox').style.display = 'block';
+    showToast('🎉 Pro activated successfully!', 'success');
+
+    updateNavUser();
+  }, 2000);
+}
+
+// FAQ
+const faqs = [
+  { q: 'UPI payment ke baad Pro kab milega?', a: 'Transaction ID enter karne ke baad turant activate ho jata hai! 5 minute se zyada nahi lagta.' },
+  { q: 'Kya refund milega?', a: 'Haan! 7 din mein refund le sakte ho. nexkittool@gmail.com par email karo.' },
+  { q: 'Monthly subscription hai ya one-time?', a: 'Monthly subscription hai. Har mahine ₹99 Pro ya ₹245 Business ke liye pay karo.' },
+  { q: 'Koi dusra payment method hai?', a: 'Abhi UPI available hai. Card payment jald aa rahi hai.' },
+  { q: 'Transaction ID kahan se milega?', a: 'GPay mein: Payment → History → Transaction detail. PhonePe mein: History → Transaction. Paytm mein: Passbook mein milega.' },
+];
+document.getElementById('faqList').innerHTML = faqs.map((f,i) => `
+  <div style="border:1px solid #e5e7eb;border-radius:12px;margin-bottom:10px;overflow:hidden">
+    <button onclick="toggleFaq(${i})" style="width:100%;padding:16px 18px;background:#fff;border:none;text-align:left;font-weight:700;font-size:.9rem;cursor:pointer;display:flex;justify-content:space-between">
+      ${f.q}<span id="fa${i}">▾</span>
+    </button>
+    <div id="fb${i}" style="display:none;padding:0 18px 14px;color:#6b7280;font-size:.88rem;line-height:1.7">${f.a}</div>
+  </div>`).join('');
+
+function toggleFaq(i) {
+  const a = document.getElementById('fb'+i), ar = document.getElementById('fa'+i);
+  const open = a.style.display === 'block';
+  a.style.display = open ? 'none' : 'block';
+  ar.style.transform = open ? '' : 'rotate(180deg)';
+}
+
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast ' + type + ' show';
+  setTimeout(() => t.className = 'toast', 3200);
+}
+
+window.addEventListener('scroll', () => document.getElementById('header').classList.toggle('scrolled', scrollY > 20));
+document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileNav').classList.toggle('open'));
+
+// INIT
+document.addEventListener('DOMContentLoaded', () => {
+  updateNavUser();
+  updateQR(99); // default pro plan QR
+});
+</script>
+</body>
+</html>

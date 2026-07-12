@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- ===== HOMEPAGE ===== -->
+  <url>
+    <loc>https://nexkittool.com/</loc>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nexkittool.com/"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://nexkittool.com/"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://nexkittool.com/lang/en-gb/"/>
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://nexkittool.com/lang/en-in/"/>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://nexkittool.com/lang/en-ca/"/>
+    <xhtml:link rel="alternate" hreflang="en-AU" href="https://nexkittool.com/lang/en-au/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://nexkittool.com/lang/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://nexkittool.com/lang/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://nexkittool.com/lang/de/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://nexkittool.com/lang/pt/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://nexkittool.com/lang/hi/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nexkittool.com/"/>
+  </url>
+
+  <!-- ===== STATIC PAGES ===== -->
+  <url><loc>https://nexkittool.com/pages/about.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://nexkittool.com/pages/contact.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://nexkittool.com/pages/privacy.html</loc><lastmod>2026-06-28</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://nexkittool.com/pages/terms.html</loc><lastmod>2026-06-28</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://nexkittool.com/pages/pricing.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- ===== TOOL LANDING PAGES ===== -->
+  <!-- PDF Tools -->
+  <url><loc>https://nexkittool.com/tools/compress-pdf/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://nexkittool.com/tools/merge-pdf/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://nexkittool.com/tools/split-pdf/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://nexkittool.com/tools/pdf-to-jpg/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://nexkittool.com/tools/jpg-to-pdf/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://nexkittool.com/tools/image-to-pdf/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <!-- word-to-pdf and pdf-to-word intentionally omitted: backend not yet implemented (noindexed holding pages) -->
+  <!-- Image Tools -->
+  <url><loc>https://nexkittool.com/tools/background-remover/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://nexkittool.com/tools/image-compressor/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://nexkittool.com/tools/image-resizer/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://nexkittool.com/tools/image-converter/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <!-- AI Tools -->
+  <url><loc>https://nexkittool.com/tools/ai-essay-writer/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://nexkittool.com/tools/grammar-checker/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://nexkittool.com/tools/text-summarizer/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://nexkittool.com/tools/language-translator/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <url><loc>https://nexkittool.com/tools/paraphrase-tool/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <url><loc>https://nexkittool.com/tools/plagiarism-checker/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <url><loc>https://nexkittool.com/tools/ai-humanizer/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <!-- Utility Tools -->
+  <url><loc>https://nexkittool.com/tools/qr-code-generator/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://nexkittool.com/tools/password-generator/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <url><loc>https://nexkittool.com/tools/word-counter/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.90</priority></url>
+  <!--
+    NOTE: The following tool cards exist in the homepage's interactive picker
+    (public/js/tools-data.js) but do not yet have dedicated SEO landing pages:
+    image-cropper, add-watermark, flip-rotate-image, black-white-filter,
+    article-rewriter, hashtag-generator, json-formatter, base64-encoder,
+    url-encoder, case-converter, lorem-ipsum, color-picker, gradient-maker,
+    contrast-checker, ai-palette-generator, pdf-to-excel, pdf-watermark, unlock-pdf.
+    These URLs were previously listed here despite returning 404 — removed until
+    real pages are built. See AUDIT_REPORT for the build-out plan.
+  -->
+
+  <!-- ===== COMPARISON PAGES ===== -->
+  <url><loc>https://nexkittool.com/compare/nexkittool-vs-smallpdf/</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://nexkittool.com/compare/nexkittool-vs-ilovepdf/</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://nexkittool.com/compare/nexkittool-vs-canva/</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+
+</urlset>

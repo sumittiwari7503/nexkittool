@@ -826,17 +826,14 @@ if ('IntersectionObserver' in window) {
   });
   document.querySelectorAll('img[data-src]').forEach(img => imgObserver.observe(img));
 }
-// Mobile nav toggle
-document.getElementById('hamburger')?.addEventListener('click', function() {
-  const nav = document.getElementById('mobileNav');
-  const expanded = this.getAttribute('aria-expanded') === 'true';
-  this.setAttribute('aria-expanded', !expanded);
-  nav.setAttribute('aria-hidden', expanded);
-  nav.style.display = expanded ? 'none' : 'flex';
-});
+// Mobile nav close helper
 function closeMobileNav() {
-  document.getElementById('mobileNav').style.display = 'none';
-  document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+  const nav = document.getElementById('mobileNav');
+  if (nav) {
+    nav.classList.remove('open');
+    nav.setAttribute('aria-hidden', 'true');
+  }
+  document.getElementById('hamburger')?.setAttribute('aria-expanded', 'false');
 }
 // Sticky header
 window.addEventListener('scroll', () => {

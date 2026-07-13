@@ -1011,8 +1011,13 @@ window.addEventListener('scroll', () => {
 });
 
 // Mobile nav
-document.getElementById('hamburger')?.addEventListener('click', () => {
-  document.getElementById('mobileNav')?.classList.toggle('open');
+document.getElementById('hamburger')?.addEventListener('click', function() {
+  const nav = document.getElementById('mobileNav');
+  if (nav) {
+    const isOpen = nav.classList.toggle('open');
+    this.setAttribute('aria-expanded', isOpen);
+    nav.setAttribute('aria-hidden', !isOpen);
+  }
 });
 
 // Modal close

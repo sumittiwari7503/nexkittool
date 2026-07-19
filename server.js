@@ -26,12 +26,16 @@ const freeLimiter = rateLimit({
   skip: (req) => req.headers['x-pro-user'] === process.env.PRO_SECRET
 });
 
-// Static files
+// Static files with optimized browser caching
 app.use(express.static(path.join(__dirname, '.'), {
-  maxAge: '1d',
+  maxAge: '1y',
   etag: true,
-  setHeaders: (res, path) => {
-    if (path.endsWith('.html')) res.setHeader('Cache-Control', 'no-cache');
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    } else if (filePath.match(/\.(css|js|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot)$/)) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    }
   }
 }));
 
@@ -49,12 +53,13 @@ app.get('/api/health', (req, res) => res.json({
   status: 'ok', name: 'nexkittool', version: '2.0.0', timestamp: new Date()
 }));
 
-// Sitemap & Robots served from root
+// Sitemap, Robots & LLMs.txt served from root
 app.get('/sitemap.xml', (req, res) => res.sendFile(path.join(__dirname, 'sitemap.xml')));
 app.get('/sitemap-blog.xml', (req, res) => res.sendFile(path.join(__dirname, 'sitemap-blog.xml')));
 app.get('/sitemap-lang.xml', (req, res) => res.sendFile(path.join(__dirname, 'sitemap-lang.xml')));
 app.get('/sitemap-index.xml', (req, res) => res.sendFile(path.join(__dirname, 'sitemap-index.xml')));
 app.get('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, 'robots.txt')));
+app.get('/llms.txt', (req, res) => res.sendFile(path.join(__dirname, 'llms.txt')));
 
 // SEO-friendly clean URLs redirection
 // Redirect non-trailing-slash URLs to canonical trailing-slash version (avoids duplicate content)

@@ -1192,16 +1192,18 @@ const TOOLS_CONFIG = {
 const MASTER_TEMPLATE = `<!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google AdSense Auto Ads Tag -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4453210706928025" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google AdSense Auto Ads Tag -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4453210706928025" crossorigin="anonymous"></script>
+
 <title>{{TITLE}}</title>
 <meta name="description" content="{{METADESC}}">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="canonical" href="https://nexkittool.com/tools/{{SLUG}}/">
 
-<!-- Alternate Alternate SEO -->
+<!-- Alternate SEO -->
 <link rel="alternate" hreflang="x-default" href="https://nexkittool.com/tools/{{SLUG}}/">
 <link rel="alternate" hreflang="en" href="https://nexkittool.com/tools/{{SLUG}}/">
 
@@ -1213,7 +1215,11 @@ const MASTER_TEMPLATE = `<!DOCTYPE html>
 <meta property="og:image" content="https://nexkittool.com/public/img/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 
+<!-- Performance & Preconnect -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/public/css/style.css">
 

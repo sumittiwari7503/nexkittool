@@ -44,6 +44,31 @@ User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
 
+# AI Agents & LLM Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# LLM Documentation
+Allow: /llms.txt
+
 # Sitemap locations
 Sitemap: https://nexkittool.com/sitemap.xml
 Sitemap: https://nexkittool.com/sitemap-blog.xml

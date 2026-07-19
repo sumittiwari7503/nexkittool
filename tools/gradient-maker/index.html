@@ -4,8 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Google AdSense Auto Ads Tag -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4453210706928025" crossorigin="anonymous"></script>
+<!-- Third-Party Marketing & Analytics (Lazy loaded to maximize CPU main thread score) -->
+<script>
+  function initThirdParty() {
+    if (window._thirdPartyLoaded) return;
+    window._thirdPartyLoaded = true;
+    const ads = document.createElement('script');
+    ads.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4453210706928025";
+    ads.async = true;
+    ads.crossOrigin = "anonymous";
+    document.head.appendChild(ads);
+  }
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => setTimeout(initThirdParty, 2500));
+  } else {
+    setTimeout(initThirdParty, 3000);
+  }
+  ['touchstart', 'scroll', 'keydown', 'click'].forEach(evt => window.addEventListener(evt, initThirdParty, { once: true, passive: true }));
+</script>
 
 <title>Free CSS Gradient Maker – Generate CSS Gradients | NexKitTool</title>
 <meta name="description" content="Create beautiful CSS gradient backgrounds online for free. Linear and radial gradients, custom colors, copy CSS code.">

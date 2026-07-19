@@ -96,6 +96,33 @@ function initSearch() {
   });
 }
 
+// Lazy script loader for heavy libraries (PDF.js, jsPDF, Mammoth, JSZip)
+const loadedScripts = {};
+function loadScript(url) {
+  if (loadedScripts[url]) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = url;
+    s.async = true;
+    s.onload = () => { loadedScripts[url] = true; resolve(); };
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+function ensureToolLibraries(toolId) {
+  const libMap = {
+    pdf2word: ['https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js'],
+    pdf2img: ['https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'],
+    img2pdf: ['https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'],
+    jpg2pdf: ['https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'],
+    word2pdf: ['https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js']
+  };
+  const urls = libMap[toolId];
+  if (!urls || urls.length === 0) return Promise.resolve();
+  return Promise.all(urls.map(loadScript));
+}
+
 // Open tool modal
 function openTool(id) {
   const tool = TOOLS.find(t => t.id === id);
@@ -106,22 +133,27 @@ function openTool(id) {
   const overlay = document.getElementById('modalOverlay');
   document.getElementById('modalTitle').textContent = tool.icon + ' ' + tool.name;
   document.getElementById('modalSub').textContent = tool.desc;
-  if (isPro && !isProUser) {
-    document.getElementById('modalBody').innerHTML = `
-      <div class="pro-lock">
-        <div class="pro-lock-icon">⭐</div>
-        <h3>Pro Feature</h3>
-        <p>${tool.name} is available for Pro users only. Upgrade for unlimited access, no ads, and priority processing.</p>
-        <a href="pages/pricing.html" class="pro-cta-btn" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#6c47ff,#ff6b47);color:#fff;border-radius:50px;font-weight:800">Upgrade to Pro — $4.99/mo</a>
-        <br><br>
-        <button onclick="openAuthModal('signup')" style="background:none;border:none;color:#6c47ff;font-weight:600;cursor:pointer;font-size:.95rem">Or create a free account first →</button>
-      </div>`;
-  } else {
-    document.getElementById('modalBody').innerHTML = getToolUI(tool);
-    initToolLogic(tool.id);
-  }
-  overlay.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+
+  const renderUI = () => {
+    if (isPro && !isProUser) {
+      document.getElementById('modalBody').innerHTML = `
+        <div class="pro-lock">
+          <div class="pro-lock-icon">⭐</div>
+          <h3>Pro Feature</h3>
+          <p>${tool.name} is available for Pro users only. Upgrade for unlimited access, no ads, and priority processing.</p>
+          <a href="pages/pricing.html" class="pro-cta-btn" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#6c47ff,#ff6b47);color:#fff;border-radius:50px;font-weight:800">Upgrade to Pro — $4.99/mo</a>
+          <br><br>
+          <button onclick="openAuthModal('signup')" style="background:none;border:none;color:#6c47ff;font-weight:600;cursor:pointer;font-size:.95rem">Or create a free account first →</button>
+        </div>`;
+    } else {
+      document.getElementById('modalBody').innerHTML = getToolUI(tool);
+      initToolLogic(tool.id);
+    }
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+
+  ensureToolLibraries(id).then(renderUI).catch(renderUI);
 }
 
 function closeTool() {

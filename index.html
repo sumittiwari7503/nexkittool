@@ -9,18 +9,61 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 <link rel="dns-prefetch" href="https://generativelanguage.googleapis.com">
-<link rel="preload" href="public/css/style.css" as="style">
 <link rel="preload" href="public/js/tools-data.js" as="script">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 
-<!-- Google AdSense & Analytics -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4453210706928025" crossorigin="anonymous"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-GJQXRF7S7T"></script>
+<!-- Critical CSS for instant FCP / LCP -->
+<style id="critical-css">
+:root{--primary:#6c47ff;--primary-dark:#5535e0;--primary-light:#ede9ff;--secondary:#ff6b47;--bg:#f8f9ff;--text:#1a1a2e;--text-muted:#4b5563;--border:#e5e7eb;--header-h:64px}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:hidden;max-width:100%;font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{text-decoration:none;color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+.header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);z-index:1000}
+.nav{display:flex;align-items:center;justify-content:space-between;height:var(--header-h)}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.4rem}
+.logo-icon{font-size:1.5rem}
+.logo-text{background:linear-gradient(135deg,#6c47ff,#ff6b47);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{padding:8px 14px;border-radius:8px;font-size:.9rem;font-weight:500;color:var(--text-muted)}
+.nav-pro-btn{background:linear-gradient(135deg,#6c47ff,#ff6b47)!important;color:#fff!important;border-radius:8px!important;padding:8px 16px!important}
+.nav-auth-btns{display:flex;gap:8px;align-items:center}
+.btn-login{padding:8px 18px;border:2px solid var(--primary);color:var(--primary);border-radius:8px;font-weight:600;font-size:.9rem;cursor:pointer}
+.btn-signup{padding:8px 18px;background:var(--primary);color:#fff;border-radius:8px;font-weight:600;font-size:.9rem;cursor:pointer}
+.hero{padding:120px 0 60px;text-align:center;background:linear-gradient(180deg,#f0ecff 0%,#f8f9ff 100%)}
+.hero-badge{display:inline-block;background:linear-gradient(135deg,#ede9ff,#fff0ed);border:1px solid #d4c5ff;color:var(--primary);padding:6px 18px;border-radius:50px;font-size:.85rem;font-weight:600;margin-bottom:20px}
+.hero-title{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;line-height:1.15;margin-bottom:16px}
+.gradient-text{background:linear-gradient(135deg,#6c47ff,#ff6b47);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:1.1rem;color:var(--text-muted);max-width:560px;margin:0 auto 32px}
+.search-box{display:flex;align-items:center;background:#fff;border:2px solid var(--border);border-radius:50px;padding:12px 20px;gap:10px;box-shadow:0 4px 20px rgba(108,71,255,0.1)}
+.search-box input{flex:1;border:none;outline:none;font-size:1rem;background:transparent;color:var(--text)}
+</style>
+
+<!-- Third-Party Marketing & Analytics (Lazy loaded to maximize CPU main thread score) -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-GJQXRF7S7T');
+  function initThirdParty() {
+    if (window._thirdPartyLoaded) return;
+    window._thirdPartyLoaded = true;
+    const ads = document.createElement('script');
+    ads.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4453210706928025";
+    ads.async = true;
+    ads.crossOrigin = "anonymous";
+    document.head.appendChild(ads);
+    const gtm = document.createElement('script');
+    gtm.src = "https://www.googletagmanager.com/gtag/js?id=G-GJQXRF7S7T";
+    gtm.async = true;
+    document.head.appendChild(gtm);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GJQXRF7S7T');
+  }
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => setTimeout(initThirdParty, 2500));
+  } else {
+    setTimeout(initThirdParty, 3000);
+  }
+  ['touchstart', 'scroll', 'keydown', 'click'].forEach(evt => window.addEventListener(evt, initThirdParty, { once: true, passive: true }));
 </script>
 
 <!-- ===== PRIMARY SEO ===== -->

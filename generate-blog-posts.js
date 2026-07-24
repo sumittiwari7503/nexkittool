@@ -978,10 +978,7 @@ const MASTER_BLOG_TEMPLATE = `<!DOCTYPE html>
 
   <h2>Related Articles</h2>
   <div class="related-grid">
-    <div class="related-card"><h4>🗜️ Compress PDF Free</h4><a href="/blog/compress-pdf-free.html">Read Guide →</a></div>
-    <div class="related-card"><h4>🎭 Remove Background</h4><a href="/blog/remove-background-free.html">Read Guide →</a></div>
-    <div class="related-card"><h4>📝 AI Essay Writer</h4><a href="/blog/best-ai-essay-writer-free.html">Read Guide →</a></div>
-    <div class="related-card"><h4>📱 QR Code Generator</h4><a href="/blog/qr-code-generator-free.html">Read Guide →</a></div>
+    {{RELATED_ARTICLES}}
   </div>
 </div>
 
@@ -1178,6 +1175,30 @@ function generateBlog(slug) {
   </ul>`;
   }
 
+  // Generate related articles dynamically
+  const allSlugs = Object.keys(BLOG_CONFIG);
+  const otherSlugs = allSlugs.filter(s => s !== slug);
+  const sortedSlugs = otherSlugs.sort((a, b) => {
+    const catA = BLOG_CONFIG[a].category === config.category ? 1 : 0;
+    const catB = BLOG_CONFIG[b].category === config.category ? 1 : 0;
+    return catB - catA;
+  });
+  const relatedSlugs = sortedSlugs.slice(0, 4);
+  const relatedHtml = relatedSlugs.map(s => {
+    const relConfig = BLOG_CONFIG[s];
+    let emoji = '📝';
+    if (relConfig.category === 'pdf') emoji = '📄';
+    else if (relConfig.category === 'image') emoji = '🖼️';
+    else if (relConfig.category === 'ai') emoji = '🤖';
+    else if (relConfig.category === 'utility') emoji = '🛠️';
+    
+    let cardTitle = relConfig.title;
+    if (cardTitle.length > 45) {
+      cardTitle = cardTitle.substring(0, 42) + '...';
+    }
+    return `<div class="related-card"><h4>${emoji} ${cardTitle}</h4><a href="/blog/${s}.html">Read Guide →</a></div>`;
+  }).join('\n    ');
+
   let pageContent = MASTER_BLOG_TEMPLATE
     .replace(/{{TITLE}}/g, config.title)
     .replace(/{{METADESC}}/g, config.metaDesc)
@@ -1189,7 +1210,8 @@ function generateBlog(slug) {
     .replace(/{{CATEGORY_WORKFLOWS}}/g, categoryWorkflows)
     .replace(/{{BODY_SECTIONS}}/g, bodyHtml)
     .replace(/{{FAQ_ACCORDION}}/g, faqHtml)
-    .replace(/{{SCHEMAS}}/g, schemasHtml);
+    .replace(/{{SCHEMAS}}/g, schemasHtml)
+    .replace(/{{RELATED_ARTICLES}}/g, relatedHtml);
 
   // Write out file
   const outFile = path.join(__dirname, 'blog', `${slug}.html`);

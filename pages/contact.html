@@ -13,10 +13,40 @@
 </script>
 </head>
 <body>
-<header class="header" id="header"><div class="container"><nav class="nav">
-  <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">Nexkittool</span></a>
-  <div class="nav-links"><a href="../index.html">Home</a><a href="pricing.html">Pricing</a><a href="about.html">About</a></div>
-</nav></div></header>
+<header class="header" id="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">Nexkittool</span></a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== MOBILE NAV ===== -->
+<nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation" aria-hidden="true" style="display: none;">
+  <a href="../index.html" onclick="toggleMobileNav()">Home</a>
+  <a href="pricing.html" onclick="toggleMobileNav()">Pricing</a>
+  <a href="contact.html" onclick="toggleMobileNav()">Contact</a>
+  <a href="about.html" onclick="toggleMobileNav()">About</a>
+</nav>
+
+<script>
+  function toggleMobileNav() {
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('hamburger');
+    const isOpen = nav.classList.toggle('open');
+    nav.style.display = isOpen ? 'flex' : 'none';
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+  }
+</script>
 
 <div class="page-hero">
   <div class="container">
@@ -69,7 +99,9 @@
 
     <div class="contact-form">
       <h3>Send Us a Message</h3>
-      <div id="contactMsg" style="display:none;background:#d1fae5;color:#059669;padding:14px;border-radius:10px;margin-bottom:16px;font-weight:600">✅ Message sent! We'll reply within 24 hours.</div>
+      <div id="contactMsg" style="display:none;background:#d1fae5;color:#059669;padding:16px;border-radius:10px;margin-bottom:16px;font-weight:600;line-height:1.5;border:1px solid #10b981">
+        ✅ Message draft generated! If your email app did not open automatically, please send your message directly to <a href="mailto:support@nexkittool.com" style="color:#047857;text-decoration:underline">support@nexkittool.com</a>.
+      </div>
       <form onsubmit="sendContact(event)">
         <div class="form-group"><label>Your Name *</label><input type="text" id="cName" placeholder="Your full name" required></div>
         <div class="form-group"><label>Email Address *</label><input type="email" id="cEmail" placeholder="you@email.com" required></div>

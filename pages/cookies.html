@@ -10,10 +10,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-<header class="header" id="header"><div class="container"><nav class="nav">
-  <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">Nexkittool</span></a>
-  <div class="nav-links"><a href="../index.html">Home</a><a href="pricing.html">Pricing</a><a href="contact.html">Contact</a></div>
-</nav></div></header>
+<header class="header" id="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">Nexkittool</span></a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== MOBILE NAV ===== -->
+<nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation" aria-hidden="true" style="display: none;">
+  <a href="../index.html" onclick="toggleMobileNav()">Home</a>
+  <a href="pricing.html" onclick="toggleMobileNav()">Pricing</a>
+  <a href="contact.html" onclick="toggleMobileNav()">Contact</a>
+  <a href="about.html" onclick="toggleMobileNav()">About</a>
+</nav>
+
+<script>
+  function toggleMobileNav() {
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('hamburger');
+    const isOpen = nav.classList.toggle('open');
+    nav.style.display = isOpen ? 'flex' : 'none';
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+  }
+</script>
 
 <div class="page-hero">
   <div class="container">

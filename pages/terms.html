@@ -76,9 +76,31 @@ a{text-decoration:none;color:inherit}
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </div>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
   </div>
 </header>
+
+<!-- ===== MOBILE NAV ===== -->
+<nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation" aria-hidden="true" style="display: none;">
+  <a href="../index.html" onclick="toggleMobileNav()">Home</a>
+  <a href="pricing.html" onclick="toggleMobileNav()">Pricing</a>
+  <a href="contact.html" onclick="toggleMobileNav()">Contact</a>
+  <a href="about.html" onclick="toggleMobileNav()">About</a>
+</nav>
+
+<script>
+  function toggleMobileNav() {
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('hamburger');
+    const isOpen = nav.classList.toggle('open');
+    nav.style.display = isOpen ? 'flex' : 'none';
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+  }
+</script>
 
 <div class="page-hero">
   <div class="container">
@@ -212,7 +234,7 @@ a{text-decoration:none;color:inherit}
         <p>If you are not satisfied with Nexkittool Pro, you may request a full refund within 7 days of your payment date:</p>
         <ul>
           <li>Email: <a href="mailto:billing@nexkittool.com" style="color:#6c47ff;font-weight:600">billing@nexkittool.com</a></li>
-          <li>Subject: "Refund Request — [your email address]"</li>
+          <li>Subject: "Refund Request — Your Account Email"</li>
           <li>Include your Transaction ID and reason for refund</li>
           <li>Refunds are processed within 3–5 business days</li>
         </ul>

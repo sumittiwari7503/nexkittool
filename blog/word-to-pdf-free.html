@@ -73,9 +73,32 @@
         <a href="/blog/index.html" style="color:#6c47ff;font-weight:700">📝 Blog</a>
         <a href="/pages/pricing.html" class="nav-pro-btn">⭐ Pro</a>
       </div>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
   </div>
 </header>
+
+<!-- ===== MOBILE NAV ===== -->
+<nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation" aria-hidden="true" style="display: none;">
+  <a href="/#ai-tools" onclick="toggleMobileNav()">🤖 AI Tools</a>
+  <a href="/#image-tools" onclick="toggleMobileNav()">🖼️ Image Tools</a>
+  <a href="/#pdf-tools" onclick="toggleMobileNav()">📄 PDF Tools</a>
+  <a href="/blog/index.html" onclick="toggleMobileNav()">📝 Blog</a>
+  <a href="/pages/pricing.html" style="color:#6c47ff;font-weight:700" onclick="toggleMobileNav()">⭐ Go Pro</a>
+</nav>
+
+<script>
+  function toggleMobileNav() {
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('hamburger');
+    const isOpen = nav.classList.toggle('open');
+    nav.style.display = isOpen ? 'flex' : 'none';
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+  }
+</script>
 
 <div class="article-hero"><div class="container" style="max-width:800px">
   <span class="article-tag">📄 PDF Guide</span>

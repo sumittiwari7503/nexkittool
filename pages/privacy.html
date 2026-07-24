@@ -9,10 +9,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-<header class="header" id="header"><div class="container"><nav class="nav">
-  <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">Nexkittool</span></a>
-  <div class="nav-links"><a href="../index.html">Home</a><a href="pricing.html">Pricing</a><a href="contact.html">Contact</a></div>
-</nav></div></header>
+<header class="header" id="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">Nexkittool</span></a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== MOBILE NAV ===== -->
+<nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation" aria-hidden="true" style="display: none;">
+  <a href="../index.html" onclick="toggleMobileNav()">Home</a>
+  <a href="pricing.html" onclick="toggleMobileNav()">Pricing</a>
+  <a href="contact.html" onclick="toggleMobileNav()">Contact</a>
+  <a href="about.html" onclick="toggleMobileNav()">About</a>
+</nav>
+
+<script>
+  function toggleMobileNav() {
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('hamburger');
+    const isOpen = nav.classList.toggle('open');
+    nav.style.display = isOpen ? 'flex' : 'none';
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+  }
+</script>
 
 <div class="page-hero">
   <div class="container">
@@ -51,8 +81,9 @@
       <li>Never analyzed, sold, or shared with third parties</li>
       <li>Transmitted over HTTPS encryption</li>
     </ul>
-    <h2>4. Google AdSense & Advertising</h2>
-    <p>We use Google AdSense to display advertisements. Google may use cookies to serve relevant ads based on your browsing. You can opt out via <a href="https://www.google.com/settings/ads" style="color:#6c47ff">Google's Ad Settings</a>. Pro users see no ads.</p>
+    <h2>4. Google AdSense & Advertising Disclosures</h2>
+    <p>We use Google AdSense and other third-party advertising companies to serve advertisements when you visit our website. Google, as a third-party vendor, uses cookies to serve ads on NexKitTool. Google's use of advertising cookies enables it and its partners to serve ads to our users based on their visits to our site and/or other sites on the Internet.</p>
+    <p>You can opt out of Google's personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" style="color:#6c47ff">Google's Ad Settings Portal</a>. Alternatively, you can opt out of a third-party vendor's use of cookies for personalized advertising by visiting the Network Advertising Initiative opt-out page or <a href="https://www.aboutads.info" target="_blank" style="color:#6c47ff">www.aboutads.info</a>.</p>
     <h2>5. Third-Party Services</h2>
     <ul>
       <li><strong>Google Gemini AI:</strong> Powers our AI writing tools. Text inputs are processed per Google's Privacy Policy.</li>
@@ -61,8 +92,16 @@
     </ul>
     <h2>6. Data Security</h2>
     <p>We implement industry-standard security measures including HTTPS encryption, secure server infrastructure, regular security audits, and access controls.</p>
-    <h2>7. Your Rights</h2>
-    <p>You have the right to: access your data, correct inaccurate data, delete your account, export your data, and opt out of marketing communications. Contact us at <a href="mailto:support@nexkittool.com" style="color:#6c47ff">support@nexkittool.com</a>.</p>
+    <h2>7. GDPR Compliance & Privacy Rights (CCPA / CPRA / GDPR)</h2>
+    <p>Under the General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA), you have several rights regarding your personal information, including:</p>
+    <ul>
+      <li><strong>Right to Know / Access:</strong> The right to request what personal information we collect and process.</li>
+      <li><strong>Right to Rectification:</strong> The right to request that we correct any inaccurate or incomplete personal data.</li>
+      <li><strong>Right to Erasure (Delete):</strong> The right to request that we erase your personal data from our servers.</li>
+      <li><strong>Right to Object / Opt-Out:</strong> The right to object to the processing of your personal data or opt-out of personalized advertisements.</li>
+      <li><strong>Right to Data Portability:</strong> The right to request a copy of your personal data in a structured, machine-readable format.</li>
+    </ul>
+    <p>To exercise any of these rights, please email us at <a href="mailto:support@nexkittool.com" style="color:#6c47ff">support@nexkittool.com</a>. We will respond within 30 days.</p>
     <h2>8. Children's Privacy</h2>
     <p>Nexkittool is not intended for children under 13. We do not knowingly collect data from children.</p>
     <h2>9. Changes to This Policy</h2>

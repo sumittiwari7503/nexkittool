@@ -78,7 +78,7 @@
 
 <!-- schemas -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://nexkittool.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://nexkittool.com/tools/"},{"@type":"ListItem","position":3,"name":"Image Cropper","item":"https://nexkittool.com/tools/image-cropper/"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I crop transparent PNGs?","acceptedAnswer":{"@type":"Answer","text":"Yes. PNG transparency is preserved when cropping images."}},{"@type":"Question","name":"Does it support custom aspect ratios?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select the \"Free\" option to drag the crop area to any custom size."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I input custom crop dimensions?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can enter custom pixel width and height targets to crop your photos."}},{"@type":"Question","name":"Will cropping reduce my file size?","acceptedAnswer":{"@type":"Answer","text":"Yes, cropping removes unnecessary pixels, which naturally shrinks the file footprint."}},{"@type":"Question","name":"Do you support PNG files with transparent backgrounds?","acceptedAnswer":{"@type":"Answer","text":"Yes, cropping preserves the transparent layers of PNG and WEBP files."}},{"@type":"Question","name":"Is the cropper free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes, our image cropper is 100% free without signup requirements."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Image Cropper","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://nexkittool.com/tools/image-cropper/"}</script>
 </head>
 <body>
@@ -152,7 +152,7 @@
 
 <div class="tool-content">
   <h2>Why Crop Images?</h2>
-  <p>Cropping allows you to remove distracting elements, focus on your subject, and fit photos into specific aspect ratios (like 1:1 square for Instagram or 16:9 for banners) without stretching.</p>
+  <p>Crop images to any aspect ratio or custom box selection. Select from standard ratios (1:1 square, 16:9 widescreen, 4:3) or adjust margins manually to optimize photos for social media banners, profile cards, and web layouts. Maintaining correct dimensions and minimal byte weights is critical for optimizing search engine ranking scores and user experiences. Large photos can cause layout shifting and slow down loading times on mobile devices. Our tool is optimized to perform transformations locally in browser memory using HTML5 canvas boundaries, preserving original details while stripping unnecessary XML metadata tags.</p>
 
   <h2>How to Use the Free Image Cropper</h2>
   <ol>
@@ -183,12 +183,20 @@
   <h2>Frequently Asked Questions</h2>
   <div class="faq-list">
     <details class="faq-item">
-      <summary>Can I crop transparent PNGs?</summary>
-      <div><p>Yes. PNG transparency is preserved when cropping images.</p></div>
+      <summary>Can I input custom crop dimensions?</summary>
+      <div><p>Yes, you can enter custom pixel width and height targets to crop your photos.</p></div>
     </details>
   <details class="faq-item">
-      <summary>Does it support custom aspect ratios?</summary>
-      <div><p>Yes. Select the "Free" option to drag the crop area to any custom size.</p></div>
+      <summary>Will cropping reduce my file size?</summary>
+      <div><p>Yes, cropping removes unnecessary pixels, which naturally shrinks the file footprint.</p></div>
+    </details>
+  <details class="faq-item">
+      <summary>Do you support PNG files with transparent backgrounds?</summary>
+      <div><p>Yes, cropping preserves the transparent layers of PNG and WEBP files.</p></div>
+    </details>
+  <details class="faq-item">
+      <summary>Is the cropper free to use?</summary>
+      <div><p>Yes, our image cropper is 100% free without signup requirements.</p></div>
     </details>
   </div>
 

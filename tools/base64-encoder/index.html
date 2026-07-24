@@ -78,7 +78,7 @@
 
 <!-- schemas -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://nexkittool.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://nexkittool.com/tools/"},{"@type":"ListItem","position":3,"name":"Base64 Encoder/Decoder","item":"https://nexkittool.com/tools/base64-encoder/"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is Base64 secure for encryption?","acceptedAnswer":{"@type":"Answer","text":"No. Base64 is an encoding format, not encryption. Anyone can decode it easily."}},{"@type":"Question","name":"Can I decode base64 back to images?","acceptedAnswer":{"@type":"Answer","text":"Our tool is designed for text-based Base64 encoding. For binary files, developer tools are recommended."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Base64 encoding used for?","acceptedAnswer":{"@type":"Answer","text":"It translates binary data into ASCII strings, useful for embedding files in HTML or data streams."}},{"@type":"Question","name":"Can I encode images to Base64?","acceptedAnswer":{"@type":"Answer","text":"Yes, our tool supports uploading small files to convert them to data URLs."}},{"@type":"Question","name":"Does encoding happen on your servers?","acceptedAnswer":{"@type":"Answer","text":"No. Encoding and decoding happen locally in browser JavaScript, keeping data secure."}},{"@type":"Question","name":"Is there a character limit for encoding?","acceptedAnswer":{"@type":"Answer","text":"No, the tool handles large text strings and data structures."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Base64 Encoder/Decoder","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://nexkittool.com/tools/base64-encoder/"}</script>
 </head>
 <body>
@@ -152,7 +152,7 @@
 
 <div class="tool-content">
   <h2>What is Base64 Encoding?</h2>
-  <p>Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It is widely used in web development to embed small images in HTML/CSS, send data in email attachments, or safely transmit parameters in URLs.</p>
+  <p>Encode text strings or binary files to Base64 format, or decode Base64 data to plain text. Base64 is essential for embedding images directly in HTML/CSS sheets, transmission protocols, and email headers. Fast client-side translation. All data transformations and encodings are handled entirely client-side using JavaScript, which means no text copies, parameters, or passwords ever leave your local computer. This provides unmatched security for encoding strings, formatting databases, or generating random credentials. Fast processing speeds make web development tasks and archiving straightforward.</p>
 
   <h2>How to Use the Free Base64 Encoder/Decoder</h2>
   <ol>
@@ -183,12 +183,20 @@
   <h2>Frequently Asked Questions</h2>
   <div class="faq-list">
     <details class="faq-item">
-      <summary>Is Base64 secure for encryption?</summary>
-      <div><p>No. Base64 is an encoding format, not encryption. Anyone can decode it easily.</p></div>
+      <summary>What is Base64 encoding used for?</summary>
+      <div><p>It translates binary data into ASCII strings, useful for embedding files in HTML or data streams.</p></div>
     </details>
   <details class="faq-item">
-      <summary>Can I decode base64 back to images?</summary>
-      <div><p>Our tool is designed for text-based Base64 encoding. For binary files, developer tools are recommended.</p></div>
+      <summary>Can I encode images to Base64?</summary>
+      <div><p>Yes, our tool supports uploading small files to convert them to data URLs.</p></div>
+    </details>
+  <details class="faq-item">
+      <summary>Does encoding happen on your servers?</summary>
+      <div><p>No. Encoding and decoding happen locally in browser JavaScript, keeping data secure.</p></div>
+    </details>
+  <details class="faq-item">
+      <summary>Is there a character limit for encoding?</summary>
+      <div><p>No, the tool handles large text strings and data structures.</p></div>
     </details>
   </div>
 

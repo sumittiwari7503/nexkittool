@@ -78,7 +78,7 @@
 
 <!-- schemas -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://nexkittool.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://nexkittool.com/tools/"},{"@type":"ListItem","position":3,"name":"WCAG Contrast Checker","item":"https://nexkittool.com/tools/contrast-checker/"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What contrast ratio is required for AA compliance?","acceptedAnswer":{"@type":"Answer","text":"Standard text requires a ratio of at least 4.5:1, while large text (18pt+) requires a ratio of at least 3:1."}},{"@type":"Question","name":"Is this checker free?","acceptedAnswer":{"@type":"Answer","text":"Yes, all our accessibility utilities are completely free."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What contrast guidelines does the checker use?","acceptedAnswer":{"@type":"Answer","text":"It measures contrast against the WCAG 2.1 Level AA and AAA standards."}},{"@type":"Question","name":"What is a passing contrast ratio?","acceptedAnswer":{"@type":"Answer","text":"Standard text requires a minimum ratio of 4.5:1, while large text requires 3:1."}},{"@type":"Question","name":"Can I check custom HEX colors?","acceptedAnswer":{"@type":"Answer","text":"Yes, enter any HEX codes to calculate readability scores."}},{"@type":"Question","name":"Does it suggest accessible colors?","acceptedAnswer":{"@type":"Answer","text":"Yes, it provides recommendations if your selected combination fails contrast targets."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"WCAG Contrast Checker","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://nexkittool.com/tools/contrast-checker/"}</script>
 </head>
 <body>
@@ -152,7 +152,7 @@
 
 <div class="tool-content">
   <h2>Verify Color Accessibility (WCAG)</h2>
-  <p>Web accessibility ensures that all users, including those with visual impairments, can read your content. Our WCAG Contrast Checker evaluates the contrast ratio between your text and background colors to ensure compliance with AA and AAA standards.</p>
+  <p>Check color contrast ratios to meet WCAG accessibility standards. Select background and foreground colors to analyze readability scores (Pass/Fail) for normal and large text classes. Essential for designing inclusive web systems. Aligning color coordinates with WCAG accessibility guidelines ensures that your interfaces are legible for all users, including those with visual impairments. Standardizing HEX, RGB, and HSL tokens makes it easy to integrate palettes directly into CSS templates or design files like Figma. Use this tool to improve the styling, layout contrast, and UI appearance of your apps.</p>
 
   <h2>How to Use the Free WCAG Contrast Checker</h2>
   <ol>
@@ -183,12 +183,20 @@
   <h2>Frequently Asked Questions</h2>
   <div class="faq-list">
     <details class="faq-item">
-      <summary>What contrast ratio is required for AA compliance?</summary>
-      <div><p>Standard text requires a ratio of at least 4.5:1, while large text (18pt+) requires a ratio of at least 3:1.</p></div>
+      <summary>What contrast guidelines does the checker use?</summary>
+      <div><p>It measures contrast against the WCAG 2.1 Level AA and AAA standards.</p></div>
     </details>
   <details class="faq-item">
-      <summary>Is this checker free?</summary>
-      <div><p>Yes, all our accessibility utilities are completely free.</p></div>
+      <summary>What is a passing contrast ratio?</summary>
+      <div><p>Standard text requires a minimum ratio of 4.5:1, while large text requires 3:1.</p></div>
+    </details>
+  <details class="faq-item">
+      <summary>Can I check custom HEX colors?</summary>
+      <div><p>Yes, enter any HEX codes to calculate readability scores.</p></div>
+    </details>
+  <details class="faq-item">
+      <summary>Does it suggest accessible colors?</summary>
+      <div><p>Yes, it provides recommendations if your selected combination fails contrast targets.</p></div>
     </details>
   </div>
 

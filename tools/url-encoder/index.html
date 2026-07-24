@@ -78,7 +78,7 @@
 
 <!-- schemas -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://nexkittool.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://nexkittool.com/tools/"},{"@type":"ListItem","position":3,"name":"URL Encoder/Decoder","item":"https://nexkittool.com/tools/url-encoder/"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is percent encoding?","acceptedAnswer":{"@type":"Answer","text":"It replaces special characters with a \"%\" followed by their hexadecimal value."}},{"@type":"Question","name":"Is it safe for personal links?","acceptedAnswer":{"@type":"Answer","text":"Yes, all processing is client-side, so your links are never sent to a server."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why do I need to encode URLs?","acceptedAnswer":{"@type":"Answer","text":"URLs can only contain specific ASCII characters. Special characters (like spaces) must be encoded to remain valid."}},{"@type":"Question","name":"Does the tool decode percent-encoded strings?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can toggle the tool to decode Base64 and URL-encoded strings."}},{"@type":"Question","name":"Is the encoding process secure?","acceptedAnswer":{"@type":"Answer","text":"Yes, all transformations occur client-side in browser JavaScript."}},{"@type":"Question","name":"What is the limit for URL length?","acceptedAnswer":{"@type":"Answer","text":"The tool handles standard query strings up to browser limits (2,083 characters)."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"URL Encoder/Decoder","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://nexkittool.com/tools/url-encoder/"}</script>
 </head>
 <body>
@@ -152,7 +152,7 @@
 
 <div class="tool-content">
   <h2>Why Use URL Encoding?</h2>
-  <p>URLs can only contain specific characters from the ASCII set. Special characters like spaces, ampersands, and slashes must be converted to percent-encoded values (e.g. spaces become %20) to prevent errors in browser routing.</p>
+  <p>Encode URL paths contextually, translating special symbols to percent encoding format, or decode percent-encoded strings to standard URLs. Essential for creating clean query links and managing server-side parameters. All data transformations and encodings are handled entirely client-side using JavaScript, which means no text copies, parameters, or passwords ever leave your local computer. This provides unmatched security for encoding strings, formatting databases, or generating random credentials. Fast processing speeds make web development tasks and archiving straightforward.</p>
 
   <h2>How to Use the Free URL Encoder/Decoder</h2>
   <ol>
@@ -183,12 +183,20 @@
   <h2>Frequently Asked Questions</h2>
   <div class="faq-list">
     <details class="faq-item">
-      <summary>What is percent encoding?</summary>
-      <div><p>It replaces special characters with a "%" followed by their hexadecimal value.</p></div>
+      <summary>Why do I need to encode URLs?</summary>
+      <div><p>URLs can only contain specific ASCII characters. Special characters (like spaces) must be encoded to remain valid.</p></div>
     </details>
   <details class="faq-item">
-      <summary>Is it safe for personal links?</summary>
-      <div><p>Yes, all processing is client-side, so your links are never sent to a server.</p></div>
+      <summary>Does the tool decode percent-encoded strings?</summary>
+      <div><p>Yes, you can toggle the tool to decode Base64 and URL-encoded strings.</p></div>
+    </details>
+  <details class="faq-item">
+      <summary>Is the encoding process secure?</summary>
+      <div><p>Yes, all transformations occur client-side in browser JavaScript.</p></div>
+    </details>
+  <details class="faq-item">
+      <summary>What is the limit for URL length?</summary>
+      <div><p>The tool handles standard query strings up to browser limits (2,083 characters).</p></div>
     </details>
   </div>
 

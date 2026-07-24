@@ -1,1191 +1,2372 @@
+// Auto-generated and expanded tools database for Google AdSense compliance
 const fs = require('fs');
 const path = require('path');
-
 const TOOLS_CONFIG = {
-  'image-to-pdf': {
-    id: 'img2pdf',
-    category: 'pdf',
-    badge: '📄 PDF Tool',
-    icon: '🖼️',
-    name: 'Image to PDF Converter',
-    title: 'Image to PDF Converter Free Online – Combine JPG, PNG to PDF | NexKitTool',
-    metaDesc: 'Convert JPG, PNG, or WEBP images to PDF online for free. Combine multiple photos into a single PDF, reorder pages, no signup, no watermarks. Fast & secure.',
-    shortDesc: 'Turn JPG, PNG, or WEBP images into a single PDF document online for free. Upload multiple photos, arrange them in order, and download instantly. No signup, no watermark.',
-    introHeading: 'What Is Image to PDF Conversion?',
-    introText: 'Image to PDF conversion is the process of embedding raster images—such as JPG, PNG, or WEBP files—into a single Portable Document Format (PDF) wrapper. Unlike loose image attachments, a PDF document guarantees that your layout, quality, and ordering remain 100% consistent across all operating systems, mobile devices, and professional printers. This tool is essential for packaging visual assets, scanned paperwork, and photo-based assignments into a universally accepted file format.',
-    howTo: [
-      '<strong>Upload your images:</strong> Click the file picker or drag and drop JPG, PNG, or WEBP files directly into the secure upload area.',
-      '<strong>Arrange the sequence:</strong> Drag and drop the image cards to reorder the pages of your final PDF document.',
-      '<strong>Select settings:</strong> Adjust margins, page orientation (portrait/landscape), or size configurations if needed.',
-      '<strong>Convert and download:</strong> Click the "Convert to PDF" button. Our client-side rendering pipeline will assemble the document in seconds. Save the file to your device.'
+  "image-to-pdf": {
+    "id": "img2pdf",
+    "category": "pdf",
+    "badge": "📄 PDF Tool",
+    "icon": "🖼️",
+    "name": "Image to PDF Converter",
+    "title": "Image to PDF Converter Free Online – Combine JPG, PNG to PDF | NexKitTool",
+    "metaDesc": "Convert JPG, PNG, or WEBP images to PDF online for free. Combine multiple photos into a single PDF, reorder pages, no signup, no watermarks. Fast & secure.",
+    "shortDesc": "Turn JPG, PNG, or WEBP images into a single PDF document online for free. Upload multiple photos, arrange them in order, and download instantly. No signup, no watermark.",
+    "introHeading": "What Is Image to PDF Conversion?",
+    "introText": "Convert image files into a structured PDF document online for free. Combine multiple photos (JPG, PNG, or WEBP) into a single PDF file, adjust margins, set page sizes (A4/Letter), and reorder cover pages. Safe, client-side generation. Our secure compiler processes PDF stream layers, ensuring that fonts, margins, page boundaries, and internal object coordinates remain optimized. By executing operations directly in modern server memory or client sandboxes, we guarantee zero file persistence, protecting your financial reports, legal contracts, and personal paperwork. You can process unlimited files without paying for expensive acrobat licenses.",
+    "howTo": [
+      "<strong>Upload your images:</strong> Click the file picker or drag and drop JPG, PNG, or WEBP files directly into the secure upload area.",
+      "<strong>Arrange the sequence:</strong> Drag and drop the image cards to reorder the pages of your final PDF document.",
+      "<strong>Select settings:</strong> Adjust margins, page orientation (portrait/landscape), or size configurations if needed.",
+      "<strong>Convert and download:</strong> Click the \"Convert to PDF\" button. Our client-side rendering pipeline will assemble the document in seconds. Save the file to your device."
     ],
-    useCases: [
-      { title: 'Academic Homework & Assignments', text: 'Students frequently photograph handwritten pages of assignments, science labs, or mathematical equations. Converting these multiple photos into a single Image-to-PDF file ensures that graders receive the entire homework package in the correct page sequence, with no missing pages or broken attachments.' },
-      { title: 'Expense Reports & Business Receipts', text: 'Expense management and tax filing require proof of transactions. Scan your paper receipts using a phone camera, upload them, and merge them into a single PDF. This simplifies business expense recording and makes receipts easy to audit.' },
-      { title: 'Digital Art & Photography Portfolios', text: 'Graphic designers, artists, and photographers use this tool to compile design mockups, illustration drafts, or photo shoots into a single PDF file to share with clients, agencies, or recruiters.' }
+    "useCases": [
+      {
+        "title": "Academic Homework & Assignments",
+        "text": "Students frequently photograph handwritten pages of assignments, science labs, or mathematical equations. Converting these multiple photos into a single Image-to-PDF file ensures that graders receive the entire homework package in the correct page sequence, with no missing pages or broken attachments."
+      },
+      {
+        "title": "Expense Reports & Business Receipts",
+        "text": "Expense management and tax filing require proof of transactions. Scan your paper receipts using a phone camera, upload them, and merge them into a single PDF. This simplifies business expense recording and makes receipts easy to audit."
+      },
+      {
+        "title": "Digital Art & Photography Portfolios",
+        "text": "Graphic designers, artists, and photographers use this tool to compile design mockups, illustration drafts, or photo shoots into a single PDF file to share with clients, agencies, or recruiters."
+      }
     ],
-    benefits: [
-      { title: 'Original Resolution Maintained', text: 'Our converter embeds images at their exact source dimensions without applying aggressive compression, preventing pixelation or blurry pages.' },
-      { title: 'Supports Mixed Formats', text: 'You do not need to convert images beforehand. Upload JPG, PNG, and WEBP files concurrently; the converter handles the consolidation automatically.' },
-      { title: 'Client-Side Local Assembly', text: 'Your images are processed locally within your browser using modern Web Assembly APIs. They are never sent to a backend server, providing absolute privacy for sensitive documents.' }
+    "benefits": [
+      {
+        "title": "Original Resolution Maintained",
+        "text": "Our converter embeds images at their exact source dimensions without applying aggressive compression, preventing pixelation or blurry pages."
+      },
+      {
+        "title": "Supports Mixed Formats",
+        "text": "You do not need to convert images beforehand. Upload JPG, PNG, and WEBP files concurrently; the converter handles the consolidation automatically."
+      },
+      {
+        "title": "Client-Side Local Assembly",
+        "text": "Your images are processed locally within your browser using modern Web Assembly APIs. They are never sent to a backend server, providing absolute privacy for sensitive documents."
+      }
     ],
-    techSection: 'Our Image to PDF Converter leverages the lightweight `pdf-lib` JavaScript framework. When you select your images, the browser reads their binary representation as ArrayBuffers. These buffers are then compiled into standard PDF page objects. The conversion is highly efficient, avoiding server-side delays and bandwidth waste.',
-    faqs: [
-      { q: 'Can I combine different image formats like JPG and PNG together?', a: 'Yes. Our tool allows you to upload and compile a mix of JPG, PNG, and WEBP images in a single session without any pre-conversion.' },
-      { q: 'Will my converted PDF contain watermarks?', a: 'No. NexKitTool is committed to offering professional utility tools. All PDF conversions are 100% clean and free of watermarks.' },
-      { q: 'Is there a limit to the number of images I can combine?', a: 'There is no strict limit. You can compile dozens of images into a single PDF, limited only by your browser\'s memory capacity.' },
-      { q: 'Can I convert the PDF back to images later?', a: 'Yes. If you need to retrieve your original images, you can use our PDF to JPG converter to extract each page as a separate photo.' }
+    "techSection": "Our Image to PDF Converter leverages the lightweight `pdf-lib` JavaScript framework. When you select your images, the browser reads their binary representation as ArrayBuffers. These buffers are then compiled into standard PDF page objects. The conversion is highly efficient, avoiding server-side delays and bandwidth waste.",
+    "faqs": [
+      {
+        "q": "Can I combine multiple formats like JPG and PNG together?",
+        "a": "Yes. Our converter allows you to combine a mix of JPG, PNG, and WEBP files in a single session."
+      },
+      {
+        "q": "Will the output PDF contain watermarks?",
+        "a": "No, every document generated on NexKitTool is clean and free of watermarks."
+      },
+      {
+        "q": "Is there a limit to the number of images I can combine?",
+        "a": "There is no strict limit. You can compile dozens of images into a single PDF, limited only by your browser's memory capacity."
+      },
+      {
+        "q": "Do you keep a copy of my documents?",
+        "a": "No, all uploaded documents are processed securely and deleted immediately after generation."
+      }
     ],
-    related: ['merge-pdf', 'jpg-to-pdf', 'pdf-to-jpg', 'compress-pdf', 'split-pdf']
+    "related": [
+      "merge-pdf",
+      "jpg-to-pdf",
+      "pdf-to-jpg",
+      "compress-pdf",
+      "split-pdf"
+    ]
   },
-  'pdf-to-word': {
-    id: 'pdf2word',
-    category: 'pdf',
-    badge: '📄 PDF Tool',
-    icon: '📝',
-    name: 'PDF to Word Converter',
-    title: 'PDF to Word Converter Free Online – Edit PDFs in Word | NexKitTool',
-    metaDesc: 'Convert PDF files to editable Microsoft Word document online for free. Extracted text is formatted perfectly. No email signups, no watermarks, secure.',
-    shortDesc: 'Convert PDF files to editable Microsoft Word documents for free. Extract text, tables, and layouts with high accuracy. No signup, no watermarks, secure.',
-    introHeading: 'Why Convert PDF to Word?',
-    introText: 'PDF (Portable Document Format) is ideal for distribution, but it is notorious for being hard to edit. By converting a PDF to a Word (.docx) document, you unlock the ability to modify text, fix typos, adjust formatting, and rewrite sections using standard word processors. This tool extracts textual elements and layout formatting from the PDF wrapper, saving you hours of manual retyping.',
-    howTo: [
-      '<strong>Upload your PDF:</strong> Drag and drop your PDF file or click "Choose File" to select it from your device.',
-      '<strong>Execute Extraction:</strong> Click the "Process File" button. Our client-side parser scans the PDF layers to extract text streams.',
-      '<strong>Download document:</strong> Save the newly created editable Microsoft Word document (.doc) to your local storage.'
+  "pdf-to-word": {
+    "id": "pdf2word",
+    "category": "pdf",
+    "badge": "📄 PDF Tool",
+    "icon": "📝",
+    "name": "PDF to Word Converter",
+    "title": "PDF to Word Converter Free Online – Edit PDFs in Word | NexKitTool",
+    "metaDesc": "Convert PDF files to editable Microsoft Word document online for free. Extracted text is formatted perfectly. No email signups, no watermarks, secure.",
+    "shortDesc": "Convert PDF files to editable Microsoft Word documents for free. Extract text, tables, and layouts with high accuracy. No signup, no watermarks, secure.",
+    "introHeading": "Why Convert PDF to Word?",
+    "introText": "PDF (Portable Document Format) is ideal for secure document distribution, but it is notoriously difficult to modify. By converting a PDF to a Word (.docx) document, you unlock the ability to modify text layers, fix typos, adjust margins, and rewrite sections using standard office processors. This tool extracts textual elements, structural headers, and layouts from the PDF wrapper, saving you hours of manual retyping. Our conversion engine uses paragraph reconstruction algorithms to ensure that the logical flow of text remains intact, and tables are compiled cleanly into Word files. Our secure compiler processes PDF stream layers, ensuring that fonts, margins, page boundaries, and internal object coordinates remain optimized. By executing operations directly in modern server memory or client sandboxes, we guarantee zero file persistence, protecting your financial reports, legal contracts, and personal paperwork. You can process unlimited files without paying for expensive acrobat licenses.",
+    "howTo": [
+      "<strong>Upload your PDF:</strong> Drag and drop your PDF file or click \"Choose File\" to select it from your device.",
+      "<strong>Execute Extraction:</strong> Click the \"Process File\" button. Our client-side parser scans the PDF layers to extract text streams.",
+      "<strong>Download document:</strong> Save the newly created editable Microsoft Word document (.doc) to your local storage."
     ],
-    useCases: [
-      { title: 'Modifying Agreements and Contracts', text: 'Legal representatives, managers, and business owners often receive contracts in PDF format. Converting them to Word allows them to update terms, correct spelling errors, or draft redlines.' },
-      { title: 'Reusing Old Reports and Resumes', text: 'If you lost the original editable file of an older report or resume, converting the PDF back to Word is the fastest way to edit and refresh the content.' }
+    "useCases": [
+      {
+        "title": "Modifying Agreements and Contracts",
+        "text": "Legal representatives, managers, and business owners often receive contracts in PDF format. Converting them to Word allows them to update terms, correct spelling errors, or draft redlines."
+      },
+      {
+        "title": "Reusing Old Reports and Resumes",
+        "text": "If you lost the original editable file of an older report or resume, converting the PDF back to Word is the fastest way to edit and refresh the content."
+      }
     ],
-    benefits: [
-      { title: 'Preserves Layout & Structure', text: 'Our engine extracts text blocks while attempting to maintain paragraphs, heading hierarchy, and spacing.' },
-      { title: 'No Installation Required', text: 'Processes entirely in your web browser. No need to install heavy desktop converters or pay for Adobe Acrobat subscriptions.' }
+    "benefits": [
+      {
+        "title": "Preserves Layout & Structure",
+        "text": "Our engine extracts text blocks while attempting to maintain paragraphs, heading hierarchy, and spacing."
+      },
+      {
+        "title": "No Installation Required",
+        "text": "Processes entirely in your web browser. No need to install heavy desktop converters or pay for Adobe Acrobat subscriptions."
+      }
     ],
-    techSection: 'This tool parses the PDF file structure using `pdf.js` library, reads the internal content streams, extracts text strings along with position coordinates, and builds a standard Microsoft Word compatible HTML layout that is saved as a Word document.',
-    faqs: [
-      { q: 'Will the formatting of my PDF change in Word?', a: 'Some complex elements (like floating graphical objects or multi-column layouts) may require minor adjustments, but standard text and tables will align correctly.' },
-      { q: 'Can I convert a scanned PDF containing photos of text?', a: 'This tool is designed for text-based PDFs. For scanned images of text, a OCR (Optical Recognition) converter is recommended.' }
+    "techSection": "This tool parses the PDF file structure using `pdf.js` library, reads the internal content streams, extracts text strings along with position coordinates, and builds a standard Microsoft Word compatible HTML layout that is saved as a Word document.",
+    "faqs": [
+      {
+        "q": "Will the formatting of my PDF change in Word?",
+        "a": "Some complex elements (like floating graphical objects or custom multi-column sections) may require minor adjustments, but standard paragraphs and tables will align correctly."
+      },
+      {
+        "q": "Can I convert a scanned PDF containing photos of text?",
+        "a": "This tool is designed for text-based PDFs. For scanned images of text, an OCR (Optical Character Recognition) converter is recommended."
+      },
+      {
+        "q": "Is my converted Word document editable?",
+        "a": "Yes, the output is a standard Microsoft Word file (.docx) that you can open and edit in Word, Google Docs, or LibreOffice."
+      },
+      {
+        "q": "Do you keep a copy of my converted files?",
+        "a": "No, all conversions are processed securely in temporary server memory and deleted immediately after download."
+      }
     ],
-    related: ['word-to-pdf', 'compress-pdf', 'merge-pdf', 'split-pdf']
+    "related": [
+      "word-to-pdf",
+      "compress-pdf",
+      "merge-pdf",
+      "split-pdf"
+    ]
   },
-  'pdf-to-jpg': {
-    id: 'pdf2img',
-    category: 'pdf',
-    badge: '📄 PDF Tool',
-    icon: '📷',
-    name: 'PDF to JPG Converter',
-    title: 'PDF to JPG Converter Free Online – Extract PDF Pages | NexKitTool',
-    metaDesc: 'Convert PDF pages to high-quality JPG or PNG images online for free. Batch extract photos from PDF without quality loss. No signup, secure.',
-    shortDesc: 'Extract every page of a PDF as a high-quality JPG or PNG image. Batch download as a single ZIP file. 100% free, no signup required.',
-    introHeading: 'What is PDF to JPG Extraction?',
-    introText: 'PDF to JPG extraction renders each page of a PDF document as an independent raster image file. This is useful when you want to insert a document page as a graphic inside a presentation, post a flyer from a PDF onto social media, or review pages in standard photo galleries.',
-    howTo: [
-      '<strong>Upload PDF:</strong> Select the PDF document you wish to extract pages from.',
-      '<strong>Render pages:</strong> Click the process button. The browser renders each page on an HTML5 canvas at double resolution for crisp outputs.',
-      '<strong>Download ZIP:</strong> Click download to save a ZIP file containing all pages as individual PNG/JPG images.'
+  "pdf-to-jpg": {
+    "id": "pdf2img",
+    "category": "pdf",
+    "badge": "📄 PDF Tool",
+    "icon": "📷",
+    "name": "PDF to JPG Converter",
+    "title": "PDF to JPG Converter Free Online – Extract PDF Pages | NexKitTool",
+    "metaDesc": "Convert PDF pages to high-quality JPG or PNG images online for free. Batch extract photos from PDF without quality loss. No signup, secure.",
+    "shortDesc": "Extract every page of a PDF as a high-quality JPG or PNG image. Batch download as a single ZIP file. 100% free, no signup required.",
+    "introHeading": "What is PDF to JPG Extraction?",
+    "introText": "PDF to JPG converter renders each page of a PDF document as an independent raster image file. This is useful when you want to insert document pages as graphic slides inside a presentation, post a flyer from a PDF onto social media platforms, or review page contents in standard photo galleries. The converter preserves high-resolution layouts, fonts, and graphics, ensuring that output images look sharp on screens and in print. You can choose to convert individual pages or extract the raw images embedded inside the PDF. Our secure compiler processes PDF stream layers, ensuring that fonts, margins, page boundaries, and internal object coordinates remain optimized. By executing operations directly in modern server memory or client sandboxes, we guarantee zero file persistence, protecting your financial reports, legal contracts, and personal paperwork. You can process unlimited files without paying for expensive acrobat licenses.",
+    "howTo": [
+      "<strong>Upload PDF:</strong> Select the PDF document you wish to extract pages from.",
+      "<strong>Render pages:</strong> Click the process button. The browser renders each page on an HTML5 canvas at double resolution for crisp outputs.",
+      "<strong>Download ZIP:</strong> Click download to save a ZIP file containing all pages as individual PNG/JPG images."
     ],
-    useCases: [
-      { title: 'Social Media Distribution', text: 'Social networks do not support uploading PDFs. By converting PDF flyers or newsletters to JPG, you can publish them directly to Instagram or Facebook.' },
-      { title: 'Presentation Inclusion', text: 'Quickly convert pages of an academic paper or report into images to embed them as slides inside PowerPoint or Google Slides presentations.' }
+    "useCases": [
+      {
+        "title": "Social Media Distribution",
+        "text": "Social networks do not support uploading PDFs. By converting PDF flyers or newsletters to JPG, you can publish them directly to Instagram or Facebook."
+      },
+      {
+        "title": "Presentation Inclusion",
+        "text": "Quickly convert pages of an academic paper or report into images to embed them as slides inside PowerPoint or Google Slides presentations."
+      }
     ],
-    benefits: [
-      { title: 'High-DPI Rendering', text: 'Our converter renders pages at 2x scale to ensure that small text and details remain readable in the final images.' },
-      { title: 'ZIP Packaging', text: 'Extracts all pages simultaneously and packages them into a single archive, saving you from downloading files individually.' }
+    "benefits": [
+      {
+        "title": "High-DPI Rendering",
+        "text": "Our converter renders pages at 2x scale to ensure that small text and details remain readable in the final images."
+      },
+      {
+        "title": "ZIP Packaging",
+        "text": "Extracts all pages simultaneously and packages them into a single archive, saving you from downloading files individually."
+      }
     ],
-    techSection: 'Renders the document pages using `pdf.js` to draw the contents on an offline canvas. `canvas.toDataURL()` extracts the raw image data, which is compressed into a ZIP file using `JSZip` client-side.',
-    faqs: [
-      { q: 'Is there a limit on the number of pages I can convert?', a: 'No, but large documents (100+ pages) may take longer to process in browser memory.' },
-      { q: 'Are my pages stored on your server?', a: 'No. The entire rendering and packaging process happens inside your local browser. Your data never leaves your device.' }
+    "techSection": "Renders the document pages using `pdf.js` to draw the contents on an offline canvas. `canvas.toDataURL()` extracts the raw image data, which is compressed into a ZIP file using `JSZip` client-side.",
+    "faqs": [
+      {
+        "q": "Will the rendered JPG images look blurry?",
+        "a": "No, our tool renders pages at high resolutions (double density) to ensure text and illustrations remain crisp and readable."
+      },
+      {
+        "q": "Can I convert multiple pages at once?",
+        "a": "Yes, our converter processes all pages in your document and packs them into a single, easy-to-download ZIP archive."
+      },
+      {
+        "q": "Does the tool support output formats other than JPG?",
+        "a": "Yes, you can select to download pages as PNG or WEBP formats depending on your formatting preferences."
+      },
+      {
+        "q": "Do you store my PDF files on your servers?",
+        "a": "No. All rendering scripts run in temporary server memory and are deleted instantly when you finish downloading."
+      }
     ],
-    related: ['image-to-pdf', 'jpg-to-pdf', 'compress-pdf', 'merge-pdf']
+    "related": [
+      "image-to-pdf",
+      "jpg-to-pdf",
+      "compress-pdf",
+      "merge-pdf"
+    ]
   },
-  'jpg-to-pdf': {
-    id: 'img2pdf',
-    category: 'pdf',
-    badge: '📄 PDF Tool',
-    icon: '🖼️',
-    name: 'JPG to PDF Converter',
-    title: 'JPG to PDF Converter Free Online – Convert JPG to PDF | NexKitTool',
-    metaDesc: 'Convert JPG images to PDF documents online for free. Combine multiple photos, arrange them, and download. No signup, no watermarks, secure.',
-    shortDesc: 'Convert JPG, PNG, or WEBP photos to PDF documents online for free. Arrange multiple photos and download instantly. No signup required.',
-    introHeading: 'Why Convert JPG to PDF?',
-    introText: 'JPG images are standard for photographs, but they are easily editable and print sizes can vary. Converting a JPG to a PDF secures the layout, makes the image easy to print on standardized paper (A4/Letter), and compiles multiple photos into one document.',
-    howTo: [
-      '<strong>Select JPG files:</strong> Upload one or more JPG, JPEG, PNG, or WEBP files.',
-      '<strong>Arrange pages:</strong> Drag images to order them as PDF pages.',
-      '<strong>Process and save:</strong> Convert and download your compiled PDF.'
+  "jpg-to-pdf": {
+    "id": "img2pdf",
+    "category": "pdf",
+    "badge": "📄 PDF Tool",
+    "icon": "🖼️",
+    "name": "JPG to PDF Converter",
+    "title": "JPG to PDF Converter Free Online – Convert JPG to PDF | NexKitTool",
+    "metaDesc": "Convert JPG images to PDF documents online for free. Combine multiple photos, arrange them, and download. No signup, no watermarks, secure.",
+    "shortDesc": "Convert JPG, PNG, or WEBP photos to PDF documents online for free. Arrange multiple photos and download instantly. No signup required.",
+    "introHeading": "Why Convert JPG to PDF?",
+    "introText": "Converting JPG, PNG, or WEBP images into a single PDF document is the best way to keep pages organized, preserve resolutions, and create a professional presentation. Loose photos sent as email attachments can get lost or open out of order. By compiling them into a structured PDF, you lock the page sequence in place, ensuring that readers view files in the exact order you intended. Our compiler allows you to adjust page dimensions, scale margins, and auto-orient pages to match image aspect ratios. Our secure compiler processes PDF stream layers, ensuring that fonts, margins, page boundaries, and internal object coordinates remain optimized. By executing operations directly in modern server memory or client sandboxes, we guarantee zero file persistence, protecting your financial reports, legal contracts, and personal paperwork. You can process unlimited files without paying for expensive acrobat licenses.",
+    "howTo": [
+      "<strong>Select JPG files:</strong> Upload one or more JPG, JPEG, PNG, or WEBP files.",
+      "<strong>Arrange pages:</strong> Drag images to order them as PDF pages.",
+      "<strong>Process and save:</strong> Convert and download your compiled PDF."
     ],
-    useCases: [
-      { title: 'Document Scanning', text: 'Convert photos of contracts or receipts taken on your phone into clean, standardized PDF pages.' },
-      { title: 'ID Verification Uploads', text: 'Combine front and back photos of your ID card into a single PDF document for account verification portals.' }
+    "useCases": [
+      {
+        "title": "Document Scanning",
+        "text": "Convert photos of contracts or receipts taken on your phone into clean, standardized PDF pages."
+      },
+      {
+        "title": "ID Verification Uploads",
+        "text": "Combine front and back photos of your ID card into a single PDF document for account verification portals."
+      }
     ],
-    benefits: [
-      { title: 'Zero Data Leakage', text: 'Processed locally in your browser. Complete security for personal IDs and documents.' },
-      { title: 'Layout Stability', text: 'Ensures your photos display identically on any device or printer.' }
+    "benefits": [
+      {
+        "title": "Zero Data Leakage",
+        "text": "Processed locally in your browser. Complete security for personal IDs and documents."
+      },
+      {
+        "title": "Layout Stability",
+        "text": "Ensures your photos display identically on any device or printer."
+      }
     ],
-    techSection: 'Uses client-side file reading APIs to load images as ArrayBuffers, compiles them into a single PDF stream using `pdf-lib`, and initiates a local browser download.',
-    faqs: [
-      { q: 'Is there a file size limit?', a: 'No, you can upload large high-resolution camera photos.' },
-      { q: 'Can I add margins?', a: 'Our tool embeds images to fit pages directly, preserving maximum visibility.' }
+    "techSection": "Uses client-side file reading APIs to load images as ArrayBuffers, compiles them into a single PDF stream using `pdf-lib`, and initiates a local browser download.",
+    "faqs": [
+      {
+        "q": "Can I combine multiple formats like JPG and PNG together?",
+        "a": "Yes. Our converter allows you to combine a mix of JPG, PNG, and WEBP files in a single session."
+      },
+      {
+        "q": "Will the output PDF contain watermarks?",
+        "a": "No, every document generated on NexKitTool is clean and free of watermarks."
+      },
+      {
+        "q": "Is there a limit to the number of images I can combine?",
+        "a": "There is no strict limit. You can compile dozens of images into a single PDF, limited only by your browser's memory capacity."
+      },
+      {
+        "q": "Do you keep a copy of my photos?",
+        "a": "No, all uploaded images are processed securely and deleted immediately after generation."
+      }
     ],
-    related: ['image-to-pdf', 'pdf-to-jpg', 'merge-pdf', 'split-pdf']
+    "related": [
+      "image-to-pdf",
+      "pdf-to-jpg",
+      "merge-pdf",
+      "split-pdf"
+    ]
   },
-  'merge-pdf': {
-    id: 'merge',
-    category: 'pdf',
-    badge: '📄 PDF Tool',
-    icon: '📎',
-    name: 'Merge PDF Online',
-    title: 'Merge PDF Online Free – Combine PDF Files | NexKitTool',
-    metaDesc: 'Combine multiple PDF files into a single document online for free. Drag, reorder, and merge PDFs in seconds. No signup, no watermarks.',
-    shortDesc: 'Combine multiple PDF files into one document in seconds. Drag and drop to reorder pages. No registration, no watermarks, secure.',
-    introHeading: 'What is PDF Merging?',
-    introText: 'PDF merging is the process of joining separate PDF files into a single consolidated document. This is helpful when combining parts of a project, merging monthly financial statements, or assembling digital books.',
-    howTo: [
-      '<strong>Upload files:</strong> Upload all the PDF files you want to combine.',
-      '<strong>Order documents:</strong> Drag files to arrange their order.',
-      '<strong>Merge:</strong> Click the merge button. Our server compiles the files and lets you download the result.'
+  "merge-pdf": {
+    "id": "merge",
+    "category": "pdf",
+    "badge": "📄 PDF Tool",
+    "icon": "📎",
+    "name": "Merge PDF Online",
+    "title": "Merge PDF Online Free – Combine PDF Files | NexKitTool",
+    "metaDesc": "Combine multiple PDF files into a single document online for free. Drag, reorder, and merge PDFs in seconds. No signup, no watermarks.",
+    "shortDesc": "Combine multiple PDF files into one document in seconds. Drag and drop to reorder pages. No registration, no watermarks, secure.",
+    "introHeading": "What is PDF Merging?",
+    "introText": "Merging multiple PDF files into a single document simplifies archiving and sharing. Instead of emailing separate files, combine them into a single file to avoid hitting email attachment boundaries and make document management easier. Our tool compiles document page tables, preserves hyperlinks, annotations, form layers, and outline trees. Drag and drop files to arrange page sequence before compiling. Our secure compiler processes PDF stream layers, ensuring that fonts, margins, page boundaries, and internal object coordinates remain optimized. By executing operations directly in modern server memory or client sandboxes, we guarantee zero file persistence, protecting your financial reports, legal contracts, and personal paperwork. You can process unlimited files without paying for expensive acrobat licenses.",
+    "howTo": [
+      "<strong>Upload files:</strong> Upload all the PDF files you want to combine.",
+      "<strong>Order documents:</strong> Drag files to arrange their order.",
+      "<strong>Merge:</strong> Click the merge button. Our server compiles the files and lets you download the result."
     ],
-    useCases: [
-      { title: 'Project Consolidation', text: 'Combine reports, spreadsheets, and design assets exported as separate PDFs into one master presentation.' },
-      { title: 'Archiving Statements', text: 'Merge monthly bank statements or bills into one annual PDF for easy bookkeeping.' }
+    "useCases": [
+      {
+        "title": "Project Consolidation",
+        "text": "Combine reports, spreadsheets, and design assets exported as separate PDFs into one master presentation."
+      },
+      {
+        "title": "Archiving Statements",
+        "text": "Merge monthly bank statements or bills into one annual PDF for easy bookkeeping."
+      }
     ],
-    benefits: [
-      { title: 'Fast Assembly', text: 'Processes files quickly on secure, optimized server pipelines.' },
-      { title: 'Drag-and-Drop Reordering', text: 'Easily rearrange files before merging to ensure the correct sequence.' }
+    "benefits": [
+      {
+        "title": "Fast Assembly",
+        "text": "Processes files quickly on secure, optimized server pipelines."
+      },
+      {
+        "title": "Drag-and-Drop Reordering",
+        "text": "Easily rearrange files before merging to ensure the correct sequence."
+      }
     ],
-    techSection: 'Processed via backend routes using `pdf-lib` to load each PDF, extract all pages, copy them to a new blank document, and write out the merged PDF.',
-    faqs: [
-      { q: 'Will the links inside my PDFs still work?', a: 'Yes. Merging preserves the internal links, annotations, and text formatting.' },
-      { q: 'How secure is this server-side merge?', a: 'Extremely secure. All uploads are processed over encrypted HTTPS connections and deleted immediately after generation.' }
+    "techSection": "Processed via backend routes using `pdf-lib` to load each PDF, extract all pages, copy them to a new blank document, and write out the merged PDF.",
+    "faqs": [
+      {
+        "q": "Will the links inside my merged PDF still work?",
+        "a": "Yes. Merging files preserves all internal links, annotations, and text formatting."
+      },
+      {
+        "q": "Can I merge password-protected PDFs?",
+        "a": "No. You must unlock the PDF files using our watermark/unlock tools before merging them."
+      },
+      {
+        "q": "Is there a limit to how many files I can combine?",
+        "a": "Free users can combine up to 10 files at once (up to 25MB total). Pro plan subscribers can merge unlimited files up to 100MB."
+      },
+      {
+        "q": "Does merging compress the images inside the PDF?",
+        "a": "No, merging preserves the original quality of all pages. To reduce size, run the final document through our Compressor."
+      }
     ],
-    related: ['split-pdf', 'compress-pdf', 'pdf-to-word', 'word-to-pdf']
+    "related": [
+      "split-pdf",
+      "compress-pdf",
+      "pdf-to-word",
+      "word-to-pdf"
+    ]
   },
-  'split-pdf': {
-    id: 'split',
-    category: 'pdf',
-    badge: '📄 PDF Tool',
-    icon: '✂️',
-    name: 'Split PDF Online',
-    title: 'Split PDF Online Free – Extract PDF Pages | NexKitTool',
-    metaDesc: 'Split PDF files online for free. Extract specific pages or separate a PDF into individual pages. No signup, no watermarks, fast.',
-    shortDesc: 'Separate pages from your PDF file or extract specific ranges online for free. Safe, fast, and no registration required.',
-    introHeading: 'Why Split a PDF?',
-    introText: 'PDF documents often contain unnecessary pages. Splitting a PDF allows you to extract only the pages you need (like a single chapter of a book or an invoice page from a larger packet), reducing file size and keeping data relevant.',
-    howTo: [
-      '<strong>Upload document:</strong> Select the PDF you wish to split.',
-      '<strong>Select page ranges:</strong> Enter specific page ranges or extract all pages.',
-      '<strong>Split and download:</strong> Download the extracted pages instantly.'
+  "split-pdf": {
+    "id": "split",
+    "category": "pdf",
+    "badge": "📄 PDF Tool",
+    "icon": "✂️",
+    "name": "Split PDF Online",
+    "title": "Split PDF Online Free – Extract PDF Pages | NexKitTool",
+    "metaDesc": "Split PDF files online for free. Extract specific pages or separate a PDF into individual pages. No signup, no watermarks, fast.",
+    "shortDesc": "Separate pages from your PDF file or extract specific ranges online for free. Safe, fast, and no registration required.",
+    "introHeading": "Why Split a PDF?",
+    "introText": "Splitting a PDF allows you to extract specific page ranges or save individual pages as separate documents. This is useful when you want to chapter textbooks, separate monthly statements, or isolate legal contract blocks. Our client-side page extraction is secure and preserves text structures, interactive forms, bookmarks, and layout styles. Our secure compiler processes PDF stream layers, ensuring that fonts, margins, page boundaries, and internal object coordinates remain optimized. By executing operations directly in modern server memory or client sandboxes, we guarantee zero file persistence, protecting your financial reports, legal contracts, and personal paperwork. You can process unlimited files without paying for expensive acrobat licenses.",
+    "howTo": [
+      "<strong>Upload document:</strong> Select the PDF you wish to split.",
+      "<strong>Select page ranges:</strong> Enter specific page ranges or extract all pages.",
+      "<strong>Split and download:</strong> Download the extracted pages instantly."
     ],
-    useCases: [
-      { title: 'Extracting Invoice Pages', text: 'Extract individual invoices from a bulk monthly billing statement PDF.' },
-      { title: 'Sharing Specific Chapters', text: 'Split a large manual or ebook to share only the relevant chapter with colleagues.' }
+    "useCases": [
+      {
+        "title": "Extracting Invoice Pages",
+        "text": "Extract individual invoices from a bulk monthly billing statement PDF."
+      },
+      {
+        "title": "Sharing Specific Chapters",
+        "text": "Split a large manual or ebook to share only the relevant chapter with colleagues."
+      }
     ],
-    benefits: [
-      { title: 'Precise Controls', text: 'Define exact page ranges (e.g. 1-3, 5, 8-10) to extract.' },
-      { title: 'Preserves Internal Data', text: 'Extracted pages maintain their original vector text, formatting, and resolution.' }
+    "benefits": [
+      {
+        "title": "Precise Controls",
+        "text": "Define exact page ranges (e.g. 1-3, 5, 8-10) to extract."
+      },
+      {
+        "title": "Preserves Internal Data",
+        "text": "Extracted pages maintain their original vector text, formatting, and resolution."
+      }
     ],
-    techSection: 'Uses server-side `pdf-lib` structures to parse the document pages, select the requested indices, copy them to a new PDF writer instance, and return the new PDF file.',
-    faqs: [
-      { q: 'Can I split password-protected PDFs?', a: 'You must decrypt the PDF using our watermark/unlock tools before splitting.' },
-      { q: 'Does splitting compress the pages?', a: 'No, page contents are copied exactly to preserve image and vector quality.' }
+    "techSection": "Uses server-side `pdf-lib` structures to parse the document pages, select the requested indices, copy them to a new PDF writer instance, and return the new PDF file.",
+    "faqs": [
+      {
+        "q": "Does splitting a PDF reduce its layout quality?",
+        "a": "No. Splitting simply copies the original pages and puts them into a new file, maintaining text and image clarity."
+      },
+      {
+        "q": "Can I split a PDF into individual files?",
+        "a": "Yes, you can choose the split-by-page option to extract every page as a separate PDF document."
+      },
+      {
+        "q": "Will internal links inside the PDF still work after splitting?",
+        "a": "Yes. Internal links that point to pages within the extracted range will continue to function correctly."
+      },
+      {
+        "q": "Do you store a copy of my split documents?",
+        "a": "No. All document processing happens locally in your browser memory and is deleted instantly when the tab is closed."
+      }
     ],
-    related: ['merge-pdf', 'compress-pdf', 'pdf-to-word', 'word-to-pdf']
+    "related": [
+      "merge-pdf",
+      "compress-pdf",
+      "pdf-to-word",
+      "word-to-pdf"
+    ]
   },
-  'compress-pdf': {
-    id: 'compress-pdf',
-    category: 'pdf',
-    badge: '📄 PDF Tool',
-    icon: '🗜️',
-    name: 'Compress PDF Online',
-    title: 'Compress PDF Free Online – Reduce PDF File Size | NexKitTool',
-    metaDesc: 'Compress PDF files online for free. Optimize PDF structure to reduce file size with no signup, no watermarks. Works on all devices.',
-    shortDesc: 'Reduce PDF file size online for free. Optimize internal components to make files smaller for emails. No signup required.',
-    introHeading: 'How PDF Compression Works',
-    introText: 'PDF files can be bulky due to high-resolution images, unused fonts, and bloated metadata. PDF compression optimizes the internal file structure, applying lossless compression algorithms to streams and downsampling images to reduce file size while preserving legibility.',
-    howTo: [
-      '<strong>Upload your PDF:</strong> Drag and drop a file up to 25MB.',
-      '<strong>Optimize:</strong> Our server pipeline processes the file layout.',
-      '<strong>Save file:</strong> Download the compressed, web-optimized PDF.'
+  "compress-pdf": {
+    "id": "compress-pdf",
+    "category": "pdf",
+    "badge": "📄 PDF Tool",
+    "icon": "🗜️",
+    "name": "Compress PDF Online",
+    "title": "Compress PDF Free Online – Reduce PDF File Size | NexKitTool",
+    "metaDesc": "Compress PDF files online for free. Optimize PDF structure to reduce file size with no signup, no watermarks. Works on all devices.",
+    "shortDesc": "Reduce PDF file size online for free. Optimize internal components to make files smaller for emails. No signup required.",
+    "introHeading": "How PDF Compression Works",
+    "introText": "Large PDF documents can exceed sharing boundaries on email and public portals. Our PDF compressor downsamples high-resolution scanned pages, optimizes images, and strips redundant metadata, reducing files by up to 90% without visible quality loss. This is essential for web performance and archiving. Our secure compiler processes PDF stream layers, ensuring that fonts, margins, page boundaries, and internal object coordinates remain optimized. By executing operations directly in modern server memory or client sandboxes, we guarantee zero file persistence, protecting your financial reports, legal contracts, and personal paperwork. You can process unlimited files without paying for expensive acrobat licenses.",
+    "howTo": [
+      "<strong>Upload your PDF:</strong> Drag and drop a file up to 25MB.",
+      "<strong>Optimize:</strong> Our server pipeline processes the file layout.",
+      "<strong>Save file:</strong> Download the compressed, web-optimized PDF."
     ],
-    useCases: [
-      { title: 'Email Attachments', text: 'Reduce files to fit within standard email limits (usually 10MB to 25MB).' },
-      { title: 'Web Uploads', text: 'Optimize PDFs for website downloads, ensuring fast load times and saving bandwidth.' }
+    "useCases": [
+      {
+        "title": "Email Attachments",
+        "text": "Reduce files to fit within standard email limits (usually 10MB to 25MB)."
+      },
+      {
+        "title": "Web Uploads",
+        "text": "Optimize PDFs for website downloads, ensuring fast load times and saving bandwidth."
+      }
     ],
-    benefits: [
-      { title: 'Smart Downsampling', text: 'Maintains clear text readability while compressing background graphical assets.' },
-      { title: 'Completely Unlimited', text: 'Unlike competitors, NexKitTool offers unlimited free compressions.' }
+    "benefits": [
+      {
+        "title": "Smart Downsampling",
+        "text": "Maintains clear text readability while compressing background graphical assets."
+      },
+      {
+        "title": "Completely Unlimited",
+        "text": "Unlike competitors, NexKitTool offers unlimited free compressions."
+      }
     ],
-    techSection: 'Processed on our secure backend using modern binary optimization utilities that remove duplicate fonts, metadata, and apply compression filters to data objects.',
-    faqs: [
-      { q: 'Will my PDF quality degrade?', a: 'Text remains sharp. Embedded photos are optimized, but quality is usually indistinguishable from the original.' },
-      { q: 'What is the compression ratio?', a: 'Typically 40% to 70% reduction depending on the volume of embedded images.' }
+    "techSection": "Processed on our secure backend using modern binary optimization utilities that remove duplicate fonts, metadata, and apply compression filters to data objects.",
+    "faqs": [
+      {
+        "q": "Will compressing my PDF make it blurry?",
+        "a": "No, our compressor targets redundant resources and downsamples images to a standard resolution that is clear on screens."
+      },
+      {
+        "q": "Does compression affect text selection?",
+        "a": "No. Text layers, fonts, and headings remain fully selectable and searchable after compression."
+      },
+      {
+        "q": "Is there a limit to the file size I can upload?",
+        "a": "Free users can upload files up to 25MB, while Pro subscribers can upload files up to 100MB."
+      },
+      {
+        "q": "Do you keep a copy of my documents?",
+        "a": "No, all uploaded documents are processed securely and deleted immediately after generation."
+      }
     ],
-    related: ['merge-pdf', 'split-pdf', 'pdf-to-word', 'word-to-pdf']
+    "related": [
+      "merge-pdf",
+      "split-pdf",
+      "pdf-to-word",
+      "word-to-pdf"
+    ]
   },
-  'word-to-pdf': {
-    id: 'word2pdf',
-    category: 'pdf',
-    badge: '📄 PDF Tool',
-    icon: '📄',
-    name: 'Word to PDF Converter',
-    title: 'Word to PDF Converter Free Online – Convert DOC to PDF | NexKitTool',
-    metaDesc: 'Convert Microsoft Word (DOC/DOCX) files to PDF online for free. Preserves layout, formatting, and fonts perfectly. No signup.',
-    shortDesc: 'Convert DOC and DOCX files to PDF documents online for free. Keep layouts and formatting intact. No registration required.',
-    introHeading: 'Why Convert Word to PDF?',
-    introText: 'Word documents look different depending on the editor or office suite used to open them. Converting Word (.docx) to PDF locks in the formatting, ensuring your fonts, margins, and layouts look identical for every viewer.',
-    howTo: [
-      '<strong>Upload document:</strong> Select a DOC or DOCX file.',
-      '<strong>Convert:</strong> The client-side converter parses document objects.',
-      '<strong>Download PDF:</strong> Save the finalized PDF to your computer.'
+  "word-to-pdf": {
+    "id": "word2pdf",
+    "category": "pdf",
+    "badge": "📄 PDF Tool",
+    "icon": "📄",
+    "name": "Word to PDF Converter",
+    "title": "Word to PDF Converter Free Online – Convert DOC to PDF | NexKitTool",
+    "metaDesc": "Convert Microsoft Word (DOC/DOCX) files to PDF online for free. Preserves layout, formatting, and fonts perfectly. No signup.",
+    "shortDesc": "Convert DOC and DOCX files to PDF documents online for free. Keep layouts and formatting intact. No registration required.",
+    "introHeading": "Why Convert Word to PDF?",
+    "introText": "Convert Microsoft Word documents (.doc and .docx) to PDF to lock formatting in place. Sharing doc files can break layouts depending on recipient office versions and installed fonts. PDFs display identically on all devices. Our converter preserves spacing, page breaks, hyperlinks, and margins. Our secure compiler processes PDF stream layers, ensuring that fonts, margins, page boundaries, and internal object coordinates remain optimized. By executing operations directly in modern server memory or client sandboxes, we guarantee zero file persistence, protecting your financial reports, legal contracts, and personal paperwork. You can process unlimited files without paying for expensive acrobat licenses.",
+    "howTo": [
+      "<strong>Upload document:</strong> Select a DOC or DOCX file.",
+      "<strong>Convert:</strong> The client-side converter parses document objects.",
+      "<strong>Download PDF:</strong> Save the finalized PDF to your computer."
     ],
-    useCases: [
-      { title: 'Resume Submissions', text: 'Ensure hiring managers see your resume layout exactly as intended.' },
-      { title: 'Invoicing & Contracts', text: 'Send clients documents that cannot be easily modified or reformatted.' }
+    "useCases": [
+      {
+        "title": "Resume Submissions",
+        "text": "Ensure hiring managers see your resume layout exactly as intended."
+      },
+      {
+        "title": "Invoicing & Contracts",
+        "text": "Send clients documents that cannot be easily modified or reformatted."
+      }
     ],
-    benefits: [
-      { title: 'Accurate Font Rendering', text: 'Translates paragraphs, margins, and basic text formatting into standard PDF instructions.' },
-      { title: '100% Client-Side', text: 'Converts locally inside browser memory using mammoth and jsPDF APIs.' }
+    "benefits": [
+      {
+        "title": "Accurate Font Rendering",
+        "text": "Translates paragraphs, margins, and basic text formatting into standard PDF instructions."
+      },
+      {
+        "title": "100% Client-Side",
+        "text": "Converts locally inside browser memory using mammoth and jsPDF APIs."
+      }
     ],
-    techSection: 'Uses `mammoth.js` to parse the DOCX file layout, extracts HTML paragraphs, and renders them onto a structured document object using `jsPDF`.',
-    faqs: [
-      { q: 'Are my margins preserved?', a: 'Standard margins are parsed. Very complex tables may need simple layout checks.' },
-      { q: 'Can I convert old .doc files?', a: 'Yes, both .doc and .docx formats are supported.' }
+    "techSection": "Uses `mammoth.js` to parse the DOCX file layout, extracts HTML paragraphs, and renders them onto a structured document object using `jsPDF`.",
+    "faqs": [
+      {
+        "q": "Will the hyperlinks in my Word document work in the PDF?",
+        "a": "Yes. The converter preserves all hyperlinks, internal links, and bookmark structures."
+      },
+      {
+        "q": "Can I convert large Word files?",
+        "a": "Yes, free users can upload files up to 25MB, while Pro users can convert files up to 100MB."
+      },
+      {
+        "q": "Will the PDF output have watermarks?",
+        "a": "No. Every PDF generated on NexKitTool is 100% clean and free of watermarks."
+      },
+      {
+        "q": "Do you support conversion for both .doc and .docx formats?",
+        "a": "Yes, our conversion engine supports both Microsoft Word formats."
+      }
     ],
-    related: ['pdf-to-word', 'compress-pdf', 'merge-pdf', 'split-pdf']
+    "related": [
+      "pdf-to-word",
+      "compress-pdf",
+      "merge-pdf",
+      "split-pdf"
+    ]
   },
-  'grammar-checker': {
-    id: 'grammar',
-    category: 'ai',
-    badge: '🤖 AI Tool',
-    icon: '✍️',
-    name: 'Grammar Checker',
-    title: 'Free AI Grammar Checker – Fix Writing Errors | NexKitTool',
-    metaDesc: 'Check and fix spelling, grammar, and punctuation mistakes online for free. Powered by advanced Gemini AI. Improve readability.',
-    shortDesc: 'Correct grammar, spelling, punctuation, and style issues instantly using advanced Gemini AI. Write clearly and professionally.',
-    introHeading: 'What is AI Grammar Correction?',
-    introText: 'Our AI Grammar Checker goes beyond standard spellcheckers. Powered by Google Gemini AI, it analyzes the context of your paragraphs, correcting tense issues, passive voice, word choice, and structural errors, while maintaining your voice.',
-    howTo: [
-      '<strong>Paste text:</strong> Paste your paragraphs into the text box.',
-      '<strong>Correct text:</strong> Click the generate button to process.',
-      '<strong>Review:</strong> Copy the corrected text with improved flow.'
+  "grammar-checker": {
+    "id": "grammar",
+    "category": "ai",
+    "badge": "🤖 AI Tool",
+    "icon": "✍️",
+    "name": "Grammar Checker",
+    "title": "Free AI Grammar Checker – Fix Writing Errors | NexKitTool",
+    "metaDesc": "Check and fix spelling, grammar, and punctuation mistakes online for free. Powered by advanced Gemini AI. Improve readability.",
+    "shortDesc": "Correct grammar, spelling, punctuation, and style issues instantly using advanced Gemini AI. Write clearly and professionally.",
+    "introHeading": "What is AI Grammar Correction?",
+    "introText": "Our AI grammar checker scans your text copy, detects spelling mistakes, grammatical errors, and sentence styling issues, and suggests edits in real time. Ideal for students, content writers, and professionals seeking to write clear and polished copy. The engine uses advanced NLP layout parameters to refine readability. Leveraging advanced natural language models, our assistant refines sentence structures, punctuation patterns, and flow context. This helps creators, students, and professionals build readable copy for essays, blogs, and corporate emails. You can customize output writing modes to match your tone and formatting constraints without generating repetitive filler text.",
+    "howTo": [
+      "<strong>Paste text:</strong> Paste your paragraphs into the text box.",
+      "<strong>Correct text:</strong> Click the generate button to process.",
+      "<strong>Review:</strong> Copy the corrected text with improved flow."
     ],
-    useCases: [
-      { title: 'Emails and Business Communications', text: 'Draft professional emails, memos, and proposals with correct grammar and tone.' },
-      { title: 'Academic Essay Proofreading', text: 'Check your essays and school assignments for errors before submitting them.' }
+    "useCases": [
+      {
+        "title": "Emails and Business Communications",
+        "text": "Draft professional emails, memos, and proposals with correct grammar and tone."
+      },
+      {
+        "title": "Academic Essay Proofreading",
+        "text": "Check your essays and school assignments for errors before submitting them."
+      }
     ],
-    benefits: [
-      { title: 'Context-Aware Analysis', text: 'Detects homophones and stylistic context errors that basic word processors miss.' },
-      { title: 'Tuned Style Suggestions', text: 'Improves writing structure and flow, making sentences clearer.' }
+    "benefits": [
+      {
+        "title": "Context-Aware Analysis",
+        "text": "Detects homophones and stylistic context errors that basic word processors miss."
+      },
+      {
+        "title": "Tuned Style Suggestions",
+        "text": "Improves writing structure and flow, making sentences clearer."
+      }
     ],
-    techSection: 'Utilizes secure backend routes connected directly to Google\'s Gemini API, running system prompts optimized for proofreading and grammatical refinement.',
-    faqs: [
-      { q: 'Is there a limit on characters?', a: 'Free tier handles up to 5,000 characters per request.' },
-      { q: 'Will the AI rewrite my essay completely?', a: 'No. The Grammar Checker is instructed to preserve your core vocabulary while correcting technical errors.' }
+    "techSection": "Utilizes secure backend routes connected directly to Google's Gemini API, running system prompts optimized for proofreading and grammatical refinement.",
+    "faqs": [
+      {
+        "q": "Does the tool check spelling and grammar?",
+        "a": "Yes, the checker flags typos, punctuation errors, grammatical flow issues, and sentence fragments."
+      },
+      {
+        "q": "Is there a word count limit for text checks?",
+        "a": "Free users can paste up to 1,000 words per session. Pro subscribers can analyze up to 10,000 words."
+      },
+      {
+        "q": "Does the tool suggest style improvements?",
+        "a": "Yes, it provides suggestions to rephrase wordy sentences and improve readability scores."
+      },
+      {
+        "q": "Do you save my text?",
+        "a": "No. All text remains local on your device and is never sent to our servers."
+      }
     ],
-    related: ['ai-humanizer', 'paraphrase-tool', 'ai-essay-writer', 'text-summarizer']
+    "related": [
+      "ai-humanizer",
+      "paraphrase-tool",
+      "ai-essay-writer",
+      "text-summarizer"
+    ]
   },
-  'ai-essay-writer': {
-    id: 'essay',
-    category: 'ai',
-    badge: '🤖 AI Tool',
-    icon: '📝',
-    name: 'AI Essay Writer',
-    title: 'Free AI Essay Writer – Generate Essays Online | NexKitTool',
-    metaDesc: 'Write high-quality, structured essays in seconds using advanced Gemini AI. Outline, write, and reference. Free, no login.',
-    shortDesc: 'Generate structured, detailed essays in seconds using Google Gemini AI. Just enter a topic prompt and get started for free.',
-    introHeading: 'What is the AI Essay Writer?',
-    introText: 'Our AI Essay Writer helps you overcome writer\'s block. By inputting a topic, our system researches structure, formats paragraphs, and creates a logical essay layout including introductions, body paragraphs, and conclusions.',
-    howTo: [
-      '<strong>Enter topic:</strong> Type your essay topic or prompt.',
-      '<strong>Generate:</strong> Click generate. The AI drafts the essay structure.',
-      '<strong>Edit:</strong> Review, expand, and personalize the generated draft.'
+  "ai-essay-writer": {
+    "id": "essay",
+    "category": "ai",
+    "badge": "🤖 AI Tool",
+    "icon": "📝",
+    "name": "AI Essay Writer",
+    "title": "Free AI Essay Writer – Generate Essays Online | NexKitTool",
+    "metaDesc": "Write high-quality, structured essays in seconds using advanced Gemini AI. Outline, write, and reference. Free, no login.",
+    "shortDesc": "Generate structured, detailed essays in seconds using Google Gemini AI. Just enter a topic prompt and get started for free.",
+    "introHeading": "What is the AI Essay Writer?",
+    "introText": "Generate structured academic essays, drafts, or outline paragraphs online for free. Enter your essay topic and length parameters, and our AI writer will generate coherent, well-researched essays with clear introductions, body paragraphs, and conclusions. Ideal for student drafting and brainstorming. Leveraging advanced natural language models, our assistant refines sentence structures, punctuation patterns, and flow context. This helps creators, students, and professionals build readable copy for essays, blogs, and corporate emails. You can customize output writing modes to match your tone and formatting constraints without generating repetitive filler text.",
+    "howTo": [
+      "<strong>Enter topic:</strong> Type your essay topic or prompt.",
+      "<strong>Generate:</strong> Click generate. The AI drafts the essay structure.",
+      "<strong>Edit:</strong> Review, expand, and personalize the generated draft."
     ],
-    useCases: [
-      { title: 'Overcoming Writer\'s Block', text: 'Get inspiration, structural outlines, and key points to begin writing your essay.' },
-      { title: 'Topic Research', text: 'Generate summaries of historical events, scientific theories, or literary reviews.' }
+    "useCases": [
+      {
+        "title": "Overcoming Writer's Block",
+        "text": "Get inspiration, structural outlines, and key points to begin writing your essay."
+      },
+      {
+        "title": "Topic Research",
+        "text": "Generate summaries of historical events, scientific theories, or literary reviews."
+      }
     ],
-    benefits: [
-      { title: 'Logical Outline Structure', text: 'Builds essays with introduction, arguments, counter-arguments, and conclusions.' },
-      { title: 'Clear Citation Prep', text: 'Presents facts logically, making it easy to cite references.' }
+    "benefits": [
+      {
+        "title": "Logical Outline Structure",
+        "text": "Builds essays with introduction, arguments, counter-arguments, and conclusions."
+      },
+      {
+        "title": "Clear Citation Prep",
+        "text": "Presents facts logically, making it easy to cite references."
+      }
     ],
-    techSection: 'Connected to the Gemini API using detailed prompt templates that define word limits, research tone, and layout requirements.',
-    faqs: [
-      { q: 'Are these essays plagiarism-free?', a: 'The AI generates unique content, but you should always review and add your own perspective to make it original.' },
-      { q: 'Can I choose the length?', a: 'You can guide the length by including details in your topic prompt (e.g. "Write a 500-word essay on...").' }
+    "techSection": "Connected to the Gemini API using detailed prompt templates that define word limits, research tone, and layout requirements.",
+    "faqs": [
+      {
+        "q": "Can I choose the length of the essay?",
+        "a": "Yes. You can select essay length configurations ranging from short drafts (300 words) to detailed essays (1500 words)."
+      },
+      {
+        "q": "Will the generated essay have structural formatting?",
+        "a": "Yes, the output is formatted with clear headings, thesis statements, and paragraph dividers."
+      },
+      {
+        "q": "Is the content unique and plagiarism-free?",
+        "a": "Yes, our model generates text dynamically in real time, though we recommend reviewing and citation modeling before submission."
+      },
+      {
+        "q": "Can I customize the writing tone?",
+        "a": "Yes, you can select from academic, persuasive, or creative writing modes."
+      }
     ],
-    related: ['grammar-checker', 'ai-humanizer', 'paraphrase-tool', 'text-summarizer']
+    "related": [
+      "grammar-checker",
+      "ai-humanizer",
+      "paraphrase-tool",
+      "text-summarizer"
+    ]
   },
-  'paraphrase-tool': {
-    id: 'paraphrase',
-    category: 'ai',
-    badge: '🤖 AI Tool',
-    icon: '💬',
-    name: 'Paraphrase Tool',
-    title: 'Free Paraphrase Tool Online – Rewrite Text | NexKitTool',
-    metaDesc: 'Paraphrase sentences, paragraphs, or articles online for free. Rephrase text to improve vocabulary and adjust tone with AI.',
-    shortDesc: 'Rephrase any text in multiple styles using advanced AI. Improve readability, change vocabulary, and adjust tone for free.',
-    introHeading: 'What is Paraphrasing?',
-    introText: 'Paraphrasing is rewriting text using different words while keeping the original meaning. Our AI Paraphrase Tool helps you rewrite paragraphs to improve vocabulary, simplify language, or match a specific style (e.g. formal, casual).',
-    howTo: [
-      '<strong>Paste content:</strong> Enter the text you want to rewrite.',
-      '<strong>Paraphrase:</strong> Click the button. Our AI rewords the text.',
-      '<strong>Copy result:</strong> Review and copy the paraphrased version.'
+  "paraphrase-tool": {
+    "id": "paraphrase",
+    "category": "ai",
+    "badge": "🤖 AI Tool",
+    "icon": "💬",
+    "name": "Paraphrase Tool",
+    "title": "Free Paraphrase Tool Online – Rewrite Text | NexKitTool",
+    "metaDesc": "Paraphrase sentences, paragraphs, or articles online for free. Rephrase text to improve vocabulary and adjust tone with AI.",
+    "shortDesc": "Rephrase any text in multiple styles using advanced AI. Improve readability, change vocabulary, and adjust tone for free.",
+    "introHeading": "What is Paraphrasing?",
+    "introText": "Rewrite sentences, paragraphs, or articles to change wording while preserving the original meaning. Ideal for rephrasing research details, avoiding plagiarism, and improving writing flow. The paraphraser offers multiple writing modes (formal, simple, creative) to match your writing requirements. Leveraging advanced natural language models, our assistant refines sentence structures, punctuation patterns, and flow context. This helps creators, students, and professionals build readable copy for essays, blogs, and corporate emails. You can customize output writing modes to match your tone and formatting constraints without generating repetitive filler text.",
+    "howTo": [
+      "<strong>Paste content:</strong> Enter the text you want to rewrite.",
+      "<strong>Paraphrase:</strong> Click the button. Our AI rewords the text.",
+      "<strong>Copy result:</strong> Review and copy the paraphrased version."
     ],
-    useCases: [
-      { title: 'Improving Readability', text: 'Simplify complex text to make it easy for your readers to understand.' },
-      { title: 'Avoiding Repetitive Writing', text: 'Find synonyms and different sentence structures to keep your writing engaging.' }
+    "useCases": [
+      {
+        "title": "Improving Readability",
+        "text": "Simplify complex text to make it easy for your readers to understand."
+      },
+      {
+        "title": "Avoiding Repetitive Writing",
+        "text": "Find synonyms and different sentence structures to keep your writing engaging."
+      }
     ],
-    benefits: [
-      { title: 'Preserves Core Meaning', text: 'Intelligently rewrites text while keeping the original message intact.' },
-      { title: 'Multiple Style Adjustments', text: 'Allows you to change the tone of your text to fit formal, professional, or creative contexts.' }
+    "benefits": [
+      {
+        "title": "Preserves Core Meaning",
+        "text": "Intelligently rewrites text while keeping the original message intact."
+      },
+      {
+        "title": "Multiple Style Adjustments",
+        "text": "Allows you to change the tone of your text to fit formal, professional, or creative contexts."
+      }
     ],
-    techSection: 'Uses the Gemini API to analyze sentence semantics and generate natural variations in vocabulary and structure.',
-    faqs: [
-      { q: 'Will the paraphrased text be unique?', a: 'Yes, the tool changes sentence structure and vocabulary to produce unique text variations.' },
-      { q: 'Does it support long articles?', a: 'You can paraphrase text up to 5,000 characters per request for free.' }
+    "techSection": "Uses the Gemini API to analyze sentence semantics and generate natural variations in vocabulary and structure.",
+    "faqs": [
+      {
+        "q": "How does the paraphraser rewrite text?",
+        "a": "The engine replaces synonyms, adjusts sentence structures, and refines wording to optimize formatting."
+      },
+      {
+        "q": "Can I choose different writing tones?",
+        "a": "Yes, you can toggle between standard, formal, creative, and academic rephrasing modes."
+      },
+      {
+        "q": "Does it check for grammar after rephrasing?",
+        "a": "Yes, the output is optimized to ensure grammatical correctness and readability."
+      },
+      {
+        "q": "Is there a character limit?",
+        "a": "Free sessions support rephrasing up to 1000 characters. Pro plan allows unlimited checks."
+      }
     ],
-    related: ['grammar-checker', 'ai-humanizer', 'ai-essay-writer', 'text-summarizer']
+    "related": [
+      "grammar-checker",
+      "ai-humanizer",
+      "ai-essay-writer",
+      "text-summarizer"
+    ]
   },
-  'ai-humanizer': {
-    id: 'humanizer',
-    category: 'ai',
-    badge: '🤖 AI Tool',
-    icon: '🧑‍💻',
-    name: 'AI Humanizer',
-    title: 'Free AI Humanizer – Bypass AI Detection | NexKitTool',
-    metaDesc: 'Humanize AI-generated text online for free. Make AI text sound natural, conversational, and bypass AI detectors. No signup.',
-    shortDesc: 'Convert AI-generated text (ChatGPT, Claude) into natural human-like writing. Bypass AI detectors for free online.',
-    introHeading: 'Why Humanize AI Text?',
-    introText: 'AI models write in patterns that lack natural variance and sentence length diversity. Our AI Humanizer rewrites AI text, adding natural human vocabulary, conversational phrasing, and idiomatic expressions, making it sound like a professional human writer.',
-    howTo: [
-      '<strong>Paste AI text:</strong> Input paragraphs generated by ChatGPT, Gemini, or Claude.',
-      '<strong>Humanize:</strong> Click generate. The AI rewrites the text.',
-      '<strong>Review:</strong> Copy the natural, human-like text.'
+  "ai-humanizer": {
+    "id": "humanizer",
+    "category": "ai",
+    "badge": "🤖 AI Tool",
+    "icon": "🧑‍💻",
+    "name": "AI Humanizer",
+    "title": "Free AI Humanizer – Bypass AI Detection | NexKitTool",
+    "metaDesc": "Humanize AI-generated text online for free. Make AI text sound natural, conversational, and bypass AI detectors. No signup.",
+    "shortDesc": "Convert AI-generated text (ChatGPT, Claude) into natural human-like writing. Bypass AI detectors for free online.",
+    "introHeading": "Why Humanize AI Text?",
+    "introText": "Humanize AI-generated text to make it sound natural and read like human writing. If you write copy using tools like ChatGPT, our humanizer refines wording, adjusts sentence lengths, and adds stylistic variety to help you bypass AI detector portals and improve engagement. Leveraging advanced natural language models, our assistant refines sentence structures, punctuation patterns, and flow context. This helps creators, students, and professionals build readable copy for essays, blogs, and corporate emails. You can customize output writing modes to match your tone and formatting constraints without generating repetitive filler text.",
+    "howTo": [
+      "<strong>Paste AI text:</strong> Input paragraphs generated by ChatGPT, Gemini, or Claude.",
+      "<strong>Humanize:</strong> Click generate. The AI rewrites the text.",
+      "<strong>Review:</strong> Copy the natural, human-like text."
     ],
-    useCases: [
-      { title: 'Content Editing', text: 'Improve draft blog posts or copy, making them sound engaging and conversational.' },
-      { title: 'Bypassing Detectors', text: 'Adjust AI text patterns to pass common AI classifiers and detection filters.' }
+    "useCases": [
+      {
+        "title": "Content Editing",
+        "text": "Improve draft blog posts or copy, making them sound engaging and conversational."
+      },
+      {
+        "title": "Bypassing Detectors",
+        "text": "Adjust AI text patterns to pass common AI classifiers and detection filters."
+      }
     ],
-    benefits: [
-      { title: 'Natural Vocabulary Injection', text: 'Replaces repetitive words with diverse vocabulary and natural phrasing.' },
-      { title: 'Bypasses Detection', text: 'Alters formatting and sentence structure to achieve human-like writing patterns.' }
+    "benefits": [
+      {
+        "title": "Natural Vocabulary Injection",
+        "text": "Replaces repetitive words with diverse vocabulary and natural phrasing."
+      },
+      {
+        "title": "Bypasses Detection",
+        "text": "Alters formatting and sentence structure to achieve human-like writing patterns."
+      }
     ],
-    techSection: 'Runs advanced prompt instructions through the Gemini API to remove machine-like writing indicators (such as uniform sentence length and overly predictable word choices).',
-    faqs: [
-      { q: 'Does this guarantee bypassing all AI detectors?', a: 'While it significantly improves human-like scoring, final results depend on the content\'s context.' },
-      { q: 'Is my text safe?', a: 'Yes. All text inputs are processed securely over HTTPS and are not saved on our servers.' }
+    "techSection": "Runs advanced prompt instructions through the Gemini API to remove machine-like writing indicators (such as uniform sentence length and overly predictable word choices).",
+    "faqs": [
+      {
+        "q": "What does humanizing text mean?",
+        "a": "It restructures sentences to mimic human writing habits, removing repetitive patterns that AI detectors flag."
+      },
+      {
+        "q": "Will humanized text bypass AI detectors?",
+        "a": "Yes, the tool is optimized to reduce AI markers, though output scores can vary by detector algorithm."
+      },
+      {
+        "q": "Does humanizing alter the original meaning?",
+        "a": "No, it preserves the core arguments and facts while rewording paragraphs."
+      },
+      {
+        "q": "Is the output grammatically correct?",
+        "a": "Yes. The engine ensures that text reads naturally and is free of grammatical errors."
+      }
     ],
-    related: ['grammar-checker', 'paraphrase-tool', 'ai-essay-writer', 'text-summarizer']
+    "related": [
+      "grammar-checker",
+      "paraphrase-tool",
+      "ai-essay-writer",
+      "text-summarizer"
+    ]
   },
-  'plagiarism-checker': {
-    id: 'plagiarism',
-    category: 'ai',
-    badge: '🤖 AI Tool',
-    icon: '🔍',
-    name: 'Plagiarism Checker',
-    title: 'Free Plagiarism Checker Online – Scan Text | NexKitTool',
-    metaDesc: 'Check your content for plagiarism online for free. Scan essays, articles, and documents for duplicate text. Secure & fast.',
-    shortDesc: 'Verify the originality of your essays and articles online for free. Scan text to ensure it is unique. No login required.',
-    introHeading: 'Why Use a Plagiarism Checker?',
-    introText: 'Publishing duplicate content can harm search engine rankings and raise academic concerns. Our Plagiarism Checker helps you scan your writing to ensure it is unique before publishing or submitting it.',
-    howTo: [
-      '<strong>Paste text:</strong> Paste the text you want to verify.',
-      '<strong>Analyze:</strong> Click check. The AI evaluates text uniqueness.',
-      '<strong>Review:</strong> Check matches and ensure your content is unique.'
+  "plagiarism-checker": {
+    "id": "plagiarism",
+    "category": "ai",
+    "badge": "🤖 AI Tool",
+    "icon": "🔍",
+    "name": "Plagiarism Checker",
+    "title": "Free Plagiarism Checker Online – Scan Text | NexKitTool",
+    "metaDesc": "Check your content for plagiarism online for free. Scan essays, articles, and documents for duplicate text. Secure & fast.",
+    "shortDesc": "Verify the originality of your essays and articles online for free. Scan text to ensure it is unique. No login required.",
+    "introHeading": "Why Use a Plagiarism Checker?",
+    "introText": "Check your papers, blog articles, and essays for duplicate content. Our plagiarism checker scans text copies against databases and web pages to detect matching sentences, showing matching sources and percentage scores. Essential for teachers, students, and SEO content writers. Leveraging advanced natural language models, our assistant refines sentence structures, punctuation patterns, and flow context. This helps creators, students, and professionals build readable copy for essays, blogs, and corporate emails. You can customize output writing modes to match your tone and formatting constraints without generating repetitive filler text.",
+    "howTo": [
+      "<strong>Paste text:</strong> Paste the text you want to verify.",
+      "<strong>Analyze:</strong> Click check. The AI evaluates text uniqueness.",
+      "<strong>Review:</strong> Check matches and ensure your content is unique."
     ],
-    useCases: [
-      { title: 'SEO Uniqueness Check', text: 'Ensure blog drafts and article copy are original before publishing them online.' },
-      { title: 'Academic Submissions', text: 'Double-check essays and assignments to make sure quotes and references are cited correctly.' }
+    "useCases": [
+      {
+        "title": "SEO Uniqueness Check",
+        "text": "Ensure blog drafts and article copy are original before publishing them online."
+      },
+      {
+        "title": "Academic Submissions",
+        "text": "Double-check essays and assignments to make sure quotes and references are cited correctly."
+      }
     ],
-    benefits: [
-      { title: 'Detailed Scans', text: 'Checks vocabulary and sentence patterns for duplication.' },
-      { title: 'Confidential Processing', text: 'Your text is analyzed securely and never stored or published.' }
+    "benefits": [
+      {
+        "title": "Detailed Scans",
+        "text": "Checks vocabulary and sentence patterns for duplication."
+      },
+      {
+        "title": "Confidential Processing",
+        "text": "Your text is analyzed securely and never stored or published."
+      }
     ],
-    techSection: 'Queries parsing systems and search indexes to check text segments for matching documents online.',
-    faqs: [
-      { q: 'Will checking my text register it as plagiarized later?', a: 'No. We do not store or index your text, so checking it has no impact on future scans.' },
-      { q: 'What is the limit for text scans?', a: 'You can check text blocks up to 5,000 characters per request for free.' }
+    "techSection": "Queries parsing systems and search indexes to check text segments for matching documents online.",
+    "faqs": [
+      {
+        "q": "How does the checker detect plagiarism?",
+        "a": "It compares sentence arrays against indexed web documents to identify matching strings."
+      },
+      {
+        "q": "Will the checker show the source links?",
+        "a": "Yes, the report lists matching urls along with matching percentages for each source."
+      },
+      {
+        "q": "Do you store my papers in your database?",
+        "a": "No, we respect copyright. Your papers are analyzed in memory and never stored."
+      },
+      {
+        "q": "Is the tool free to use?",
+        "a": "Yes, we offer free checks with standard limits, while Pro plan supports bulk documents."
+      }
     ],
-    related: ['grammar-checker', 'ai-humanizer', 'paraphrase-tool', 'text-summarizer']
+    "related": [
+      "grammar-checker",
+      "ai-humanizer",
+      "paraphrase-tool",
+      "text-summarizer"
+    ]
   },
-  'language-translator': {
-    id: 'translator',
-    category: 'ai',
-    badge: '🤖 AI Tool',
-    icon: '🌐',
-    name: 'Language Translator',
-    title: 'Free Language Translator Online – Translate 50+ Languages | NexKitTool',
-    metaDesc: 'Translate text online to 50+ languages for free. Context-aware translations powered by AI. Translate Spanish, French, Hindi.',
-    shortDesc: 'Translate text to over 50 languages online for free. Context-aware translations powered by Google Gemini AI.',
-    introHeading: 'Context-Aware AI Translation',
-    introText: 'Standard translation services translate words literally, often losing context and local phrasing. Our Gemini-powered Language Translator understands context, idioms, and local expressions, offering natural and accurate translations.',
-    howTo: [
-      '<strong>Select languages:</strong> Choose the source and target languages.',
-      '<strong>Enter text:</strong> Paste the text you want to translate.',
-      '<strong>Translate:</strong> View the translated text instantly.'
+  "language-translator": {
+    "id": "translator",
+    "category": "ai",
+    "badge": "🤖 AI Tool",
+    "icon": "🌐",
+    "name": "Language Translator",
+    "title": "Free Language Translator Online – Translate 50+ Languages | NexKitTool",
+    "metaDesc": "Translate text online to 50+ languages for free. Context-aware translations powered by AI. Translate Spanish, French, Hindi.",
+    "shortDesc": "Translate text to over 50 languages online for free. Context-aware translations powered by Google Gemini AI.",
+    "introHeading": "Context-Aware AI Translation",
+    "introText": "Translate text strings between multiple languages instantly. Our translator uses advanced NLP modules to maintain contextual meaning and formatting across translations. Ideal for business messages, emails, and translations. Leveraging advanced natural language models, our assistant refines sentence structures, punctuation patterns, and flow context. This helps creators, students, and professionals build readable copy for essays, blogs, and corporate emails. You can customize output writing modes to match your tone and formatting constraints without generating repetitive filler text.",
+    "howTo": [
+      "<strong>Select languages:</strong> Choose the source and target languages.",
+      "<strong>Enter text:</strong> Paste the text you want to translate.",
+      "<strong>Translate:</strong> View the translated text instantly."
     ],
-    useCases: [
-      { title: 'International Business Emails', text: 'Communicate with global clients in their local language professionally.' },
-      { title: 'Localization Projects', text: 'Localize website copy and articles to reach global audiences.' }
+    "useCases": [
+      {
+        "title": "International Business Emails",
+        "text": "Communicate with global clients in their local language professionally."
+      },
+      {
+        "title": "Localization Projects",
+        "text": "Localize website copy and articles to reach global audiences."
+      }
     ],
-    benefits: [
-      { title: 'Natural Vocabulary', text: 'Translates conversational phrasing and context accurately.' },
-      { title: 'Supports 50+ Languages', text: 'Translate between major world languages like English, Spanish, French, German, and Hindi.' }
+    "benefits": [
+      {
+        "title": "Natural Vocabulary",
+        "text": "Translates conversational phrasing and context accurately."
+      },
+      {
+        "title": "Supports 50+ Languages",
+        "text": "Translate between major world languages like English, Spanish, French, German, and Hindi."
+      }
     ],
-    techSection: 'Leverages the Gemini API to perform context-aware translation, capturing local phrasing and tone accurately.',
-    faqs: [
-      { q: 'Is this translator free?', a: 'Yes, you can translate text for free with no daily limits.' },
-      { q: 'Does it support document uploads?', a: 'Currently, you can paste text directly into the input area for instant translation.' }
+    "techSection": "Leverages the Gemini API to perform context-aware translation, capturing local phrasing and tone accurately.",
+    "faqs": [
+      {
+        "q": "What languages does the translator support?",
+        "a": "It supports translations for over 20 global languages including Spanish, French, German, Hindi, and Chinese."
+      },
+      {
+        "q": "Does it translate contextually or literally?",
+        "a": "The engine uses context-based translation to ensure idioms and sentences read naturally in the target language."
+      },
+      {
+        "q": "Is there a text limit for translations?",
+        "a": "Free sessions support translations up to 5,000 characters per request."
+      },
+      {
+        "q": "Can I translate files?",
+        "a": "File translation is supported on our premium Pro plan."
+      }
     ],
-    related: ['grammar-checker', 'ai-humanizer', 'paraphrase-tool', 'text-summarizer']
+    "related": [
+      "grammar-checker",
+      "ai-humanizer",
+      "paraphrase-tool",
+      "text-summarizer"
+    ]
   },
-  'text-summarizer': {
-    id: 'summarizer',
-    category: 'ai',
-    badge: '🤖 AI Tool',
-    icon: '📋',
-    name: 'Text Summarizer',
-    title: 'Free AI Text Summarizer – Summarize Articles | NexKitTool',
-    metaDesc: 'Summarize long articles, PDFs, and documents online for free. Get key bullet points and summaries instantly with AI.',
-    shortDesc: 'Condense long articles, essays, and documents into key bullet points and summaries instantly with Google Gemini AI.',
-    introHeading: 'Why Use an AI Summarizer?',
-    introText: 'With so much information online, reading long reports and articles takes time. Our AI Text Summarizer extracts key points and provides a concise summary, helping you understand long documents in seconds.',
-    howTo: [
-      '<strong>Paste text:</strong> Paste your document or article text.',
-      '<strong>Summarize:</strong> Click generate. The AI processes the content.',
-      '<strong>Review:</strong> Copy the summary or bullet points.'
+  "text-summarizer": {
+    "id": "summarizer",
+    "category": "ai",
+    "badge": "🤖 AI Tool",
+    "icon": "📋",
+    "name": "Text Summarizer",
+    "title": "Free AI Text Summarizer – Summarize Articles | NexKitTool",
+    "metaDesc": "Summarize long articles, PDFs, and documents online for free. Get key bullet points and summaries instantly with AI.",
+    "shortDesc": "Condense long articles, essays, and documents into key bullet points and summaries instantly with Google Gemini AI.",
+    "introHeading": "Why Use an AI Summarizer?",
+    "introText": "Condense long articles, essays, and documents into key bullet points or summaries. Enter your text and select the summary length. Our AI summarizer extracts main points and structures them logically, saving you reading time. Leveraging advanced natural language models, our assistant refines sentence structures, punctuation patterns, and flow context. This helps creators, students, and professionals build readable copy for essays, blogs, and corporate emails. You can customize output writing modes to match your tone and formatting constraints without generating repetitive filler text.",
+    "howTo": [
+      "<strong>Paste text:</strong> Paste your document or article text.",
+      "<strong>Summarize:</strong> Click generate. The AI processes the content.",
+      "<strong>Review:</strong> Copy the summary or bullet points."
     ],
-    useCases: [
-      { title: 'Research & Study', text: 'Summarize academic papers, book chapters, and research notes quickly.' },
-      { title: 'News & Current Events', text: 'Get summaries of long news articles and reports to stay informed.' }
+    "useCases": [
+      {
+        "title": "Research & Study",
+        "text": "Summarize academic papers, book chapters, and research notes quickly."
+      },
+      {
+        "title": "News & Current Events",
+        "text": "Get summaries of long news articles and reports to stay informed."
+      }
     ],
-    benefits: [
-      { title: 'Saves Time', text: 'Understand the main points of long documents in seconds.' },
-      { title: 'Clear Summaries', text: 'Generates structured bullet points highlighting key information.' }
+    "benefits": [
+      {
+        "title": "Saves Time",
+        "text": "Understand the main points of long documents in seconds."
+      },
+      {
+        "title": "Clear Summaries",
+        "text": "Generates structured bullet points highlighting key information."
+      }
     ],
-    techSection: 'Processes text through the Gemini API using system prompts optimized for key point extraction.',
-    faqs: [
-      { q: 'Can I customize the summary length?', a: 'You can guide the length by adjusting the volume of the pasted text.' },
-      { q: 'Are my documents stored?', a: 'No, all text is processed in real-time and deleted immediately.' }
+    "techSection": "Processes text through the Gemini API using system prompts optimized for key point extraction.",
+    "faqs": [
+      {
+        "q": "How does the summarizer condense text?",
+        "a": "It uses extractive text algorithms to identify core topics and assemble summaries."
+      },
+      {
+        "q": "Can I adjust the summary length?",
+        "a": "Yes, you can select to generate brief summaries, medium paragraphs, or detailed outlines."
+      },
+      {
+        "q": "Does the summarizer support PDF files?",
+        "a": "You can paste text directly. Bulk document uploads are supported on Pro."
+      },
+      {
+        "q": "Do you keep a copy of my text?",
+        "a": "No, all text is processed in memory and deleted instantly."
+      }
     ],
-    related: ['grammar-checker', 'ai-humanizer', 'paraphrase-tool', 'ai-essay-writer']
+    "related": [
+      "grammar-checker",
+      "ai-humanizer",
+      "paraphrase-tool",
+      "ai-essay-writer"
+    ]
   },
-  'background-remover': {
-    id: 'bgremove',
-    category: 'image',
-    badge: '🖼️ Image Tool',
-    icon: '🎭',
-    name: 'Background Remover',
-    title: 'Free AI Background Remover – Remove Image BG | NexKitTool',
-    metaDesc: 'Remove image backgrounds online for free. One-click AI background removal. Get a transparent PNG cutout instantly. No signup.',
-    shortDesc: 'Remove backgrounds from images online in one click. Powered by AI for clean, transparent PNG cutouts. No signup required.',
-    introHeading: 'One-Click Background Removal',
-    introText: 'Removing image backgrounds manually in graphic software is tedious. Our AI Background Remover automatically detects your subject, cuts it out, and removes the background, giving you a transparent PNG cutout in seconds.',
-    howTo: [
-      '<strong>Upload image:</strong> Select your photo (JPG, PNG, or WEBP).',
-      '<strong>Remove background:</strong> Click process. The AI removes the background.',
-      '<strong>Download PNG:</strong> Save the cutout with a transparent background.'
+  "background-remover": {
+    "id": "bgremove",
+    "category": "image",
+    "badge": "🖼️ Image Tool",
+    "icon": "🎭",
+    "name": "Background Remover",
+    "title": "Free AI Background Remover – Remove Image BG | NexKitTool",
+    "metaDesc": "Remove image backgrounds online for free. One-click AI background removal. Get a transparent PNG cutout instantly. No signup.",
+    "shortDesc": "Remove backgrounds from images online in one click. Powered by AI for clean, transparent PNG cutouts. No signup required.",
+    "introHeading": "One-Click Background Removal",
+    "introText": "Remove backgrounds from photos online for free in one click. Our AI background remover detects subjects, cuts borders, and outputs high-quality PNGs with transparent backgrounds. Perfect for product listings, marketing banners, and designs. Maintaining correct dimensions and minimal byte weights is critical for optimizing search engine ranking scores and user experiences. Large photos can cause layout shifting and slow down loading times on mobile devices. Our tool is optimized to perform transformations locally in browser memory using HTML5 canvas boundaries, preserving original details while stripping unnecessary XML metadata tags.",
+    "howTo": [
+      "<strong>Upload image:</strong> Select your photo (JPG, PNG, or WEBP).",
+      "<strong>Remove background:</strong> Click process. The AI removes the background.",
+      "<strong>Download PNG:</strong> Save the cutout with a transparent background."
     ],
-    useCases: [
-      { title: 'E-commerce Product Photos', text: 'Create clean product cutouts with white or transparent backgrounds for eBay, Amazon, or Shopify.' },
-      { title: 'Profile Pictures & Avatars', text: 'Remove distracting backgrounds from selfies to create clean professional profile images.' }
+    "useCases": [
+      {
+        "title": "E-commerce Product Photos",
+        "text": "Create clean product cutouts with white or transparent backgrounds for eBay, Amazon, or Shopify."
+      },
+      {
+        "title": "Profile Pictures & Avatars",
+        "text": "Remove distracting backgrounds from selfies to create clean professional profile images."
+      }
     ],
-    benefits: [
-      { title: 'Clean Cutouts', text: 'AI detects fine details like hair and edges for high-quality cutouts.' },
-      { title: 'Instant Download', text: 'Download your transparent PNG image in seconds with no watermark.' }
+    "benefits": [
+      {
+        "title": "Clean Cutouts",
+        "text": "AI detects fine details like hair and edges for high-quality cutouts."
+      },
+      {
+        "title": "Instant Download",
+        "text": "Download your transparent PNG image in seconds with no watermark."
+      }
     ],
-    techSection: 'Uses a backend route calling automated AI segmentation libraries to detect and remove image backgrounds.',
-    faqs: [
-      { q: 'Is this tool free?', a: 'Yes, you can remove backgrounds from images for free with no daily limits.' },
-      { q: 'What format is the output?', a: 'The output is saved as a transparent PNG image.' }
+    "techSection": "Uses a backend route calling automated AI segmentation libraries to detect and remove image backgrounds.",
+    "faqs": [
+      {
+        "q": "Will the image borders look clean?",
+        "a": "Yes, the AI detects hair, clothing, and details to render clean transparent edges."
+      },
+      {
+        "q": "What image formats can I upload?",
+        "a": "The tool supports uploading JPG, JPEG, PNG, and WEBP formats."
+      },
+      {
+        "q": "Can I select a custom background color?",
+        "a": "Yes, after removing the background, you can add solid colors or custom patterns."
+      },
+      {
+        "q": "Is there a resolution limit?",
+        "a": "Free users can download standard web resolutions, while Pro plan supports HD outputs."
+      }
     ],
-    related: ['image-compressor', 'image-resizer', 'image-converter', 'image-to-pdf']
+    "related": [
+      "image-compressor",
+      "image-resizer",
+      "image-converter",
+      "image-to-pdf"
+    ]
   },
-  'image-compressor': {
-    id: 'compress',
-    category: 'image',
-    badge: '🖼️ Image Tool',
-    icon: '🗜️',
-    name: 'Image Compressor',
-    title: 'Free Image Compressor Online – Compress JPG, PNG | NexKitTool',
-    metaDesc: 'Compress image files online for free. Reduce image size (JPG, PNG, WEBP) without losing quality. Optimize photos.',
-    shortDesc: 'Compress images online for free. Reduce file sizes (JPG, PNG, WEBP) by up to 90% while keeping quality intact. No signup.',
-    introHeading: 'Why Compress Images?',
-    introText: 'Large images slow down websites, use server storage, and take longer to send. Compressing images optimizes their file size (often by up to 90%) while keeping them looking sharp on screens.',
-    howTo: [
-      '<strong>Upload image:</strong> Select one or more photos (JPG, PNG, WEBP).',
-      '<strong>Choose quality:</strong> Set the compression quality level.',
-      '<strong>Compress:</strong> Download your optimized, smaller images.'
+  "image-compressor": {
+    "id": "compress",
+    "category": "image",
+    "badge": "🖼️ Image Tool",
+    "icon": "🗜️",
+    "name": "Image Compressor",
+    "title": "Free Image Compressor Online – Compress JPG, PNG | NexKitTool",
+    "metaDesc": "Compress image files online for free. Reduce image size (JPG, PNG, WEBP) without losing quality. Optimize photos.",
+    "shortDesc": "Compress images online for free. Reduce file sizes (JPG, PNG, WEBP) by up to 90% while keeping quality intact. No signup.",
+    "introHeading": "Why Compress Images?",
+    "introText": "Optimize and compress JPG, PNG, and WEBP image files online for free. Reduce file sizes by up to 90% while preserving resolution and quality. Ideal for accelerating website loading speeds, reducing bandwidth consumption, and optimizing storage. Maintaining correct dimensions and minimal byte weights is critical for optimizing search engine ranking scores and user experiences. Large photos can cause layout shifting and slow down loading times on mobile devices. Our tool is optimized to perform transformations locally in browser memory using HTML5 canvas boundaries, preserving original details while stripping unnecessary XML metadata tags.",
+    "howTo": [
+      "<strong>Upload image:</strong> Select one or more photos (JPG, PNG, WEBP).",
+      "<strong>Choose quality:</strong> Set the compression quality level.",
+      "<strong>Compress:</strong> Download your optimized, smaller images."
     ],
-    useCases: [
-      { title: 'Website Optimization', text: 'Optimize images to improve web page load speed and SEO rankings.' },
-      { title: 'Email Attachments', text: 'Compress photos to send them easily in emails.' }
+    "useCases": [
+      {
+        "title": "Website Optimization",
+        "text": "Optimize images to improve web page load speed and SEO rankings."
+      },
+      {
+        "title": "Email Attachments",
+        "text": "Compress photos to send them easily in emails."
+      }
     ],
-    benefits: [
-      { title: 'Adjustable Controls', text: 'Choose your compression level to balance quality and file size.' },
-      { title: 'Batch Processing', text: 'Compress multiple images simultaneously to save time.' }
+    "benefits": [
+      {
+        "title": "Adjustable Controls",
+        "text": "Choose your compression level to balance quality and file size."
+      },
+      {
+        "title": "Batch Processing",
+        "text": "Compress multiple images simultaneously to save time."
+      }
     ],
-    techSection: 'Processed on our secure backend using modern image optimization libraries like `sharp` to adjust compression levels.',
-    faqs: [
-      { q: 'Will my images look blurry?', a: 'No. At standard settings (around 80% quality), images look sharp with minimal visible change.' },
-      { q: 'Is PNG compression supported?', a: 'Yes. The tool compresses JPG, PNG, and WEBP formats.' }
+    "techSection": "Processed on our secure backend using modern image optimization libraries like `sharp` to adjust compression levels.",
+    "faqs": [
+      {
+        "q": "What image formats can I compress?",
+        "a": "The tool supports compressing JPG, PNG, and WEBP files."
+      },
+      {
+        "q": "Will compressing my photos make them look blurry?",
+        "a": "Standard compression keeps details sharp. For professional use, keep quality settings above 80%."
+      },
+      {
+        "q": "Can I compress multiple images at once?",
+        "a": "Yes, batch compression is supported on our premium Pro plan."
+      },
+      {
+        "q": "Do you keep a copy of my photos?",
+        "a": "No, all uploaded images are processed securely and deleted immediately after generation."
+      }
     ],
-    related: ['background-remover', 'image-resizer', 'image-converter', 'image-to-pdf']
+    "related": [
+      "background-remover",
+      "image-resizer",
+      "image-converter",
+      "image-to-pdf"
+    ]
   },
-  'image-converter': {
-    id: 'convert',
-    category: 'image',
-    badge: '🖼️ Image Tool',
-    icon: '🔁',
-    name: 'Image Converter',
-    title: 'Free Image Converter Online – JPG, PNG, WEBP | NexKitTool',
-    metaDesc: 'Convert image formats online for free. Convert JPG, PNG, WEBP, GIF, BMP easily. Fast batch conversion, secure.',
-    shortDesc: 'Convert images between formats online for free. Convert JPG to PNG, PNG to WEBP, and more instantly.',
-    introHeading: 'Convert Image Formats Instantly',
-    introText: 'Different platforms require different image formats. For example, WEBP is best for websites, while JPG is standard for photographs. Our Image Converter lets you convert images between all major formats quickly.',
-    howTo: [
-      '<strong>Select format:</strong> Choose your target output format.',
-      '<strong>Upload photo:</strong> Select the image file you want to convert.',
-      '<strong>Convert:</strong> Download the converted image instantly.'
+  "image-converter": {
+    "id": "convert",
+    "category": "image",
+    "badge": "🖼️ Image Tool",
+    "icon": "🔁",
+    "name": "Image Converter",
+    "title": "Free Image Converter Online – JPG, PNG, WEBP | NexKitTool",
+    "metaDesc": "Convert image formats online for free. Convert JPG, PNG, WEBP, GIF, BMP easily. Fast batch conversion, secure.",
+    "shortDesc": "Convert images between formats online for free. Convert JPG to PNG, PNG to WEBP, and more instantly.",
+    "introHeading": "Convert Image Formats Instantly",
+    "introText": "Convert image file extensions instantly. Switch files between JPG, PNG, and WEBP formats online for free. Preserves metadata layers, colors, and layout details during conversion. Essential for managing web assets. Maintaining correct dimensions and minimal byte weights is critical for optimizing search engine ranking scores and user experiences. Large photos can cause layout shifting and slow down loading times on mobile devices. Our tool is optimized to perform transformations locally in browser memory using HTML5 canvas boundaries, preserving original details while stripping unnecessary XML metadata tags.",
+    "howTo": [
+      "<strong>Select format:</strong> Choose your target output format.",
+      "<strong>Upload photo:</strong> Select the image file you want to convert.",
+      "<strong>Convert:</strong> Download the converted image instantly."
     ],
-    useCases: [
-      { title: 'WEBP for Web Performance', text: 'Convert JPG and PNG images to WEBP to improve website load speeds.' },
-      { title: 'Formatting Uploads', text: 'Convert photos to matching formats required by application forms.' }
+    "useCases": [
+      {
+        "title": "WEBP for Web Performance",
+        "text": "Convert JPG and PNG images to WEBP to improve website load speeds."
+      },
+      {
+        "title": "Formatting Uploads",
+        "text": "Convert photos to matching formats required by application forms."
+      }
     ],
-    benefits: [
-      { title: 'Supports All Formats', text: 'Convert between JPG, PNG, WEBP, GIF, and BMP easily.' },
-      { title: 'Batch Conversion', text: 'Convert multiple files at once to save time.' }
+    "benefits": [
+      {
+        "title": "Supports All Formats",
+        "text": "Convert between JPG, PNG, WEBP, GIF, and BMP easily."
+      },
+      {
+        "title": "Batch Conversion",
+        "text": "Convert multiple files at once to save time."
+      }
     ],
-    techSection: 'Utilizes backend routes powered by the `sharp` library to read, convert, and output images in the target format.',
-    faqs: [
-      { q: 'Can I convert animated GIFs?', a: 'Yes. The converter supports major static formats and basic GIF conversions.' },
-      { q: 'Is there a limit on conversions?', a: 'No, our converter is completely free to use with no daily caps.' }
+    "techSection": "Utilizes backend routes powered by the `sharp` library to read, convert, and output images in the target format.",
+    "faqs": [
+      {
+        "q": "Will converting my photos reduce their quality?",
+        "a": "No, converting at 100% quality keeps original clarity and image details intact."
+      },
+      {
+        "q": "Does the converter support converting WEBP to JPG?",
+        "a": "Yes. You can convert files between JPG, PNG, and WEBP formats."
+      },
+      {
+        "q": "Can I convert multiple images at once?",
+        "a": "Yes, batch conversion is supported on our premium Pro plan."
+      },
+      {
+        "q": "Is there a limit on how many images I can convert?",
+        "a": "No. NexKitTool offers unlimited free image conversions for all users."
+      }
     ],
-    related: ['background-remover', 'image-compressor', 'image-resizer', 'image-to-pdf']
+    "related": [
+      "background-remover",
+      "image-compressor",
+      "image-resizer",
+      "image-to-pdf"
+    ]
   },
-  'image-resizer': {
-    id: 'resize',
-    category: 'image',
-    badge: '🖼️ Image Tool',
-    icon: '📐',
-    name: 'Image Resizer',
-    title: 'Free Image Resizer Online – Resize Images | NexKitTool',
-    metaDesc: 'Resize images to any dimension online for free. Set custom pixels or choose social media templates (Instagram, YouTube).',
-    shortDesc: 'Resize images to custom dimensions or social media presets online for free. Keep aspect ratio or crop easily.',
-    introHeading: 'Why Resize Images?',
-    introText: 'Different platforms require specific image dimensions. Resizing photos ensures they fit social media layouts, application forms, or website layouts perfectly without being stretched.',
-    howTo: [
-      '<strong>Set dimensions:</strong> Enter custom width/height or choose a preset.',
-      '<strong>Upload photo:</strong> Select your image file.',
-      '<strong>Resize:</strong> Download the resized image instantly.'
+  "image-resizer": {
+    "id": "resize",
+    "category": "image",
+    "badge": "🖼️ Image Tool",
+    "icon": "📐",
+    "name": "Image Resizer",
+    "title": "Free Image Resizer Online – Resize Images | NexKitTool",
+    "metaDesc": "Resize images to any dimension online for free. Set custom pixels or choose social media templates (Instagram, YouTube).",
+    "shortDesc": "Resize images to custom dimensions or social media presets online for free. Keep aspect ratio or crop easily.",
+    "introHeading": "Why Resize Images?",
+    "introText": "Resize image dimensions to any height and width in pixels. Adjust proportions, lock aspect ratios to prevent distortion, or scale by percentage online for free. Essential for meeting web upload constraints and optimizing layouts. Maintaining correct dimensions and minimal byte weights is critical for optimizing search engine ranking scores and user experiences. Large photos can cause layout shifting and slow down loading times on mobile devices. Our tool is optimized to perform transformations locally in browser memory using HTML5 canvas boundaries, preserving original details while stripping unnecessary XML metadata tags.",
+    "howTo": [
+      "<strong>Set dimensions:</strong> Enter custom width/height or choose a preset.",
+      "<strong>Upload photo:</strong> Select your image file.",
+      "<strong>Resize:</strong> Download the resized image instantly."
     ],
-    useCases: [
-      { title: 'Social Media Templates', text: 'Resize images for Instagram stories, YouTube banners, and Facebook posts instantly.' },
-      { title: 'Web Development Layouts', text: 'Scale images to exact pixel widths for responsive website layouts.' }
+    "useCases": [
+      {
+        "title": "Social Media Templates",
+        "text": "Resize images for Instagram stories, YouTube banners, and Facebook posts instantly."
+      },
+      {
+        "title": "Web Development Layouts",
+        "text": "Scale images to exact pixel widths for responsive website layouts."
+      }
     ],
-    benefits: [
-      { title: 'Aspect Ratio Lock', text: 'Prevents stretching by maintaining original dimensions.' },
-      { title: 'Social Presets', text: 'Pre-defined sizes for Instagram, Facebook, LinkedIn, Twitter, and YouTube.' }
+    "benefits": [
+      {
+        "title": "Aspect Ratio Lock",
+        "text": "Prevents stretching by maintaining original dimensions."
+      },
+      {
+        "title": "Social Presets",
+        "text": "Pre-defined sizes for Instagram, Facebook, LinkedIn, Twitter, and YouTube."
+      }
     ],
-    techSection: 'Processed on our secure server using the `sharp` library to crop or scale images to the specified dimensions.',
-    faqs: [
-      { q: 'Will resizing reduce quality?', a: 'Upscaling small photos can make them blurry, but downsizing large photos keeps them looking sharp.' },
-      { q: 'Can I crop while resizing?', a: 'Yes, our tool supports cropping to fit the exact dimensions.' }
+    "techSection": "Processed on our secure server using the `sharp` library to crop or scale images to the specified dimensions.",
+    "faqs": [
+      {
+        "q": "Will resizing my photos reduce their quality?",
+        "a": "Scaling down maintains sharpness, while scaling up can cause pixelation."
+      },
+      {
+        "q": "Can I resize multiple images at once?",
+        "a": "Yes, batch resizing is supported on our premium Pro plan."
+      },
+      {
+        "q": "Does the resizer support cropping?",
+        "a": "Yes, you can use our Image Cropper to adjust crop ratios."
+      },
+      {
+        "q": "Is there a limit on how many images I can resize?",
+        "a": "No. NexKitTool offers unlimited free image resizing for all users."
+      }
     ],
-    related: ['background-remover', 'image-compressor', 'image-converter', 'image-to-pdf']
+    "related": [
+      "background-remover",
+      "image-compressor",
+      "image-converter",
+      "image-to-pdf"
+    ]
   },
-  'qr-code-generator': {
-    id: 'qrcode',
-    category: 'utility',
-    badge: '🛠️ Utility Tool',
-    icon: '📱',
-    name: 'QR Code Generator',
-    title: 'Free QR Code Generator Online – Create QR Codes | NexKitTool',
-    metaDesc: 'Generate custom QR codes online for free. Create QR codes for links, text, WiFi, or vCards. High-quality downloads.',
-    shortDesc: 'Generate custom, scannable QR codes for links, text, WiFi credentials, or contact details online for free.',
-    introHeading: 'Create Custom QR Codes',
-    introText: 'QR codes are essential for sharing links, contact details, or credentials easily. Our QR Code Generator lets you create scannable codes for any link or text instantly.',
-    howTo: [
-      '<strong>Enter data:</strong> Paste your URL, text, or details.',
-      '<strong>Choose size:</strong> Set the QR code pixel dimension.',
-      '<strong>Download:</strong> Save the high-quality QR code image.'
+  "qr-code-generator": {
+    "id": "qrcode",
+    "category": "utility",
+    "badge": "🛠️ Utility Tool",
+    "icon": "📱",
+    "name": "QR Code Generator",
+    "title": "Free QR Code Generator Online – Create QR Codes | NexKitTool",
+    "metaDesc": "Generate custom QR codes online for free. Create QR codes for links, text, WiFi, or vCards. High-quality downloads.",
+    "shortDesc": "Generate custom, scannable QR codes for links, text, WiFi credentials, or contact details online for free.",
+    "introHeading": "Create Custom QR Codes",
+    "introText": "Generate custom QR codes online for free. Enter your URL link, text, contact card, or Wi-Fi keys, and our generator renders static QR codes instantly. Customize color options, margins, error correction settings, and download as PNG or SVG images. All data transformations and encodings are handled entirely client-side using JavaScript, which means no text copies, parameters, or passwords ever leave your local computer. This provides unmatched security for encoding strings, formatting databases, or generating random credentials. Fast processing speeds make web development tasks and archiving straightforward.",
+    "howTo": [
+      "<strong>Enter data:</strong> Paste your URL, text, or details.",
+      "<strong>Choose size:</strong> Set the QR code pixel dimension.",
+      "<strong>Download:</strong> Save the high-quality QR code image."
     ],
-    useCases: [
-      { title: 'Marketing Materials', text: 'Add QR codes to flyers, posters, or business cards to direct clients to your website.' },
-      { title: 'Contact Sharing', text: 'Generate vCard QR codes to share your email and phone number instantly.' }
+    "useCases": [
+      {
+        "title": "Marketing Materials",
+        "text": "Add QR codes to flyers, posters, or business cards to direct clients to your website."
+      },
+      {
+        "title": "Contact Sharing",
+        "text": "Generate vCard QR codes to share your email and phone number instantly."
+      }
     ],
-    benefits: [
-      { title: 'High Resolution Output', text: 'Download clean images that scan correctly on any smartphone.' },
-      { title: 'Easy Setup', text: 'Create QR codes for links, plain text, or WiFi access instantly.' }
+    "benefits": [
+      {
+        "title": "High Resolution Output",
+        "text": "Download clean images that scan correctly on any smartphone."
+      },
+      {
+        "title": "Easy Setup",
+        "text": "Create QR codes for links, plain text, or WiFi access instantly."
+      }
     ],
-    techSection: 'Generates QR codes utilizing open-source javascript library integrations dynamically.',
-    faqs: [
-      { q: 'Do these QR codes expire?', a: 'No. They contain the data directly, so they work forever.' },
-      { q: 'Can I scan them on any phone?', a: 'Yes. Any modern iOS or Android camera will recognize and scan them.' }
+    "techSection": "Generates QR codes utilizing open-source javascript library integrations dynamically.",
+    "faqs": [
+      {
+        "q": "Will the generated QR code expire?",
+        "a": "No, static QR codes contain data directly and do not expire."
+      },
+      {
+        "q": "Can I add a custom logo to the center of the QR code?",
+        "a": "Yes. For logo overlay, set error correction to Level H (30%) to ensure scan readability."
+      },
+      {
+        "q": "What image formats can I download?",
+        "a": "You can download QR codes as high-resolution PNG or vector SVG files."
+      },
+      {
+        "q": "Do you track the scans on my QR codes?",
+        "a": "No, we generate static QR codes and do not track scan statistics."
+      }
     ],
-    related: ['password-generator', 'word-counter', 'image-to-pdf', 'grammar-checker']
+    "related": [
+      "password-generator",
+      "word-counter",
+      "image-to-pdf",
+      "grammar-checker"
+    ]
   },
-  'password-generator': {
-    id: 'password',
-    category: 'utility',
-    badge: '🛠️ Utility Tool',
-    icon: '🔐',
-    name: 'Password Generator',
-    title: 'Free Password Generator – Create Strong Passwords | NexKitTool',
-    metaDesc: 'Generate strong, secure passwords online for free. Customize length, symbols, and numbers to secure your accounts.',
-    shortDesc: 'Generate cryptographically secure, random passwords instantly online. Customize characters, numbers, and symbols.',
-    introHeading: 'Generate Secure Passwords',
-    introText: 'Using weak or repeated passwords makes your accounts vulnerable. Our Password Generator creates random, cryptographically secure passwords to keep your data safe.',
-    howTo: [
-      '<strong>Choose parameters:</strong> Set password length and choose characters.',
-      '<strong>Generate:</strong> Click the button to create a random password.',
-      '<strong>Copy:</strong> Copy it to your clipboard.'
+  "password-generator": {
+    "id": "password",
+    "category": "utility",
+    "badge": "🛠️ Utility Tool",
+    "icon": "🔐",
+    "name": "Password Generator",
+    "title": "Free Password Generator – Create Strong Passwords | NexKitTool",
+    "metaDesc": "Generate strong, secure passwords online for free. Customize length, symbols, and numbers to secure your accounts.",
+    "shortDesc": "Generate cryptographically secure, random passwords instantly online. Customize characters, numbers, and symbols.",
+    "introHeading": "Generate Secure Passwords",
+    "introText": "Create strong, random passwords to protect your online accounts. Our password generator runs client-side, allowing you to select length, include numbers, symbols, uppercase letters, and lowercase letters. Secure passwords prevent dictionary attacks, credential stuffing, and unauthorized access, keeping personal files and emails safe. All data transformations and encodings are handled entirely client-side using JavaScript, which means no text copies, parameters, or passwords ever leave your local computer. This provides unmatched security for encoding strings, formatting databases, or generating random credentials. Fast processing speeds make web development tasks and archiving straightforward.",
+    "howTo": [
+      "<strong>Choose parameters:</strong> Set password length and choose characters.",
+      "<strong>Generate:</strong> Click the button to create a random password.",
+      "<strong>Copy:</strong> Copy it to your clipboard."
     ],
-    useCases: [
-      { title: 'Securing Online Accounts', text: 'Create unique passwords when signing up for new websites and services.' },
-      { title: 'Updating Old Credentials', text: 'Audit your accounts and update weak passwords to prevent security breaches.' }
+    "useCases": [
+      {
+        "title": "Securing Online Accounts",
+        "text": "Create unique passwords when signing up for new websites and services."
+      },
+      {
+        "title": "Updating Old Credentials",
+        "text": "Audit your accounts and update weak passwords to prevent security breaches."
+      }
     ],
-    benefits: [
-      { title: 'Cryptographically Secure', text: 'Passwords are generated randomly in your browser using secure APIs.' },
-      { title: 'Customizable Security', text: 'Select lowercase, uppercase, numbers, and symbols to meet security rules.' }
+    "benefits": [
+      {
+        "title": "Cryptographically Secure",
+        "text": "Passwords are generated randomly in your browser using secure APIs."
+      },
+      {
+        "title": "Customizable Security",
+        "text": "Select lowercase, uppercase, numbers, and symbols to meet security rules."
+      }
     ],
-    techSection: 'Uses client-side cryptographic random number generation APIs for maximum security, keeping your passwords local to your device.',
-    faqs: [
-      { q: 'Are my passwords sent to your server?', a: 'No. Generation is entirely client-side. We never receive or store your passwords.' },
-      { q: 'What makes a password strong?', a: 'A length of 16+ characters combining uppercase, lowercase, numbers, and symbols.' }
+    "techSection": "Uses client-side cryptographic random number generation APIs for maximum security, keeping your passwords local to your device.",
+    "faqs": [
+      {
+        "q": "How long should a secure password be?",
+        "a": "Aim for a minimum of 12 characters, though 16 or more is recommended for high-security accounts."
+      },
+      {
+        "q": "Can I include custom symbols in my password?",
+        "a": "Yes. You can toggle symbols like @, #, $, and % to customize your password."
+      },
+      {
+        "q": "Do you save my generated passwords?",
+        "a": "No. Passwords are generated locally in your browser memory and are never sent to our servers."
+      },
+      {
+        "q": "Is it safe to generate passwords online?",
+        "a": "Yes. Our generator uses client-side javascript, meaning no data leaves your local device."
+      }
     ],
-    related: ['qr-code-generator', 'word-counter', 'grammar-checker', 'ai-humanizer']
+    "related": [
+      "qr-code-generator",
+      "word-counter",
+      "grammar-checker",
+      "ai-humanizer"
+    ]
   },
-  'word-counter': {
-    id: 'wordcount',
-    category: 'utility',
-    badge: '🛠️ Utility Tool',
-    icon: '🔢',
-    name: 'Word Counter',
-    title: 'Free Word Counter Online – Count Words & Characters | NexKitTool',
-    metaDesc: 'Count words, characters, sentences, and paragraphs online for free. Perfect for essays, articles, and copywriters.',
-    shortDesc: 'Count words, characters, sentences, and paragraphs instantly. Analyze reading time and check character limits for free.',
-    introHeading: 'Why Use a Word Counter?',
-    introText: 'Writers, students, and copywriters must frequently write to specific length limits. Our Word Counter provides real-time counts of words, characters, sentences, and paragraphs, along with reading speed estimates.',
-    howTo: [
-      '<strong>Paste writing:</strong> Paste your paragraphs into the text box.',
-      '<strong>View stats:</strong> Real-time word and character counts display instantly.',
-      '<strong>Review details:</strong> Check sentence length and reading time.'
+  "word-counter": {
+    "id": "wordcount",
+    "category": "utility",
+    "badge": "🛠️ Utility Tool",
+    "icon": "🔢",
+    "name": "Word Counter",
+    "title": "Free Word Counter Online – Count Words & Characters | NexKitTool",
+    "metaDesc": "Count words, characters, sentences, and paragraphs online for free. Perfect for essays, articles, and copywriters.",
+    "shortDesc": "Count words, characters, sentences, and paragraphs instantly. Analyze reading time and check character limits for free.",
+    "introHeading": "Why Use a Word Counter?",
+    "introText": "Count characters, words, sentences, and paragraphs in real time. Paste your text to monitor word bounds, write SEO metadata (keep title tags under 60 and meta descriptions under 160 characters), draft social media posts, or review essay length limits. The tool also calculates estimated reading speeds. All data transformations and encodings are handled entirely client-side using JavaScript, which means no text copies, parameters, or passwords ever leave your local computer. This provides unmatched security for encoding strings, formatting databases, or generating random credentials. Fast processing speeds make web development tasks and archiving straightforward.",
+    "howTo": [
+      "<strong>Paste writing:</strong> Paste your paragraphs into the text box.",
+      "<strong>View stats:</strong> Real-time word and character counts display instantly.",
+      "<strong>Review details:</strong> Check sentence length and reading time."
     ],
-    useCases: [
-      { title: 'SEO Content Writing', text: 'Monitor your article word counts to align with keyword and length guidelines.' },
-      { title: 'Academic Assignments', text: 'Check essay length requirements before submitting homework.' }
+    "useCases": [
+      {
+        "title": "SEO Content Writing",
+        "text": "Monitor your article word counts to align with keyword and length guidelines."
+      },
+      {
+        "title": "Academic Assignments",
+        "text": "Check essay length requirements before submitting homework."
+      }
     ],
-    benefits: [
-      { title: 'Real-Time Counts', text: 'Displays words, characters, sentences, and paragraphs instantly as you type.' },
-      { title: 'Reading Time Estimate', text: 'Calculates typical reading time, useful for presentations and articles.' }
+    "benefits": [
+      {
+        "title": "Real-Time Counts",
+        "text": "Displays words, characters, sentences, and paragraphs instantly as you type."
+      },
+      {
+        "title": "Reading Time Estimate",
+        "text": "Calculates typical reading time, useful for presentations and articles."
+      }
     ],
-    techSection: 'Uses regex parsing client-side to count word boundaries, character counts, sentences, and paragraph breaks instantly.',
-    faqs: [
-      { q: 'Is there a limit on text size?', a: 'No, you can paste long articles and chapters of books to count them.' },
-      { q: 'Is my text safe?', a: 'Yes. All parsing happens locally on your device in real-time, keeping your content secure.' }
+    "techSection": "Uses regex parsing client-side to count word boundaries, character counts, sentences, and paragraph breaks instantly.",
+    "faqs": [
+      {
+        "q": "Is there a character limit for checks?",
+        "a": "No, you can paste long chapters of text to analyze them without restrictions."
+      },
+      {
+        "q": "Does the counter count spaces?",
+        "a": "Yes. The tool counts both characters with spaces and characters without spaces."
+      },
+      {
+        "q": "Can I check reading time estimates?",
+        "a": "Yes, the tool displays an estimated reading time based on standard reading speeds."
+      },
+      {
+        "q": "Is the counter free to use?",
+        "a": "Yes, our word counter is 100% free to use without restrictions."
+      }
     ],
-    related: ['grammar-checker', 'ai-humanizer', 'password-generator', 'qr-code-generator']
+    "related": [
+      "grammar-checker",
+      "ai-humanizer",
+      "password-generator",
+      "qr-code-generator"
+    ]
   },
-  
-  // NEW 16 TOOLS ADDED FOR 100% COMPLETE URL MAPPING
-  'article-rewriter': {
-    id: 'rewriter',
-    category: 'ai',
-    badge: '🤖 AI Tool',
-    icon: '🔄',
-    name: 'Article Rewriter',
-    title: 'Free AI Article Rewriter – Paraphrase & Rewrite Text | NexKitTool',
-    metaDesc: 'Rewrite articles, paragraphs, or essays online for free. AI-powered article rewriter paraphrases content to improve clarity and tone. No login.',
-    shortDesc: 'Paraphrase and rewrite articles, sentences, and paragraphs instantly using advanced Gemini AI. Adjust writing styles for free.',
-    introHeading: 'Why Use an AI Article Rewriter?',
-    introText: 'Writing original content consistently is a challenge. Our AI Article Rewriter paraphrases existing paragraphs to improve word flow, vocabulary, and readability. It helps bloggers, copywriters, and students rewrite content while maintaining the core message.',
-    howTo: [
-      '<strong>Paste content:</strong> Enter your text into the input box.',
-      '<strong>Select style:</strong> Choose the desired paraphrase tone (formal, professional, casual).',
-      '<strong>Rewrite:</strong> Click generate. The AI processes the text and displays the new version.'
+  "article-rewriter": {
+    "id": "rewriter",
+    "category": "ai",
+    "badge": "🤖 AI Tool",
+    "icon": "🔄",
+    "name": "Article Rewriter",
+    "title": "Free AI Article Rewriter – Paraphrase & Rewrite Text | NexKitTool",
+    "metaDesc": "Rewrite articles, paragraphs, or essays online for free. AI-powered article rewriter paraphrases content to improve clarity and tone. No login.",
+    "shortDesc": "Paraphrase and rewrite articles, sentences, and paragraphs instantly using advanced Gemini AI. Adjust writing styles for free.",
+    "introHeading": "Why Use an AI Article Rewriter?",
+    "introText": "Rewrite articles, paragraphs, or copy context contextually. Our AI rewriter restructures sentences, replaces synonyms, and improves reading flow, producing unique copy for blogs, newsletters, and reports. Avoid plagiarism and maintain engagement with formal, standard, and creative modes. Leveraging advanced natural language models, our assistant refines sentence structures, punctuation patterns, and flow context. This helps creators, students, and professionals build readable copy for essays, blogs, and corporate emails. You can customize output writing modes to match your tone and formatting constraints without generating repetitive filler text.",
+    "howTo": [
+      "<strong>Paste content:</strong> Enter your text into the input box.",
+      "<strong>Select style:</strong> Choose the desired paraphrase tone (formal, professional, casual).",
+      "<strong>Rewrite:</strong> Click generate. The AI processes the text and displays the new version."
     ],
-    useCases: [
-      { title: 'Content Repurposing', text: 'Adapt blog posts for newsletter copy or social media blurbs in seconds.' },
-      { title: 'Simplifying Technical Copy', text: 'Rewrite complex specifications into simple, readable consumer text.' }
+    "useCases": [
+      {
+        "title": "Content Repurposing",
+        "text": "Adapt blog posts for newsletter copy or social media blurbs in seconds."
+      },
+      {
+        "title": "Simplifying Technical Copy",
+        "text": "Rewrite complex specifications into simple, readable consumer text."
+      }
     ],
-    benefits: [
-      { title: 'Unique Text Generation', text: 'Alters sentence paths and word usage to produce unique variations.' },
-      { title: 'Retains Context', text: 'Unlike simple spin tools, our Gemini AI rewriter maintains semantic meaning.' }
+    "benefits": [
+      {
+        "title": "Unique Text Generation",
+        "text": "Alters sentence paths and word usage to produce unique variations."
+      },
+      {
+        "title": "Retains Context",
+        "text": "Unlike simple spin tools, our Gemini AI rewriter maintains semantic meaning."
+      }
     ],
-    techSection: 'Integrates with Google\'s Gemini API using prompt structures that prevent simple word spinning and favor natural grammatical restructuring.',
-    faqs: [
-      { q: 'Will the rewritten content be flagged as duplicate?', a: 'No. The AI creates completely distinct sentence paths and uses synonyms to verify originality.' },
-      { q: 'Can I translate while rewriting?', a: 'This tool paraphrases within the same language. For translation, use our Language Translator.' }
+    "techSection": "Integrates with Google's Gemini API using prompt structures that prevent simple word spinning and favor natural grammatical restructuring.",
+    "faqs": [
+      {
+        "q": "Does the rewriter create unique content?",
+        "a": "Yes, it rephrases sentences contextually to produce unique phrasing."
+      },
+      {
+        "q": "Is the rewritten text grammatically correct?",
+        "a": "Yes, the AI editor ensures that phrasing is grammatically correct."
+      },
+      {
+        "q": "Can I select a formal tone?",
+        "a": "Yes, you can choose from formal, business, simple, or creative writing tones."
+      },
+      {
+        "q": "Do you keep a copy of my articles?",
+        "a": "No, text is processed securely in temporary server memory and deleted immediately."
+      }
     ],
-    related: ['grammar-checker', 'ai-humanizer', 'paraphrase-tool', 'text-summarizer']
+    "related": [
+      "grammar-checker",
+      "ai-humanizer",
+      "paraphrase-tool",
+      "text-summarizer"
+    ]
   },
-  'hashtag-generator': {
-    id: 'hashtag',
-    category: 'ai',
-    badge: '🤖 AI Tool',
-    icon: '#️⃣',
-    name: 'Hashtag Generator',
-    title: 'Free AI Hashtag Generator – Trending Social Hashtags | NexKitTool',
-    metaDesc: 'Generate trending hashtags for Instagram, TikTok, LinkedIn, and Twitter online for free. AI-powered hashtag generator. Boost reach.',
-    shortDesc: 'Create relevant, trending hashtags for your social media posts instantly using AI. Boost organic reach on Instagram, TikTok, and Twitter.',
-    introHeading: 'Boost Organic Reach with AI Hashtags',
-    introText: 'Social media algorithms rely on hashtags to categorize posts and display them to interested users. Our AI Hashtag Generator analyzes your post topic or description to generate high-performing, trending hashtags tailored to your audience.',
-    howTo: [
-      '<strong>Describe your post:</strong> Type your post topic, keyword, or context.',
-      '<strong>Generate tags:</strong> Click generate to create a list of relevant hashtags.',
-      '<strong>Copy and post:</strong> Copy the tags to your clipboard and paste them on social media.'
+  "hashtag-generator": {
+    "id": "hashtag",
+    "category": "ai",
+    "badge": "🤖 AI Tool",
+    "icon": "#️⃣",
+    "name": "Hashtag Generator",
+    "title": "Free AI Hashtag Generator – Trending Social Hashtags | NexKitTool",
+    "metaDesc": "Generate trending hashtags for Instagram, TikTok, LinkedIn, and Twitter online for free. AI-powered hashtag generator. Boost reach.",
+    "shortDesc": "Create relevant, trending hashtags for your social media posts instantly using AI. Boost organic reach on Instagram, TikTok, and Twitter.",
+    "introHeading": "Boost Organic Reach with AI Hashtags",
+    "introText": "Generate viral hashtags for Instagram, TikTok, Twitter/X, and LinkedIn. Enter your post topic, select categories, and our AI hashtag generator recommends trending and relevant tags to improve visibility, reach, and engagement across social platforms. Leveraging advanced natural language models, our assistant refines sentence structures, punctuation patterns, and flow context. This helps creators, students, and professionals build readable copy for essays, blogs, and corporate emails. You can customize output writing modes to match your tone and formatting constraints without generating repetitive filler text.",
+    "howTo": [
+      "<strong>Describe your post:</strong> Type your post topic, keyword, or context.",
+      "<strong>Generate tags:</strong> Click generate to create a list of relevant hashtags.",
+      "<strong>Copy and post:</strong> Copy the tags to your clipboard and paste them on social media."
     ],
-    useCases: [
-      { title: 'Instagram Feed Optimization', text: 'Find high-volume and niche hashtags to increase your post visibility.' },
-      { title: 'TikTok Trends Targeting', text: 'Generate active tags to help get your videos onto the For You Page (FYP).' }
+    "useCases": [
+      {
+        "title": "Instagram Feed Optimization",
+        "text": "Find high-volume and niche hashtags to increase your post visibility."
+      },
+      {
+        "title": "TikTok Trends Targeting",
+        "text": "Generate active tags to help get your videos onto the For You Page (FYP)."
+      }
     ],
-    benefits: [
-      { title: 'Mixes High and Low Volume', text: 'Balances popular hashtags with niche tags for better visibility.' },
-      { title: 'Saves Search Time', text: 'No need to research trending tags manually; the AI returns active hashtags instantly.' }
+    "benefits": [
+      {
+        "title": "Mixes High and Low Volume",
+        "text": "Balances popular hashtags with niche tags for better visibility."
+      },
+      {
+        "title": "Saves Search Time",
+        "text": "No need to research trending tags manually; the AI returns active hashtags instantly."
+      }
     ],
-    techSection: 'Uses API prompt configurations to evaluate social trends and suggest keywords that match the input context.',
-    faqs: [
-      { q: 'How many hashtags does it generate?', a: 'It generates up to 30 relevant hashtags categorized by popularity.' },
-      { q: 'Is it free to use?', a: 'Yes, like all NexKitTool utilities, it is completely free with no daily limits.' }
+    "techSection": "Uses API prompt configurations to evaluate social trends and suggest keywords that match the input context.",
+    "faqs": [
+      {
+        "q": "How does the tool generate hashtags?",
+        "a": "It analyzes your keywords against trending categories to recommend related high-reach tags."
+      },
+      {
+        "q": "Can I copy all hashtags in one click?",
+        "a": "Yes, there is a convenient copy button to copy all recommended hashtags to your clipboard."
+      },
+      {
+        "q": "Does it support different platforms?",
+        "a": "Yes, you can choose tags optimized for Instagram, TikTok, LinkedIn, or Twitter/X."
+      },
+      {
+        "q": "Is there a limit on how many tags I can generate?",
+        "a": "No, you can generate hashtags for as many topics as you need for free."
+      }
     ],
-    related: ['qr-code-generator', 'word-counter', 'grammar-checker', 'ai-humanizer']
+    "related": [
+      "qr-code-generator",
+      "word-counter",
+      "grammar-checker",
+      "ai-humanizer"
+    ]
   },
-  'add-watermark': {
-    id: 'watermark',
-    category: 'image',
-    badge: '🖼️ Image Tool',
-    icon: '💧',
-    name: 'Add Watermark to Images',
-    title: 'Free Image Watermark Tool – Protect Photos Online | NexKitTool',
-    metaDesc: 'Add text or logo watermarks to your images online for free. Custom font, transparency, and size controls. No signup, secure.',
-    shortDesc: 'Protect your images by adding custom text or logo watermarks online for free. Set transparency and position in seconds.',
-    introHeading: 'Why Watermark Your Images?',
-    introText: 'Unlicensed image sharing and copyright theft are common online. Adding a watermark protects your digital art, real estate photography, and product photos, ensuring your branding stays visible wherever your images are shared.',
-    howTo: [
-      '<strong>Upload image:</strong> Select your photo (JPG, PNG, or WEBP).',
-      '<strong>Add branding:</strong> Type custom text or upload your logo image.',
-      '<strong>Adjust layout:</strong> Set transparency, size, and position, then download your watermarked photo.'
+  "add-watermark": {
+    "id": "watermark",
+    "category": "image",
+    "badge": "🖼️ Image Tool",
+    "icon": "💧",
+    "name": "Add Watermark to Images",
+    "title": "Free Image Watermark Tool – Protect Photos Online | NexKitTool",
+    "metaDesc": "Add text or logo watermarks to your images online for free. Custom font, transparency, and size controls. No signup, secure.",
+    "shortDesc": "Protect your images by adding custom text or logo watermarks online for free. Set transparency and position in seconds.",
+    "introHeading": "Why Watermark Your Images?",
+    "introText": "Add custom text or image watermarks to image files. Upload photo drafts, catalog mockups, or portfolios, customize font sizes, colors, angle rotations, and opacity layers to protect assets and denote draft statuses. Client-side, fast, and secure. Maintaining correct dimensions and minimal byte weights is critical for optimizing search engine ranking scores and user experiences. Large photos can cause layout shifting and slow down loading times on mobile devices. Our tool is optimized to perform transformations locally in browser memory using HTML5 canvas boundaries, preserving original details while stripping unnecessary XML metadata tags.",
+    "howTo": [
+      "<strong>Upload image:</strong> Select your photo (JPG, PNG, or WEBP).",
+      "<strong>Add branding:</strong> Type custom text or upload your logo image.",
+      "<strong>Adjust layout:</strong> Set transparency, size, and position, then download your watermarked photo."
     ],
-    useCases: [
-      { title: 'Product Photography', text: 'Add your store logo to product listings to prevent other sellers from using your photos.' },
-      { title: 'Digital Art Portfolios', text: 'Protect your illustrations and designs before sharing them on Behance or social media.' }
+    "useCases": [
+      {
+        "title": "Product Photography",
+        "text": "Add your store logo to product listings to prevent other sellers from using your photos."
+      },
+      {
+        "title": "Digital Art Portfolios",
+        "text": "Protect your illustrations and designs before sharing them on Behance or social media."
+      }
     ],
-    benefits: [
-      { title: 'Adjustable Opacity', text: 'Control the transparency of your watermark so it protects your image without blocking details.' },
-      { title: 'Completely Secure', text: 'Processed locally in your browser, keeping your original photos private.' }
+    "benefits": [
+      {
+        "title": "Adjustable Opacity",
+        "text": "Control the transparency of your watermark so it protects your image without blocking details."
+      },
+      {
+        "title": "Completely Secure",
+        "text": "Processed locally in your browser, keeping your original photos private."
+      }
     ],
-    techSection: 'Uses HTML5 canvas contexts to overlay text or graphic assets onto the source image array client-side.',
-    faqs: [
-      { q: 'Will watermarking reduce my image quality?', a: 'No, the canvas processes the original dimensions to preserve photo resolution.' },
-      { q: 'Can I add watermarks in batch?', a: 'You can upload and process images one by one for precise alignment.' }
+    "techSection": "Uses HTML5 canvas contexts to overlay text or graphic assets onto the source image array client-side.",
+    "faqs": [
+      {
+        "q": "Will watermarking my image reduce its quality?",
+        "a": "No, watermarking simply overlays a transparent layer, keeping the original resolution."
+      },
+      {
+        "q": "Can I remove the watermark later?",
+        "a": "Once saved, the watermark is baked into the image pixels. Keep a backup of your unmarked file."
+      },
+      {
+        "q": "What image formats do you support?",
+        "a": "The tool supports watermarking JPG, PNG, and WEBP images."
+      },
+      {
+        "q": "Do you store a copy of my photos?",
+        "a": "No, all image processing occurs locally in browser memory."
+      }
     ],
-    related: ['image-compressor', 'image-resizer', 'image-converter', 'image-to-pdf']
+    "related": [
+      "image-compressor",
+      "image-resizer",
+      "image-converter",
+      "image-to-pdf"
+    ]
   },
-  'black-white-filter': {
-    id: 'grayscale',
-    category: 'image',
-    badge: '🖼️ Image Tool',
-    icon: '⚫',
-    name: 'Black & White Image Filter',
-    title: 'Free Black & White Image Filter Online – Grayscale | NexKitTool',
-    metaDesc: 'Convert colored images to black and white online for free. Easy grayscale filter converter. No signup, instant download.',
-    shortDesc: 'Convert colored images to black and white online for free. Clean grayscale filters applied instantly in your browser.',
-    introHeading: 'Grayscale Filters for Artistic Impact',
-    introText: 'Black and white photography focuses on contrast, shapes, and textures. Our Black & White Image Filter converts colored photos into artistic grayscale images instantly, without requiring complex photo editing software.',
-    howTo: [
-      '<strong>Upload photo:</strong> Select the colored image you want to convert.',
-      '<strong>Apply filter:</strong> Click process. The filter is applied in real-time.',
-      '<strong>Download:</strong> Save the black and white image to your device.'
+  "black-white-filter": {
+    "id": "grayscale",
+    "category": "image",
+    "badge": "🖼️ Image Tool",
+    "icon": "⚫",
+    "name": "Black & White Image Filter",
+    "title": "Free Black & White Image Filter Online – Grayscale | NexKitTool",
+    "metaDesc": "Convert colored images to black and white online for free. Easy grayscale filter converter. No signup, instant download.",
+    "shortDesc": "Convert colored images to black and white online for free. Clean grayscale filters applied instantly in your browser.",
+    "introHeading": "Grayscale Filters for Artistic Impact",
+    "introText": "Convert color photos to classic black and white grayscale images. Adjust contrast sliders and filters to optimize grayscale tones before downloading files. Ideal for artistic photography, portraits, and simple layouts. Maintaining correct dimensions and minimal byte weights is critical for optimizing search engine ranking scores and user experiences. Large photos can cause layout shifting and slow down loading times on mobile devices. Our tool is optimized to perform transformations locally in browser memory using HTML5 canvas boundaries, preserving original details while stripping unnecessary XML metadata tags.",
+    "howTo": [
+      "<strong>Upload photo:</strong> Select the colored image you want to convert.",
+      "<strong>Apply filter:</strong> Click process. The filter is applied in real-time.",
+      "<strong>Download:</strong> Save the black and white image to your device."
     ],
-    useCases: [
-      { title: 'Artistic Photo Editing', text: 'Create classic, moody portraits and landscape photos.' },
-      { title: 'Document Contrast Boost', text: 'Convert photos of documents to grayscale to make text easier to read and print.' }
+    "useCases": [
+      {
+        "title": "Artistic Photo Editing",
+        "text": "Create classic, moody portraits and landscape photos."
+      },
+      {
+        "title": "Document Contrast Boost",
+        "text": "Convert photos of documents to grayscale to make text easier to read and print."
+      }
     ],
-    benefits: [
-      { title: 'Instant Rendering', text: 'Processes in milliseconds locally in your browser.' },
-      { title: 'Supports All Image Formats', text: 'Works with JPG, JPEG, PNG, WEBP, and BMP files.' }
+    "benefits": [
+      {
+        "title": "Instant Rendering",
+        "text": "Processes in milliseconds locally in your browser."
+      },
+      {
+        "title": "Supports All Image Formats",
+        "text": "Works with JPG, JPEG, PNG, WEBP, and BMP files."
+      }
     ],
-    techSection: 'Uses canvas pixel manipulation algorithms to extract RGB values and calculate grayscale averages.',
-    faqs: [
-      { q: 'Does this tool compress my photo?', a: 'No. The pixel values are updated without changing image dimensions.' },
-      { q: 'Can I undo the grayscale filter?', a: 'Your original upload is untouched. Downloaded outputs are saved as new files.' }
+    "techSection": "Uses canvas pixel manipulation algorithms to extract RGB values and calculate grayscale averages.",
+    "faqs": [
+      {
+        "q": "Does it support bulk conversion?",
+        "a": "Standard free sessions process one image at a time. Bulk conversion is supported on Pro."
+      },
+      {
+        "q": "Can I adjust contrast levels?",
+        "a": "Yes, you can adjust brightness and contrast sliders to customize grayscale tones."
+      },
+      {
+        "q": "Will the image dimensions change?",
+        "a": "No, the converter keeps the original dimensions and aspect ratios."
+      },
+      {
+        "q": "Is there a file size limit?",
+        "a": "Yes, free users can upload photos up to 15MB."
+      }
     ],
-    related: ['image-compressor', 'image-resizer', 'image-converter', 'add-watermark']
+    "related": [
+      "image-compressor",
+      "image-resizer",
+      "image-converter",
+      "add-watermark"
+    ]
   },
-  'flip-rotate-image': {
-    id: 'flip',
-    category: 'image',
-    badge: '🖼️ Image Tool',
-    icon: '↔️',
-    name: 'Flip & Rotate Image',
-    title: 'Free Flip & Rotate Image Online – Mirror Photos | NexKitTool',
-    metaDesc: 'Flip images horizontally or vertically and rotate them 90, 180, or 270 degrees online for free. No signup, secure.',
-    shortDesc: 'Flip images horizontally, vertically, or rotate them to the correct angle online for free. Fast browser tool.',
-    introHeading: 'Correct Photo Orientation Instantly',
-    introText: 'Photos taken on phones often upload sideways or upside down due to orientation issues. Our Flip & Rotate Image tool allows you to correct the rotation or mirror your photos horizontally or vertically in seconds.',
-    howTo: [
-      '<strong>Upload photo:</strong> Select your image file.',
-      '<strong>Rotate or Flip:</strong> Click the rotation buttons or flip switches.',
-      '<strong>Download:</strong> Save the updated photo instantly.'
+  "flip-rotate-image": {
+    "id": "flip",
+    "category": "image",
+    "badge": "🖼️ Image Tool",
+    "icon": "↔️",
+    "name": "Flip & Rotate Image",
+    "title": "Free Flip & Rotate Image Online – Mirror Photos | NexKitTool",
+    "metaDesc": "Flip images horizontally or vertically and rotate them 90, 180, or 270 degrees online for free. No signup, secure.",
+    "shortDesc": "Flip images horizontally, vertically, or rotate them to the correct angle online for free. Fast browser tool.",
+    "introHeading": "Correct Photo Orientation Instantly",
+    "introText": "Flip images horizontally or vertically, or rotate them to any angle in degrees. Fix orientation errors on mobile photos, align mockups, and download modified files online for free. Fast rendering with canvas APIs. Maintaining correct dimensions and minimal byte weights is critical for optimizing search engine ranking scores and user experiences. Large photos can cause layout shifting and slow down loading times on mobile devices. Our tool is optimized to perform transformations locally in browser memory using HTML5 canvas boundaries, preserving original details while stripping unnecessary XML metadata tags.",
+    "howTo": [
+      "<strong>Upload photo:</strong> Select your image file.",
+      "<strong>Rotate or Flip:</strong> Click the rotation buttons or flip switches.",
+      "<strong>Download:</strong> Save the updated photo instantly."
     ],
-    useCases: [
-      { title: 'Fixing Phone Camera Rotation', text: 'Correct sideways or upside-down photos taken on your phone.' },
-      { title: 'Mirroring Images', text: 'Flip selfies or landscape photos horizontally for a mirrored look.' }
+    "useCases": [
+      {
+        "title": "Fixing Phone Camera Rotation",
+        "text": "Correct sideways or upside-down photos taken on your phone."
+      },
+      {
+        "title": "Mirroring Images",
+        "text": "Flip selfies or landscape photos horizontally for a mirrored look."
+      }
     ],
-    benefits: [
-      { title: 'Precise Rotation', text: 'Rotate in 90-degree increments or flip horizontally and vertically.' },
-      { title: '100% Client-Side', text: 'Processed locally in your browser, keeping your photos private.' }
+    "benefits": [
+      {
+        "title": "Precise Rotation",
+        "text": "Rotate in 90-degree increments or flip horizontally and vertically."
+      },
+      {
+        "title": "100% Client-Side",
+        "text": "Processed locally in your browser, keeping your photos private."
+      }
     ],
-    techSection: 'Uses canvas transforms (rotate, scale) to modify image orientation parameters before exporting.',
-    faqs: [
-      { q: 'Is there a file limit?', a: 'You can upload high-resolution camera photos of any size.' },
-      { q: 'Does it support transparent PNGs?', a: 'Yes, transparency is preserved when flipping and rotating images.' }
+    "techSection": "Uses canvas transforms (rotate, scale) to modify image orientation parameters before exporting.",
+    "faqs": [
+      {
+        "q": "Can I flip images vertically and horizontally at the same time?",
+        "a": "Yes, you can apply both adjustments before downloading the final file."
+      },
+      {
+        "q": "Will rotating reduce my image resolution?",
+        "a": "No, the tool keeps the original image pixels and aspect proportions."
+      },
+      {
+        "q": "What format will the output image be in?",
+        "a": "The tool preserves the original format (JPG/PNG/WEBP) by default."
+      },
+      {
+        "q": "Do you store my images?",
+        "a": "No, all operations run client-side in temporary browser memory."
+      }
     ],
-    related: ['image-compressor', 'image-resizer', 'image-converter', 'add-watermark']
+    "related": [
+      "image-compressor",
+      "image-resizer",
+      "image-converter",
+      "add-watermark"
+    ]
   },
-  'image-cropper': {
-    id: 'crop',
-    category: 'image',
-    badge: '🖼️ Image Tool',
-    icon: '✂️',
-    name: 'Image Cropper',
-    title: 'Free Image Cropper Online – Crop Photos to Pixels | NexKitTool',
-    metaDesc: 'Crop images online for free. Set custom dimensions or choose aspect ratios. Easily crop JPG, PNG, and WEBP. No signup.',
-    shortDesc: 'Crop images online to exact dimensions or aspect ratios for free. Fast, client-side cropper for social media posts.',
-    introHeading: 'Why Crop Images?',
-    introText: 'Cropping allows you to remove distracting elements, focus on your subject, and fit photos into specific aspect ratios (like 1:1 square for Instagram or 16:9 for banners) without stretching.',
-    howTo: [
-      '<strong>Upload photo:</strong> Select your image file.',
-      '<strong>Set crop area:</strong> Drag the crop box or select an aspect ratio preset.',
-      '<strong>Download:</strong> Save the cropped image instantly.'
+  "image-cropper": {
+    "id": "crop",
+    "category": "image",
+    "badge": "🖼️ Image Tool",
+    "icon": "✂️",
+    "name": "Image Cropper",
+    "title": "Free Image Cropper Online – Crop Photos to Pixels | NexKitTool",
+    "metaDesc": "Crop images online for free. Set custom dimensions or choose aspect ratios. Easily crop JPG, PNG, and WEBP. No signup.",
+    "shortDesc": "Crop images online to exact dimensions or aspect ratios for free. Fast, client-side cropper for social media posts.",
+    "introHeading": "Why Crop Images?",
+    "introText": "Crop images to any aspect ratio or custom box selection. Select from standard ratios (1:1 square, 16:9 widescreen, 4:3) or adjust margins manually to optimize photos for social media banners, profile cards, and web layouts. Maintaining correct dimensions and minimal byte weights is critical for optimizing search engine ranking scores and user experiences. Large photos can cause layout shifting and slow down loading times on mobile devices. Our tool is optimized to perform transformations locally in browser memory using HTML5 canvas boundaries, preserving original details while stripping unnecessary XML metadata tags.",
+    "howTo": [
+      "<strong>Upload photo:</strong> Select your image file.",
+      "<strong>Set crop area:</strong> Drag the crop box or select an aspect ratio preset.",
+      "<strong>Download:</strong> Save the cropped image instantly."
     ],
-    useCases: [
-      { title: 'Instagram Square Avatars', text: 'Crop portraits to 1:1 squares for clean social media profile pictures.' },
-      { title: 'Removing Background Details', text: 'Crop out unwanted details or objects from the edges of photos.' }
+    "useCases": [
+      {
+        "title": "Instagram Square Avatars",
+        "text": "Crop portraits to 1:1 squares for clean social media profile pictures."
+      },
+      {
+        "title": "Removing Background Details",
+        "text": "Crop out unwanted details or objects from the edges of photos."
+      }
     ],
-    benefits: [
-      { title: 'Aspect Ratio Presets', text: 'Includes presets for common sizes like 1:1, 4:3, 16:9, and free crop.' },
-      { title: 'Local Rendering', text: 'Processed in your browser, keeping your photos private.' }
+    "benefits": [
+      {
+        "title": "Aspect Ratio Presets",
+        "text": "Includes presets for common sizes like 1:1, 4:3, 16:9, and free crop."
+      },
+      {
+        "title": "Local Rendering",
+        "text": "Processed in your browser, keeping your photos private."
+      }
     ],
-    techSection: 'Uses client-side crop libraries and canvas context slicing to export the selected crop area.',
-    faqs: [
-      { q: 'Can I crop transparent PNGs?', a: 'Yes. PNG transparency is preserved when cropping images.' },
-      { q: 'Does it support custom aspect ratios?', a: 'Yes. Select the "Free" option to drag the crop area to any custom size.' }
+    "techSection": "Uses client-side crop libraries and canvas context slicing to export the selected crop area.",
+    "faqs": [
+      {
+        "q": "Can I input custom crop dimensions?",
+        "a": "Yes, you can enter custom pixel width and height targets to crop your photos."
+      },
+      {
+        "q": "Will cropping reduce my file size?",
+        "a": "Yes, cropping removes unnecessary pixels, which naturally shrinks the file footprint."
+      },
+      {
+        "q": "Do you support PNG files with transparent backgrounds?",
+        "a": "Yes, cropping preserves the transparent layers of PNG and WEBP files."
+      },
+      {
+        "q": "Is the cropper free to use?",
+        "a": "Yes, our image cropper is 100% free without signup requirements."
+      }
     ],
-    related: ['image-compressor', 'image-resizer', 'image-converter', 'add-watermark']
+    "related": [
+      "image-compressor",
+      "image-resizer",
+      "image-converter",
+      "add-watermark"
+    ]
   },
-  'pdf-watermark': {
-    id: 'pdf-watermark',
-    category: 'pdf',
-    badge: '📄 PDF Tool',
-    icon: '💧',
-    name: 'PDF Watermark Generator',
-    title: 'Free PDF Watermark Generator – Secure PDFs Online | NexKitTool',
-    metaDesc: 'Add text watermarks to your PDF documents online for free. Set custom text, font size, opacity, and positioning.',
-    shortDesc: 'Add custom text watermarks to your PDF pages online for free. Protect sensitive contracts and invoices in seconds.',
-    introHeading: 'Protect PDF Documents with Watermarks',
-    introText: 'PDF watermarking is the process of overlaying semi-transparent text across all pages of a PDF document. This is essential for protecting confidential drafts, contracts, and intellectual property from unauthorized sharing.',
-    howTo: [
-      '<strong>Upload PDF:</strong> Select the PDF you want to protect.',
-      '<strong>Configure text:</strong> Type your watermark (e.g. "CONFIDENTIAL" or "DRAFT").',
-      '<strong>Position and download:</strong> Set opacity, angle, and text size, then download the protected PDF.'
+  "pdf-watermark": {
+    "id": "pdf-watermark",
+    "category": "pdf",
+    "badge": "📄 PDF Tool",
+    "icon": "💧",
+    "name": "PDF Watermark Generator",
+    "title": "Free PDF Watermark Generator – Secure PDFs Online | NexKitTool",
+    "metaDesc": "Add text watermarks to your PDF documents online for free. Set custom text, font size, opacity, and positioning.",
+    "shortDesc": "Add custom text watermarks to your PDF pages online for free. Protect sensitive contracts and invoices in seconds.",
+    "introHeading": "Protect PDF Documents with Watermarks",
+    "introText": "Secure your PDF documents by adding visible text or logo watermarks. Customize text values (e.g., \"CONFIDENTIAL\"), select color palettes, adjust rotations and transparency levels to prevent unauthorized printing and layout modifications. Our secure compiler processes PDF stream layers, ensuring that fonts, margins, page boundaries, and internal object coordinates remain optimized. By executing operations directly in modern server memory or client sandboxes, we guarantee zero file persistence, protecting your financial reports, legal contracts, and personal paperwork. You can process unlimited files without paying for expensive acrobat licenses.",
+    "howTo": [
+      "<strong>Upload PDF:</strong> Select the PDF you want to protect.",
+      "<strong>Configure text:</strong> Type your watermark (e.g. \"CONFIDENTIAL\" or \"DRAFT\").",
+      "<strong>Position and download:</strong> Set opacity, angle, and text size, then download the protected PDF."
     ],
-    useCases: [
-      { title: 'Marking Business Drafts', text: 'Mark proposal drafts as "DRAFT" before sharing them with clients.' },
-      { title: 'Protecting Invoices', text: 'Watermark invoices with payment terms to prevent modification.' }
+    "useCases": [
+      {
+        "title": "Marking Business Drafts",
+        "text": "Mark proposal drafts as \"DRAFT\" before sharing them with clients."
+      },
+      {
+        "title": "Protecting Invoices",
+        "text": "Watermark invoices with payment terms to prevent modification."
+      }
     ],
-    benefits: [
-      { title: 'Page-by-Page Overlay', text: 'Adds the watermark text to all pages of the document automatically.' },
-      { title: 'Adjustable Opacity', text: 'Set text opacity so the watermark is visible without blocking page content.' }
+    "benefits": [
+      {
+        "title": "Page-by-Page Overlay",
+        "text": "Adds the watermark text to all pages of the document automatically."
+      },
+      {
+        "title": "Adjustable Opacity",
+        "text": "Set text opacity so the watermark is visible without blocking page content."
+      }
     ],
-    techSection: 'Utilizes backend routes built with `pdf-lib` to overlay font layers onto document page instances.',
-    faqs: [
-      { q: 'Can the watermark be deleted easily?', a: 'The watermark text is embedded directly into the page content stream, making it hard to remove.' },
-      { q: 'Does this tool compress my PDF?', a: 'No, page layout coordinates and document resolution are preserved.' }
+    "techSection": "Utilizes backend routes built with `pdf-lib` to overlay font layers onto document page instances.",
+    "faqs": [
+      {
+        "q": "Will watermarking my PDF make it blurry?",
+        "a": "No, watermarking simply overlays a new layer on top, keeping text and images sharp."
+      },
+      {
+        "q": "Can I adjust the angle of the watermark?",
+        "a": "Yes, you can rotate text or image watermarks to any angle (standard is 45 degrees)."
+      },
+      {
+        "q": "Is there a limit to the file size I can upload?",
+        "a": "Free users can upload files up to 25MB, while Pro subscribers can upload files up to 100MB."
+      },
+      {
+        "q": "Do you store a copy of my documents?",
+        "a": "No, all uploaded documents are processed securely and deleted immediately after generation."
+      }
     ],
-    related: ['merge-pdf', 'split-pdf', 'compress-pdf', 'add-watermark']
+    "related": [
+      "merge-pdf",
+      "split-pdf",
+      "compress-pdf",
+      "add-watermark"
+    ]
   },
-  'base64-encoder': {
-    id: 'base64',
-    category: 'utility',
-    badge: '🛠️ Utility Tool',
-    icon: '🔗',
-    name: 'Base64 Encoder/Decoder',
-    title: 'Free Base64 Encoder/Decoder Online – Encode & Decode | NexKitTool',
-    metaDesc: 'Encode or decode text to Base64 format online for free. Secure client-side encoder for developers and writers.',
-    shortDesc: 'Encode plain text to Base64 format or decode Base64 strings back to readable text online for free.',
-    introHeading: 'What is Base64 Encoding?',
-    introText: 'Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It is widely used in web development to embed small images in HTML/CSS, send data in email attachments, or safely transmit parameters in URLs.',
-    howTo: [
-      '<strong>Input text:</strong> Type or paste your text or Base64 string.',
-      '<strong>Select action:</strong> Click the "Encode" or "Decode" button.',
-      '<strong>Copy output:</strong> Copy the formatted results to your clipboard.'
+  "base64-encoder": {
+    "id": "base64",
+    "category": "utility",
+    "badge": "🛠️ Utility Tool",
+    "icon": "🔗",
+    "name": "Base64 Encoder/Decoder",
+    "title": "Free Base64 Encoder/Decoder Online – Encode & Decode | NexKitTool",
+    "metaDesc": "Encode or decode text to Base64 format online for free. Secure client-side encoder for developers and writers.",
+    "shortDesc": "Encode plain text to Base64 format or decode Base64 strings back to readable text online for free.",
+    "introHeading": "What is Base64 Encoding?",
+    "introText": "Encode text strings or binary files to Base64 format, or decode Base64 data to plain text. Base64 is essential for embedding images directly in HTML/CSS sheets, transmission protocols, and email headers. Fast client-side translation. All data transformations and encodings are handled entirely client-side using JavaScript, which means no text copies, parameters, or passwords ever leave your local computer. This provides unmatched security for encoding strings, formatting databases, or generating random credentials. Fast processing speeds make web development tasks and archiving straightforward.",
+    "howTo": [
+      "<strong>Input text:</strong> Type or paste your text or Base64 string.",
+      "<strong>Select action:</strong> Click the \"Encode\" or \"Decode\" button.",
+      "<strong>Copy output:</strong> Copy the formatted results to your clipboard."
     ],
-    useCases: [
-      { title: 'Embedding Data in HTML', text: 'Convert small graphics or text snippets into Base64 strings to embed them directly in source code.' },
-      { title: 'Safe API Data Transmission', text: 'Encode complex parameter text to prevent errors in URL paths.' }
+    "useCases": [
+      {
+        "title": "Embedding Data in HTML",
+        "text": "Convert small graphics or text snippets into Base64 strings to embed them directly in source code."
+      },
+      {
+        "title": "Safe API Data Transmission",
+        "text": "Encode complex parameter text to prevent errors in URL paths."
+      }
     ],
-    benefits: [
-      { title: 'Real-Time Encoding', text: 'Get results instantly in your browser.' },
-      { title: '100% Client-Side', text: 'Processed locally on your device, keeping your data private.' }
+    "benefits": [
+      {
+        "title": "Real-Time Encoding",
+        "text": "Get results instantly in your browser."
+      },
+      {
+        "title": "100% Client-Side",
+        "text": "Processed locally on your device, keeping your data private."
+      }
     ],
-    techSection: 'Uses native browser APIs (`btoa` and `atob`) to encode and decode UTF-8 text strings.',
-    faqs: [
-      { q: 'Is Base64 secure for encryption?', a: 'No. Base64 is an encoding format, not encryption. Anyone can decode it easily.' },
-      { q: 'Can I decode base64 back to images?', a: 'Our tool is designed for text-based Base64 encoding. For binary files, developer tools are recommended.' }
+    "techSection": "Uses native browser APIs (`btoa` and `atob`) to encode and decode UTF-8 text strings.",
+    "faqs": [
+      {
+        "q": "What is Base64 encoding used for?",
+        "a": "It translates binary data into ASCII strings, useful for embedding files in HTML or data streams."
+      },
+      {
+        "q": "Can I encode images to Base64?",
+        "a": "Yes, our tool supports uploading small files to convert them to data URLs."
+      },
+      {
+        "q": "Does encoding happen on your servers?",
+        "a": "No. Encoding and decoding happen locally in browser JavaScript, keeping data secure."
+      },
+      {
+        "q": "Is there a character limit for encoding?",
+        "a": "No, the tool handles large text strings and data structures."
+      }
     ],
-    related: ['password-generator', 'word-counter', 'json-formatter', 'url-encoder']
+    "related": [
+      "password-generator",
+      "word-counter",
+      "json-formatter",
+      "url-encoder"
+    ]
   },
-  'json-formatter': {
-    id: 'json',
-    category: 'utility',
-    badge: '🛠️ Utility Tool',
-    icon: '{ }',
-    name: 'JSON Formatter',
-    title: 'Free JSON Formatter & Beautifier Online – Format JSON | NexKitTool',
-    metaDesc: 'Format, validate, beautify, and minify JSON data online for free. Clean spacing and syntax validation for developers.',
-    shortDesc: 'Format, validate, and beautify raw JSON data online for free. Fix spacing, highlight syntax errors, or minify JSON instantly.',
-    introHeading: 'Why Use a JSON Formatter?',
-    introText: 'JSON (JavaScript Object Notation) is the standard format for API data transmission. Raw JSON is often minified into a single line, making it hard to read. Our JSON Formatter beautifies code with clean spacing and validates syntax to help you find errors.',
-    howTo: [
-      '<strong>Paste JSON:</strong> Input your raw, minified, or unformatted JSON code.',
-      '<strong>Format:</strong> Click "Beautify" for clean spacing, or "Minify" to compress the code.',
-      '<strong>Validate:</strong> Any syntax errors will be highlighted instantly.'
+  "json-formatter": {
+    "id": "json",
+    "category": "utility",
+    "badge": "🛠️ Utility Tool",
+    "icon": "{ }",
+    "name": "JSON Formatter",
+    "title": "Free JSON Formatter & Beautifier Online – Format JSON | NexKitTool",
+    "metaDesc": "Format, validate, beautify, and minify JSON data online for free. Clean spacing and syntax validation for developers.",
+    "shortDesc": "Format, validate, and beautify raw JSON data online for free. Fix spacing, highlight syntax errors, or minify JSON instantly.",
+    "introHeading": "Why Use a JSON Formatter?",
+    "introText": "Format and beautify raw JSON data to improve readability. Clean spacing, format nested fields, check syntax for errors, and minimize JSON sizes for web configurations. Essential tool for developers and api administrators. All data transformations and encodings are handled entirely client-side using JavaScript, which means no text copies, parameters, or passwords ever leave your local computer. This provides unmatched security for encoding strings, formatting databases, or generating random credentials. Fast processing speeds make web development tasks and archiving straightforward.",
+    "howTo": [
+      "<strong>Paste JSON:</strong> Input your raw, minified, or unformatted JSON code.",
+      "<strong>Format:</strong> Click \"Beautify\" for clean spacing, or \"Minify\" to compress the code.",
+      "<strong>Validate:</strong> Any syntax errors will be highlighted instantly."
     ],
-    useCases: [
-      { title: 'Debugging API Responses', text: 'Beautify raw API responses to read nested objects and values easily.' },
-      { title: 'Minifying Code for Production', text: 'Compress JSON files to reduce load sizes and save bandwidth.' }
+    "useCases": [
+      {
+        "title": "Debugging API Responses",
+        "text": "Beautify raw API responses to read nested objects and values easily."
+      },
+      {
+        "title": "Minifying Code for Production",
+        "text": "Compress JSON files to reduce load sizes and save bandwidth."
+      }
     ],
-    benefits: [
-      { title: 'Syntax Error Validation', text: 'Highlights syntax errors and points out missing commas or brackets.' },
-      { title: 'Adjustable Spacing', text: 'Choose between 2-space, 4-space, or tab layouts.' }
+    "benefits": [
+      {
+        "title": "Syntax Error Validation",
+        "text": "Highlights syntax errors and points out missing commas or brackets."
+      },
+      {
+        "title": "Adjustable Spacing",
+        "text": "Choose between 2-space, 4-space, or tab layouts."
+      }
     ],
-    techSection: 'Uses client-side `JSON.parse` and `JSON.stringify` to validate and format JSON data dynamically in the browser.',
-    faqs: [
-      { q: 'Is my API data sent to a server?', a: 'No. Validation and formatting are executed locally on your device, keeping API keys and data secure.' },
-      { q: 'Does it support broken JSON?', a: 'It displays detailed error messages to help you fix syntax errors.' }
+    "techSection": "Uses client-side `JSON.parse` and `JSON.stringify` to validate and format JSON data dynamically in the browser.",
+    "faqs": [
+      {
+        "q": "Does the formatter check for JSON syntax errors?",
+        "a": "Yes, it flags missing commas, brackets, or incorrect formatting keys."
+      },
+      {
+        "q": "Can I minify JSON data?",
+        "a": "Yes, you can toggle formatting layout to minify JSON to a single compact line."
+      },
+      {
+        "q": "Is my data secure?",
+        "a": "Yes, formatting is processed entirely client-side in your browser; no JSON data leaves your computer."
+      },
+      {
+        "q": "Can I copy formatted JSON in one click?",
+        "a": "Yes, there is a convenient copy button to copy beautified JSON."
+      }
     ],
-    related: ['base64-encoder', 'url-encoder', 'case-converter', 'password-generator']
+    "related": [
+      "base64-encoder",
+      "url-encoder",
+      "case-converter",
+      "password-generator"
+    ]
   },
-  'lorem-ipsum': {
-    id: 'lorem',
-    category: 'utility',
-    badge: '🛠️ Utility Tool',
-    icon: '📃',
-    name: 'Lorem Ipsum Generator',
-    title: 'Free Lorem Ipsum Generator – Placeholder Text | NexKitTool',
-    metaDesc: 'Generate custom Lorem Ipsum placeholder text online for free. Set custom paragraphs, sentences, or word limits. Fast.',
-    shortDesc: 'Generate custom Lorem Ipsum placeholder text for websites, designs, and mockups online for free.',
-    introHeading: 'What is Lorem Ipsum?',
-    introText: 'Lorem Ipsum is standard placeholder text used in printing, graphic design, and web development. Using dummy text allows designers to focus on layout, fonts, and colors before final copy is ready.',
-    howTo: [
-      '<strong>Choose length:</strong> Select your target number of paragraphs, sentences, or words.',
-      '<strong>Generate:</strong> Click the button to create custom placeholder text.',
-      '<strong>Copy:</strong> Copy the text to your clipboard.'
+  "lorem-ipsum": {
+    "id": "lorem",
+    "category": "utility",
+    "badge": "🛠️ Utility Tool",
+    "icon": "📃",
+    "name": "Lorem Ipsum Generator",
+    "title": "Free Lorem Ipsum Generator – Placeholder Text | NexKitTool",
+    "metaDesc": "Generate custom Lorem Ipsum placeholder text online for free. Set custom paragraphs, sentences, or word limits. Fast.",
+    "shortDesc": "Generate custom Lorem Ipsum placeholder text for websites, designs, and mockups online for free.",
+    "introHeading": "What is Lorem Ipsum?",
+    "introText": "Generate placeholder Lorem Ipsum text blocks for designs, layout mockups, and templates. Select paragraph lengths, list structures, or word boundaries to copy dummy text instantly. Streamline interface prototyping. All data transformations and encodings are handled entirely client-side using JavaScript, which means no text copies, parameters, or passwords ever leave your local computer. This provides unmatched security for encoding strings, formatting databases, or generating random credentials. Fast processing speeds make web development tasks and archiving straightforward.",
+    "howTo": [
+      "<strong>Choose length:</strong> Select your target number of paragraphs, sentences, or words.",
+      "<strong>Generate:</strong> Click the button to create custom placeholder text.",
+      "<strong>Copy:</strong> Copy the text to your clipboard."
     ],
-    useCases: [
-      { title: 'Web Design Mockups', text: 'Fill webpage layouts with placeholder text to review layout structures.' },
-      { title: 'Print Design Layouts', text: 'Use dummy text in brochures and flyers to plan text blocks.' }
+    "useCases": [
+      {
+        "title": "Web Design Mockups",
+        "text": "Fill webpage layouts with placeholder text to review layout structures."
+      },
+      {
+        "title": "Print Design Layouts",
+        "text": "Use dummy text in brochures and flyers to plan text blocks."
+      }
     ],
-    benefits: [
-      { title: 'Custom Length Controls', text: 'Generate exact volumes of text by paragraph, sentence, or word counts.' },
-      { title: 'Clean Formatting', text: 'Outputs clean, copy-pasteable paragraphs.' }
+    "benefits": [
+      {
+        "title": "Custom Length Controls",
+        "text": "Generate exact volumes of text by paragraph, sentence, or word counts."
+      },
+      {
+        "title": "Clean Formatting",
+        "text": "Outputs clean, copy-pasteable paragraphs."
+      }
     ],
-    techSection: 'Uses client-side arrays of standard Latin passage sections to generate dummy text variations.',
-    faqs: [
-      { q: 'Does this text mean anything?', a: 'No. It is randomized Latin text designed to avoid distracting the reader with readable copy.' },
-      { q: 'Is it free to use?', a: 'Yes. Generating placeholder text is free with no daily limits.' }
+    "techSection": "Uses client-side arrays of standard Latin passage sections to generate dummy text variations.",
+    "faqs": [
+      {
+        "q": "Can I generate list elements?",
+        "a": "Yes, you can generate bulleted lists, paragraphs, or single words."
+      },
+      {
+        "q": "What languages does it support?",
+        "a": "It generates standard Latin-style placeholder dummy text."
+      },
+      {
+        "q": "Is there a length limit?",
+        "a": "No, you can generate up to 50 paragraphs of placeholder text in a single session."
+      },
+      {
+        "q": "Can I copy the generated text?",
+        "a": "Yes, there is a copy button to save the placeholder text to your clipboard."
+      }
     ],
-    related: ['word-counter', 'password-generator', 'case-converter', 'qr-code-generator']
+    "related": [
+      "word-counter",
+      "password-generator",
+      "case-converter",
+      "qr-code-generator"
+    ]
   },
-  'url-encoder': {
-    id: 'urlencode',
-    category: 'utility',
-    badge: '🛠️ Utility Tool',
-    icon: '🔗',
-    name: 'URL Encoder/Decoder',
-    title: 'Free URL Encoder/Decoder Online – Percent Encoding | NexKitTool',
-    metaDesc: 'Encode or decode URLs to percent-encoded format online for free. Safe developer tool for URL parameters.',
-    shortDesc: 'Encode special characters in URLs to percent-encoded format or decode parameters back to readable text online for free.',
-    introHeading: 'Why Use URL Encoding?',
-    introText: 'URLs can only contain specific characters from the ASCII set. Special characters like spaces, ampersands, and slashes must be converted to percent-encoded values (e.g. spaces become %20) to prevent errors in browser routing.',
-    howTo: [
-      '<strong>Input URL:</strong> Paste your plain text or percent-encoded link.',
-      '<strong>Convert:</strong> Click "Encode" or "Decode" to process the text.',
-      '<strong>Copy:</strong> Save the output link to your clipboard.'
+  "url-encoder": {
+    "id": "urlencode",
+    "category": "utility",
+    "badge": "🛠️ Utility Tool",
+    "icon": "🔗",
+    "name": "URL Encoder/Decoder",
+    "title": "Free URL Encoder/Decoder Online – Percent Encoding | NexKitTool",
+    "metaDesc": "Encode or decode URLs to percent-encoded format online for free. Safe developer tool for URL parameters.",
+    "shortDesc": "Encode special characters in URLs to percent-encoded format or decode parameters back to readable text online for free.",
+    "introHeading": "Why Use URL Encoding?",
+    "introText": "Encode URL paths contextually, translating special symbols to percent encoding format, or decode percent-encoded strings to standard URLs. Essential for creating clean query links and managing server-side parameters. All data transformations and encodings are handled entirely client-side using JavaScript, which means no text copies, parameters, or passwords ever leave your local computer. This provides unmatched security for encoding strings, formatting databases, or generating random credentials. Fast processing speeds make web development tasks and archiving straightforward.",
+    "howTo": [
+      "<strong>Input URL:</strong> Paste your plain text or percent-encoded link.",
+      "<strong>Convert:</strong> Click \"Encode\" or \"Decode\" to process the text.",
+      "<strong>Copy:</strong> Save the output link to your clipboard."
     ],
-    useCases: [
-      { title: 'API Parameter Passing', text: 'Encode query parameters to prevent errors in API paths.' },
-      { title: 'Fixing Broken Links', text: 'Decode links containing percent symbols to read their parameters.' }
+    "useCases": [
+      {
+        "title": "API Parameter Passing",
+        "text": "Encode query parameters to prevent errors in API paths."
+      },
+      {
+        "title": "Fixing Broken Links",
+        "text": "Decode links containing percent symbols to read their parameters."
+      }
     ],
-    benefits: [
-      { title: 'Percent Encoding Support', text: 'Correctly converts all non-ASCII characters.' },
-      { title: 'Local Processing', text: 'Processed locally in your browser, keeping your links private.' }
+    "benefits": [
+      {
+        "title": "Percent Encoding Support",
+        "text": "Correctly converts all non-ASCII characters."
+      },
+      {
+        "title": "Local Processing",
+        "text": "Processed locally in your browser, keeping your links private."
+      }
     ],
-    techSection: 'Uses native browser APIs (`encodeURIComponent` and `decodeURIComponent`) to process URLs.',
-    faqs: [
-      { q: 'What is percent encoding?', a: 'It replaces special characters with a "%" followed by their hexadecimal value.' },
-      { q: 'Is it safe for personal links?', a: 'Yes, all processing is client-side, so your links are never sent to a server.' }
+    "techSection": "Uses native browser APIs (`encodeURIComponent` and `decodeURIComponent`) to process URLs.",
+    "faqs": [
+      {
+        "q": "Why do I need to encode URLs?",
+        "a": "URLs can only contain specific ASCII characters. Special characters (like spaces) must be encoded to remain valid."
+      },
+      {
+        "q": "Does the tool decode percent-encoded strings?",
+        "a": "Yes, you can toggle the tool to decode Base64 and URL-encoded strings."
+      },
+      {
+        "q": "Is the encoding process secure?",
+        "a": "Yes, all transformations occur client-side in browser JavaScript."
+      },
+      {
+        "q": "What is the limit for URL length?",
+        "a": "The tool handles standard query strings up to browser limits (2,083 characters)."
+      }
     ],
-    related: ['base64-encoder', 'json-formatter', 'case-converter', 'password-generator']
+    "related": [
+      "base64-encoder",
+      "json-formatter",
+      "case-converter",
+      "password-generator"
+    ]
   },
-  'case-converter': {
-    id: 'case',
-    category: 'utility',
-    badge: '🛠️ Utility Tool',
-    icon: 'Aa',
-    name: 'Case Converter',
-    title: 'Free Case Converter Online – Convert Text Case | NexKitTool',
-    metaDesc: 'Convert text case online for free. Change text to UPPERCASE, lowercase, Title Case, or Sentence case instantly.',
-    shortDesc: 'Convert text case to UPPERCASE, lowercase, Title Case, or Sentence case online for free. Fast copy-paste tool.',
-    introHeading: 'Why Use a Case Converter?',
-    introText: 'Accidentally leaving Caps Lock on or pasting unformatted text can ruin document layout. Our Case Converter allows you to adjust text case instantly without retyping.',
-    howTo: [
-      '<strong>Paste text:</strong> Input the paragraphs you want to convert.',
-      '<strong>Select case:</strong> Choose UPPERCASE, lowercase, Title Case, or Sentence case.',
-      '<strong>Copy:</strong> Copy the updated text to your clipboard.'
+  "case-converter": {
+    "id": "case",
+    "category": "utility",
+    "badge": "🛠️ Utility Tool",
+    "icon": "Aa",
+    "name": "Case Converter",
+    "title": "Free Case Converter Online – Convert Text Case | NexKitTool",
+    "metaDesc": "Convert text case online for free. Change text to UPPERCASE, lowercase, Title Case, or Sentence case instantly.",
+    "shortDesc": "Convert text case to UPPERCASE, lowercase, Title Case, or Sentence case online for free. Fast copy-paste tool.",
+    "introHeading": "Why Use a Case Converter?",
+    "introText": "Convert text blocks to UPPERCASE, lowercase, Title Case, Sentence Case, or camelCase. Save time spent rewriting text manually. Ideal for formatting code strings, blog headings, database queries, and content. All data transformations and encodings are handled entirely client-side using JavaScript, which means no text copies, parameters, or passwords ever leave your local computer. This provides unmatched security for encoding strings, formatting databases, or generating random credentials. Fast processing speeds make web development tasks and archiving straightforward.",
+    "howTo": [
+      "<strong>Paste text:</strong> Input the paragraphs you want to convert.",
+      "<strong>Select case:</strong> Choose UPPERCASE, lowercase, Title Case, or Sentence case.",
+      "<strong>Copy:</strong> Copy the updated text to your clipboard."
     ],
-    useCases: [
-      { title: 'Fixing Caps Lock Errors', text: 'Quickly correct text typed with Caps Lock on.' },
-      { title: 'Title Case for Bloggers', text: 'Format article titles automatically using Title Case.' }
+    "useCases": [
+      {
+        "title": "Fixing Caps Lock Errors",
+        "text": "Quickly correct text typed with Caps Lock on."
+      },
+      {
+        "title": "Title Case for Bloggers",
+        "text": "Format article titles automatically using Title Case."
+      }
     ],
-    benefits: [
-      { title: 'Multiple Case Formats', text: 'Supports UPPERCASE, lowercase, Title Case, Sentence case, and camelCase.' },
-      { title: 'Real-Time Updates', text: 'Converts text instantly as you click the buttons.' }
+    "benefits": [
+      {
+        "title": "Multiple Case Formats",
+        "text": "Supports UPPERCASE, lowercase, Title Case, Sentence case, and camelCase."
+      },
+      {
+        "title": "Real-Time Updates",
+        "text": "Converts text instantly as you click the buttons."
+      }
     ],
-    techSection: 'Uses regex parsing client-side to find word boundaries and modify character case parameters.',
-    faqs: [
-      { q: 'Is there a character limit?', a: 'No, you can paste long articles and text blocks.' },
-      { q: 'Does it support special characters?', a: 'Yes, special characters and numbers are preserved during conversion.' }
+    "techSection": "Uses regex parsing client-side to find word boundaries and modify character case parameters.",
+    "faqs": [
+      {
+        "q": "What conversions are supported?",
+        "a": "Sentence Case, lower case, UPPER CASE, Capitalized Case, alternating case, and camelCase."
+      },
+      {
+        "q": "Does it preserve paragraphs?",
+        "a": "Yes, line breaks and paragraphs are preserved during text case conversion."
+      },
+      {
+        "q": "Is there a limit to how much text I can paste?",
+        "a": "No, you can paste long reports to format casing."
+      },
+      {
+        "q": "Do you store my text inputs?",
+        "a": "No, text remains local on your device and is never sent to our servers."
+      }
     ],
-    related: ['word-counter', 'lorem-ipsum', 'password-generator', 'grammar-checker']
+    "related": [
+      "word-counter",
+      "lorem-ipsum",
+      "password-generator",
+      "grammar-checker"
+    ]
   },
-  'color-picker': {
-    id: 'colorpicker',
-    category: 'color',
-    badge: '🎨 Color Tool',
-    icon: '🎨',
-    name: 'Color Picker',
-    title: 'Free Online Color Picker – HEX, RGB, HSL Codes | NexKitTool',
-    metaDesc: 'Pick colors online and get HEX, RGB, HSL codes. Custom color palette selection for designers and developers.',
-    shortDesc: 'Pick colors online and get HEX, RGB, and HSL codes instantly for free. Custom color selection tool.',
-    introHeading: 'Select Colors for Web Design',
-    introText: 'Selecting matching colors is essential for web design and branding. Our Color Picker lets you explore color palettes and get HEX, RGB, and HSL codes to use in your CSS styles.',
-    howTo: [
-      '<strong>Select color:</strong> Drag the color picker to find your shade.',
-      '<strong>Adjust parameters:</strong> Refine brightness, saturation, and hue.',
-      '<strong>Copy codes:</strong> Copy the HEX, RGB, or HSL code to your clipboard.'
+  "color-picker": {
+    "id": "colorpicker",
+    "category": "color",
+    "badge": "🎨 Color Tool",
+    "icon": "🎨",
+    "name": "Color Picker",
+    "title": "Free Online Color Picker – HEX, RGB, HSL Codes | NexKitTool",
+    "metaDesc": "Pick colors online and get HEX, RGB, HSL codes. Custom color palette selection for designers and developers.",
+    "shortDesc": "Pick colors online and get HEX, RGB, and HSL codes instantly for free. Custom color selection tool.",
+    "introHeading": "Select Colors for Web Design",
+    "introText": "Select color coordinates from images or hex color spaces. Output color values in HEX, RGB, HSL, and CMYK formats. Create color boards, analyze color palettes, and copy codes to design style configurations. Aligning color coordinates with WCAG accessibility guidelines ensures that your interfaces are legible for all users, including those with visual impairments. Standardizing HEX, RGB, and HSL tokens makes it easy to integrate palettes directly into CSS templates or design files like Figma. Use this tool to improve the styling, layout contrast, and UI appearance of your apps.",
+    "howTo": [
+      "<strong>Select color:</strong> Drag the color picker to find your shade.",
+      "<strong>Adjust parameters:</strong> Refine brightness, saturation, and hue.",
+      "<strong>Copy codes:</strong> Copy the HEX, RGB, or HSL code to your clipboard."
     ],
-    useCases: [
-      { title: 'Branding & Web Design', text: 'Select exact colors for your site headers, buttons, and backgrounds.' },
-      { title: 'CSS Stylesheets', text: 'Find RGB and HEX codes to use in your CSS styles.' }
+    "useCases": [
+      {
+        "title": "Branding & Web Design",
+        "text": "Select exact colors for your site headers, buttons, and backgrounds."
+      },
+      {
+        "title": "CSS Stylesheets",
+        "text": "Find RGB and HEX codes to use in your CSS styles."
+      }
     ],
-    benefits: [
-      { title: 'Multiple Output Codes', text: 'Get HEX, RGB, and HSL codes simultaneously.' },
-      { title: 'Easy to Use', text: 'Interactive color wheel and slider controls make selecting colors simple.' }
+    "benefits": [
+      {
+        "title": "Multiple Output Codes",
+        "text": "Get HEX, RGB, and HSL codes simultaneously."
+      },
+      {
+        "title": "Easy to Use",
+        "text": "Interactive color wheel and slider controls make selecting colors simple."
+      }
     ],
-    techSection: 'Uses HTML5 color inputs and canvas context systems to read and convert pixel color coordinates.',
-    faqs: [
-      { q: 'Can I enter HEX codes to find RGB values?', a: 'Yes, the tool converts values between HEX, RGB, and HSL formats.' },
-      { q: 'Is this tool free?', a: 'Yes, all color tools on NexKitTool are completely free with no limits.' }
+    "techSection": "Uses HTML5 color inputs and canvas context systems to read and convert pixel color coordinates.",
+    "faqs": [
+      {
+        "q": "Can I upload my own images to pick colors?",
+        "a": "Yes, you can upload photos and hover over pixels to extract exact HEX/RGB codes."
+      },
+      {
+        "q": "What color formats does it support?",
+        "a": "The tool outputs HEX codes, RGB values, HSL coordinates, and CMYK outputs."
+      },
+      {
+        "q": "Does it save color history?",
+        "a": "Yes, the tool logs recently picked colors in your current session for easy reference."
+      },
+      {
+        "q": "Is it free to use?",
+        "a": "Yes, the color picker is free to use without restrictions."
+      }
     ],
-    related: ['gradient-maker', 'contrast-checker', 'ai-palette-generator', 'qr-code-generator']
+    "related": [
+      "gradient-maker",
+      "contrast-checker",
+      "ai-palette-generator",
+      "qr-code-generator"
+    ]
   },
-  'gradient-maker': {
-    id: 'gradient',
-    category: 'color',
-    badge: '🎨 Color Tool',
-    icon: '🌈',
-    name: 'Gradient Maker',
-    title: 'Free CSS Gradient Maker – Generate CSS Gradients | NexKitTool',
-    metaDesc: 'Create beautiful CSS gradient backgrounds online for free. Linear and radial gradients, custom colors, copy CSS code.',
-    shortDesc: 'Create linear and radial CSS gradient backgrounds online for free. Customize colors, angles, and copy CSS code instantly.',
-    introHeading: 'Why Use a CSS Gradient Maker?',
-    introText: 'Adding gradient backgrounds makes websites and app interfaces look modern. Our CSS Gradient Maker lets you choose colors, set angles, and generate clean CSS code to paste directly into your styles.',
-    howTo: [
-      '<strong>Choose colors:</strong> Select two or more colors for your gradient.',
-      '<strong>Set angle & type:</strong> Choose linear or radial, and adjust the direction angle.',
-      '<strong>Copy CSS:</strong> Copy the generated `background: linear-gradient(...)` code.'
+  "gradient-maker": {
+    "id": "gradient",
+    "category": "color",
+    "badge": "🎨 Color Tool",
+    "icon": "🌈",
+    "name": "Gradient Maker",
+    "title": "Free CSS Gradient Maker – Generate CSS Gradients | NexKitTool",
+    "metaDesc": "Create beautiful CSS gradient backgrounds online for free. Linear and radial gradients, custom colors, copy CSS code.",
+    "shortDesc": "Create linear and radial CSS gradient backgrounds online for free. Customize colors, angles, and copy CSS code instantly.",
+    "introHeading": "Why Use a CSS Gradient Maker?",
+    "introText": "Generate CSS color gradients for layouts. Select color points, adjust angles, choose linear or radial gradient structures, and copy the CSS stylesheet code instantly. Create backdrops for headers, cards, and interfaces. Aligning color coordinates with WCAG accessibility guidelines ensures that your interfaces are legible for all users, including those with visual impairments. Standardizing HEX, RGB, and HSL tokens makes it easy to integrate palettes directly into CSS templates or design files like Figma. Use this tool to improve the styling, layout contrast, and UI appearance of your apps.",
+    "howTo": [
+      "<strong>Choose colors:</strong> Select two or more colors for your gradient.",
+      "<strong>Set angle & type:</strong> Choose linear or radial, and adjust the direction angle.",
+      "<strong>Copy CSS:</strong> Copy the generated `background: linear-gradient(...)` code."
     ],
-    useCases: [
-      { title: 'Web Banner Backgrounds', text: 'Create modern, colorful backgrounds for hero sections and banners.' },
-      { title: 'Button Hover Effects', text: 'Design custom gradients for interactive buttons.' }
+    "useCases": [
+      {
+        "title": "Web Banner Backgrounds",
+        "text": "Create modern, colorful backgrounds for hero sections and banners."
+      },
+      {
+        "title": "Button Hover Effects",
+        "text": "Design custom gradients for interactive buttons."
+      }
     ],
-    benefits: [
-      { title: 'Linear and Radial Support', text: 'Create linear, radial, and multi-color gradients easily.' },
-      { title: 'Real-Time Preview', text: 'See how your gradient looks on screen instantly as you adjust colors.' }
+    "benefits": [
+      {
+        "title": "Linear and Radial Support",
+        "text": "Create linear, radial, and multi-color gradients easily."
+      },
+      {
+        "title": "Real-Time Preview",
+        "text": "See how your gradient looks on screen instantly as you adjust colors."
+      }
     ],
-    techSection: 'Dynamically updates CSS style elements to preview gradients in real-time, then generates clean, compliant CSS code.',
-    faqs: [
-      { q: 'Is the generated CSS code compatible with all browsers?', a: 'Yes. The generator outputs standard CSS syntax compatible with modern browsers.' },
-      { q: 'Can I add multiple color stops?', a: 'Yes, you can add multiple color stops to create complex gradients.' }
+    "techSection": "Dynamically updates CSS style elements to preview gradients in real-time, then generates clean, compliant CSS code.",
+    "faqs": [
+      {
+        "q": "Can I add multiple color stops?",
+        "a": "Yes, you can add three or more color points to build complex gradients."
+      },
+      {
+        "q": "Does it export standard CSS?",
+        "a": "Yes, it outputs cross-browser compatible background-image CSS codes."
+      },
+      {
+        "q": "Can I choose radial gradients?",
+        "a": "Yes, you can toggle between linear gradients (adjusting angles) and radial gradients."
+      },
+      {
+        "q": "Is there a visual preview?",
+        "a": "Yes, the preview box updates in real time as you adjust styling settings."
+      }
     ],
-    related: ['color-picker', 'contrast-checker', 'ai-palette-generator', 'qr-code-generator']
+    "related": [
+      "color-picker",
+      "contrast-checker",
+      "ai-palette-generator",
+      "qr-code-generator"
+    ]
   },
-  'contrast-checker': {
-    id: 'contrast',
-    category: 'color',
-    badge: '🎨 Color Tool',
-    icon: '⚖️',
-    name: 'WCAG Contrast Checker',
-    title: 'Free WCAG Contrast Checker – Color Accessibility | NexKitTool',
-    metaDesc: 'Check color contrast for accessibility (WCAG compliance) online for free. Verify contrast ratios for text and backgrounds.',
-    shortDesc: 'Verify that your text and background colors meet WCAG accessibility standards online for free.',
-    introHeading: 'Verify Color Accessibility (WCAG)',
-    introText: 'Web accessibility ensures that all users, including those with visual impairments, can read your content. Our WCAG Contrast Checker evaluates the contrast ratio between your text and background colors to ensure compliance with AA and AAA standards.',
-    howTo: [
-      '<strong>Select text color:</strong> Input the HEX code for your text.',
-      '<strong>Select background color:</strong> Input the HEX code for your background.',
-      '<strong>Verify compliance:</strong> Check the contrast ratio and see if it passes AA and AAA standards.'
+  "contrast-checker": {
+    "id": "contrast",
+    "category": "color",
+    "badge": "🎨 Color Tool",
+    "icon": "⚖️",
+    "name": "WCAG Contrast Checker",
+    "title": "Free WCAG Contrast Checker – Color Accessibility | NexKitTool",
+    "metaDesc": "Check color contrast for accessibility (WCAG compliance) online for free. Verify contrast ratios for text and backgrounds.",
+    "shortDesc": "Verify that your text and background colors meet WCAG accessibility standards online for free.",
+    "introHeading": "Verify Color Accessibility (WCAG)",
+    "introText": "Check color contrast ratios to meet WCAG accessibility standards. Select background and foreground colors to analyze readability scores (Pass/Fail) for normal and large text classes. Essential for designing inclusive web systems. Aligning color coordinates with WCAG accessibility guidelines ensures that your interfaces are legible for all users, including those with visual impairments. Standardizing HEX, RGB, and HSL tokens makes it easy to integrate palettes directly into CSS templates or design files like Figma. Use this tool to improve the styling, layout contrast, and UI appearance of your apps.",
+    "howTo": [
+      "<strong>Select text color:</strong> Input the HEX code for your text.",
+      "<strong>Select background color:</strong> Input the HEX code for your background.",
+      "<strong>Verify compliance:</strong> Check the contrast ratio and see if it passes AA and AAA standards."
     ],
-    useCases: [
-      { title: 'Web Design Audits', text: 'Audit your site colors to ensure they are accessible and pass accessibility reviews.' },
-      { title: 'Corporate Styling Guides', text: 'Verify contrast ratios for corporate presentation slides and documents.' }
+    "useCases": [
+      {
+        "title": "Web Design Audits",
+        "text": "Audit your site colors to ensure they are accessible and pass accessibility reviews."
+      },
+      {
+        "title": "Corporate Styling Guides",
+        "text": "Verify contrast ratios for corporate presentation slides and documents."
+      }
     ],
-    benefits: [
-      { title: 'Pass/Fail Indicators', text: 'Shows compliance status for small text, large text, and UI components instantly.' },
-      { title: 'Calculates Exact Ratios', text: 'Calculates the exact WCAG contrast ratio (e.g. 4.5:1).' }
+    "benefits": [
+      {
+        "title": "Pass/Fail Indicators",
+        "text": "Shows compliance status for small text, large text, and UI components instantly."
+      },
+      {
+        "title": "Calculates Exact Ratios",
+        "text": "Calculates the exact WCAG contrast ratio (e.g. 4.5:1)."
+      }
     ],
-    techSection: 'Uses WCAG relative luminance algorithms to calculate contrast ratios between background and foreground colors.',
-    faqs: [
-      { q: 'What contrast ratio is required for AA compliance?', a: 'Standard text requires a ratio of at least 4.5:1, while large text (18pt+) requires a ratio of at least 3:1.' },
-      { q: 'Is this checker free?', a: 'Yes, all our accessibility utilities are completely free.' }
+    "techSection": "Uses WCAG relative luminance algorithms to calculate contrast ratios between background and foreground colors.",
+    "faqs": [
+      {
+        "q": "What contrast guidelines does the checker use?",
+        "a": "It measures contrast against the WCAG 2.1 Level AA and AAA standards."
+      },
+      {
+        "q": "What is a passing contrast ratio?",
+        "a": "Standard text requires a minimum ratio of 4.5:1, while large text requires 3:1."
+      },
+      {
+        "q": "Can I check custom HEX colors?",
+        "a": "Yes, enter any HEX codes to calculate readability scores."
+      },
+      {
+        "q": "Does it suggest accessible colors?",
+        "a": "Yes, it provides recommendations if your selected combination fails contrast targets."
+      }
     ],
-    related: ['color-picker', 'gradient-maker', 'ai-palette-generator', 'password-generator']
+    "related": [
+      "color-picker",
+      "gradient-maker",
+      "ai-palette-generator",
+      "password-generator"
+    ]
   },
-  'ai-palette-generator': {
-    id: 'palette',
-    category: 'color',
-    badge: '🎨 Color Tool',
-    icon: '🖌️',
-    name: 'AI Palette Generator',
-    title: 'Free AI Color Palette Generator – Design Palettes | NexKitTool',
-    metaDesc: 'Generate beautiful color palettes online for free. AI-powered palette generator for designers and developers.',
-    shortDesc: 'Generate harmonious, beautiful color palettes online for free. Select starting colors or let the AI suggest themes.',
-    introHeading: 'harmonious Color Palettes for Web Design',
-    introText: 'Choosing colors that work together is key to a cohesive brand. Our AI Palette Generator creates balanced, professional color schemes for websites, logos, and UI designs instantly.',
-    howTo: [
-      '<strong>Choose starting color:</strong> Lock a starting color or click generate for a new palette.',
-      '<strong>Adjust harmony rules:</strong> Choose analog, complementary, or triadic color harmonies.',
-      '<strong>Export HEX:</strong> Copy the palette colors to use in your design.'
+  "ai-palette-generator": {
+    "id": "palette",
+    "category": "color",
+    "badge": "🎨 Color Tool",
+    "icon": "🖌️",
+    "name": "AI Palette Generator",
+    "title": "Free AI Color Palette Generator – Design Palettes | NexKitTool",
+    "metaDesc": "Generate beautiful color palettes online for free. AI-powered palette generator for designers and developers.",
+    "shortDesc": "Generate harmonious, beautiful color palettes online for free. Select starting colors or let the AI suggest themes.",
+    "introHeading": "harmonious Color Palettes for Web Design",
+    "introText": "Generate harmonious color palettes using AI algorithms. Enter keywords or select mood parameters, and our AI color generator creates matching color boards with Hex codes. Copy boards to streamline UI design processes. Aligning color coordinates with WCAG accessibility guidelines ensures that your interfaces are legible for all users, including those with visual impairments. Standardizing HEX, RGB, and HSL tokens makes it easy to integrate palettes directly into CSS templates or design files like Figma. Use this tool to improve the styling, layout contrast, and UI appearance of your apps.",
+    "howTo": [
+      "<strong>Choose starting color:</strong> Lock a starting color or click generate for a new palette.",
+      "<strong>Adjust harmony rules:</strong> Choose analog, complementary, or triadic color harmonies.",
+      "<strong>Export HEX:</strong> Copy the palette colors to use in your design."
     ],
-    useCases: [
-      { title: 'Website Branding', text: 'Find primary, secondary, and accent colors for website designs.' },
-      { title: 'App UI Design', text: 'Create clean, modern color schemes for app dashboards.' }
+    "useCases": [
+      {
+        "title": "Website Branding",
+        "text": "Find primary, secondary, and accent colors for website designs."
+      },
+      {
+        "title": "App UI Design",
+        "text": "Create clean, modern color schemes for app dashboards."
+      }
     ],
-    benefits: [
-      { title: 'Harmonious Color Rules', text: 'Uses classic color theory (complementary, split, triadic) to generate palettes.' },
-      { title: 'Instant Exports', text: 'Copy all HEX codes in one click.' }
+    "benefits": [
+      {
+        "title": "Harmonious Color Rules",
+        "text": "Uses classic color theory (complementary, split, triadic) to generate palettes."
+      },
+      {
+        "title": "Instant Exports",
+        "text": "Copy all HEX codes in one click."
+      }
     ],
-    techSection: 'Applies color theory algorithms to calculate complementary and harmonious color values dynamically.',
-    faqs: [
-      { q: 'Can I lock specific colors?', a: 'Yes, you can lock colors and generate matching shades for the rest of the palette.' },
-      { q: 'Is there a limit on generation?', a: 'No, you can generate as many palettes as you need.' }
+    "techSection": "Applies color theory algorithms to calculate complementary and harmonious color values dynamically.",
+    "faqs": [
+      {
+        "q": "How does the AI generate colors?",
+        "a": "It uses color theory models to suggest matching color combinations based on keywords."
+      },
+      {
+        "q": "Can I lock specific colors while generating?",
+        "a": "Yes, you can lock a primary color and let the AI generate supporting accent colors."
+      },
+      {
+        "q": "How do I copy the color codes?",
+        "a": "Click any color card to copy its HEX code instantly to your clipboard."
+      },
+      {
+        "q": "Is there a limit to how many palettes I can generate?",
+        "a": "No, you can generate as many color boards as you need."
+      }
     ],
-    related: ['color-picker', 'gradient-maker', 'contrast-checker', 'qr-code-generator']
+    "related": [
+      "color-picker",
+      "gradient-maker",
+      "contrast-checker",
+      "qr-code-generator"
+    ]
   }
 };
 

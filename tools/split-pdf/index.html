@@ -78,7 +78,7 @@
 
 <!-- schemas -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://nexkittool.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://nexkittool.com/tools/"},{"@type":"ListItem","position":3,"name":"Split PDF Online","item":"https://nexkittool.com/tools/split-pdf/"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I split password-protected PDFs?","acceptedAnswer":{"@type":"Answer","text":"You must decrypt the PDF using our watermark/unlock tools before splitting."}},{"@type":"Question","name":"Does splitting compress the pages?","acceptedAnswer":{"@type":"Answer","text":"No, page contents are copied exactly to preserve image and vector quality."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does splitting a PDF reduce its layout quality?","acceptedAnswer":{"@type":"Answer","text":"No. Splitting simply copies the original pages and puts them into a new file, maintaining text and image clarity."}},{"@type":"Question","name":"Can I split a PDF into individual files?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can choose the split-by-page option to extract every page as a separate PDF document."}},{"@type":"Question","name":"Will internal links inside the PDF still work after splitting?","acceptedAnswer":{"@type":"Answer","text":"Yes. Internal links that point to pages within the extracted range will continue to function correctly."}},{"@type":"Question","name":"Do you store a copy of my split documents?","acceptedAnswer":{"@type":"Answer","text":"No. All document processing happens locally in your browser memory and is deleted instantly when the tab is closed."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Split PDF Online","applicationCategory":"PDFApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://nexkittool.com/tools/split-pdf/"}</script>
 </head>
 <body>
@@ -152,7 +152,7 @@
 
 <div class="tool-content">
   <h2>Why Split a PDF?</h2>
-  <p>PDF documents often contain unnecessary pages. Splitting a PDF allows you to extract only the pages you need (like a single chapter of a book or an invoice page from a larger packet), reducing file size and keeping data relevant.</p>
+  <p>Splitting a PDF allows you to extract specific page ranges or save individual pages as separate documents. This is useful when you want to chapter textbooks, separate monthly statements, or isolate legal contract blocks. Our client-side page extraction is secure and preserves text structures, interactive forms, bookmarks, and layout styles. Our secure compiler processes PDF stream layers, ensuring that fonts, margins, page boundaries, and internal object coordinates remain optimized. By executing operations directly in modern server memory or client sandboxes, we guarantee zero file persistence, protecting your financial reports, legal contracts, and personal paperwork. You can process unlimited files without paying for expensive acrobat licenses.</p>
 
   <h2>How to Use the Free Split PDF Online</h2>
   <ol>
@@ -183,12 +183,20 @@
   <h2>Frequently Asked Questions</h2>
   <div class="faq-list">
     <details class="faq-item">
-      <summary>Can I split password-protected PDFs?</summary>
-      <div><p>You must decrypt the PDF using our watermark/unlock tools before splitting.</p></div>
+      <summary>Does splitting a PDF reduce its layout quality?</summary>
+      <div><p>No. Splitting simply copies the original pages and puts them into a new file, maintaining text and image clarity.</p></div>
     </details>
   <details class="faq-item">
-      <summary>Does splitting compress the pages?</summary>
-      <div><p>No, page contents are copied exactly to preserve image and vector quality.</p></div>
+      <summary>Can I split a PDF into individual files?</summary>
+      <div><p>Yes, you can choose the split-by-page option to extract every page as a separate PDF document.</p></div>
+    </details>
+  <details class="faq-item">
+      <summary>Will internal links inside the PDF still work after splitting?</summary>
+      <div><p>Yes. Internal links that point to pages within the extracted range will continue to function correctly.</p></div>
+    </details>
+  <details class="faq-item">
+      <summary>Do you store a copy of my split documents?</summary>
+      <div><p>No. All document processing happens locally in your browser memory and is deleted instantly when the tab is closed.</p></div>
     </details>
   </div>
 

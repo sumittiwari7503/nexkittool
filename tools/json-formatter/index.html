@@ -78,7 +78,7 @@
 
 <!-- schemas -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://nexkittool.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://nexkittool.com/tools/"},{"@type":"ListItem","position":3,"name":"JSON Formatter","item":"https://nexkittool.com/tools/json-formatter/"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my API data sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Validation and formatting are executed locally on your device, keeping API keys and data secure."}},{"@type":"Question","name":"Does it support broken JSON?","acceptedAnswer":{"@type":"Answer","text":"It displays detailed error messages to help you fix syntax errors."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the formatter check for JSON syntax errors?","acceptedAnswer":{"@type":"Answer","text":"Yes, it flags missing commas, brackets, or incorrect formatting keys."}},{"@type":"Question","name":"Can I minify JSON data?","acceptedAnswer":{"@type":"Answer","text":"Yes, you can toggle formatting layout to minify JSON to a single compact line."}},{"@type":"Question","name":"Is my data secure?","acceptedAnswer":{"@type":"Answer","text":"Yes, formatting is processed entirely client-side in your browser; no JSON data leaves your computer."}},{"@type":"Question","name":"Can I copy formatted JSON in one click?","acceptedAnswer":{"@type":"Answer","text":"Yes, there is a convenient copy button to copy beautified JSON."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JSON Formatter","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://nexkittool.com/tools/json-formatter/"}</script>
 </head>
 <body>
@@ -152,7 +152,7 @@
 
 <div class="tool-content">
   <h2>Why Use a JSON Formatter?</h2>
-  <p>JSON (JavaScript Object Notation) is the standard format for API data transmission. Raw JSON is often minified into a single line, making it hard to read. Our JSON Formatter beautifies code with clean spacing and validates syntax to help you find errors.</p>
+  <p>Format and beautify raw JSON data to improve readability. Clean spacing, format nested fields, check syntax for errors, and minimize JSON sizes for web configurations. Essential tool for developers and api administrators. All data transformations and encodings are handled entirely client-side using JavaScript, which means no text copies, parameters, or passwords ever leave your local computer. This provides unmatched security for encoding strings, formatting databases, or generating random credentials. Fast processing speeds make web development tasks and archiving straightforward.</p>
 
   <h2>How to Use the Free JSON Formatter</h2>
   <ol>
@@ -183,12 +183,20 @@
   <h2>Frequently Asked Questions</h2>
   <div class="faq-list">
     <details class="faq-item">
-      <summary>Is my API data sent to a server?</summary>
-      <div><p>No. Validation and formatting are executed locally on your device, keeping API keys and data secure.</p></div>
+      <summary>Does the formatter check for JSON syntax errors?</summary>
+      <div><p>Yes, it flags missing commas, brackets, or incorrect formatting keys.</p></div>
     </details>
   <details class="faq-item">
-      <summary>Does it support broken JSON?</summary>
-      <div><p>It displays detailed error messages to help you fix syntax errors.</p></div>
+      <summary>Can I minify JSON data?</summary>
+      <div><p>Yes, you can toggle formatting layout to minify JSON to a single compact line.</p></div>
+    </details>
+  <details class="faq-item">
+      <summary>Is my data secure?</summary>
+      <div><p>Yes, formatting is processed entirely client-side in your browser; no JSON data leaves your computer.</p></div>
+    </details>
+  <details class="faq-item">
+      <summary>Can I copy formatted JSON in one click?</summary>
+      <div><p>Yes, there is a convenient copy button to copy beautified JSON.</p></div>
     </details>
   </div>
 

@@ -2910,9 +2910,16 @@ Object.keys(BLOG_CONFIG).forEach(slug => {
 // Generate categories HTML files
 const categories = ['pdf', 'image', 'ai', 'utility'];
 const categoryNames = { pdf: 'PDF Tools', image: 'Image Tools', ai: 'AI Writing', utility: 'Utility Tools' };
+const categoryDescriptions = {
+  pdf: `Welcome to the NexKitTool PDF guides repository. In this archive, you will find comprehensive, step-by-step tutorials designed to help you merge, split, compress, convert, and watermark PDF files without installing heavy software. We explore common conversion issues, document alignment formatting, layout preservation, and security practices to ensure your digital files remain private and professional. Whether you are dealing with a 50MB file that refuses to send via email, or converting complex spreadsheets to PDFs, our tutorials explain exactly how to achieve it. We also detail the encryption protocols and secure server behaviors used when handling your files, offering you complete peace of mind.`,
+  image: `Explore our collection of expert tutorials on image processing, formatting, and optimization. Here, we cover how to compress image files without losing visual clarity, how to convert between modern formats like WebP, PNG, and JPG, how to make backgrounds transparent utilizing AI tools, and how to crop or flip images. Each guide is written to help you optimize visual assets for faster web load times, higher page quality, and professional presentations without paying for expensive Adobe licensing. You will learn the difference between lossy and lossless compression, and how to preserve color spaces.`,
+  ai: `Welcome to our AI Writing and Content Strategy knowledge base. AI engines like Google Gemini can accelerate your copywriting workflow, but they often produce generic, robotic text. Our guides cover how to humanize AI outputs, check for plagiarism, check grammar and spelling, translate passages across 50+ languages, and summarize long research reports. We share practical editing workflows to ensure your text retains a warm, authentic human tone that engages readers. You will discover practical methods to structure prompts, refine styles, and edit draft parameters to match your specific target audience's reading habits. Additionally, we analyze how search engine algorithms scan for computer-generated text patterns, explaining what indicators flag a document as lower quality, and how you can override these filters by injecting personal anecdotes, statistics, and formatting variations. By learning these advanced optimization methods, copywriters and marketers can safely integrate automated workflows into their publication schedules without sacrificing page value or risking search engine penalties. Furthermore, we explore standard compliance policies and formatting guidelines to ensure your final texts remain compliant with search engine quality guidelines, avoiding common traps like duplicate content tags or boilerplate text blocks.`,
+  utility: `Read detailed developer guides and utility tutorials on NexKitTool. This section covers QR code generation, password entropy and security calculations, word counter analytics, color pickers, gradient builders, and Base64 encoding. Our resources explain how to generate high-entropy security credentials, construct functional QR tags for Wi-Fi or contacts, format complex JSON payloads, and utilize web utility tools to optimize your day-to-day productivity. We focus on teaching the underlying concepts, such as cryptographic security, character encoding standards, and error-correction levels for barcodes. Understanding how these tools process data on the local client side using native JavaScript allows you to build clean, fast workflows without exposing key parameters or security keys to remote servers, maintaining optimal privacy for your personal credentials. We detail standard configurations, common syntax validation pitfalls, and custom settings that developers can use to parse, clean, or format code outputs. Additionally, we provide comprehensive comparisons between online and offline string manipulations, explaining the speed and security trade-offs of using browser-based JavaScript tools compared to terminal utilities or command line scripts, helping you select the most efficient processing methods for your data structures. Our guides are regularly updated to match new standard guidelines.`
+};
 
 categories.forEach(cat => {
   const catName = categoryNames[cat];
+  const catDesc = categoryDescriptions[cat];
   const catTemplate = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -2977,7 +2984,7 @@ categories.forEach(cat => {
       <a href="/">Home</a> <span>›</span> <a href="/blog/index.html">Blog</a> <span>›</span> <span>Category: ${catName}</span>
     </nav>
     <h1>${catName} Guides</h1>
-    <p>Read detailed, step-by-step documentation regarding ${catName} on our free utility suite.</p>
+    <p>${catDesc}</p>
   </div>
 </div>
 
@@ -2993,6 +3000,14 @@ categories.forEach(cat => {
         </a>
       `).join('')}
     </div>
+  </div>
+</section>
+
+<section style="padding: 0 0 80px; background: #fff;">
+  <div class="container" style="max-width: 800px; margin: 0 auto; line-height: 1.8; color: #4b5563;">
+    <h2 style="color: #1a1a2e; font-weight: 800; font-size: 1.5rem; margin-bottom: 16px;">About Our ${catName} Guides</h2>
+    <p>NexKitTool offers a suite of high-performance web applications designed to make document processing, graphic formatting, and coding productivity accessible to everyone. Our platform operates entirely in the browser, using optimized client-side technologies to process inputs locally and privately. By keeping core tools free forever and utilizing optional Pro memberships rather than intrusive ads, we maintain a secure, clutter-free user experience. Our tools are fully mobile-responsive and load in milliseconds, ensuring you can split files, compress images, translate content, or generate passwords instantly on any device.</p>
+    <p>All scripts and AI features are built on secure foundations with TLS encryption protocols, maintaining a strict policy that deletes uploaded files immediately upon completion. Browse our collection of guides above to master productivity workflows and maximize your efficiency.</p>
   </div>
 </section>
 

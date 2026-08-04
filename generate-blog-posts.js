@@ -1,4 +1,4 @@
-// Auto-generated and expanded blogs database for Google AdSense compliance
+// Auto-generated and expanded blogs database for compliance
 const fs = require('fs');
 const path = require('path');
 const BLOG_CONFIG = {
@@ -1825,7 +1825,7 @@ categories.forEach(cat => {
   const catTemplate = `<!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google AdSense Auto Ads Tag -->
+  <!-- Auto Ads Tag -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4453210706928025" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">

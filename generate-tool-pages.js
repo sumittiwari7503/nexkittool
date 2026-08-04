@@ -1,4 +1,4 @@
-// Auto-generated and expanded tools database for Google AdSense compliance
+// Auto-generated and expanded tools database for compliance
 const fs = require('fs');
 const path = require('path');
 const TOOLS_CONFIG = {

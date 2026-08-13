@@ -9,11 +9,6 @@
   function initThirdParty() {
     if (window._thirdPartyLoaded) return;
     window._thirdPartyLoaded = true;
-    const ads = document.createElement('script');
-    ads.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4453210706928025";
-    ads.async = true;
-    ads.crossOrigin = "anonymous";
-    document.head.appendChild(ads);
   }
   if ('requestIdleCallback' in window) {
     requestIdleCallback(() => setTimeout(initThirdParty, 2500));
@@ -117,7 +112,7 @@
     <p>Adding watermarks on NexKitTool is fast, secure, and requires no registration. Follow these steps to safeguard your document:<br><br>1. <strong>Upload Document:</strong> Drag and drop your PDF file into the secure watermark dashboard.<br>2. <strong>Choose Watermark Type:</strong> Select "Text Watermark" to overlay custom text, or "Image Watermark" to upload your logo file.<br>3. <strong>Configure Settings:</strong> Adjust text size, font color, opacity (transparency level), angle (rotation), and layout margins. Our viewer updates in real time.<br>4. <strong>Apply and Save:</strong> Click the "Apply Watermark" button. Our script compiles the layers and downloads your protected PDF instantly to your local storage.</p>
 
   <h2>Text vs. Image Watermarks: Choosing the Right Option</h2>
-    <p>• <strong>Text Watermarks:</strong> Ideal for adding text identifiers like "COPYRIGHT © 2026", "DRAFT", or user emails. They are lightweight, render perfectly on all devices, and can be customized with various fonts and colors.<br>• <strong>Image Watermarks:</strong> Best for overlaying corporate branding elements, seals, or logos. Ensure you upload high-resolution images with transparent backgrounds (PNG format) for the cleanest results. Transparent PNGs blend seamlessly with document content without creating white rectangular borders.</p>
+    <p>• <strong>Text Watermarks:</strong> Ideal for adding text identifiers like "COPYRIGHT © 2026", "DRAFT", or user emails. They are lightweight, render perfectly on all devices, and can be customized with various fonts and colors.<br>• <strong>Image Watermarks:</strong> Best for overlaying corporate branding elements, seals, or logos. Ensure you upload high-resolution images with transparent backgrounds (PNG format) for the cleanest results. Transparent PNGs blend naturally with document content without creating white rectangular borders.</p>
 
   <h2>Common Layout Problems and How to Solve Them</h2>
     <p>• <strong>Covering Page Content:</strong> Placing watermarks at 100% opacity will cover your document text, making it unreadable. Set opacity between 15% and 30% so your watermark is visible but doesn't block content.<br>• <strong>Watermarking Multiple Pages:</strong> Standard utilities sometimes only watermark the first page. NexKitTool applies your configuration to all pages in the PDF document.<br>• <strong>Size Variations:</strong> If your PDF has mixed page sizes (e.g., A4 and Letter pages mixed), ensure you use our auto-scaling option to adjust watermark dimensions proportionally.</p>

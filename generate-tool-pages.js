@@ -2381,11 +2381,6 @@ const MASTER_TEMPLATE = `<!DOCTYPE html>
   function initThirdParty() {
     if (window._thirdPartyLoaded) return;
     window._thirdPartyLoaded = true;
-    const ads = document.createElement('script');
-    ads.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4453210706928025";
-    ads.async = true;
-    ads.crossOrigin = "anonymous";
-    document.head.appendChild(ads);
   }
   if ('requestIdleCallback' in window) {
     requestIdleCallback(() => setTimeout(initThirdParty, 2500));

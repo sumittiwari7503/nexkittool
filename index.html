@@ -44,11 +44,6 @@ a{text-decoration:none;color:inherit}
   function initThirdParty() {
     if (window._thirdPartyLoaded) return;
     window._thirdPartyLoaded = true;
-    const ads = document.createElement('script');
-    ads.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4453210706928025";
-    ads.async = true;
-    ads.crossOrigin = "anonymous";
-    document.head.appendChild(ads);
     const gtm = document.createElement('script');
     gtm.src = "https://www.googletagmanager.com/gtag/js?id=G-GJQXRF7S7T";
     gtm.async = true;

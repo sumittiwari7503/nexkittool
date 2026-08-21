@@ -1,128 +1,147 @@
-const path = require('path');
-const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
+const path = require('path');
 
-const DB_PATH = path.join(__dirname, 'nexkittool.db');
+const DB_PATH = path.join(__dirname, 'nexkittool_db.json');
 
-// Initialize database connection
-const db = new sqlite3.Database(DB_PATH, (err) => {
-  if (err) {
-    console.error('Database connection failed:', err.message);
-  } else {
-    console.log('Connected to SQLite database.');
+// Helper to read database directly from disk
+function readDatabase() {
+  try {
+    if (fs.existsSync(DB_PATH)) {
+      const content = fs.readFileSync(DB_PATH, 'utf-8');
+      const data = JSON.parse(content);
+      if (!data.users) data.users = [];
+      if (!data.sessions) data.sessions = [];
+      return data;
+    }
+  } catch (err) {
+    console.error('Database read failed:', err.message);
   }
-});
+  return { users: [], sessions: [] };
+}
 
-// Auto-initialize tables
-db.serialize(() => {
-  db.run(`
-    CREATE TABLE IF NOT EXISTS users (
-      id TEXT PRIMARY KEY,
-      name TEXT,
-      email TEXT UNIQUE,
-      password TEXT,
-      plan TEXT DEFAULT 'free',
-      verified INTEGER DEFAULT 0,
-      createdAt TEXT
-    )
-  `, (err) => {
-    if (err) {
-      console.error('Table creation failed:', err.message);
-    } else {
-      console.log('Users table ready.');
-    }
-  });
+// Helper to write database directly to disk
+function writeDatabase(data) {
+  try {
+    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
+  } catch (err) {
+    console.error('Database write failed:', err.message);
+  }
+}
 
-  db.run(`
-    CREATE TABLE IF NOT EXISTS sessions (
-      token TEXT PRIMARY KEY,
-      userId TEXT,
-      createdAt TEXT
-    )
-  `, (err) => {
-    if (err) {
-      console.error('Sessions table creation failed:', err.message);
-    } else {
-      console.log('Sessions table ready.');
-    }
-  });
-});
+// Auto-initialize DB structure on file creation
+if (!fs.existsSync(DB_PATH)) {
+  writeDatabase({ users: [], sessions: [] });
+}
 
-// Helper wrapper to run queries with promises
 const dbHelper = {
-  get(query, params = []) {
-    return new Promise((resolve, reject) => {
-      db.get(query, params, (err, row) => {
-        if (err) reject(err);
-        else resolve(row);
-      });
-    });
+  // Mock standard SQL get helper
+  async get(query, params = []) {
+    const data = readDatabase();
+    if (query.includes('FROM sessions')) {
+      const token = params[0];
+      return data.sessions.find(s => s.token === token) || null;
+    }
+    return null;
   },
 
-  all(query, params = []) {
-    return new Promise((resolve, reject) => {
-      db.all(query, params, (err, rows) => {
-        if (err) reject(err);
-        else resolve(rows);
-      });
-    });
+  // Mock standard SQL run helper
+  async run(query, params = []) {
+    const data = readDatabase();
+    if (query.includes('INSERT INTO sessions')) {
+      const [token, userId, createdAt] = params;
+      data.sessions = data.sessions.filter(s => s.token !== token);
+      data.sessions.push({ token, userId, createdAt });
+      writeDatabase(data);
+    } else if (query.includes('DELETE FROM sessions')) {
+      const token = params[0];
+      data.sessions = data.sessions.filter(s => s.token !== token);
+      writeDatabase(data);
+    } else if (query.includes('UPDATE users SET verified = 1')) {
+      const id = params[0];
+      const user = data.users.find(u => u.id === id);
+      if (user) {
+        user.verified = 1;
+        writeDatabase(data);
+      }
+    }
+    return { changes: 1 };
   },
 
-  run(query, params = []) {
-    return new Promise((resolve, reject) => {
-      db.run(query, params, function(err) {
-        if (err) reject(err);
-        else resolve({ lastID: this.lastID, changes: this.changes });
-      });
-    });
-  },
-
-  // DB Methods
   async getUserByEmail(email) {
     if (!email) return null;
-    const row = await this.get('SELECT * FROM users WHERE LOWER(email) = ?', [email.toLowerCase().trim()]);
-    if (row) {
-      row.verified = row.verified === 1;
+    const data = readDatabase();
+    const user = data.users.find(u => u.email.toLowerCase() === email.toLowerCase().trim());
+    if (user) {
+      return { ...user, verified: user.verified === 1 };
     }
-    return row;
+    return null;
   },
 
   async getUserById(id) {
     if (!id) return null;
-    const row = await this.get('SELECT * FROM users WHERE id = ?', [id]);
-    if (row) {
-      row.verified = row.verified === 1;
+    const data = readDatabase();
+    const user = data.users.find(u => u.id === id);
+    if (user) {
+      return { ...user, verified: user.verified === 1 };
     }
-    return row;
+    return null;
   },
 
   async createUser(id, name, email, password, plan = 'free', verified = false) {
-    await this.run(
-      'INSERT INTO users (id, name, email, password, plan, verified, createdAt) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [id, name.trim(), email.toLowerCase().trim(), password, plan, verified ? 1 : 0, new Date().toISOString()]
-    );
+    const data = readDatabase();
+    const newUser = {
+      id,
+      name: name.trim(),
+      email: email.toLowerCase().trim(),
+      password,
+      plan,
+      verified: verified ? 1 : 0,
+      createdAt: new Date().toISOString()
+    };
+    data.users.push(newUser);
+    writeDatabase(data);
     return this.getUserById(id);
   },
 
   async updateUserPlan(userId, plan) {
-    await this.run('UPDATE users SET plan = ? WHERE id = ?', [plan, userId]);
+    const data = readDatabase();
+    const user = data.users.find(u => u.id === userId);
+    if (user) {
+      user.plan = plan;
+      writeDatabase(data);
+    }
     return this.getUserById(userId);
   },
 
   async verifyUserEmail(email) {
-    await this.run('UPDATE users SET verified = 1 WHERE LOWER(email) = ?', [email.toLowerCase().trim()]);
+    const data = readDatabase();
+    const user = data.users.find(u => u.email.toLowerCase() === email.toLowerCase().trim());
+    if (user) {
+      user.verified = 1;
+      writeDatabase(data);
+    }
   },
 
   async updateUserPassword(email, hashedPassword) {
-    await this.run('UPDATE users SET password = ? WHERE LOWER(email) = ?', [hashedPassword, email.toLowerCase().trim()]);
+    const data = readDatabase();
+    const user = data.users.find(u => u.email.toLowerCase() === email.toLowerCase().trim());
+    if (user) {
+      user.password = hashedPassword;
+      writeDatabase(data);
+    }
   },
 
   async createSession(token, userId) {
-    await this.run('INSERT INTO sessions (token, userId, createdAt) VALUES (?, ?, ?)', [token, userId, new Date().toISOString()]);
+    const data = readDatabase();
+    data.sessions = data.sessions.filter(s => s.token !== token);
+    data.sessions.push({ token, userId, createdAt: new Date().toISOString() });
+    writeDatabase(data);
   },
 
   async deleteSession(token) {
-    await this.run('DELETE FROM sessions WHERE token = ?', [token]);
+    const data = readDatabase();
+    data.sessions = data.sessions.filter(s => s.token !== token);
+    writeDatabase(data);
   }
 };
 

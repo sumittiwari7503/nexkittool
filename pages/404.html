@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - Page Not Found | NexKitTool</title>
+<meta name="description" content="The page you are looking for does not exist on NexKitTool. Go back to the homepage or search our free online tools.">
+<link rel="canonical" href="https://nexkittool.com/pages/404.html">
+<link rel="stylesheet" href="/public/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+  .error-container {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  .error-code {
+    font-size: 8rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #6c47ff, #ff6b47);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .error-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: #1a1a2e;
+  }
+  .error-text {
+    color: #4b5563;
+    font-size: 1.1rem;
+    margin-bottom: 32px;
+  }
+  .search-form {
+    max-width: 450px;
+    margin: 0 auto 32px;
+    display: flex;
+    gap: 8px;
+  }
+  .search-input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 50px;
+    outline: none;
+    font-size: 0.95rem;
+  }
+  .search-input:focus {
+    border-color: #6c47ff;
+  }
+  .search-btn {
+    padding: 12px 24px;
+    background: #6c47ff;
+    color: #fff;
+    border-radius: 50px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .search-btn:hover {
+    background: #5535e0;
+  }
+  .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn-404 {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-404-primary {
+    background: linear-gradient(135deg, #6c47ff, #ff6b47);
+    color: #fff;
+  }
+  .btn-404-secondary {
+    border: 2px solid #6c47ff;
+    color: #6c47ff;
+  }
+  .btn-404-secondary:hover {
+    background: rgba(108, 71, 255, 0.05);
+  }
+</style>
+</head>
+<body>
+<header class="header" id="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="/" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">Nexkittool</span></a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/pages/pricing.html">Pricing</a>
+        <a href="/pages/contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="error-container">
+    <div class="error-code">404</div>
+    <h1 class="error-title">Oops! Page Not Found</h1>
+    <p class="error-text">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+    
+    <form class="search-form" action="/tools/" method="GET">
+      <input type="text" name="search" class="search-input" placeholder="Search for tools (e.g. compress, merge)..." required>
+      <button type="submit" class="search-btn">Search</button>
+    </form>
+
+    <div class="btn-group">
+      <a href="/" class="btn-404 btn-404-primary">⚡ Go to Homepage</a>
+      <a href="/tools/" class="btn-404 btn-404-secondary">📂 Browse All Tools</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2026 NexKitTool. All rights reserved.</p>
+      <p>Created by Sumit Tiwari</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -122,8 +122,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// SPA fallback
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+// Custom 404 page fallback for unmatched routes
+app.get('*', (req, res) => {
+  res.status(404).sendFile(path.join(__dirname, 'pages', '404.html'));
+});
 
 // Error handler
 app.use((err, req, res, next) => {

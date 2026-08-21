@@ -3,7 +3,8 @@
   "version": "3.0.0",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "build": "echo 'No build required'"
   },
   "dependencies": {
     "compression": "^1.8.1",

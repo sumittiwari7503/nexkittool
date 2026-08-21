@@ -9,11 +9,22 @@ const upload = multer({ storage, limits: { fileSize: 15 * 1024 * 1024 } });
 // Compress Image
 router.post('/compress', upload.single('image'), async (req, res) => {
   try {
+    if (!req.file) return res.status(400).json({ error: 'No image file uploaded.' });
     const sharp = require('sharp');
-    const output = await sharp(req.file.buffer)
-      .jpeg({ quality: 70 })
-      .toBuffer();
-    res.set('Content-Type', 'image/jpeg');
+    const quality = Math.min(100, Math.max(1, parseInt(req.body.quality) || 75));
+    const format = req.body.format || req.file.mimetype.split('/')[1] || 'jpeg';
+
+    let image = sharp(req.file.buffer);
+    if (format === 'png') {
+      image = image.png({ quality, compressionLevel: 9, palette: true });
+    } else if (format === 'webp') {
+      image = image.webp({ quality });
+    } else {
+      image = image.jpeg({ quality, mozjpeg: true });
+    }
+
+    const output = await image.toBuffer();
+    res.set('Content-Type', 'image/' + format);
     res.send(output);
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
@@ -21,10 +32,12 @@ router.post('/compress', upload.single('image'), async (req, res) => {
 // Resize Image
 router.post('/resize', upload.single('image'), async (req, res) => {
   try {
+    if (!req.file) return res.status(400).json({ error: 'No image file uploaded.' });
     const sharp = require('sharp');
     const w = parseInt(req.body.width) || 800;
     const h = parseInt(req.body.height) || 600;
-    const output = await sharp(req.file.buffer).resize(w, h, { fit: 'inside' }).toBuffer();
+    const fit = req.body.fit || 'inside';
+    const output = await sharp(req.file.buffer).resize(w, h, { fit }).toBuffer();
     res.set('Content-Type', req.file.mimetype);
     res.send(output);
   } catch (err) { res.status(500).json({ error: err.message }); }

@@ -229,6 +229,53 @@ function getToolUI(tool) {
               style="width:100%;padding:12px 16px;border:2px solid #e5e7eb;border-radius:10px;font-size:.95rem;outline:none;box-sizing:border-box">
           </div>
         ` : ''}
+        ${tool.id === 'img2pdf' ? `
+          <div style="margin-top:14px;text-align:left">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px">
+              <div>
+                <label style="font-size:.8rem;color:#6b7280;display:block;margin-bottom:4px">Page Size</label>
+                <select id="img2pdfSize" style="width:100%;padding:10px;border:2px solid #e5e7eb;border-radius:8px;font-size:.92rem;outline:none">
+                  <option value="a4" selected>A4</option>
+                  <option value="letter">Letter</option>
+                  <option value="fit">Fit Image</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:.8rem;color:#6b7280;display:block;margin-bottom:4px">Orientation</label>
+                <select id="img2pdfOrient" style="width:100%;padding:10px;border:2px solid #e5e7eb;border-radius:8px;font-size:.92rem;outline:none">
+                  <option value="portrait" selected>Portrait</option>
+                  <option value="landscape">Landscape</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:.8rem;color:#6b7280;display:block;margin-bottom:4px">Margins</label>
+                <select id="img2pdfMargin" style="width:100%;padding:10px;border:2px solid #e5e7eb;border-radius:8px;font-size:.92rem;outline:none">
+                  <option value="0" selected>No Margin</option>
+                  <option value="20">Small (20px)</option>
+                  <option value="40">Large (40px)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        ` : ''}
+        ${tool.id === 'pdf2img' ? `
+          <div style="margin-top:14px;text-align:left">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+              <div>
+                <label style="font-size:.8rem;color:#6b7280;display:block;margin-bottom:4px">Image Format</label>
+                <select id="pdf2imgFmt" style="width:100%;padding:10px;border:2px solid #e5e7eb;border-radius:8px;font-size:.92rem;outline:none">
+                  <option value="jpeg" selected>JPG</option>
+                  <option value="png">PNG</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:.8rem;color:#6b7280;display:block;margin-bottom:4px">Pages (e.g. 1-3, 5)</label>
+                <input type="text" id="pdf2imgPages" placeholder="Leave empty for all pages" 
+                  style="width:100%;padding:10px;border:2px solid #e5e7eb;border-radius:8px;font-size:.92rem;outline:none;box-sizing:border-box">
+              </div>
+            </div>
+          </div>
+        ` : ''}
         <button onclick="processPDF('${tool.id}')" class="btn-auth" style="width:100%;margin-top:16px">⚡ Process File</button>
         <div id="pdfOutput" style="display:none;text-align:center;margin-top:16px;padding:20px;background:#d1fae5;border-radius:10px">
           <p style="font-weight:700;color:#059669;margin-bottom:12px">✅ Processing complete!</p>
@@ -439,10 +486,63 @@ function getToolUI(tool) {
 }
 
 function getImageOptions(id) {
-  if (id === 'resize') return `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
-    <input type="number" id="resizeW" placeholder="Width (px)" style="padding:10px;border:2px solid #e5e7eb;border-radius:8px;outline:none;font-size:.95rem">
-    <input type="number" id="resizeH" placeholder="Height (px)" style="padding:10px;border:2px solid #e5e7eb;border-radius:8px;outline:none;font-size:.95rem">
-  </div>`;
+  if (id === 'resize') return `
+    <div style="margin-top:14px;text-align:left">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <div>
+          <label style="font-size:.8rem;color:#6b7280;display:block;margin-bottom:4px">Width (px)</label>
+          <input type="number" id="resizeW" placeholder="Width" style="width:100%;padding:10px;border:2px solid #e5e7eb;border-radius:8px;outline:none;font-size:.95rem" oninput="onResizeWidthInput()">
+        </div>
+        <div>
+          <label style="font-size:.8rem;color:#6b7280;display:block;margin-bottom:4px">Height (px)</label>
+          <input type="number" id="resizeH" placeholder="Height" style="width:100%;padding:10px;border:2px solid #e5e7eb;border-radius:8px;outline:none;font-size:.95rem" oninput="onResizeHeightInput()">
+        </div>
+      </div>
+      <div style="margin-bottom:12px">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.9rem;color:#374151">
+          <input type="checkbox" id="resizeLockAspect" checked> Lock Aspect Ratio
+        </label>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <div>
+          <label style="font-size:.8rem;color:#6b7280;display:block;margin-bottom:4px">Resize Preset</label>
+          <select id="resizePreset" style="width:100%;padding:10px;border:2px solid #e5e7eb;border-radius:8px;font-size:.95rem;outline:none" onchange="applyResizePreset(this.value)">
+            <option value="">Custom</option>
+            <option value="50">50% Smaller</option>
+            <option value="25">75% Smaller</option>
+            <option value="200">2x Larger</option>
+            <option value="hd">HD (1280x720)</option>
+            <option value="fhd">Full HD (1920x1080)</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:.8rem;color:#6b7280;display:block;margin-bottom:4px">Fit Mode</label>
+          <select id="resizeFit" style="width:100%;padding:10px;border:2px solid #e5e7eb;border-radius:8px;font-size:.95rem;outline:none">
+            <option value="inside" selected>Inside (Preserve aspect)</option>
+            <option value="cover">Cover (Fill & Crop)</option>
+            <option value="contain">Contain (Pad background)</option>
+            <option value="fill">Fill (Stretch)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  `;
+  if (id === 'compress') return `
+    <div style="margin-top:14px;text-align:left">
+      <div style="margin-bottom:12px">
+        <label style="display:block;font-size:.85rem;font-weight:600;margin-bottom:6px;color:#374151">Compression Quality: <span id="compQualityVal" style="color:#6c47ff;font-weight:700">75%</span></label>
+        <input type="range" id="compressQuality" min="10" max="100" value="75" style="width:100%" oninput="document.getElementById('compQualityVal').textContent=this.value+'%'">
+      </div>
+      <div>
+        <label style="display:block;font-size:.85rem;font-weight:600;margin-bottom:6px;color:#374151">Preset Levels:</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+          <button type="button" onclick="document.getElementById('compressQuality').value=85;document.getElementById('compressQuality').dispatchEvent(new Event('input'))" style="padding:8px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;font-size:.8rem;font-weight:600;cursor:pointer">High Quality</button>
+          <button type="button" onclick="document.getElementById('compressQuality').value=70;document.getElementById('compressQuality').dispatchEvent(new Event('input'))" style="padding:8px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;font-size:.8rem;font-weight:600;cursor:pointer">Balanced</button>
+          <button type="button" onclick="document.getElementById('compressQuality').value=50;document.getElementById('compressQuality').dispatchEvent(new Event('input'))" style="padding:8px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;font-size:.8rem;font-weight:600;cursor:pointer">Max Compress</button>
+        </div>
+      </div>
+    </div>
+  `;
   if (id === 'watermark') return `<div style="margin-top:14px"><input type="text" id="wmText" placeholder="Watermark text e.g. Nexkittool" style="width:100%;padding:10px;border:2px solid #e5e7eb;border-radius:8px;outline:none;font-size:.95rem"></div>`;
   if (id === 'convert') return `<select id="convertFmt" style="width:100%;margin-top:14px;padding:10px;border:2px solid #e5e7eb;border-radius:8px;font-size:.95rem"><option value="jpeg">Convert to JPG</option><option value="png">Convert to PNG</option><option value="webp">Convert to WEBP</option></select>`;
   if (id === 'flip') return `
@@ -557,6 +657,16 @@ function previewImage(input) {
     img.src = e.target.result;
     document.getElementById('imagePreview').style.display = 'block';
     document.getElementById('imageOutput').style.display = 'none';
+    img.onload = () => {
+      window.originalImgAspectRatio = img.naturalWidth / img.naturalHeight;
+      window.originalImgWidth = img.naturalWidth;
+      window.originalImgHeight = img.naturalHeight;
+      
+      const resizeW = document.getElementById('resizeW');
+      const resizeH = document.getElementById('resizeH');
+      if (resizeW) resizeW.value = img.naturalWidth;
+      if (resizeH) resizeH.value = img.naturalHeight;
+    };
     if (window.activeToolId === 'crop') {
       setTimeout(() => initCropTool(img), 100);
     }
@@ -575,11 +685,50 @@ async function processImage(toolId) {
   if (!file) { showToast('Please select an image!', 'error'); return; }
   const btn = document.querySelectorAll('#imagePreview button')[0];
   btn.textContent = '⏳ Processing...'; btn.disabled = true;
+
+  if (toolId === 'bgremove') {
+    try {
+      btn.textContent = '⏳ Loading AI Model...';
+      const { removeBackground } = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal/+esm');
+      
+      btn.textContent = '⏳ Removing Background...';
+      const outputBlob = await removeBackground(file, {
+        progress: (key, current, total) => {
+          const percent = Math.round((current / total) * 100);
+          btn.textContent = `⏳ Processing: ${percent}%...`;
+        }
+      });
+      
+      const url = URL.createObjectURL(outputBlob);
+      document.getElementById('resultImg').src = url;
+      document.getElementById('downloadBtn').onclick = () => {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'nexkittool-bgremoved.png';
+        a.click();
+      };
+      document.getElementById('imageOutput').style.display = 'block';
+      showToast('Background removed successfully! ✅', 'success');
+    } catch (err) {
+      showToast('Error removing background: ' + err.message, 'error');
+      console.error(err);
+    }
+    btn.textContent = '⚡ Process Image'; btn.disabled = false;
+    return;
+  }
+
   const formData = new FormData();
   formData.append('image', file);
   if (toolId === 'resize') {
     formData.append('width', document.getElementById('resizeW')?.value || 800);
     formData.append('height', document.getElementById('resizeH')?.value || 600);
+    formData.append('fit', document.getElementById('resizeFit')?.value || 'inside');
+  }
+  if (toolId === 'compress') {
+    const qualityVal = document.getElementById('compressQuality')?.value || 75;
+    formData.append('quality', qualityVal);
+    const fmt = file.type.split('/')[1] || 'jpeg';
+    formData.append('format', fmt);
   }
   if (toolId === 'watermark') formData.append('text', document.getElementById('wmText')?.value || 'Nexkittool');
   if (toolId === 'convert') formData.append('format', document.getElementById('convertFmt')?.value || 'jpeg');
@@ -597,6 +746,29 @@ async function processImage(toolId) {
     const blob = await res.blob();
     const url = URL.createObjectURL(blob);
     document.getElementById('resultImg').src = url;
+
+    let statsEl = document.getElementById('compStats');
+    if (!statsEl) {
+      statsEl = document.createElement('div');
+      statsEl.id = 'compStats';
+      statsEl.style.margin = '10px 0';
+      statsEl.style.fontSize = '0.9rem';
+      statsEl.style.color = '#374151';
+      const resultImg = document.getElementById('resultImg');
+      resultImg.parentNode.insertBefore(statsEl, resultImg.nextSibling);
+    }
+
+    if (toolId === 'compress' || toolId === 'convert') {
+      const origSize = file.size;
+      const compSize = blob.size;
+      const pct = Math.round(((origSize - compSize) / origSize) * 100);
+      const savings = pct > 0 ? `Saved ${pct}%` : `Size changed`;
+      statsEl.innerHTML = `Original: <strong>${(origSize/1024).toFixed(1)} KB</strong> \| Output: <strong>${(compSize/1024).toFixed(1)} KB</strong><br><span style="color:#059669;font-weight:700">${savings}</span>`;
+      statsEl.style.display = 'block';
+    } else {
+      statsEl.style.display = 'none';
+    }
+
     document.getElementById('downloadBtn').onclick = () => {
       const a = document.createElement('a'); a.href = url; a.download = 'nexkittool-' + toolId + '.' + (blob.type.split('/')[1] || 'jpg'); a.click();
     };
@@ -606,13 +778,37 @@ async function processImage(toolId) {
   btn.textContent = '⚡ Process Image'; btn.disabled = false;
 }
 
-function pdfFileSelected(input) {
+async function pdfFileSelected(input) {
   const files = Array.from(input.files);
   if (!files.length) return;
   const totalSize = files.reduce((s, f) => s + f.size, 0);
   const maxSize = Auth.isPro() ? 100 : 25;
   if (totalSize > maxSize * 1024 * 1024) { showToast(`File too large! Max ${maxSize}MB.`, 'error'); return; }
-  document.getElementById('pdfFileInfo').innerHTML = files.map(f => `📄 <strong>${f.name}</strong> — ${(f.size/1024/1024).toFixed(2)} MB`).join('<br>');
+  
+  const container = document.getElementById('pdfFileInfo');
+  container.innerHTML = '⏳ Loading file details...';
+  
+  const fileInfos = [];
+  try {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+    for (const f of files) {
+      let pageCountText = '';
+      if (f.name.toLowerCase().endsWith('.pdf')) {
+        try {
+          const arrayBuffer = await f.arrayBuffer();
+          const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+          pageCountText = ` — <strong>${pdf.numPages} pages</strong>`;
+        } catch (e) {
+          console.warn('Could not read PDF details:', e);
+        }
+      }
+      fileInfos.push(`📄 <strong>${f.name}</strong> (${(f.size/1024/1024).toFixed(2)} MB)${pageCountText}`);
+    }
+    container.innerHTML = fileInfos.join('<br>');
+  } catch (err) {
+    container.innerHTML = files.map(f => `📄 <strong>${f.name}</strong> — ${(f.size/1024/1024).toFixed(2)} MB`).join('<br>');
+  }
+  
   document.getElementById('pdfInfo').style.display = 'block';
   document.getElementById('pdfOutput').style.display = 'none';
 }
@@ -640,13 +836,44 @@ async function processPDF(toolId) {
     const rangeVal = document.getElementById('splitPages')?.value.trim() || '';
     formData.append('pages', rangeVal);
   }
+  if (toolId === 'img2pdf') {
+    formData.append('pageSize', document.getElementById('img2pdfSize')?.value || 'a4');
+    formData.append('orientation', document.getElementById('img2pdfOrient')?.value || 'portrait');
+    formData.append('margin', document.getElementById('img2pdfMargin')?.value || '0');
+  }
   const endpointMap = { img2pdf:'image-to-pdf', pdf2img:'pdf-to-image', merge:'merge', split:'split', 'compress-pdf':'compress', 'pdf-watermark':'watermark', word2pdf:'word-to-pdf', pdf2word:'pdf-to-word' };
   try {
     const res = await fetch('/api/pdf/' + (endpointMap[toolId] || toolId), { method: 'POST', body: formData });
-    if (!res.ok) throw new Error('Processing failed');
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.error || 'Processing failed');
+    }
     const blob = await res.blob();
     const url = URL.createObjectURL(blob);
     const ext = blob.type.includes('pdf') ? 'pdf' : (blob.type.split('/')[1] || 'zip');
+
+    let pdfStatsEl = document.getElementById('pdfStats');
+    if (!pdfStatsEl) {
+      pdfStatsEl = document.createElement('div');
+      pdfStatsEl.id = 'pdfStats';
+      pdfStatsEl.style.margin = '10px 0 16px 0';
+      pdfStatsEl.style.fontSize = '0.9rem';
+      pdfStatsEl.style.color = '#374151';
+      const pdfDownload = document.getElementById('pdfDownload');
+      pdfDownload.parentNode.insertBefore(pdfStatsEl, pdfDownload);
+    }
+
+    if (toolId === 'compress-pdf') {
+      const origSize = files.reduce((s, f) => s + f.size, 0);
+      const compSize = blob.size;
+      const pct = Math.round(((origSize - compSize) / origSize) * 100);
+      const savings = pct > 0 ? `Saved ${pct}%` : `No size reduction possible`;
+      pdfStatsEl.innerHTML = `Original: <strong>${(origSize/1024/1024).toFixed(2)} MB</strong> \| Compressed: <strong>${(compSize/1024/1024).toFixed(2)} MB</strong><br><span style="color:#059669;font-weight:700">${savings}</span>`;
+      pdfStatsEl.style.display = 'block';
+    } else {
+      pdfStatsEl.style.display = 'none';
+    }
+
     document.getElementById('pdfDownload').onclick = () => {
       const a = document.createElement('a'); a.href = url; a.download = 'nexkittool-' + toolId + '.' + ext; a.click();
     };
@@ -751,9 +978,36 @@ async function processPDFToImageClient(file) {
     const pageCount = pdf.numPages;
     const zip = new JSZip();
 
-    for (let i = 1; i <= pageCount; i++) {
-      btn.textContent = `⏳ Rendering Page ${i}/${pageCount}...`;
-      const page = await pdf.getPage(i);
+    const format = document.getElementById('pdf2imgFmt')?.value || 'jpeg';
+    const mime = format === 'png' ? 'image/png' : 'image/jpeg';
+    const ext = format === 'png' ? 'png' : 'jpg';
+
+    const rangeText = document.getElementById('pdf2imgPages')?.value.trim() || '';
+    const pagesToRender = [];
+    if (rangeText) {
+      const parts = rangeText.split(',');
+      for (const part of parts) {
+        const p = part.trim();
+        if (/^\d+$/.test(p)) {
+          const page = parseInt(p, 10);
+          if (page >= 1 && page <= pageCount) pagesToRender.push(page);
+        } else if (/^\d+-\d+$/.test(p)) {
+          const [startStr, endStr] = p.split('-');
+          let start = parseInt(startStr, 10);
+          let end = parseInt(endStr, 10);
+          if (start >= 1 && start <= pageCount && end >= 1 && end <= pageCount) {
+            if (start > end) [start, end] = [end, start];
+            for (let i = start; i <= end; i++) pagesToRender.push(i);
+          }
+        }
+      }
+    }
+    const finalPages = pagesToRender.length > 0 ? Array.from(new Set(pagesToRender)).sort((a,b)=>a-b) : Array.from({ length: pageCount }, (_, i) => i + 1);
+
+    for (let idx = 0; idx < finalPages.length; idx++) {
+      const pageNum = finalPages[idx];
+      btn.textContent = `⏳ Rendering Page ${pageNum} (${idx + 1}/${finalPages.length})...`;
+      const page = await pdf.getPage(pageNum);
       const viewport = page.getViewport({ scale: 2.0 });
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
@@ -761,9 +1015,9 @@ async function processPDFToImageClient(file) {
       canvas.height = viewport.height;
 
       await page.render({ canvasContext: context, viewport: viewport }).promise;
-      const dataUrl = canvas.toDataURL('image/png');
+      const dataUrl = canvas.toDataURL(mime, 0.85);
       const base64Data = dataUrl.split(',')[1];
-      zip.file(`page-${i}.png`, base64Data, { base64: true });
+      zip.file(`page-${pageNum}.${ext}`, base64Data, { base64: true });
     }
 
     btn.textContent = '⏳ Generating ZIP file...';
@@ -1368,3 +1622,37 @@ function initCropTool(img) {
     };
   };
 }
+
+window.onResizeWidthInput = function() {
+  const w = parseFloat(document.getElementById('resizeW')?.value);
+  const lock = document.getElementById('resizeLockAspect')?.checked;
+  if (lock && w && window.originalImgAspectRatio) {
+    document.getElementById('resizeH').value = Math.round(w / window.originalImgAspectRatio);
+  }
+};
+
+window.onResizeHeightInput = function() {
+  const h = parseFloat(document.getElementById('resizeH')?.value);
+  const lock = document.getElementById('resizeLockAspect')?.checked;
+  if (lock && h && window.originalImgAspectRatio) {
+    document.getElementById('resizeW').value = Math.round(h * window.originalImgAspectRatio);
+  }
+};
+
+window.applyResizePreset = function(val) {
+  if (!val) return;
+  const resizeW = document.getElementById('resizeW');
+  const resizeH = document.getElementById('resizeH');
+  if (!window.originalImgWidth || !window.originalImgHeight) return;
+  if (val === 'hd') {
+    resizeW.value = 1280;
+    resizeH.value = 720;
+  } else if (val === 'fhd') {
+    resizeW.value = 1920;
+    resizeH.value = 1080;
+  } else {
+    const scale = parseFloat(val) / 100;
+    resizeW.value = Math.round(window.originalImgWidth * scale);
+    resizeH.value = Math.round(window.originalImgHeight * scale);
+  }
+};

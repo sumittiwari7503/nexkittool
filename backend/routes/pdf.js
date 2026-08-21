@@ -12,17 +12,63 @@ router.post('/image-to-pdf', upload.array('file'), async (req, res) => {
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: 'No image files uploaded.' });
     }
+    
+    const pageSizeOption = req.body.pageSize || 'a4';
+    const orientation = req.body.orientation || 'portrait';
+    const margin = Math.max(0, parseInt(req.body.margin) || 0);
+
     const pdfDoc = await PDFDocument.create();
+
+    const PAGE_SIZES = {
+      a4: [595.28, 841.89],
+      letter: [612, 792]
+    };
+
     for (const file of req.files) {
-      // Normalize every image to a clean baseline PNG via sharp first.
-      // pdf-lib's built-in JPEG parser does not support progressive JPEGs
-      // or all chroma-subsampling variants and can throw "SOI not found"
-      // on otherwise-valid real-world photos. Routing everything through
-      // sharp guarantees pdf-lib always receives a format it can embed.
       const normalized = await sharp(file.buffer).png().toBuffer();
       const img = await pdfDoc.embedPng(normalized);
-      const page = pdfDoc.addPage([img.width, img.height]);
-      page.drawImage(img, { x: 0, y: 0, width: img.width, height: img.height });
+
+      let pageWidth, pageHeight;
+      if (pageSizeOption === 'fit') {
+        pageWidth = img.width + margin * 2;
+        pageHeight = img.height + margin * 2;
+      } else {
+        const baseDims = PAGE_SIZES[pageSizeOption] || PAGE_SIZES.a4;
+        if (orientation === 'landscape') {
+          pageWidth = baseDims[1];
+          pageHeight = baseDims[0];
+        } else {
+          pageWidth = baseDims[0];
+          pageHeight = baseDims[1];
+        }
+      }
+
+      const page = pdfDoc.addPage([pageWidth, pageHeight]);
+
+      const availableWidth = pageWidth - margin * 2;
+      const availableHeight = pageHeight - margin * 2;
+
+      const imgRatio = img.width / img.height;
+      const boxRatio = availableWidth / availableHeight;
+
+      let drawWidth, drawHeight;
+      if (pageSizeOption === 'fit') {
+        drawWidth = img.width;
+        drawHeight = img.height;
+      } else {
+        if (imgRatio > boxRatio) {
+          drawWidth = availableWidth;
+          drawHeight = availableWidth / imgRatio;
+        } else {
+          drawHeight = availableHeight;
+          drawWidth = availableHeight * imgRatio;
+        }
+      }
+
+      const x = margin + (availableWidth - drawWidth) / 2;
+      const y = margin + (availableHeight - drawHeight) / 2;
+
+      page.drawImage(img, { x, y, width: drawWidth, height: drawHeight });
     }
     const pdfBytes = await pdfDoc.save();
     res.set('Content-Type', 'application/pdf');
@@ -30,7 +76,7 @@ router.post('/image-to-pdf', upload.array('file'), async (req, res) => {
     res.send(Buffer.from(pdfBytes));
   } catch (err) {
     console.error('image-to-pdf error:', err.message);
-    res.status(500).json({ error: 'Could not convert one or more images to PDF. Please make sure each file is a valid JPG, PNG, or WEBP image.' });
+    res.status(500).json({ error: 'Could not convert images to PDF.' });
   }
 });
 

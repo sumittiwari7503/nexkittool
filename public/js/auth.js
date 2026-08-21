@@ -261,11 +261,24 @@ function switchTab(tab) {
 function showForgot() { switchTab('forgot'); }
 
 // ========== GOOGLE SIGN-IN INIT ==========
-function initGoogleSignIn() {
+let fetchedGoogleClientId = null;
+
+async function initGoogleSignIn() {
   if (typeof google === 'undefined' || !google.accounts) return;
   try {
+    if (!fetchedGoogleClientId) {
+      const res = await fetch('/api/auth/config');
+      const data = await res.json();
+      fetchedGoogleClientId = data.googleClientId;
+    }
+
+    if (!fetchedGoogleClientId || fetchedGoogleClientId.startsWith('your_')) {
+      console.warn('Google Sign-In is disabled: GOOGLE_CLIENT_ID is not configured.');
+      return;
+    }
+
     google.accounts.id.initialize({
-      client_id: GOOGLE_CLIENT_ID,
+      client_id: fetchedGoogleClientId,
       callback: handleGoogleCredential,
       auto_select: false,
       cancel_on_tap_outside: true

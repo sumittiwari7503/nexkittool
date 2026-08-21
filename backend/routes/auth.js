@@ -228,4 +228,11 @@ router.get('/verify-email', async (req, res) => {
 // LOGOUT
 router.post('/logout', (req, res) => res.json({ ok: true }));
 
+// CONFIG (exposes safe config options to the client)
+router.get('/config', (req, res) => {
+  res.json({
+    googleClientId: process.env.GOOGLE_CLIENT_ID || 'your_google_client_id_here'
+  });
+});
+
 module.exports = router;

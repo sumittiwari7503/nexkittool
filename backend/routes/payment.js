@@ -10,8 +10,17 @@ const PLANS = {
   'business-annual': { price: 9999, name: 'Nexkittool Business Annual' },
 };
 
+function isStripeConfigured() {
+  if (!stripe) return false;
+  const key = process.env.STRIPE_SECRET_KEY || '';
+  if (key.includes('skip') || key.startsWith('your_') || key.startsWith('sk_test_your') || key.includes('sk_live_your')) {
+    return false;
+  }
+  return true;
+}
+
 router.post('/create-session', async (req, res) => {
-  if (!stripe) return res.status(503).json({ error: 'Payment not configured. Add STRIPE_SECRET_KEY to .env' });
+  if (!isStripeConfigured()) return res.status(503).json({ error: 'Stripe card checkout is currently unavailable. Please configure a valid STRIPE_SECRET_KEY.' });
   const { plan, userId } = req.body;
   const planInfo = PLANS[plan];
   if (!planInfo) return res.status(400).json({ error: 'Invalid plan' });
@@ -31,7 +40,7 @@ router.post('/create-session', async (req, res) => {
 });
 
 router.post('/verify-session', async (req, res) => {
-  if (!stripe) return res.status(503).json({ error: 'Payment not configured. Add STRIPE_SECRET_KEY to .env' });
+  if (!isStripeConfigured()) return res.status(503).json({ error: 'Stripe card checkout is currently unavailable. Please configure a valid STRIPE_SECRET_KEY.' });
   const { sessionId, userId } = req.body;
   if (!sessionId || !userId) return res.status(400).json({ error: 'Session ID and User ID are required' });
   try {

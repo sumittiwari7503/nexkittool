@@ -40,11 +40,27 @@ router.post('/grayscale', upload.single('image'), async (req, res) => {
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// Flip
+// Flip & Rotate
 router.post('/flip', upload.single('image'), async (req, res) => {
   try {
+    if (!req.file) return res.status(400).json({ error: 'No image file uploaded.' });
     const sharp = require('sharp');
-    const output = await sharp(req.file.buffer).flop().toBuffer();
+    const mode = req.body.mode || 'horizontal';
+    
+    let image = sharp(req.file.buffer);
+    if (mode === '90') {
+      image = image.rotate(90);
+    } else if (mode === '180') {
+      image = image.rotate(180);
+    } else if (mode === '270') {
+      image = image.rotate(270);
+    } else if (mode === 'vertical') {
+      image = image.flip();
+    } else {
+      image = image.flop(); // default horizontal
+    }
+
+    const output = await image.toBuffer();
     res.set('Content-Type', req.file.mimetype);
     res.send(output);
   } catch (err) { res.status(500).json({ error: err.message }); }
@@ -131,10 +147,25 @@ router.post('/remove-bg', upload.single('image'), async (req, res) => {
 // Crop
 router.post('/crop', upload.single('image'), async (req, res) => {
   try {
+    if (!req.file) return res.status(400).json({ error: 'No image file uploaded.' });
     const sharp = require('sharp');
-    const output = await sharp(req.file.buffer)
-      .resize(800, 800, { fit: 'cover' })
+    const x = Math.round(parseFloat(req.body.x || 0));
+    const y = Math.round(parseFloat(req.body.y || 0));
+    const w = Math.round(parseFloat(req.body.width || 0));
+    const h = Math.round(parseFloat(req.body.height || 0));
+
+    const image = sharp(req.file.buffer);
+    const metadata = await image.metadata();
+
+    const left = Math.max(0, Math.min(x, metadata.width - 1));
+    const top = Math.max(0, Math.min(y, metadata.height - 1));
+    const width = Math.max(1, Math.min(w, metadata.width - left));
+    const height = Math.max(1, Math.min(h, metadata.height - top));
+
+    const output = await image
+      .extract({ left, top, width, height })
       .toBuffer();
+
     res.set('Content-Type', req.file.mimetype);
     res.send(output);
   } catch (err) { res.status(500).json({ error: err.message }); }

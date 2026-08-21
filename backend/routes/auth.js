@@ -3,8 +3,9 @@ const router = express.Router();
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 
-// ===== IN-MEMORY STORE (replace with DB in production) =====
-const users = new Map();           // email -> user object
+const db = require('../db');
+
+// ===== IN-MEMORY TOKEN STORES (fine for temp tokens) =====
 const resetTokens = new Map();     // token -> { email, expiry }
 const verifyTokens = new Map();    // token -> { email, expiry }
 
@@ -88,37 +89,44 @@ router.post('/signup', async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) return res.status(400).json({ error: 'All fields required' });
   if (password.length < 6) return res.status(400).json({ error: 'Password too short' });
-  if (users.has(email.toLowerCase())) return res.status(400).json({ error: 'Email already registered' });
 
-  const user = {
-    id: Date.now().toString(),
-    name: name.trim(),
-    email: email.toLowerCase().trim(),
-    password: hashPass(password),
-    plan: 'free',
-    verified: false,
-    createdAt: new Date()
-  };
-  users.set(email.toLowerCase(), user);
+  try {
+    const existingUser = await db.getUserByEmail(email);
+    if (existingUser) return res.status(400).json({ error: 'Email already registered' });
 
-  // Send verification email
-  const token = generateToken();
-  verifyTokens.set(token, { email: email.toLowerCase(), expiry: Date.now() + 24*60*60*1000 });
-  const BASE = process.env.BASE_URL || 'http://localhost:3000';
-  const verifyLink = `${BASE}/api/auth/verify-email?token=${token}`;
-  const sent = await sendMail(email, 'Verify your Nexkittool email ✅', welcomeEmailHtml(name, verifyLink));
+    const id = Date.now().toString();
+    const hashedPassword = hashPass(password);
+    const user = await db.createUser(id, name, email, hashedPassword, 'free', false);
 
-  const token2 = generateToken();
-  res.json({ ok: true, token: token2, emailSent: sent, user: { id: user.id, name: user.name, email: user.email, plan: 'free', verified: false } });
+    // Send verification email
+    const token = generateToken();
+    verifyTokens.set(token, { email: email.toLowerCase(), expiry: Date.now() + 24*60*60*1000 });
+    const BASE = process.env.BASE_URL || 'http://localhost:3000';
+    const verifyLink = `${BASE}/api/auth/verify-email?token=${token}`;
+    const sent = await sendMail(email, 'Verify your Nexkittool email ✅', welcomeEmailHtml(name, verifyLink));
+
+    const token2 = generateToken();
+    await db.createSession(token2, user.id);
+    res.json({ ok: true, token: token2, emailSent: sent, user: { id: user.id, name: user.name, email: user.email, plan: 'free', verified: false } });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // LOGIN
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
-  const user = users.get(email.toLowerCase());
-  if (!user || user.password !== hashPass(password)) return res.status(401).json({ error: 'Invalid email or password' });
-  const token = generateToken();
-  res.json({ ok: true, token, user: { id: user.id, name: user.name, email: user.email, plan: user.plan, verified: user.verified } });
+  try {
+    const user = await db.getUserByEmail(email);
+    if (!user || user.password !== hashPass(password)) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+    const token = generateToken();
+    await db.createSession(token, user.id);
+    res.json({ ok: true, token, user: { id: user.id, name: user.name, email: user.email, plan: user.plan, verified: user.verified } });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // GOOGLE SIGN-IN (verifies ID token server-side)
@@ -127,29 +135,28 @@ router.post('/google', async (req, res) => {
     const { credential } = req.body;
     if (!credential) return res.status(400).json({ error: 'No credential provided' });
 
-    // Decode JWT payload (Google already verified it client-side via GSI; for extra security verify server-side)
+    // Decode JWT payload (Google already verified it client-side via GSI)
     const payload = JSON.parse(Buffer.from(credential.split('.')[1], 'base64url').toString());
     const { email, name, picture, sub: googleId } = payload;
     if (!email) return res.status(400).json({ error: 'Invalid Google token' });
 
-    let user = users.get(email.toLowerCase());
+    let user = await db.getUserByEmail(email);
     if (!user) {
       // Auto-create account
-      user = { id: googleId, name, email: email.toLowerCase(), password: null, plan: 'free', verified: true, googleId, picture, createdAt: new Date() };
-      users.set(email.toLowerCase(), user);
-      // Send welcome email (no verify link needed, Google already verified)
+      user = await db.createUser(googleId, name, email, null, 'free', true);
+      // Send welcome email
       const BASE = process.env.BASE_URL || 'http://localhost:3000';
       const welcomeHtml = welcomeEmailHtml(name, BASE).replace('Please verify your email address to unlock all features.', 'Your Google account has been connected. You\'re all set!').replace(/<div style="text-align:center;margin:28px 0">[\s\S]*?<\/div>/, `<div style="text-align:center;margin:28px 0"><a href="${BASE}" style="background:linear-gradient(135deg,#6c47ff,#ff6b47);color:#fff;text-decoration:none;padding:14px 32px;border-radius:10px;font-weight:700;font-size:1rem;display:inline-block">🚀 Start Using Nexkittool</a></div>`);
       await sendMail(email, 'Welcome to Nexkittool! 🎉', welcomeHtml);
     } else {
-      // Existing user - update google info
-      user.googleId = googleId;
+      // Existing user - update verified status
+      await db.run('UPDATE users SET verified = 1 WHERE id = ?', [user.id]);
       user.verified = true;
-      if (picture) user.picture = picture;
     }
 
     const token = generateToken();
-    res.json({ ok: true, token, user: { id: user.id, name: user.name, email: user.email, plan: user.plan, verified: true, picture: user.picture } });
+    await db.createSession(token, user.id);
+    res.json({ ok: true, token, user: { id: user.id, name: user.name, email: user.email, plan: user.plan, verified: true, picture } });
   } catch (err) {
     console.error('Google auth error:', err);
     res.status(500).json({ error: 'Google sign-in failed. Please try again.' });
@@ -161,47 +168,61 @@ router.post('/forgot-password', async (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ error: 'Email required' });
 
-  const user = users.get(email.toLowerCase());
-  // Always return success (don't reveal if email exists)
-  if (!user) return res.json({ ok: true, msg: 'If that email is registered, a reset link has been sent.' });
+  try {
+    const user = await db.getUserByEmail(email);
+    // Always return success (don't reveal if email exists)
+    if (!user) return res.json({ ok: true, msg: 'If that email is registered, a reset link has been sent.' });
 
-  const token = generateToken();
-  resetTokens.set(token, { email: email.toLowerCase(), expiry: Date.now() + 60*60*1000 }); // 1 hour
-  const BASE = process.env.BASE_URL || 'http://localhost:3000';
-  const resetLink = `${BASE}/reset-password.html?token=${token}`;
-  const sent = await sendMail(email, 'Reset your Nexkittool password 🔑', resetEmailHtml(user.name, resetLink));
+    const token = generateToken();
+    resetTokens.set(token, { email: email.toLowerCase(), expiry: Date.now() + 60*60*1000 }); // 1 hour
+    const BASE = process.env.BASE_URL || 'http://localhost:3000';
+    const resetLink = `${BASE}/reset-password.html?token=${token}`;
+    const sent = await sendMail(email, 'Reset your Nexkittool password 🔑', resetEmailHtml(user.name, resetLink));
 
-  res.json({ ok: true, sent, msg: 'If that email is registered, a reset link has been sent.' });
+    res.json({ ok: true, sent, msg: 'If that email is registered, a reset link has been sent.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // RESET PASSWORD (from reset link)
-router.post('/reset-password', (req, res) => {
+router.post('/reset-password', async (req, res) => {
   const { token, password } = req.body;
   if (!token || !password) return res.status(400).json({ error: 'Token and password required' });
   if (password.length < 6) return res.status(400).json({ error: 'Password too short' });
 
-  const data = resetTokens.get(token);
-  if (!data || data.expiry < Date.now()) return res.status(400).json({ error: 'Reset link has expired. Please request a new one.' });
+  try {
+    const data = resetTokens.get(token);
+    if (!data || data.expiry < Date.now()) return res.status(400).json({ error: 'Reset link has expired. Please request a new one.' });
 
-  const user = users.get(data.email);
-  if (!user) return res.status(400).json({ error: 'User not found' });
+    const user = await db.getUserByEmail(data.email);
+    if (!user) return res.status(400).json({ error: 'User not found' });
 
-  user.password = hashPass(password);
-  resetTokens.delete(token);
-  res.json({ ok: true, msg: 'Password reset successfully! You can now log in.' });
+    await db.updateUserPassword(data.email, hashPass(password));
+    resetTokens.delete(token);
+    res.json({ ok: true, msg: 'Password reset successfully! You can now log in.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // VERIFY EMAIL
-router.get('/verify-email', (req, res) => {
+router.get('/verify-email', async (req, res) => {
   const { token } = req.query;
-  const data = verifyTokens.get(token);
-  if (!data || data.expiry < Date.now()) {
-    return res.send(`<html><body style="font-family:Inter,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f9fafb"><div style="text-align:center;background:#fff;padding:40px;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.1)"><div style="font-size:3rem">❌</div><h2 style="color:#dc2626">Link Expired</h2><p style="color:#6b7280">This verification link has expired. Please sign up again or contact support.</p><a href="/" style="color:#6c47ff;font-weight:700">← Go Home</a></div></body></html>`);
+  try {
+    const data = verifyTokens.get(token);
+    if (!data || data.expiry < Date.now()) {
+      return res.send(`<html><body style="font-family:Inter,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f9fafb"><div style="text-align:center;background:#fff;padding:40px;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.1)"><div style="font-size:3rem">❌</div><h2 style="color:#dc2626">Link Expired</h2><p style="color:#6b7280">This verification link has expired. Please sign up again or contact support.</p><a href="/" style="color:#6c47ff;font-weight:700">← Go Home</a></div></body></html>`);
+    }
+    const user = await db.getUserByEmail(data.email);
+    if (user) {
+      await db.verifyUserEmail(data.email);
+    }
+    verifyTokens.delete(token);
+    res.send(`<html><body style="font-family:Inter,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f9fafb"><div style="text-align:center;background:#fff;padding:40px;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.1)"><div style="font-size:3rem">✅</div><h2 style="color:#059669">Email Verified!</h2><p style="color:#6b7280">Your email has been verified. You can now use all Nexkittool features.</p><a href="/" style="background:linear-gradient(135deg,#6c47ff,#ff6b47);color:#fff;text-decoration:none;padding:12px 28px;border-radius:10px;font-weight:700;display:inline-block;margin-top:16px">🚀 Go to Nexkittool</a></div></body></html>`);
+  } catch (err) {
+    res.status(500).send('Verification failed due to a database error.');
   }
-  const user = users.get(data.email);
-  if (user) user.verified = true;
-  verifyTokens.delete(token);
-  res.send(`<html><body style="font-family:Inter,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f9fafb"><div style="text-align:center;background:#fff;padding:40px;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.1)"><div style="font-size:3rem">✅</div><h2 style="color:#059669">Email Verified!</h2><p style="color:#6b7280">Your email has been verified. You can now use all Nexkittool features.</p><a href="/" style="background:linear-gradient(135deg,#6c47ff,#ff6b47);color:#fff;text-decoration:none;padding:12px 28px;border-radius:10px;font-weight:700;display:inline-block;margin-top:16px">🚀 Go to Nexkittool</a></div></body></html>`);
 });
 
 // LOGOUT

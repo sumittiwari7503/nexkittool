@@ -157,8 +157,15 @@
     </div>
 
     <div id="paymentFlow">
+      <!-- STRIPE CARD CHECKOUT -->
+      <div style="margin-bottom: 28px; border-bottom: 2px dashed #e5e7eb; padding-bottom: 24px; text-align: center;">
+        <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:8px;color:#1a1a2e">💳 Pay with Credit / Debit Card</h3>
+        <p style="color:#6b7280;font-size:.82rem;margin-bottom:16px">Instant automated Pro activation via Stripe Checkout</p>
+        <button onclick="payWithStripe()" class="btn-verify" style="margin:0 auto; max-width:320px; background:linear-gradient(135deg,#6c47ff,#00d4aa); display:block; width:100%">Pay with Card (Stripe)</button>
+      </div>
+
       <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:6px">Pay via UPI</h2>
-      <p style="color:#6b7280;font-size:.9rem;margin-bottom:20px">Scan QR or use UPI ID below</p>
+      <p style="color:#6b7280;font-size:.9rem;margin-bottom:20px">Scan QR or use UPI ID below (Manual verification)</p>
 
       <!-- AMOUNT -->
       <div class="amount-badge" id="amountBadge">₹99</div>
@@ -412,6 +419,51 @@ function copyUPI() {
   });
 }
 
+async function payWithStripe() {
+  const user = Auth.getCurrentUser();
+  if (!user) {
+    showToast('Please log in first to upgrade to Pro!', 'error');
+    openAuthModal('login');
+    return;
+  }
+  
+  const stripeBtn = document.querySelector('button[onclick="payWithStripe()"]');
+  const originalText = stripeBtn.textContent;
+  stripeBtn.textContent = '⏳ Redirecting to Stripe...';
+  stripeBtn.disabled = true;
+
+  try {
+    const res = await fetch('/api/payment/create-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        plan: currentPlan === 'pro' ? 'pro-monthly' : 'business-monthly',
+        userId: user.id
+      })
+    });
+    
+    if (res.status === 503) {
+      showToast('❌ Card payment configuration is currently unavailable. Please pay via UPI instead.', 'error');
+      stripeBtn.textContent = originalText;
+      stripeBtn.disabled = false;
+      return;
+    }
+    
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      showToast('❌ Failed to initiate Stripe checkout: ' + (data.error || 'Unknown error'), 'error');
+      stripeBtn.textContent = originalText;
+      stripeBtn.disabled = false;
+    }
+  } catch (err) {
+    showToast('❌ Connection error. Stripe payment is unavailable.', 'error');
+    stripeBtn.textContent = originalText;
+    stripeBtn.disabled = false;
+  }
+}
+
 function verifyPayment() {
   const email = document.getElementById('verifyEmail').value.trim();
   const txn = document.getElementById('verifyTxn').value.trim();
@@ -434,38 +486,27 @@ function verifyPayment() {
   btn.textContent = '⏳ Verifying...';
   btn.disabled = true;
 
-  // Save to localStorage as pro user
+  // Save to localStorage as pending verification
   setTimeout(() => {
-    // Activate Pro in Auth system
-    const user = Auth.getCurrentUser();
-    if (user) {
-      Auth.upgradeToPro(user.id);
-    }
-
     // Also save pending verification (admin can check)
     const verifications = JSON.parse(localStorage.getItem('nexkittool_verifications') || '[]');
     verifications.push({
       email, txn, name, plan: currentPlan,
       amount: PLANS[currentPlan].amount,
-      date: new Date().toISOString()
+      date: new Date().toISOString(),
+      status: 'pending'
     });
     localStorage.setItem('nexkittool_verifications', JSON.stringify(verifications));
 
-    // Save pro status by email
-    const proUsers = JSON.parse(localStorage.getItem('nexkittool_pro_users') || '{}');
-    proUsers[email] = {
-      plan: currentPlan, txn, name,
-      amount: PLANS[currentPlan].amount,
-      activatedAt: new Date().toISOString()
-    };
-    localStorage.setItem('nexkittool_pro_users', JSON.stringify(proUsers));
+    // Reset button
+    btn.textContent = '🚀 Activate Pro Now';
+    btn.disabled = false;
 
-    // Show success
-    document.getElementById('paymentFlow').style.display = 'none';
-    document.getElementById('successBox').style.display = 'block';
-    showToast('🎉 Pro activated successfully!', 'success');
-
-    updateNavUser();
+    // Show manual review notice instead of upgrade success
+    showToast('✅ UPI transaction submitted! Our team will verify and activate within 5 minutes.', 'success');
+    
+    // Clear fields
+    document.getElementById('verifyTxn').value = '';
   }, 2000);
 }
 

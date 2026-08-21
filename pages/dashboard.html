@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Dashboard - Nexkittool</title>
+<meta name="description" content="Manage your Nexkittool Pro subscription and account settings.">
+<link rel="stylesheet" href="../public/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<style>
+.dashboard-card { background:#fff; border:2px solid #e5e7eb; border-radius:24px; padding:36px; max-width:600px; margin:0 auto; box-shadow:0 10px 30px rgba(0,0,0,0.05); }
+.dashboard-header { display:flex; align-items:center; gap:20px; border-bottom:1px solid #f3f4f6; padding-bottom:24px; margin-bottom:24px; }
+.dashboard-avatar { width:70px; height:70px; border-radius:50%; background:linear-gradient(135deg,#6c47ff,#ff6b47); color:#fff; display:flex; align-items:center; justify-content:center; font-size:2rem; font-weight:800; }
+.dashboard-info { flex:1; }
+.dashboard-info h2 { font-size:1.4rem; font-weight:900; color:#1a1a2e; margin:0; }
+.dashboard-info p { color:#6b7280; font-size:.9rem; margin:4px 0 0; }
+.status-badge { display:inline-block; padding:6px 16px; border-radius:50px; font-weight:700; font-size:.85rem; margin-top:8px; }
+.status-badge.free { background:#ede9ff; color:#6c47ff; }
+.status-badge.pro { background:#fffbeb; color:#f59e0b; border:1px solid #fde68a; }
+.dashboard-details { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px; }
+.detail-item { background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:16px; }
+.detail-label { font-size:.8rem; color:#9ca3af; font-weight:600; text-transform:uppercase; margin-bottom:4px; }
+.detail-value { font-size:1rem; font-weight:700; color:#1a1a2e; }
+.dashboard-actions { display:flex; gap:12px; flex-wrap:wrap; }
+.dash-btn { flex:1; text-align:center; padding:14px 28px; border-radius:12px; font-weight:700; font-size:.95rem; cursor:pointer; transition:all .2s; border:none; text-decoration:none; }
+.dash-btn-prim { background:linear-gradient(135deg,#6c47ff,#ff6b47); color:#fff; }
+.dash-btn-prim:hover { opacity:.95; }
+.dash-btn-sec { background:#f3f4f6; color:#4b5563; }
+.dash-btn-sec:hover { background:#e5e7eb; }
+</style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">Nexkittool</span></a>
+      <div class="nav-links">
+        <a href="../index.html#ai-tools">AI Tools</a>
+        <a href="../index.html#image-tools">Image</a>
+        <a href="../index.html#pdf-tools">PDF</a>
+        <a href="../index.html#utility-tools">Utilities</a>
+      </div>
+      <div class="nav-auth-btns" id="navAuthBtns">
+        <button class="btn-login" onclick="openAuthModal('login')">Login</button>
+        <button class="btn-signup" onclick="openAuthModal('signup')">Sign Up Free</button>
+      </div>
+      <div class="nav-user" id="navUserArea" style="display:none">
+        <div class="nav-user-dropdown" id="navUserDropdown">
+          <div style="display:flex;align-items:center;gap:10px;cursor:pointer" onclick="toggleUserDropdown()">
+            <div class="nav-avatar" id="navAvatarText">U</div>
+            <div><div id="navUserName" class="nav-user-name">User</div><div id="navUserPlan" style="font-size:.75rem;color:#6c47ff;font-weight:600">Free</div></div>
+          </div>
+          <div class="nav-user-dropdown-menu" id="userDropdownMenu">
+            <a href="dashboard.html">👤 Dashboard</a>
+            <button onclick="doLogout()">🚪 Logout</button>
+          </div>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== MOBILE NAV ===== -->
+<nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation" aria-hidden="true" style="display: none;">
+  <a href="../index.html" onclick="toggleMobileNav()">Home</a>
+  <a href="pricing.html" onclick="toggleMobileNav()">Pricing</a>
+  <a href="contact.html" onclick="toggleMobileNav()">Contact</a>
+  <a href="about.html" onclick="toggleMobileNav()">About</a>
+</nav>
+
+<script>
+  function toggleMobileNav() {
+    const nav = document.getElementById('mobileNav');
+    const btn = document.getElementById('hamburger');
+    const isOpen = nav.classList.toggle('open');
+    nav.style.display = isOpen ? 'flex' : 'none';
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+  }
+</script>
+
+<div class="page-hero">
+  <div class="container">
+    <h1>Your <span class="gradient-text">Dashboard</span></h1>
+    <p>Manage your account settings and plan subscription</p>
+  </div>
+</div>
+
+<div class="container" style="padding-bottom:80px;">
+  <div id="loginWarning" style="text-align:center;padding:40px 20px;display:none;">
+    <div style="font-size:3rem;margin-bottom:16px;">🔒</div>
+    <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:8px;">Authentication Required</h2>
+    <p style="color:#6b7280;margin-bottom:24px;">Please log in or sign up to view your dashboard settings.</p>
+    <button onclick="openAuthModal('login')" class="dash-btn dash-btn-prim" style="display:inline-block;width:auto;padding:12px 32px;">Log In</button>
+  </div>
+
+  <div id="dashboardContent" class="dashboard-card" style="display:none;">
+    <div class="dashboard-header">
+      <div class="dashboard-avatar" id="dashAvatar">U</div>
+      <div class="dashboard-info">
+        <h2 id="dashName">User Name</h2>
+        <p id="dashEmail">user@example.com</p>
+        <span id="dashPlanBadge" class="status-badge free">Free Plan</span>
+      </div>
+    </div>
+
+    <div class="dashboard-details">
+      <div class="detail-item">
+        <div class="detail-label">Subscription Status</div>
+        <div class="detail-value" id="detailPlan">Free</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Email Verified</div>
+        <div class="detail-value" id="detailVerified">No</div>
+      </div>
+    </div>
+
+    <div class="dashboard-actions">
+      <a href="pricing.html" id="upgradeCta" class="dash-btn dash-btn-prim">⭐ Upgrade to Pro</a>
+      <button onclick="doLogoutRedirect()" class="dash-btn dash-btn-sec">🚪 Log Out</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-column">
+        <a href="/" class="footer-brand-logo" aria-label="NexKitTool Home">
+          <span class="logo-icon">⚡</span>
+          <span class="logo-text">NexKitTool</span>
+        </a>
+        <p>Premium free online utilities for PDF compression, image editing, AI content generation, and developer productivity tools.</p>
+        <div class="footer-contact-details">
+          <span>📍 Noida, Uttar Pradesh, India</span>
+          <a href="mailto:support@nexkittool.com">✉ support@nexkittool.com</a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h4>Company</h4>
+        <a href="/pages/about.html">About Us</a>
+        <a href="/pages/contact.html">Contact Us</a>
+        <a href="/pages/privacy.html">Privacy Policy</a>
+        <a href="/pages/terms.html">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom-divider"></div>
+    <div class="footer-bottom">
+      <p>© 2026 NexKitTool. All rights reserved.</p>
+      <p>Created by Sumit Tiwari</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../public/js/auth.js"></script>
+<script>
+function renderDashboard() {
+  const user = Auth.getCurrentUser();
+  const warning = document.getElementById('loginWarning');
+  const content = document.getElementById('dashboardContent');
+  if (!user) {
+    warning.style.display = 'block';
+    content.style.display = 'none';
+    return;
+  }
+  warning.style.display = 'none';
+  content.style.display = 'block';
+
+  // Fill details
+  document.getElementById('dashAvatar').textContent = user.avatar || user.name.charAt(0).toUpperCase();
+  document.getElementById('dashName').textContent = user.name;
+  document.getElementById('dashEmail').textContent = user.email;
+  
+  const isPro = user.plan === 'pro';
+  const badge = document.getElementById('dashPlanBadge');
+  badge.textContent = isPro ? '⭐ Pro Plan' : 'Free Plan';
+  badge.className = 'status-badge ' + (isPro ? 'pro' : 'free');
+  
+  document.getElementById('detailPlan').textContent = isPro ? 'Pro Subscription ($4.99/mo)' : 'Free Tier';
+  document.getElementById('detailVerified').textContent = user.verified ? 'Yes ✅' : 'No ❌';
+  
+  const upgradeCta = document.getElementById('upgradeCta');
+  if (isPro) {
+    upgradeCta.style.display = 'none';
+  } else {
+    upgradeCta.style.display = 'block';
+  }
+}
+
+function doLogoutRedirect() {
+  doLogout();
+  setTimeout(() => window.location.href = '../index.html', 800);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderDashboard();
+  
+  // Also hook into dropdown updates
+  const originalUpdate = updateNavUser;
+  window.updateNavUser = function() {
+    originalUpdate();
+    renderDashboard();
+  };
+});
+window.addEventListener('scroll', () => document.getElementById('header').classList.toggle('scrolled', window.scrollY > 20));
+</script>
+</body>
+</html>

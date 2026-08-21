@@ -31,6 +31,50 @@ const freeLimiter = rateLimit({
   skip: (req) => req.headers['x-pro-user'] === process.env.PRO_SECRET
 });
 
+// Protect sensitive files and directories from static exposure
+app.use((req, res, next) => {
+  // Decode URL components repeatedly to handle double encoding
+  let decodedPath = req.path;
+  let prevPath = '';
+  while (decodedPath !== prevPath) {
+    prevPath = decodedPath;
+    try {
+      decodedPath = decodeURIComponent(decodedPath);
+    } catch (e) {
+      break;
+    }
+  }
+
+  // Block path traversal attempts immediately
+  if (decodedPath.includes('..') || decodedPath.includes('\\..')) {
+    return res.status(404).send('404 Not Found');
+  }
+
+  const normalizedPath = path.normalize(decodedPath).replace(/^\\|^\//, '');
+  const blockedPatterns = [
+    /^\.env/i,
+    /^server\.js/i,
+    /^package\.json/i,
+    /^package-lock\.json/i,
+    /^generate-blog-posts\.js/i,
+    /^generate-tool-pages\.js/i,
+    /^nexkittool_deployed\.zip/i,
+    /^nexkittool_updated\.zip/i,
+    /^backend\//i,
+    /^scratch\//i,
+    /^node_modules\//i,
+    /^\.git/i,
+    /\.md$/i,
+    /\.db$/i,
+    /\.sqlite$/i
+  ];
+  const isBlocked = blockedPatterns.some(pattern => pattern.test(normalizedPath));
+  if (isBlocked) {
+    return res.status(404).send('404 Not Found');
+  }
+  next();
+});
+
 // Static files with optimized browser caching
 app.use(express.static(path.join(__dirname, '.'), {
   maxAge: '1y',
@@ -47,7 +91,7 @@ app.use(express.static(path.join(__dirname, '.'), {
 // API Routes
 app.use('/api/image', apiLimiter, require('./backend/routes/image'));
 app.use('/api/pdf', apiLimiter, require('./backend/routes/pdf'));
-app.use('/api/ai', freeLimiter, require('./backend/routes/ai'));
+app.use('/api/ai', require('./backend/routes/ai'));
 app.use('/api/payment', require('./backend/routes/payment'));
 app.use('/api/utility', apiLimiter, require('./backend/routes/utility'));
 app.use('/api/auth', require('./backend/routes/auth'));

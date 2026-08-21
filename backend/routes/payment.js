@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const stripe = process.env.STRIPE_SECRET_KEY ? require('stripe')(process.env.STRIPE_SECRET_KEY) : null;
+const db = require('../db');
 
 const PLANS = {
   'pro-monthly': { price: 499, name: 'Nexkittool Pro Monthly' },
@@ -29,7 +30,27 @@ router.post('/create-session', async (req, res) => {
   }
 });
 
-router.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
+router.post('/verify-session', async (req, res) => {
+  if (!stripe) return res.status(503).json({ error: 'Payment not configured. Add STRIPE_SECRET_KEY to .env' });
+  const { sessionId, userId } = req.body;
+  if (!sessionId || !userId) return res.status(400).json({ error: 'Session ID and User ID are required' });
+  try {
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+    if (session.payment_status === 'paid') {
+      const upgradedUser = await db.updateUserPlan(userId, 'pro');
+      return res.json({
+        ok: true,
+        user: upgradedUser ? { id: upgradedUser.id, name: upgradedUser.name, email: upgradedUser.email, plan: upgradedUser.plan, verified: upgradedUser.verified } : null
+      });
+    } else {
+      return res.status(400).json({ error: 'Payment has not been completed.' });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
   const sig = req.headers['stripe-signature'];
   if (!stripe || !process.env.STRIPE_WEBHOOK_SECRET) return res.json({ received: true });
   try {
@@ -37,6 +58,7 @@ router.post('/webhook', express.raw({ type: 'application/json' }), (req, res) =>
     if (event.type === 'checkout.session.completed') {
       const { userId, plan } = event.data.object.metadata;
       console.log(`✅ Payment success: User ${userId} upgraded to ${plan}`);
+      await db.updateUserPlan(userId, 'pro');
     }
     res.json({ received: true });
   } catch (err) { res.status(400).send(`Webhook Error: ${err.message}`); }

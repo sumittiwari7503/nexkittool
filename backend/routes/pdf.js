@@ -84,17 +84,67 @@ router.post('/watermark', upload.single('file'), async (req, res) => {
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
+function parsePageRange(rangeStr, maxPages) {
+  const pages = new Set();
+  const parts = rangeStr.split(',');
+  for (const part of parts) {
+    const p = part.trim();
+    if (!p) continue;
+    if (/^\d+$/.test(p)) {
+      const page = parseInt(p, 10);
+      if (page < 1 || page > maxPages) {
+        throw new Error(`Page number ${page} out of bounds (1-${maxPages}).`);
+      }
+      pages.add(page - 1);
+    } else if (/^\d+-\d+$/.test(p)) {
+      const [startStr, endStr] = p.split('-');
+      let start = parseInt(startStr, 10);
+      let end = parseInt(endStr, 10);
+      if (start < 1 || start > maxPages || end < 1 || end > maxPages) {
+        throw new Error(`Page range ${p} out of bounds (1-${maxPages}).`);
+      }
+      if (start > end) {
+        [start, end] = [end, start]; // Swap reversed range
+      }
+      for (let i = start; i <= end; i++) {
+        pages.add(i - 1);
+      }
+    } else {
+      throw new Error(`Invalid range format: "${p}". Use numbers or ranges like 1-5.`);
+    }
+  }
+  return Array.from(pages).sort((a, b) => a - b);
+}
+
 // Split PDF
 router.post('/split', upload.single('file'), async (req, res) => {
   try {
+    if (!req.file) return res.status(400).json({ error: 'No PDF file uploaded.' });
     const doc = await PDFDocument.load(req.file.buffer);
+    const maxPages = doc.getPageCount();
+    const rangeText = req.body.pages || '';
+    
+    let indices = [];
+    if (rangeText.trim()) {
+      indices = parsePageRange(rangeText, maxPages);
+      if (indices.length === 0) {
+        return res.status(400).json({ error: 'No valid pages selected.' });
+      }
+    } else {
+      // If empty range, extract all pages
+      indices = Array.from({ length: maxPages }, (_, i) => i);
+    }
+    
     const newDoc = await PDFDocument.create();
-    const [firstPage] = await newDoc.copyPages(doc, [0]);
-    newDoc.addPage(firstPage);
+    const copiedPages = await newDoc.copyPages(doc, indices);
+    copiedPages.forEach(page => newDoc.addPage(page));
+    
     const pdfBytes = await newDoc.save();
     res.set('Content-Type', 'application/pdf');
     res.send(Buffer.from(pdfBytes));
-  } catch (err) { res.status(500).json({ error: err.message }); }
+  } catch (err) { 
+    res.status(400).json({ error: err.message }); 
+  }
 });
 
 // PDF to Image (real rendering — returns a single JPG for 1-page PDFs, or a ZIP of JPGs for multi-page PDFs)

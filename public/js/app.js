@@ -125,6 +125,7 @@ function ensureToolLibraries(toolId) {
 
 // Open tool modal
 function openTool(id) {
+  window.activeToolId = id;
   const tool = TOOLS.find(t => t.id === id);
   if (!tool) return;
   const isPro = PRO_TOOLS.includes(id);
@@ -211,15 +212,23 @@ function getToolUI(tool) {
   // PDF TOOLS
   if (['img2pdf','pdf2img','merge','split','compress-pdf','pdf-watermark','word2pdf','pdf2word'].includes(tool.id)) {
     const accept = ['merge','split','compress-pdf','pdf-watermark','pdf2img','pdf2word'].includes(tool.id) ? '.pdf' : (tool.id === 'img2pdf' ? 'image/*' : '.doc,.docx');
+    const isSplit = tool.id === 'split';
     return `
-      <div style="border:2px dashed #e5e7eb;border-radius:12px;padding:32px;text-align:center;cursor:pointer" id="dropZone" onclick="document.getElementById('pdfFile').click()">
+      <div style="border:2px dashed #e5e7eb;border-radius:12px;padding:32px;text-align:center;cursor:pointer;transition:all .2s" id="dropZone" onclick="document.getElementById('pdfFile').click()" ondragover="event.preventDefault();this.style.borderColor='#6c47ff'" ondragleave="this.style.borderColor='#e5e7eb'" ondrop="handleDrop(event,'pdfFile')">
         <div style="font-size:2.5rem;margin-bottom:12px">📄</div>
         <p style="font-weight:600">Drop file here or <span style="color:#6c47ff">click to browse</span></p>
         <p style="font-size:.82rem;color:#6b7280;margin-top:6px">Max 25MB for free • 100MB for Pro</p>
-        <input type="file" id="pdfFile" accept="${accept}" style="display:none" multiple onchange="pdfFileSelected(this)">
+        <input type="file" id="pdfFile" accept="${accept}" style="display:none" ${tool.id === 'merge' || tool.id === 'img2pdf' ? 'multiple' : ''} onchange="pdfFileSelected(this)">
       </div>
       <div id="pdfInfo" style="display:none;margin-top:16px">
         <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:16px" id="pdfFileInfo"></div>
+        ${isSplit ? `
+          <div class="form-group" style="margin-top:14px;text-align:left">
+            <label style="display:block;font-size:.85rem;font-weight:600;margin-bottom:6px;color:#374151">Page Range to Extract (e.g. 1-5, 8, 11-13):</label>
+            <input type="text" id="splitPages" placeholder="Leave empty to extract all pages" 
+              style="width:100%;padding:12px 16px;border:2px solid #e5e7eb;border-radius:10px;font-size:.95rem;outline:none;box-sizing:border-box">
+          </div>
+        ` : ''}
         <button onclick="processPDF('${tool.id}')" class="btn-auth" style="width:100%;margin-top:16px">⚡ Process File</button>
         <div id="pdfOutput" style="display:none;text-align:center;margin-top:16px;padding:20px;background:#d1fae5;border-radius:10px">
           <p style="font-weight:700;color:#059669;margin-bottom:12px">✅ Processing complete!</p>
@@ -436,6 +445,45 @@ function getImageOptions(id) {
   </div>`;
   if (id === 'watermark') return `<div style="margin-top:14px"><input type="text" id="wmText" placeholder="Watermark text e.g. Nexkittool" style="width:100%;padding:10px;border:2px solid #e5e7eb;border-radius:8px;outline:none;font-size:.95rem"></div>`;
   if (id === 'convert') return `<select id="convertFmt" style="width:100%;margin-top:14px;padding:10px;border:2px solid #e5e7eb;border-radius:8px;font-size:.95rem"><option value="jpeg">Convert to JPG</option><option value="png">Convert to PNG</option><option value="webp">Convert to WEBP</option></select>`;
+  if (id === 'flip') return `
+    <div style="margin-top:14px;text-align:left">
+      <label style="display:block;font-size:.85rem;font-weight:600;margin-bottom:6px;color:#374151">Select Transformation:</label>
+      <select id="flipMode" style="width:100%;padding:10px;border:2px solid #e5e7eb;border-radius:8px;font-size:.95rem;outline:none">
+        <option value="horizontal">Horizontal Flip (Mirror)</option>
+        <option value="vertical">Vertical Flip</option>
+        <option value="90">Rotate 90° Clockwise</option>
+        <option value="180">Rotate 180°</option>
+        <option value="270">Rotate 270° Clockwise</option>
+      </select>
+    </div>
+  `;
+  if (id === 'crop') return `
+    <div style="margin-top:14px;text-align:left">
+      <div style="position:relative;display:inline-block;margin:10px auto;max-width:100%" id="cropContainer">
+        <div id="cropBox" style="position:absolute;border:2px dashed #6c47ff;box-shadow:0 0 0 9999px rgba(0,0,0,0.5);cursor:move;box-sizing:border-box">
+          <div style="position:absolute;right:-5px;bottom:-5px;width:10px;height:10px;background:#6c47ff;cursor:se-resize" id="cropResize"></div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
+        <div>
+          <label style="font-size:.8rem;color:#6b7280">X Coordinate (px)</label>
+          <input type="number" id="cropX" value="0" min="0" style="width:100%;padding:8px;border:2px solid #e5e7eb;border-radius:8px;outline:none" oninput="updateCropBoxFromInputs()">
+        </div>
+        <div>
+          <label style="font-size:.8rem;color:#6b7280">Y Coordinate (px)</label>
+          <input type="number" id="cropY" value="0" min="0" style="width:100%;padding:8px;border:2px solid #e5e7eb;border-radius:8px;outline:none" oninput="updateCropBoxFromInputs()">
+        </div>
+        <div>
+          <label style="font-size:.8rem;color:#6b7280">Width (px)</label>
+          <input type="number" id="cropW" value="200" min="10" style="width:100%;padding:8px;border:2px solid #e5e7eb;border-radius:8px;outline:none" oninput="updateCropBoxFromInputs()">
+        </div>
+        <div>
+          <label style="font-size:.8rem;color:#6b7280">Height (px)</label>
+          <input type="number" id="cropH" value="200" min="10" style="width:100%;padding:8px;border:2px solid #e5e7eb;border-radius:8px;outline:none" oninput="updateCropBoxFromInputs()">
+        </div>
+      </div>
+    </div>
+  `;
   return '';
 }
 
@@ -474,9 +522,14 @@ async function runAI(toolId) {
     humanizer: `Rewrite the following AI-generated text so it reads naturally and conversationally like a human wrote it — vary sentence length and remove robotic or repetitive phrasing while keeping the original meaning intact:\n\n"${input}"`
   };
   try {
+    const headers = { 'Content-Type': 'application/json' };
+    const user = Auth.getCurrentUser();
+    if (user && user.token) {
+      headers['Authorization'] = `Bearer ${user.token}`;
+    }
     const res = await fetch('/api/ai/generate', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ prompt: prompts[toolId] || input, toolId })
     });
     const data = await res.json();
@@ -500,9 +553,13 @@ function previewImage(input) {
   if (file.size > 10 * 1024 * 1024) { showToast('File too large! Max 10MB for free.', 'error'); return; }
   const reader = new FileReader();
   reader.onload = e => {
-    document.getElementById('previewImg').src = e.target.result;
+    const img = document.getElementById('previewImg');
+    img.src = e.target.result;
     document.getElementById('imagePreview').style.display = 'block';
     document.getElementById('imageOutput').style.display = 'none';
+    if (window.activeToolId === 'crop') {
+      setTimeout(() => initCropTool(img), 100);
+    }
   };
   reader.readAsDataURL(file);
 }
@@ -526,6 +583,13 @@ async function processImage(toolId) {
   }
   if (toolId === 'watermark') formData.append('text', document.getElementById('wmText')?.value || 'Nexkittool');
   if (toolId === 'convert') formData.append('format', document.getElementById('convertFmt')?.value || 'jpeg');
+  if (toolId === 'flip') formData.append('mode', document.getElementById('flipMode')?.value || 'horizontal');
+  if (toolId === 'crop') {
+    formData.append('x', document.getElementById('cropX')?.value || 0);
+    formData.append('y', document.getElementById('cropY')?.value || 0);
+    formData.append('width', document.getElementById('cropW')?.value || 200);
+    formData.append('height', document.getElementById('cropH')?.value || 200);
+  }
   const endpointMap = { bgremove:'remove-bg', resize:'resize', compress:'compress', watermark:'watermark', grayscale:'grayscale', flip:'flip', crop:'crop', convert:'convert' };
   try {
     const res = await fetch('/api/image/' + (endpointMap[toolId] || toolId), { method: 'POST', body: formData });
@@ -572,6 +636,10 @@ async function processPDF(toolId) {
   btn.textContent = '⏳ Processing...'; btn.disabled = true;
   const formData = new FormData();
   files.forEach(f => formData.append('file', f));
+  if (toolId === 'split') {
+    const rangeVal = document.getElementById('splitPages')?.value.trim() || '';
+    formData.append('pages', rangeVal);
+  }
   const endpointMap = { img2pdf:'image-to-pdf', pdf2img:'pdf-to-image', merge:'merge', split:'split', 'compress-pdf':'compress', 'pdf-watermark':'watermark', word2pdf:'word-to-pdf', pdf2word:'pdf-to-word' };
   try {
     const res = await fetch('/api/pdf/' + (endpointMap[toolId] || toolId), { method: 'POST', body: formData });
@@ -982,9 +1050,14 @@ async function runPalette() {
   
   try {
     const prompt = `Generate a color palette of 5 harmonious colors matching the theme/mood: "${input}". Return ONLY a JSON array of 5 HEX strings, for example: ["#1a1a2d", "#ff5656", "#00b5b5", "#eeeeee", "#ffd369"]. Return no markdown, no explanation, just raw JSON.`;
+    const headers = { 'Content-Type': 'application/json' };
+    const user = Auth.getCurrentUser();
+    if (user && user.token) {
+      headers['Authorization'] = `Bearer ${user.token}`;
+    }
     const res = await fetch('/api/ai/generate', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ prompt, toolId: 'palette' })
     });
     const data = await res.json();
@@ -1043,13 +1116,20 @@ window.addEventListener('scroll', () => {
 });
 
 // Mobile nav
-document.getElementById('hamburger')?.addEventListener('click', function() {
+window.toggleMobileNav = function() {
   const nav = document.getElementById('mobileNav');
-  if (nav) {
+  const btn = document.getElementById('hamburger');
+  if (nav && btn) {
     const isOpen = nav.classList.toggle('open');
-    this.setAttribute('aria-expanded', isOpen);
-    nav.setAttribute('aria-hidden', !isOpen);
+    nav.style.display = isOpen ? 'flex' : 'none';
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    nav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
   }
+};
+
+document.getElementById('hamburger')?.addEventListener('click', function() {
+  if (this.getAttribute('onclick')) return; // Avoid double toggle if inline onclick exists
+  window.toggleMobileNav();
 });
 
 // Modal close
@@ -1092,4 +1172,199 @@ function enableTracking() {
     'analytics_storage': 'granted',
     'ad_storage': 'granted'
   });
+}
+
+function initCropTool(img) {
+  const container = document.getElementById('cropContainer');
+  const cropBox = document.getElementById('cropBox');
+  const cropXInput = document.getElementById('cropX');
+  const cropYInput = document.getElementById('cropY');
+  const cropWInput = document.getElementById('cropW');
+  const cropHInput = document.getElementById('cropH');
+
+  if (!container || !cropBox || !img) return;
+
+  container.innerHTML = '';
+  const cropImg = img.cloneNode(true);
+  cropImg.style.maxHeight = '300px';
+  cropImg.style.display = 'block';
+  cropImg.style.margin = '0 auto';
+  cropImg.style.userSelect = 'none';
+  container.appendChild(cropImg);
+  container.appendChild(cropBox);
+
+  cropImg.onload = () => {
+    const dispW = cropImg.clientWidth;
+    const dispH = cropImg.clientHeight;
+    const natW = cropImg.naturalWidth;
+    const natH = cropImg.naturalHeight;
+
+    const initW = Math.round(natW * 0.5);
+    const initH = Math.round(natH * 0.5);
+    const initX = Math.round((natW - initW) / 2);
+    const initY = Math.round((natH - initH) / 2);
+
+    cropXInput.value = initX;
+    cropYInput.value = initY;
+    cropWInput.value = initW;
+    cropHInput.value = initH;
+
+    cropXInput.max = natW;
+    cropYInput.max = natH;
+    cropWInput.max = natW;
+    cropHInput.max = natH;
+
+    updateCropOverlay();
+  };
+
+  if (cropImg.complete) {
+    cropImg.onload();
+  }
+
+  window.updateCropOverlay = function() {
+    const dispW = cropImg.clientWidth;
+    const dispH = cropImg.clientHeight;
+    const natW = cropImg.naturalWidth;
+    const natH = cropImg.naturalHeight;
+
+    const scaleX = dispW / natW;
+    const scaleY = dispH / natH;
+
+    const x = parseInt(cropXInput.value) || 0;
+    const y = parseInt(cropYInput.value) || 0;
+    const w = parseInt(cropWInput.value) || 100;
+    const h = parseInt(cropHInput.value) || 100;
+
+    cropBox.style.left = Math.round(x * scaleX) + 'px';
+    cropBox.style.top = Math.round(y * scaleY) + 'px';
+    cropBox.style.width = Math.round(w * scaleX) + 'px';
+    cropBox.style.height = Math.round(h * scaleY) + 'px';
+  };
+
+  window.updateCropBoxFromInputs = function() {
+    const natW = cropImg.naturalWidth;
+    const natH = cropImg.naturalHeight;
+
+    let x = parseInt(cropXInput.value) || 0;
+    let y = parseInt(cropYInput.value) || 0;
+    let w = parseInt(cropWInput.value) || 100;
+    let h = parseInt(cropHInput.value) || 100;
+
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+    if (w < 10) w = 10;
+    if (h < 10) h = 10;
+
+    if (x + w > natW) w = natW - x;
+    if (y + h > natH) h = natH - y;
+
+    cropXInput.value = x;
+    cropYInput.value = y;
+    cropWInput.value = w;
+    cropHInput.value = h;
+
+    updateCropOverlay();
+  };
+
+  let isDragging = false;
+  let startX, startY;
+  let boxLeft, boxTop;
+
+  cropBox.onmousedown = cropBox.ontouchstart = (e) => {
+    if (e.target.id === 'cropResize') return;
+    e.preventDefault();
+    isDragging = true;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    startX = clientX;
+    startY = clientY;
+    boxLeft = parseInt(cropBox.style.left) || 0;
+    boxTop = parseInt(cropBox.style.top) || 0;
+
+    document.onmousemove = document.ontouchmove = (moveEvent) => {
+      if (!isDragging) return;
+      const mX = moveEvent.touches ? moveEvent.touches[0].clientX : moveEvent.clientX;
+      const mY = moveEvent.touches ? moveEvent.touches[0].clientY : moveEvent.clientY;
+      const dx = mX - startX;
+      const dy = mY - startY;
+
+      let newLeft = boxLeft + dx;
+      let newTop = boxTop + dy;
+
+      const dispW = cropImg.clientWidth;
+      const dispH = cropImg.clientHeight;
+      const boxW = cropBox.clientWidth;
+      const boxH = cropBox.clientHeight;
+
+      if (newLeft < 0) newLeft = 0;
+      if (newTop < 0) newTop = 0;
+      if (newLeft + boxW > dispW) newLeft = dispW - boxW;
+      if (newTop + boxH > dispH) newTop = dispH - boxH;
+
+      cropBox.style.left = newLeft + 'px';
+      cropBox.style.top = newTop + 'px';
+
+      const natW = cropImg.naturalWidth;
+      const natH = cropImg.naturalHeight;
+      cropXInput.value = Math.round(newLeft * (natW / dispW));
+      cropYInput.value = Math.round(newTop * (natH / dispH));
+    };
+
+    document.onmouseup = document.ontouchend = () => {
+      isDragging = false;
+      document.onmousemove = document.ontouchmove = null;
+      document.onmouseup = document.ontouchend = null;
+    };
+  };
+
+  const resizeHandle = document.getElementById('cropResize');
+  let isResizing = false;
+  let startW, startH;
+
+  resizeHandle.onmousedown = resizeHandle.ontouchstart = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    isResizing = true;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    startX = clientX;
+    startY = clientY;
+    boxLeft = parseInt(cropBox.style.left) || 0;
+    boxTop = parseInt(cropBox.style.top) || 0;
+    startW = cropBox.clientWidth;
+    startH = cropBox.clientHeight;
+
+    document.onmousemove = document.ontouchmove = (moveEvent) => {
+      if (!isResizing) return;
+      const mX = moveEvent.touches ? moveEvent.touches[0].clientX : moveEvent.clientX;
+      const mY = moveEvent.touches ? moveEvent.touches[0].clientY : moveEvent.clientY;
+      const dx = mX - startX;
+      const dy = mY - startY;
+
+      let newW = startW + dx;
+      let newH = startH + dy;
+
+      const dispW = cropImg.clientWidth;
+      const dispH = cropImg.clientHeight;
+
+      if (newW < 20) newW = 20;
+      if (newH < 20) newH = 20;
+      if (boxLeft + newW > dispW) newW = dispW - boxLeft;
+      if (boxTop + newH > dispH) newH = dispH - boxTop;
+
+      cropBox.style.width = newW + 'px';
+      cropBox.style.height = newH + 'px';
+
+      const natW = cropImg.naturalWidth;
+      const natH = cropImg.naturalHeight;
+      cropWInput.value = Math.round(newW * (natW / dispW));
+      cropHInput.value = Math.round(newH * (natH / dispH));
+    };
+
+    document.onmouseup = document.ontouchend = () => {
+      isResizing = false;
+      document.onmousemove = document.ontouchmove = null;
+      document.onmouseup = document.ontouchend = null;
+    };
+  };
 }

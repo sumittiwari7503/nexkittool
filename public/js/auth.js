@@ -18,6 +18,31 @@ const Auth = {
     try { localStorage.removeItem(this.SESSION_KEY); } catch(e) {}
   },
   isPro() { const u = this.getCurrentUser(); return u && u.plan === 'pro'; },
+  async upgradeToPro(userId, sessionId) {
+    if (!sessionId) {
+      return { ok: false, error: 'Automatic activation requires Stripe Checkout. UPI payments must be verified by administrators.' };
+    }
+    try {
+      const r = await fetch('/api/payment/verify-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, sessionId })
+      });
+      const data = await r.json();
+      if (data.ok) {
+        const user = this.getCurrentUser();
+        if (user && user.id === userId) {
+          user.plan = 'pro';
+          this.setSession(user);
+        }
+        return { ok: true, user: data.user };
+      } else {
+        return { ok: false, error: data.error || 'Verification failed.' };
+      }
+    } catch (e) {
+      return { ok: false, error: 'Network error occurred.' };
+    }
+  },
 
   // ---- API helpers ----
   async apiSignup(name, email, password) {
@@ -59,7 +84,7 @@ async function handleGoogleCredential(response) {
     setBtnLoading('nkt_googleBtn', true, '⏳ Signing in...');
     const data = await Auth.apiGoogle(response.credential);
     if (data.ok) {
-      const user = { ...data.user, avatar: data.user.name.charAt(0).toUpperCase() };
+      const user = { ...data.user, token: data.token, avatar: data.user.name.charAt(0).toUpperCase() };
       Auth.setSession(user);
       closeAuthModal();
       updateNavUser();
@@ -300,7 +325,7 @@ async function doLogin(e) {
   try {
     const data = await Auth.apiLogin(email, pass);
     if (data.ok) {
-      const user = { ...data.user, avatar: data.user.name.charAt(0).toUpperCase() };
+      const user = { ...data.user, token: data.token, avatar: data.user.name.charAt(0).toUpperCase() };
       Auth.setSession(user);
       closeAuthModal();
       updateNavUser();
@@ -327,7 +352,7 @@ async function doSignup(e) {
   try {
     const data = await Auth.apiSignup(name, email, pass);
     if (data.ok) {
-      const user = { ...data.user, avatar: data.user.name.charAt(0).toUpperCase() };
+      const user = { ...data.user, token: data.token, avatar: data.user.name.charAt(0).toUpperCase() };
       Auth.setSession(user);
       closeAuthModal();
       updateNavUser();

@@ -123,7 +123,7 @@
     </nav>
     <div class="section-badge badge-pdf" style="margin-bottom:12px">📄 PDF Tool</div>
     <h1>Free Word to PDF Converter Online</h1>
-    <p>Convert DOC and DOCX files to PDF documents online for free. Keep layouts and formatting intact. No registration required.</p>
+    <p>Convert DOCX files to clean PDF documents online for free. Preserves headings, bold text, lists, and tables. No registration required.</p>
     <div class="tool-features-bar">
       <span class="tool-feat-badge"><b>✓</b> 100% Free</span>
       <span class="tool-feat-badge"><b>✓</b> No Signup</span>
@@ -147,29 +147,29 @@
 
 <div class="tool-content">
   <h2>Why Convert Word to PDF?</h2>
-  <p>Convert Microsoft Word documents (.doc and .docx) to PDF to lock formatting in place. Once converted, you can easily <a href="/tools/split-pdf/">separate PDF pages</a> or merge them with other files using our document tools. Sharing doc files can break layouts depending on recipient office versions and installed fonts. PDFs display identically on all devices. Our converter preserves spacing, page breaks, hyperlinks, and margins. Our secure compiler processes PDF stream layers, ensuring that fonts, margins, page boundaries, and internal object coordinates remain optimized. By executing operations directly in modern server memory or client sandboxes, we guarantee zero file persistence, protecting your financial reports, legal contracts, and personal paperwork. You can process unlimited files without paying for expensive acrobat licenses.</p>
+  <p>Convert Microsoft Word documents (.docx) to PDF to lock text formatting in place. Once converted, you can easily <a href="/tools/split-pdf/">separate PDF pages</a> or merge them with other files using our document tools. PDFs display consistently across devices and operating systems without missing font errors. Our converter parses document headings, paragraphs, bold and italic styling, bullet lists, and basic tables into a standardized PDF layout. Please note: This converter is optimized for modern .docx files. If you have an older .doc file (Word 97–2003), simply re-save it as .docx in Word or Google Docs before uploading.</p>
 
   <h2>How to Use the Free Word to PDF Converter</h2>
   <ol>
-    <li><strong>Upload document:</strong> Select a DOC or DOCX file.</li>
-    <li><strong>Convert:</strong> The client-side converter parses document objects.</li>
-    <li><strong>Download PDF:</strong> Save the finalized PDF to your computer.</li>
+    <li><strong>Upload document:</strong> Select your DOCX file.</li>
+    <li><strong>Convert:</strong> The client-side converter parses document text, headings, and tables.</li>
+    <li><strong>Download PDF:</strong> Save the finalized PDF directly to your device.</li>
   </ol>
 
   <h2>Key Benefits of NexKitTool Word to PDF Converter</h2>
   <ul>
-    <li><strong>Accurate Font Rendering:</strong> Translates paragraphs, margins, and basic text formatting into standard PDF instructions.</li>
-    <li><strong>100% Client-Side:</strong> Converts locally inside browser memory using mammoth and jsPDF APIs.</li>
+    <li><strong>Structure & Heading Preservation:</strong> Translates paragraphs, headings, bullet lists, bold/italic text, and tables into clean PDF format.</li>
+    <li><strong>100% Private Client-Side Conversion:</strong> Converts directly inside browser memory without uploading sensitive files to external storage.</li>
   </ul>
 
   <h2>Typical Use Cases</h2>
   <ul>
-    <li><strong>Resume Submissions:</strong> Ensure hiring managers see your resume layout exactly as intended.</li>
-    <li><strong>Invoicing & Contracts:</strong> Send clients documents that cannot be easily modified or reformatted.</li>
+    <li><strong>Document Sharing:</strong> Distribute reports, essays, and drafts in standard PDF format across different devices.</li>
+    <li><strong>Printing & Archiving:</strong> Lock formatting and fonts so documents print reliably without reflow or page layout shifting.</li>
   </ul>
 
   <h2>Technical Architecture and Privacy Safeguards</h2>
-  <p>Uses `mammoth.js` to parse the DOCX file layout, extracts HTML paragraphs, and renders them onto a structured document object using `jsPDF`.</p>
+  <p>Uses `mammoth.js` to parse the DOCX OpenXML structure, extracts HTML elements (headings, tables, lists, text runs), and compiles them into a structured PDF document directly in browser sandbox memory.</p>
   <p>Every tool page on NexKitTool is built with data-privacy by design. When handling operations that process documents, images, or passwords, all calculations are executed directly in browser sandbox contexts or routed through highly secure, short-lived backend instances. We use standard end-to-end SSL/TLS configurations to encrypt telemetry. No uploaded datasets or text fragments are ever written to persistent disk storage or utilized for training machine learning algorithms.</p>
 
   <h2>Common Document and File Management Standards</h2>
@@ -179,7 +179,7 @@
   <div class="faq-list">
     <details class="faq-item">
       <summary>Will the hyperlinks in my Word document work in the PDF?</summary>
-      <div><p>Yes. The converter preserves all hyperlinks, internal links, and bookmark structures.</p></div>
+      <div><p>Yes. The converter extracts and links URLs embedded in the document.</p></div>
     </details>
   <details class="faq-item">
       <summary>Can I convert large Word files?</summary>
@@ -191,7 +191,7 @@
     </details>
   <details class="faq-item">
       <summary>Do you support conversion for both .doc and .docx formats?</summary>
-      <div><p>Yes, our conversion engine supports both Microsoft Word formats.</p></div>
+      <div><p>This converter currently supports modern .docx files. For older legacy .doc files (Word 97–2003), simply open the file in Microsoft Word or Google Docs and save it as .docx before uploading.</p></div>
     </details>
   </div>
 

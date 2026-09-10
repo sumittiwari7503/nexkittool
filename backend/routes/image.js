@@ -107,9 +107,10 @@ router.post('/convert', upload.single('image'), async (req, res) => {
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// Background Remove (simple threshold method)
+// Background Remove (Legacy fallback route; production web app uses client-side WASM engine)
 router.post('/remove-bg', upload.single('image'), async (req, res) => {
   try {
+    res.set('X-Deprecated', 'true');
     const sharp = require('sharp');
     const image = sharp(req.file.buffer);
     const metadata = await image.metadata();

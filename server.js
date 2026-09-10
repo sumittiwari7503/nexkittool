@@ -10,6 +10,10 @@ const compression = require('compression');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Reverse Proxy Configuration (Hostinger / Nginx front-facing proxy)
+// Trust 1st proxy hop so req.ip safely reflects the client IP rather than 127.0.0.1
+app.set('trust proxy', 1);
+
 // Security & Performance
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
@@ -24,9 +28,17 @@ app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 
 // Rate Limiters
-const apiLimiter = rateLimit({ windowMs: 15*60*1000, max: 200, standardHeaders: true });
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 200,
+  standardHeaders: true,
+  legacyHeaders: false
+});
 const freeLimiter = rateLimit({
-  windowMs: 60*60*1000, max: 30,
+  windowMs: 60 * 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
   message: { error: 'Free tier: 30 AI requests/hour. Upgrade to Pro for unlimited!' },
   skip: (req) => req.headers['x-pro-user'] === process.env.PRO_SECRET
 });

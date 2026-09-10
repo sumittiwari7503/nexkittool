@@ -112,11 +112,11 @@ function loadScript(url) {
 
 function ensureToolLibraries(toolId) {
   const libMap = {
-    pdf2word: ['https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js'],
+    pdf2word: ['https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'],
     pdf2img: ['https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'],
     img2pdf: ['https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'],
     jpg2pdf: ['https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'],
-    word2pdf: ['https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js']
+    word2pdf: ['https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js']
   };
   const urls = libMap[toolId];
   if (!urls || urls.length === 0) return Promise.resolve();
@@ -164,9 +164,10 @@ function closeTool() {
 
 // Tool UIs
 function getToolUI(tool) {
-  const textTools = { essay:'Write a detailed essay about:',grammar:'Paste text to fix grammar:',rewriter:'Paste text to rewrite:',summarizer:'Paste text to summarize:',translator:'Enter text to translate:',hashtag:'Enter topic for hashtags:',paraphrase:'Paste text to paraphrase:',plagiarism:'Paste text to check:',humanizer:'Paste AI-generated text to humanize:' };
+  const textTools = { essay:'Write a detailed essay about:',grammar:'Paste text to fix grammar:',rewriter:'Paste text to rewrite:',summarizer:'Paste text to summarize:',translator:'Enter text to translate:',hashtag:'Enter topic for hashtags:',paraphrase:'Paste text to paraphrase:',plagiarism:'Paste text to analyze writing originality & style:',humanizer:'Paste AI-generated text to humanize:' };
   if (textTools[tool.id]) {
     const isTranslator = tool.id === 'translator';
+    const isPlagiarism = tool.id === 'plagiarism';
     return `
       ${isTranslator ? `<div class="form-group"><label>Target Language</label>
         <select id="langSelect" style="width:100%;padding:10px;border:2px solid #e5e7eb;border-radius:8px;font-size:.95rem;outline:none">
@@ -176,15 +177,21 @@ function getToolUI(tool) {
           <option value="German">German</option><option value="Japanese">Japanese</option>
           <option value="Russian">Russian</option><option value="Portuguese">Portuguese</option>
         </select></div>` : ''}
+      ${isPlagiarism ? `<div style="font-size:.82rem;color:#4b5563;background:#f9fafb;border:1px solid #e5e7eb;padding:10px 14px;border-radius:8px;margin-bottom:14px;line-height:1.5">
+        💡 <strong>Notice:</strong> NexKitTool uses AI to analyze writing patterns, generic phrasing, stylistic predictability, and originality signals. It does not crawl the live web or access proprietary academic plagiarism databases.
+      </div>` : ''}
       <div class="form-group">
         <label>${textTools[tool.id]}</label>
         <textarea id="toolInput" rows="5" style="width:100%;padding:12px;border:2px solid #e5e7eb;border-radius:10px;font-size:.95rem;resize:vertical;outline:none;font-family:inherit" placeholder="Type or paste here..."></textarea>
       </div>
-      <button onclick="runAI('${tool.id}')" class="btn-auth" style="width:100%">✨ Generate</button>
+      <button onclick="runAI('${tool.id}')" class="btn-auth" style="width:100%">${isPlagiarism ? '🔍 Analyze Writing Originality' : '✨ Generate'}</button>
       <div id="aiOutput" style="margin-top:20px;display:none">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <strong>Result:</strong>
-          <button onclick="copyOutput()" style="background:var(--primary-light);color:var(--primary);border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.85rem">📋 Copy</button>
+          <strong>${isPlagiarism ? 'AI-Based Writing Analysis:' : 'Result:'}</strong>
+          <div style="display:flex;gap:8px">
+            <button onclick="copyOutput()" style="background:var(--primary-light);color:var(--primary);border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.85rem">📋 Copy</button>
+            <button onclick="resetAI()" style="background:#f3f4f6;color:#4b5563;border:1px solid #e5e7eb;padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.85rem">🔄 Clear</button>
+          </div>
         </div>
         <div id="aiResult" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px;padding:16px;min-height:80px;line-height:1.7;white-space:pre-wrap;font-size:.92rem"></div>
       </div>`;
@@ -618,7 +625,30 @@ async function runAI(toolId) {
     translator: `Translate the following text to ${document.getElementById('langSelect')?.value || 'Urdu'}:\n\n"${input}"`,
     hashtag: `Generate 20 relevant, trending hashtags for this topic: "${input}". Format as a list of hashtags.`,
     paraphrase: `Paraphrase the following text in a natural, human way:\n\n"${input}"`,
-    plagiarism: `Analyze if this text appears to be plagiarized or AI-generated. Rate originality 0-100% and explain:\n\n"${input}"`,
+    plagiarism: `You are an expert writing analyst. Analyze the following text for writing originality, style patterns, and predictability.
+
+Evaluate and structure your response into these exact sections:
+
+1. 📊 AI-Based Writing Analysis (Estimated Originality & Freshness):
+Provide a qualitative evaluation of whether this text reads like distinctive, human-crafted writing or generic/formulaic text. State an estimated Stylistic Originality score (0-100%) and clearly explain that this is an AI stylistic estimate based on vocabulary predictability and structural patterns, not a web/database plagiarism scan.
+
+2. ⚠️ Generic or Cliché Phrases:
+Identify any overly common, predictable, or cliché phrases that reduce the text's distinctiveness.
+
+3. 🔁 Repetitive Wording & Structure:
+Highlight repetitive sentence openings, filler phrases, or overused words.
+
+4. 🤖 Stylistic Signals (Human vs. Formulaic Patterns):
+Point out signals of natural human voice versus formulaic or computer-generated writing patterns.
+
+5. ✏️ Specific Sentences to Rewrite:
+Quote 1-3 specific sentences from the text that could be revised to sound more distinctive and original.
+
+6. 💡 Suggestions for Greater Distinctiveness:
+Provide 2-3 practical tips to strengthen the voice, style, and authenticity of this piece.
+
+Text to analyze:
+"""${input}"""`,
     humanizer: `Rewrite the following AI-generated text so it reads naturally and conversationally like a human wrote it — vary sentence length and remove robotic or repetitive phrasing while keeping the original meaning intact:\n\n"${input}"`
   };
   try {
@@ -639,12 +669,45 @@ async function runAI(toolId) {
   } catch (err) {
     showToast('AI Error: ' + err.message, 'error');
   }
-  btn.textContent = '✨ Generate'; btn.disabled = false;
+  btn.textContent = toolId === 'plagiarism' ? '🔍 Analyze Writing Originality' : '✨ Generate'; btn.disabled = false;
 }
 
 function copyOutput() {
   const txt = document.getElementById('aiResult')?.textContent;
-  navigator.clipboard.writeText(txt).then(() => showToast('Copied!', 'success'));
+  if (!txt) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt)
+      .then(() => showToast('Copied to clipboard! ✅', 'success'))
+      .catch(() => fallbackCopyText(txt));
+  } else {
+    fallbackCopyText(txt);
+  }
+}
+
+function fallbackCopyText(text) {
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('Copied to clipboard! ✅', 'success');
+  } catch (e) {
+    showToast('Failed to copy text', 'error');
+  }
+}
+
+function resetAI() {
+  const input = document.getElementById('toolInput');
+  if (input) input.value = '';
+  const out = document.getElementById('aiOutput');
+  if (out) out.style.display = 'none';
+  const res = document.getElementById('aiResult');
+  if (res) res.textContent = '';
+  if (input) input.focus();
 }
 
 function previewImage(input) {
@@ -680,6 +743,54 @@ function handleDrop(e, inputId) {
   document.getElementById(inputId).dispatchEvent(new Event('change'));
 }
 
+async function prepareImageForBgRemove(file) {
+  return new Promise((resolve) => {
+    try {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth && window.innerWidth < 768);
+      const maxDim = isMobile ? 1200 : 1600;
+
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        const { width, height } = img;
+        if (!width || !height || (width <= maxDim && height <= maxDim)) {
+          resolve(file);
+          return;
+        }
+
+        let targetWidth = width;
+        let targetHeight = height;
+        if (width >= height) {
+          targetWidth = maxDim;
+          targetHeight = Math.round((height * maxDim) / width);
+        } else {
+          targetHeight = maxDim;
+          targetWidth = Math.round((width * maxDim) / height);
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) { resolve(file); return; }
+
+        ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+        canvas.toBlob((blob) => {
+          resolve(blob || file);
+        }, file.type || 'image/png', 0.95);
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        resolve(file);
+      };
+      img.src = url;
+    } catch (e) {
+      resolve(file);
+    }
+  });
+}
+
 async function processImage(toolId) {
   const file = document.getElementById('imageFile')?.files[0];
   if (!file) { showToast('Please select an image!', 'error'); return; }
@@ -688,17 +799,31 @@ async function processImage(toolId) {
 
   if (toolId === 'bgremove') {
     try {
-      btn.textContent = '⏳ Loading AI Model...';
-      const { removeBackground } = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal/+esm');
+      // Stage 1: Preparing image
+      btn.textContent = '⏳ Preparing image...';
+      const safeFile = await prepareImageForBgRemove(file);
+
+      // Stage 2: Loading AI background-removal engine
+      btn.textContent = '⏳ Loading AI background-removal engine...';
+      const { removeBackground } = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal/+esm').catch(() => {
+        throw new Error('Failed to load AI engine from CDN. Please check your network connection.');
+      });
       
-      btn.textContent = '⏳ Removing Background...';
-      const outputBlob = await removeBackground(file, {
+      // Stage 3: Removing background
+      btn.textContent = '⏳ Removing background...';
+      const outputBlob = await removeBackground(safeFile, {
         progress: (key, current, total) => {
-          const percent = Math.round((current / total) * 100);
-          btn.textContent = `⏳ Processing: ${percent}%...`;
+          if (total && total > 0) {
+            const percent = Math.round((current / total) * 100);
+            btn.textContent = `⏳ Removing background: ${percent}%...`;
+          } else {
+            btn.textContent = '⏳ Removing background...';
+          }
         }
       });
       
+      // Stage 4: Preparing download
+      btn.textContent = '⏳ Preparing download...';
       const url = URL.createObjectURL(outputBlob);
       document.getElementById('resultImg').src = url;
       document.getElementById('downloadBtn').onclick = () => {
@@ -710,8 +835,14 @@ async function processImage(toolId) {
       document.getElementById('imageOutput').style.display = 'block';
       showToast('Background removed successfully! ✅', 'success');
     } catch (err) {
-      showToast('Error removing background: ' + err.message, 'error');
-      console.error(err);
+      console.error('Background removal error:', err);
+      let userMsg = 'Error removing background: ' + err.message;
+      if (err.message && (err.message.includes('memory') || err.message.includes('Out of memory') || err.name === 'RangeError')) {
+        userMsg = 'Image is too large for your browser memory. Please try a slightly smaller photo.';
+      } else if (err.message && err.message.includes('CDN')) {
+        userMsg = 'Could not load AI engine from CDN. Please check your connection and retry.';
+      }
+      showToast(userMsg, 'error');
     }
     btn.textContent = '⚡ Process Image'; btn.disabled = false;
     return;
@@ -786,27 +917,61 @@ async function pdfFileSelected(input) {
   if (totalSize > maxSize * 1024 * 1024) { showToast(`File too large! Max ${maxSize}MB.`, 'error'); return; }
   
   const container = document.getElementById('pdfFileInfo');
-  container.innerHTML = '⏳ Loading file details...';
+  container.textContent = '⏳ Loading file details...';
   
-  const fileInfos = [];
   try {
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+    const items = [];
     for (const f of files) {
-      let pageCountText = '';
+      let pageCount = null;
       if (f.name.toLowerCase().endsWith('.pdf')) {
         try {
           const arrayBuffer = await f.arrayBuffer();
           const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-          pageCountText = ` — <strong>${pdf.numPages} pages</strong>`;
+          pageCount = pdf.numPages;
         } catch (e) {
           console.warn('Could not read PDF details:', e);
         }
       }
-      fileInfos.push(`📄 <strong>${f.name}</strong> (${(f.size/1024/1024).toFixed(2)} MB)${pageCountText}`);
+      items.push({ name: f.name, size: f.size, pageCount });
     }
-    container.innerHTML = fileInfos.join('<br>');
+
+    container.textContent = '';
+    items.forEach(item => {
+      const row = document.createElement('div');
+      row.style.marginBottom = '6px';
+      row.appendChild(document.createTextNode('📄 '));
+
+      const strongName = document.createElement('strong');
+      strongName.textContent = item.name; // textContent securely treats filename strictly as text
+      row.appendChild(strongName);
+
+      const sizeText = document.createTextNode(` (${(item.size / 1024 / 1024).toFixed(2)} MB)`);
+      row.appendChild(sizeText);
+
+      if (item.pageCount !== null) {
+        row.appendChild(document.createTextNode(' — '));
+        const strongPages = document.createElement('strong');
+        strongPages.textContent = `${item.pageCount} pages`;
+        row.appendChild(strongPages);
+      }
+      container.appendChild(row);
+    });
   } catch (err) {
-    container.innerHTML = files.map(f => `📄 <strong>${f.name}</strong> — ${(f.size/1024/1024).toFixed(2)} MB`).join('<br>');
+    container.textContent = '';
+    files.forEach(f => {
+      const row = document.createElement('div');
+      row.style.marginBottom = '6px';
+      row.appendChild(document.createTextNode('📄 '));
+
+      const strongName = document.createElement('strong');
+      strongName.textContent = f.name; // textContent securely treats filename strictly as text
+      row.appendChild(strongName);
+
+      const sizeText = document.createTextNode(` — ${(f.size / 1024 / 1024).toFixed(2)} MB`);
+      row.appendChild(sizeText);
+      container.appendChild(row);
+    });
   }
   
   document.getElementById('pdfInfo').style.display = 'block';
@@ -866,9 +1031,18 @@ async function processPDF(toolId) {
     if (toolId === 'compress-pdf') {
       const origSize = files.reduce((s, f) => s + f.size, 0);
       const compSize = blob.size;
-      const pct = Math.round(((origSize - compSize) / origSize) * 100);
-      const savings = pct > 0 ? `Saved ${pct}%` : `No size reduction possible`;
-      pdfStatsEl.innerHTML = `Original: <strong>${(origSize/1024/1024).toFixed(2)} MB</strong> \| Compressed: <strong>${(compSize/1024/1024).toFixed(2)} MB</strong><br><span style="color:#059669;font-weight:700">${savings}</span>`;
+      const diff = origSize - compSize;
+      const pct = Math.round((diff / origSize) * 100);
+      const origMb = (origSize / (1024 * 1024)).toFixed(2);
+      const compMb = (compSize / (1024 * 1024)).toFixed(2);
+
+      let savingsHtml = '';
+      if (pct > 0) {
+        savingsHtml = `<span style="color:#059669;font-weight:700">Saved ${pct}% (${(diff / 1024).toFixed(1)} KB reduced)</span>`;
+      } else {
+        savingsHtml = `<span style="color:#6b7280;font-weight:600">No significant size reduction was possible without reducing text/vector quality.</span>`;
+      }
+      pdfStatsEl.innerHTML = `Original: <strong>${origMb} MB</strong> | Compressed: <strong>${compMb} MB</strong><br>${savingsHtml}`;
       pdfStatsEl.style.display = 'block';
     } else {
       pdfStatsEl.style.display = 'none';
@@ -1038,32 +1212,171 @@ async function processPDFToImageClient(file) {
   btn.textContent = '⚡ Process File'; btn.disabled = false;
 }
 
+function escapeXmlText(str) {
+  return (str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function buildOpenXmlDocxBlob(pagesData) {
+  const zip = new JSZip();
+
+  zip.file('[Content_Types].xml', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>
+  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+  <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
+</Types>`);
+
+  zip.folder('_rels').file('.rels', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+</Relationships>`);
+
+  zip.folder('word').folder('_rels').file('document.xml.rels', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>
+</Relationships>`);
+
+  zip.folder('word').file('styles.xml', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:docDefaults>
+    <w:rPrDefault>
+      <w:rPr>
+        <w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/>
+        <w:sz w:val="22"/>
+        <w:color w:val="1F2937"/>
+      </w:rPr>
+    </w:rPrDefault>
+  </w:docDefaults>
+</w:styles>`);
+
+  let bodyXml = '';
+  pagesData.forEach((pageLines, pIdx) => {
+    if (pIdx > 0) {
+      bodyXml += `<w:p><w:r><w:br w:type="page"/></w:r></w:p>`;
+    }
+    pageLines.forEach(lineText => {
+      const trimmed = lineText.trim();
+      if (!trimmed) return;
+      const isHeading = trimmed.length < 80 && /^[A-Z0-9\s:—–-]+$/.test(trimmed) && trimmed.length > 3;
+      if (isHeading) {
+        bodyXml += `<w:p>
+          <w:pPr><w:spacing w:before="240" w:after="120"/></w:pPr>
+          <w:r>
+            <w:rPr><w:b/><w:sz w:val="28"/><w:color w:val="111827"/></w:rPr>
+            <w:t xml:space="preserve">${escapeXmlText(trimmed)}</w:t>
+          </w:r>
+        </w:p>`;
+      } else {
+        bodyXml += `<w:p>
+          <w:pPr><w:spacing w:after="140" w:line="276" w:lineRule="auto"/></w:pPr>
+          <w:r><w:t xml:space="preserve">${escapeXmlText(trimmed)}</w:t></w:r>
+        </w:p>`;
+      }
+    });
+  });
+
+  const documentXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+            xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <w:body>
+    ${bodyXml}
+    <w:sectPr>
+      <w:pgSz w:w="11906" w:h="16838"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440"/>
+    </w:sectPr>
+  </w:body>
+</w:document>`;
+
+  zip.folder('word').file('document.xml', documentXml);
+  return zip.generateAsync({ type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+}
+
 async function processWordToPDFClient(file) {
   const btn = document.querySelectorAll('#pdfInfo button')[0];
   btn.textContent = '⏳ Reading Word Doc...'; btn.disabled = true;
+
+  const fileName = (file.name || '').toLowerCase();
+  if (fileName.endsWith('.doc') && !fileName.endsWith('.docx')) {
+    showToast('This converter currently supports modern .docx files. Please save older .doc files as .docx before uploading.', 'error');
+    btn.textContent = '⚡ Process File'; btn.disabled = false;
+    return;
+  }
+
   try {
     const arrayBuffer = await file.arrayBuffer();
-    const result = await mammoth.extractRawText({ arrayBuffer: arrayBuffer });
-    const text = result.value || '';
-    if (!text.trim()) throw new Error('Word document contains no readable text!');
+    btn.textContent = '⏳ Parsing document layout...';
+    const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+    const html = result.value || '';
+    if (!html.trim()) throw new Error('Word document contains no readable text or content!');
 
-    btn.textContent = '⏳ Generating PDF...';
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    const splitText = doc.splitTextToSize(text, 180);
-    let y = 15;
-    const pageHeight = doc.internal.pageSize.height;
+    btn.textContent = '⏳ Rendering PDF document...';
+    const container = document.createElement('div');
+    container.style.position = 'fixed';
+    container.style.left = '-9999px';
+    container.style.top = '0';
+    container.style.width = '750px';
+    container.style.padding = '32px';
+    container.style.background = '#ffffff';
+    container.style.color = '#111827';
+    container.style.fontFamily = 'Arial, Helvetica, sans-serif';
+    container.style.fontSize = '14px';
+    container.style.lineHeight = '1.6';
 
-    splitText.forEach(line => {
-      if (y + 10 > pageHeight) {
-        doc.addPage();
-        y = 15;
-      }
-      doc.text(line, 15, y);
-      y += 8;
-    });
+    const styleEl = document.createElement('style');
+    styleEl.textContent = `
+      h1 { font-size: 24px; color: #111827; margin: 16px 0 10px 0; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; font-weight: 800; }
+      h2 { font-size: 19px; color: #1f2937; margin: 14px 0 8px 0; font-weight: 700; }
+      h3 { font-size: 16px; color: #374151; margin: 12px 0 6px 0; font-weight: 600; }
+      p { margin: 8px 0; }
+      strong, b { font-weight: 700; }
+      em, i { font-style: italic; }
+      table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 13px; }
+      th, td { border: 1px solid #d1d5db; padding: 7px 10px; text-align: left; }
+      th { background: #f3f4f6; font-weight: 700; }
+      ul, ol { margin: 8px 0 8px 24px; padding: 0; }
+      li { margin-bottom: 4px; }
+      a { color: #6c47ff; text-decoration: underline; }
+      img { max-width: 100%; height: auto; margin: 10px 0; display: block; }
+    `;
+    container.appendChild(styleEl);
 
-    const pdfBlob = doc.output('blob');
+    const innerDiv = document.createElement('div');
+    innerDiv.innerHTML = html;
+    container.appendChild(innerDiv);
+    document.body.appendChild(container);
+
+    let pdfBlob;
+    if (window.html2pdf) {
+      const opt = {
+        margin: [10, 10, 10, 10],
+        filename: 'nexkittool-converted-word.pdf',
+        image: { type: 'jpeg', quality: 0.95 },
+        html2canvas: { scale: 2, useCORS: true, logging: false },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+      };
+      pdfBlob = await html2pdf().set(opt).from(container).output('blob');
+    } else {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      const splitText = doc.splitTextToSize(innerDiv.innerText || '', 180);
+      let y = 15;
+      const pageHeight = doc.internal.pageSize.height;
+      splitText.forEach(line => {
+        if (y + 10 > pageHeight) { doc.addPage(); y = 15; }
+        doc.text(line, 15, y);
+        y += 8;
+      });
+      pdfBlob = doc.output('blob');
+    }
+    document.body.removeChild(container);
+
     const url = URL.createObjectURL(pdfBlob);
     document.getElementById('pdfDownload').onclick = () => {
       const a = document.createElement('a');
@@ -1088,38 +1401,65 @@ async function processPDFToWordClient(file) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
     const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
     const pageCount = pdf.numPages;
-    let extractedText = '';
+    const pagesData = [];
+    let totalTextLength = 0;
 
     for (let i = 1; i <= pageCount; i++) {
-      btn.textContent = `⏳ Extracting page ${i}/${pageCount}...`;
+      btn.textContent = `⏳ Reading page ${i}/${pageCount}...`;
       const page = await pdf.getPage(i);
       const textContent = await page.getTextContent();
-      const pageText = textContent.items.map(item => item.str).join(' ');
-      extractedText += `\n--- Page ${i} ---\n\n` + pageText + `\n`;
+      const items = textContent.items || [];
+
+      // Sort items top-to-bottom, left-to-right
+      items.sort((a, b) => {
+        const yA = a.transform[5];
+        const yB = b.transform[5];
+        if (Math.abs(yA - yB) > 4) return yB - yA; // top to bottom
+        return a.transform[4] - b.transform[4];     // left to right
+      });
+
+      // Group text items into visual lines and paragraphs
+      const pageLines = [];
+      let currentLine = '';
+      let currentY = null;
+
+      for (const item of items) {
+        const str = item.str;
+        if (!str) continue;
+        const y = item.transform[5];
+        if (currentY === null) {
+          currentY = y;
+          currentLine = str;
+        } else if (Math.abs(y - currentY) <= 5) {
+          currentLine += (currentLine.endsWith(' ') || str.startsWith(' ') ? '' : ' ') + str;
+        } else {
+          if (currentLine.trim()) pageLines.push(currentLine.trim());
+          currentLine = str;
+          currentY = y;
+        }
+      }
+      if (currentLine.trim()) pageLines.push(currentLine.trim());
+
+      const pageTextCombined = pageLines.join(' ');
+      totalTextLength += pageTextCombined.length;
+      pagesData.push(pageLines);
     }
 
-    if (!extractedText.trim()) throw new Error('No text content found in the PDF!');
+    if (totalTextLength === 0) {
+      throw new Error('This PDF appears to contain scanned image pages without a searchable text layer. OCR is not currently supported.');
+    }
 
-    btn.textContent = '⏳ Generating Word Document...';
-    const htmlContent = `
-      <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
-      <head><title>Converted Document</title><style>body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }</style></head>
-      <body>
-        <h2>Converted from PDF - Nexkittool</h2>
-        <pre style="white-space: pre-wrap; font-family: inherit;">${extractedText}</pre>
-      </body>
-      </html>
-    `;
-    const docBlob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
-    const url = URL.createObjectURL(docBlob);
+    btn.textContent = '⏳ Generating Word Document (.docx)...';
+    const docxBlob = await buildOpenXmlDocxBlob(pagesData);
+    const url = URL.createObjectURL(docxBlob);
     document.getElementById('pdfDownload').onclick = () => {
       const a = document.createElement('a');
       a.href = url;
-      a.download = `nexkittool-converted-pdf.doc`;
+      a.download = `nexkittool-converted-pdf.docx`;
       a.click();
     };
     document.getElementById('pdfOutput').style.display = 'block';
-    showToast('Converted to Word successfully! ✅', 'success');
+    showToast('Converted to Word (.docx) successfully! ✅', 'success');
   } catch (err) {
     showToast('Error: ' + err.message, 'error');
     console.error(err);
@@ -1333,15 +1673,7 @@ async function runPalette() {
     renderPalette(colors);
     showToast('Palette generated! ✅', 'success');
   } catch (err) {
-    showToast('AI Error. Generating fallback palette...', 'warning');
-    const fallbacks = [
-      ["#FF7E5F", "#FEB47B", "#765285", "#351C4D", "#F47A60"],
-      ["#00F2FE", "#4FACFE", "#20E2D7", "#F9F9F9", "#111111"],
-      ["#E1EEC3", "#F0C27B", "#593C1F", "#F89B29", "#FF5252"],
-      ["#2C3E50", "#FD79A8", "#FFEAA7", "#00B894", "#0984E3"]
-    ];
-    const pal = fallbacks[Math.floor(Math.random() * fallbacks.length)];
-    renderPalette(pal);
+    showToast('AI Error: ' + err.message, 'error');
   }
   btn.textContent = originalText; btn.disabled = false;
 }

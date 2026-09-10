@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
+const { PDFDocument, PDFName, PDFRawStream, PDFNumber, rgb, StandardFonts } = require('pdf-lib');
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 25 * 1024 * 1024 } });
 
@@ -96,15 +96,93 @@ router.post('/merge', upload.array('file'), async (req, res) => {
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// Compress PDF (re-save)
+// Compress PDF (Safe raster stream downsampling + object stream packing)
 router.post('/compress', upload.single('file'), async (req, res) => {
   try {
-    const doc = await PDFDocument.load(req.file.buffer);
+    if (!req.file || !req.file.buffer) {
+      return res.status(400).json({ error: 'No PDF file uploaded.' });
+    }
+
+    const sharp = require('sharp');
+    const doc = await PDFDocument.load(req.file.buffer, { ignoreEncryption: true });
+    const context = doc.context;
+
+    // Collect compressible image indirect objects
+    const imageRefs = [];
+    for (const [ref, obj] of context.enumerateIndirectObjects()) {
+      if (obj instanceof PDFRawStream) {
+        const dict = obj.dict;
+        const subtype = dict.get(PDFName.of('Subtype'));
+        if (subtype === PDFName.of('Image')) {
+          const filter = dict.get(PDFName.of('Filter'));
+          if (filter === PDFName.of('DCTDecode')) {
+            imageRefs.push(ref);
+          }
+        }
+      }
+    }
+
+    // Process each image sequentially to control memory footprint
+    for (const ref of imageRefs) {
+      try {
+        const obj = context.lookup(ref);
+        if (!obj || !(obj instanceof PDFRawStream)) continue;
+        const dict = obj.dict;
+        const contents = obj.getContents();
+        if (!contents || contents.length < 5000) continue; // Skip tiny icons/decorations < 5KB
+
+        const meta = await sharp(contents).metadata();
+        if (!meta || !meta.width || !meta.height) continue;
+
+        let sharpPipeline = sharp(contents);
+        let targetWidth = meta.width;
+        let targetHeight = meta.height;
+
+        // Downsample high-resolution images exceeding 1400px
+        const maxDim = 1400;
+        if (meta.width > maxDim || meta.height > maxDim) {
+          if (meta.width >= meta.height) {
+            targetWidth = maxDim;
+            targetHeight = Math.round((meta.height * maxDim) / meta.width);
+          } else {
+            targetHeight = maxDim;
+            targetWidth = Math.round((meta.width * maxDim) / meta.height);
+          }
+          sharpPipeline = sharpPipeline.resize(targetWidth, targetHeight, { fit: 'inside' });
+        }
+
+        // Recompress to JPEG quality 70 with mozjpeg
+        const recompressedJpg = await sharpPipeline.jpeg({ quality: 70, mozjpeg: true }).toBuffer();
+
+        // Only replace if recompression actually saved bytes
+        if (recompressedJpg && recompressedJpg.length < contents.length) {
+          const replacementStream = context.stream(recompressedJpg, {
+            Type: PDFName.of('XObject'),
+            Subtype: PDFName.of('Image'),
+            Width: PDFNumber.of(targetWidth),
+            Height: PDFNumber.of(targetHeight),
+            ColorSpace: dict.get(PDFName.of('ColorSpace')) || PDFName.of('DeviceRGB'),
+            BitsPerComponent: PDFNumber.of(8),
+            Filter: PDFName.of('DCTDecode')
+          });
+
+          const smask = dict.get(PDFName.of('SMask'));
+          if (smask) replacementStream.dict.set(PDFName.of('SMask'), smask);
+
+          context.assign(ref, replacementStream);
+        }
+      } catch (imgErr) {
+        // Continue processing other objects if one image stream fails
+      }
+    }
+
     const pdfBytes = await doc.save({ useObjectStreams: true });
     res.set('Content-Type', 'application/pdf');
     res.set('Content-Disposition', 'attachment; filename="nexkittool-compressed.pdf"');
     res.send(Buffer.from(pdfBytes));
-  } catch (err) { res.status(500).json({ error: err.message }); }
+  } catch (err) {
+    res.status(500).json({ error: 'Could not compress this PDF: ' + err.message });
+  }
 });
 
 // PDF Watermark

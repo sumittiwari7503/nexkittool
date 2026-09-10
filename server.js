@@ -87,6 +87,29 @@ app.use((req, res, next) => {
   next();
 });
 
+// Trust page conventional URL aliases / redirects (HTTP 301 to canonical /pages/*.html)
+const trustAliases = {
+  '/privacy': '/pages/privacy.html',
+  '/privacy/': '/pages/privacy.html',
+  '/terms': '/pages/terms.html',
+  '/terms/': '/pages/terms.html',
+  '/terms-and-conditions': '/pages/terms.html',
+  '/terms-and-conditions/': '/pages/terms.html',
+  '/about': '/pages/about.html',
+  '/about/': '/pages/about.html',
+  '/contact': '/pages/contact.html',
+  '/contact/': '/pages/contact.html'
+};
+
+app.use((req, res, next) => {
+  const target = trustAliases[req.path];
+  if (target) {
+    const query = req.url.slice(req.path.length);
+    return res.redirect(301, target + query);
+  }
+  next();
+});
+
 // Static files with optimized browser caching
 app.use(express.static(path.join(__dirname, '.'), {
   maxAge: '1y',

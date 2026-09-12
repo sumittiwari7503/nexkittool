@@ -2596,7 +2596,7 @@ const MASTER_BLOG_TEMPLATE = `<!DOCTYPE html>
         <a href="/#pdf-tools">📄 PDF</a>
         <a href="/#image-tools">🖼️ Image</a>
         <a href="/#ai-tools">🤖 AI Tools</a>
-        <a href="/blog/index.html" style="color:#6c47ff;font-weight:700">📝 Blog</a>
+        <a href="/blog/" style="color:#6c47ff;font-weight:700">📝 Blog</a>
         <a href="/pages/pricing.html" class="nav-pro-btn">⭐ Pro</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()">
@@ -2611,7 +2611,7 @@ const MASTER_BLOG_TEMPLATE = `<!DOCTYPE html>
   <a href="/#ai-tools" onclick="toggleMobileNav()">🤖 AI Tools</a>
   <a href="/#image-tools" onclick="toggleMobileNav()">🖼️ Image Tools</a>
   <a href="/#pdf-tools" onclick="toggleMobileNav()">📄 PDF Tools</a>
-  <a href="/blog/index.html" onclick="toggleMobileNav()">📝 Blog</a>
+  <a href="/blog/" onclick="toggleMobileNav()">📝 Blog</a>
   <a href="/pages/pricing.html" style="color:#6c47ff;font-weight:700" onclick="toggleMobileNav()">⭐ Go Pro</a>
 </nav>
 
@@ -2941,7 +2941,7 @@ categories.forEach(cat => {
         <a href="/#pdf-tools">📄 PDF</a>
         <a href="/#image-tools">🖼️ Image</a>
         <a href="/#ai-tools">🤖 AI Tools</a>
-        <a href="/blog/index.html" style="color:#6c47ff;font-weight:700">📝 Blog</a>
+        <a href="/blog/" style="color:#6c47ff;font-weight:700">📝 Blog</a>
         <a href="/pages/pricing.html" class="nav-pro-btn">⭐ Pro</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()">
@@ -2956,7 +2956,7 @@ categories.forEach(cat => {
   <a href="/#ai-tools" onclick="toggleMobileNav()">🤖 AI Tools</a>
   <a href="/#image-tools" onclick="toggleMobileNav()">🖼️ Image Tools</a>
   <a href="/#pdf-tools" onclick="toggleMobileNav()">📄 PDF Tools</a>
-  <a href="/blog/index.html" onclick="toggleMobileNav()">📝 Blog</a>
+  <a href="/blog/" onclick="toggleMobileNav()">📝 Blog</a>
   <a href="/pages/pricing.html" style="color:#6c47ff;font-weight:700" onclick="toggleMobileNav()">⭐ Go Pro</a>
 </nav>
 
@@ -2974,7 +2974,7 @@ categories.forEach(cat => {
 <div class="blog-hero">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Home</a> <span>›</span> <a href="/blog/index.html">Blog</a> <span>›</span> <span>Category: ${catName}</span>
+      <a href="/">Home</a> <span>›</span> <a href="/blog/">Blog</a> <span>›</span> <span>Category: ${catName}</span>
     </nav>
     <h1>${catName} Guides</h1>
     <p>${catDesc}</p>

@@ -98,7 +98,15 @@ const trustAliases = {
   '/about': '/pages/about.html',
   '/about/': '/pages/about.html',
   '/contact': '/pages/contact.html',
-  '/contact/': '/pages/contact.html'
+  '/contact/': '/pages/contact.html',
+  '/privacy-policy': '/pages/privacy.html',
+  '/privacy-policy/': '/pages/privacy.html',
+  '/terms-of-service': '/pages/terms.html',
+  '/terms-of-service/': '/pages/terms.html',
+  '/cookies': '/pages/cookies.html',
+  '/cookies/': '/pages/cookies.html',
+  '/cookie-policy': '/pages/cookies.html',
+  '/cookie-policy/': '/pages/cookies.html'
 };
 
 app.use((req, res, next) => {

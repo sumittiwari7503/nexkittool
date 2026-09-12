@@ -2456,7 +2456,7 @@ const MASTER_TEMPLATE = `<!DOCTYPE html>
         <a href="/#ai-tools">🤖 AI Tools</a>
         <a href="/#image-tools">🖼️ Image</a>
         <a href="/#pdf-tools">📄 PDF</a>
-        <a href="/blog/index.html">📝 Blog</a>
+        <a href="/blog/">📝 Blog</a>
         <a href="/pages/pricing.html" class="nav-pro-btn">⭐ Pro</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()">
@@ -2471,7 +2471,7 @@ const MASTER_TEMPLATE = `<!DOCTYPE html>
   <a href="/#ai-tools" onclick="toggleMobileNav()">🤖 AI Tools</a>
   <a href="/#image-tools" onclick="toggleMobileNav()">🖼️ Image Tools</a>
   <a href="/#pdf-tools" onclick="toggleMobileNav()">📄 PDF Tools</a>
-  <a href="/blog/index.html" onclick="toggleMobileNav()">📝 Blog</a>
+  <a href="/blog/" onclick="toggleMobileNav()">📝 Blog</a>
   <a href="/pages/pricing.html" style="color:#6c47ff;font-weight:700" onclick="toggleMobileNav()">⭐ Go Pro</a>
 </nav>
 

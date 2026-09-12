@@ -35,12 +35,12 @@
 <header class="header" id="header">
   <div class="container">
     <nav class="nav">
-      <a href="../index.html" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">Nexkittool</span></a>
+      <a href="/" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">Nexkittool</span></a>
       <div class="nav-links">
-        <a href="../index.html#ai-tools">AI Tools</a>
-        <a href="../index.html#image-tools">Image</a>
-        <a href="../index.html#pdf-tools">PDF</a>
-        <a href="../index.html#utility-tools">Utilities</a>
+        <a href="/#ai-tools">AI Tools</a>
+        <a href="/#image-tools">Image</a>
+        <a href="/#pdf-tools">PDF</a>
+        <a href="/#utility-tools">Utilities</a>
       </div>
       <div class="nav-auth-btns" id="navAuthBtns">
         <button class="btn-login" onclick="openAuthModal('login')">Login</button>
@@ -65,7 +65,7 @@
 
 <!-- ===== MOBILE NAV ===== -->
 <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation" aria-hidden="true" style="display: none;">
-  <a href="../index.html" onclick="toggleMobileNav()">Home</a>
+  <a href="/" onclick="toggleMobileNav()">Home</a>
   <a href="pricing.html" onclick="toggleMobileNav()">Pricing</a>
   <a href="contact.html" onclick="toggleMobileNav()">Contact</a>
   <a href="about.html" onclick="toggleMobileNav()">About</a>
@@ -192,7 +192,7 @@ function renderDashboard() {
 
 function doLogoutRedirect() {
   doLogout();
-  setTimeout(() => window.location.href = '../index.html', 800);
+  setTimeout(() => window.location.href = '/', 800);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

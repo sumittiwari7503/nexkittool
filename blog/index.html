@@ -18,7 +18,7 @@
 <meta name="twitter:description" content="Step-by-step guides for PDF, image, AI writing and more free online tools.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../public/css/style.css">
+<link rel="stylesheet" href="/public/css/style.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -40,582 +40,1506 @@
 }
 </script>
 <style>
-.blog-hero{padding:100px 0 48px;background:linear-gradient(180deg,#ede9ff 0%,#f8f9ff 100%)}
-.blog-hero h1{font-size:clamp(2rem,4vw,2.8rem);font-weight:900;margin-bottom:12px}
-.blog-hero p{color:#4b5563;font-size:1.05rem;max-width:540px}
-.blog-filters{display:flex;gap:10px;flex-wrap:wrap;margin:32px 0 24px}
-.filter-btn{padding:8px 18px;border-radius:50px;border:1.5px solid #e5e7eb;background:#fff;font-size:.85rem;font-weight:600;color:#374151;cursor:pointer;transition:all .2s}
-.filter-btn.active,.filter-btn:hover{background:#6c47ff;color:#fff;border-color:#6c47ff}
-.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
-.blog-card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;overflow:hidden;transition:all .2s;text-decoration:none;color:inherit;display:flex;flex-direction:column}
-.blog-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(108,71,255,.12);border-color:#6c47ff}
-.blog-card-body{padding:20px;flex:1;display:flex;flex-direction:column}
-.blog-card-emoji{font-size:2.5rem;margin-bottom:12px}
-.blog-tag{display:inline-block;font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:50px;text-transform:uppercase;margin-bottom:10px}
-.tag-pdf{background:#fee2e2;color:#dc2626}
-.tag-image{background:#e0f2fe;color:#0369a1}
-.tag-ai{background:#ede9ff;color:#6c47ff}
-.tag-utility{background:#d1fae5;color:#059669}
-.blog-card h3{font-size:1rem;font-weight:800;line-height:1.4;margin-bottom:8px;color:#1a1a2e}
-.blog-card p{font-size:.85rem;color:#6b7280;line-height:1.6;margin:0 0 16px;flex:1}
-.blog-meta{font-size:.78rem;color:#9ca3af;display:flex;gap:12px;align-items:center}
-.blog-read-more{color:#6c47ff;font-weight:700;font-size:.85rem;margin-top:12px;display:inline-block}
-.blog-search{width:100%;max-width:480px;padding:12px 20px;border-radius:50px;border:2px solid #e5e7eb;font-size:.95rem;font-family:Inter,sans-serif;outline:none;transition:border-color .2s}
-.blog-search:focus{border-color:#6c47ff}
+/* ===== BLOG PAGE DEDICATED PROFESSIONAL STYLES ===== */
+:root {
+  --primary: #6c47ff;
+  --primary-dark: #5535e0;
+  --primary-light: #ede9ff;
+  --text-dark: #0f172a;
+  --text-body: #475569;
+  --text-muted: #94a3b8;
+  --border-light: #e2e8f0;
+}
+
+/* Clean up hero and reset breadcrumbs */
+.blog-hero {
+  padding: 105px 0 50px;
+  background: linear-gradient(180deg, #f1edff 0%, #f8f9ff 100%);
+  text-align: center;
+  border-bottom: 1px solid var(--border-light);
+}
+.blog-hero .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.blog-hero .breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  padding: 0 !important;
+}
+.blog-hero .breadcrumb a {
+  color: var(--primary);
+  font-weight: 500;
+  text-decoration: none;
+}
+.blog-hero .breadcrumb a:hover {
+  text-decoration: underline;
+}
+.blog-hero .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 50px;
+  background: rgba(108,71,255,0.08);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+.blog-hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  color: var(--text-dark);
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.blog-hero .hero-desc {
+  font-size: 1.1rem;
+  color: var(--text-body);
+  line-height: 1.7;
+  max-width: 680px;
+  margin: 0 auto 28px;
+  text-align: center;
+}
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  pointer-events: none;
+  opacity: 0.6;
+}
+.blog-search {
+  width: 100%;
+  padding: 14px 20px 14px 50px;
+  border-radius: 50px;
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
+  font-size: 0.98rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+.blog-search:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(108,71,255,0.15);
+}
+
+/* Main Section */
+.blog-main-section {
+  padding: 48px 0 80px;
+  background: #f8f9ff;
+}
+.blog-main-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Filters */
+.blog-filters-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+.blog-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.filter-btn {
+  padding: 9px 20px;
+  border-radius: 50px;
+  border: 1.5px solid var(--border-light);
+  background: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+.filter-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: #f5f3ff;
+}
+.filter-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 4px 14px rgba(108,71,255,0.25);
+}
+
+/* Card Grid */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 28px;
+}
+.blog-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px rgba(108,71,255,0.12);
+  border-color: #c4b5fd;
+}
+.blog-card-body {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.blog-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.blog-card-emoji {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+.blog-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.tag-pdf { background: #fee2e2; color: #b91c1c; }
+.tag-image { background: #e0f2fe; color: #0369a1; }
+.tag-ai { background: #ede9ff; color: #6c47ff; }
+.tag-utility { background: #dcfce7; color: #15803d; }
+
+.blog-card h3 {
+  font-size: 1.12rem;
+  font-weight: 800;
+  line-height: 1.45;
+  color: var(--text-dark);
+  margin: 0 0 10px;
+  transition: color 0.2s;
+}
+.blog-card:hover h3 {
+  color: var(--primary);
+}
+.blog-card p {
+  font-size: 0.9rem;
+  color: var(--text-body);
+  line-height: 1.6;
+  margin: 0 0 20px;
+  flex: 1;
+}
+.blog-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+.blog-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.blog-read-more {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.88rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.2s;
+}
+.blog-card:hover .blog-read-more {
+  transform: translateX(4px);
+}
+
+/* Empty State */
+.blog-empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1.5px dashed #cbd5e1;
+  grid-column: 1 / -1;
+  display: none;
+}
+.blog-empty-state .empty-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+.blog-empty-state h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+.blog-empty-state p {
+  color: var(--text-body);
+  max-width: 480px;
+  margin: 0 auto 20px;
+  font-size: 0.95rem;
+}
+.reset-filter-btn {
+  padding: 10px 24px;
+  background: var(--primary);
+  color: #ffffff;
+  border-radius: 50px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.reset-filter-btn:hover {
+  background: var(--primary-dark);
+}
+
+/* CTA Banner */
+.blog-cta-banner {
+  background: linear-gradient(135deg, #6c47ff, #ff6b47);
+  border-radius: 20px;
+  padding: 48px 32px;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 64px;
+  box-shadow: 0 12px 32px rgba(108,71,255,0.2);
+}
+.blog-cta-banner h2 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+.blog-cta-banner p {
+  opacity: 0.95;
+  font-size: 1.05rem;
+  max-width: 620px;
+  margin: 0 auto 24px;
+  line-height: 1.6;
+}
+.blog-cta-banner .cta-button {
+  background: #ffffff;
+  color: var(--primary);
+  padding: 14px 34px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+}
+.blog-cta-banner .cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* ===== FOOTER ARCHITECTURE ===== */
+.footer {
+  background: #0f172a !important;
+  color: #cbd5e1 !important;
+  padding: 80px 0 40px !important;
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.footer .container {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+}
+.footer-top-brand {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 24px !important;
+  padding-bottom: 40px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  margin-bottom: 48px !important;
+}
+.footer-brand-info {
+  max-width: 540px !important;
+}
+.footer-brand-logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-weight: 800 !important;
+  font-size: 1.5rem !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  margin-bottom: 10px !important;
+}
+.footer-brand-logo .logo-text {
+  background: linear-gradient(135deg, #6c47ff, #ff6b47) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.footer-brand-desc {
+  font-size: 0.92rem !important;
+  line-height: 1.6 !important;
+  color: #94a3b8 !important;
+  margin: 0 !important;
+}
+.footer-social-links {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+.footer-social-icon {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 10px !important;
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-size: 1.1rem !important;
+  transition: all 0.2s ease !important;
+}
+.footer-social-icon:hover {
+  background: #6c47ff !important;
+  border-color: #6c47ff !important;
+  transform: translateY(-2px) !important;
+}
+
+/* 5-Column Grid */
+.footer-main-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 36px !important;
+  margin-bottom: 48px !important;
+}
+.footer-links-col {
+  display: flex !important;
+  flex-direction: column !important;
+}
+.footer-links-col h4 {
+  color: #ffffff !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  margin: 0 0 16px 0 !important;
+}
+.footer-links-col ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+.footer-links-col li {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.footer-links-col a {
+  color: #94a3b8 !important;
+  text-decoration: none !important;
+  font-size: 0.88rem !important;
+  line-height: 1.4 !important;
+  transition: all 0.2s ease !important;
+  display: inline-block !important;
+}
+.footer-links-col a:hover {
+  color: #ffffff !important;
+  transform: translateX(3px) !important;
+}
+
+/* Trust Checklist Strip */
+.footer-trust-strip {
+  padding: 32px 0 !important;
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  margin-bottom: 32px !important;
+  text-align: center !important;
+}
+.footer-trust-title {
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: #94a3b8 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  margin-bottom: 18px !important;
+}
+.footer-trust-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 12px 16px !important;
+}
+.footer-trust-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  padding: 8px 16px !important;
+  border-radius: 50px !important;
+  font-size: 0.85rem !important;
+  color: #cbd5e1 !important;
+}
+.footer-trust-icon {
+  color: #00d4aa !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+}
+
+/* Info Bar & Copyright */
+.footer-info-bar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 16px !important;
+  padding-bottom: 24px !important;
+  font-size: 0.85rem !important;
+  color: #94a3b8 !important;
+}
+.footer-contact-info {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 20px !important;
+}
+.footer-contact-item a {
+  color: #cbd5e1 !important;
+  text-decoration: none !important;
+  transition: color 0.2s !important;
+}
+.footer-contact-item a:hover {
+  color: #6c47ff !important;
+}
+.footer-copyright-bar {
+  text-align: center !important;
+  padding-top: 20px !important;
+  border-top: 1px solid rgba(255,255,255,0.05) !important;
+  font-size: 0.82rem !important;
+  color: #64748b !important;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .footer-main-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 32px !important;
+  }
+}
+@media (max-width: 768px) {
+  .blog-hero { padding: 90px 0 40px; }
+  .blog-grid { grid-template-columns: 1fr; gap: 20px; }
+  .blog-filters { gap: 8px; }
+  .filter-btn { padding: 7px 14px; font-size: 0.8rem; }
+  .blog-cta-banner { padding: 36px 20px; }
+  .blog-cta-banner h2 { font-size: 1.4rem; }
+  .blog-card-body { padding: 20px; }
+  .footer-main-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 28px !important;
+  }
+  .footer-top-brand {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .footer-info-bar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+}
+@media (max-width: 480px) {
+  .footer-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
 </style>
 </head>
 <body>
+
+<!-- ===== HEADER ===== -->
 <header class="header" id="header">
   <div class="container">
     <nav class="nav" role="navigation" aria-label="Main navigation">
-      <a href="../" class="logo" aria-label="Nexkittool Home"><span class="logo-icon">⚡</span><span class="logo-text">Nexkittool</span></a>
-      <div class="nav-links">
-        <a href="../#pdf-tools">📄 PDF</a>
-        <a href="../#image-tools">🖼️ Image</a>
-        <a href="../#ai-tools">🤖 AI Tools</a>
-        <a href="/blog/" style="color:#6c47ff;font-weight:700">📝 Blog</a>
-        <a href="../pages/pricing.html" class="nav-pro-btn">⭐ Pro</a>
+      <a href="/" class="logo" aria-label="NexKitTool - Free Online Tools">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">Nexkittool</span>
+      </a>
+      <div class="nav-links" role="menubar">
+        <a href="/#pdf-tools" role="menuitem">📄 PDF</a>
+        <a href="/#image-tools" role="menuitem">🖼️ Image</a>
+        <a href="/#ai-tools" role="menuitem">🤖 AI Tools</a>
+        <a href="/blog/" role="menuitem" style="color:#6c47ff;font-weight:700">📝 Blog</a>
+        <a href="/pages/pricing.html" class="nav-pro-btn" role="menuitem">⭐ Pro</a>
       </div>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
   </div>
 </header>
 
-<div class="blog-hero">
+<!-- ===== MOBILE NAVIGATION DRAWER ===== -->
+<nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation" aria-hidden="true" style="display:none">
+  <a href="/" onclick="toggleMobileNav()">🏠 Home</a>
+  <a href="/#pdf-tools" onclick="toggleMobileNav()">📄 PDF Tools</a>
+  <a href="/#image-tools" onclick="toggleMobileNav()">🖼️ Image Tools</a>
+  <a href="/#ai-tools" onclick="toggleMobileNav()">🤖 AI Tools</a>
+  <a href="/blog/" onclick="toggleMobileNav()" style="color:#6c47ff;font-weight:700">📝 Blog</a>
+  <a href="/pages/pricing.html" style="color:#6c47ff;font-weight:700" onclick="toggleMobileNav()">⭐ Go Pro</a>
+</nav>
+
+<!-- ===== BLOG HERO ===== -->
+<div class="blog-hero" role="banner">
   <div class="container">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="../">Home</a> <span>›</span> <span>Blog</span>
+      <a href="/">Home</a> <span>›</span> <span aria-current="page">Blog</span>
     </nav>
-    <h1>📝 Nexkittool Blog</h1>
-    <p>Free step-by-step guides on PDF tools, image editing, AI writing, QR codes and more online tools.</p>
-    <div style="margin-top:20px">
-      <input type="search" class="blog-search" id="blogSearch" placeholder="Search guides… e.g. compress PDF, remove background" aria-label="Search blog posts">
+    <div class="hero-badge">📚 Practical Tutorials & Tool Insights</div>
+    <h1>Free Tools, Guides & Tips</h1>
+    <p class="hero-desc">NexKitTool publishes practical step-by-step guides for PDF tools, image tools, AI utilities, and developer tools. Discover simple, free ways to process documents and boost your digital productivity.</p>
+    <div class="search-wrapper">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input type="search" class="blog-search" id="blogSearch" placeholder="Search guides… e.g. compress PDF, background remover, essay writer" aria-label="Search blog posts">
     </div>
   </div>
 </div>
 
-<section style="padding:48px 0 80px">
+<!-- ===== BLOG CONTENT SECTION ===== -->
+<main class="blog-main-section" id="mainContent">
   <div class="container">
-    <div class="blog-filters" role="group" aria-label="Filter blog posts by category">
-      <button class="filter-btn active" onclick="filterPosts('all')" aria-pressed="true">All Guides</button>
-      <button class="filter-btn" onclick="filterPosts('pdf')" aria-pressed="false">📄 PDF</button>
-      <button class="filter-btn" onclick="filterPosts('image')" aria-pressed="false">🖼️ Image</button>
-      <button class="filter-btn" onclick="filterPosts('ai')" aria-pressed="false">🤖 AI Writing</button>
-      <button class="filter-btn" onclick="filterPosts('utility')" aria-pressed="false">🛠️ Utility</button>
+    <!-- Category Filters -->
+    <div class="blog-filters-container">
+      <div class="blog-filters" role="group" aria-label="Filter blog posts by category">
+        <button class="filter-btn active" onclick="filterPosts('all')" aria-pressed="true">✨ All Guides (45)</button>
+        <button class="filter-btn" onclick="filterPosts('pdf')" aria-pressed="false">📄 PDF (12)</button>
+        <button class="filter-btn" onclick="filterPosts('ai')" aria-pressed="false">🤖 AI (11)</button>
+        <button class="filter-btn" onclick="filterPosts('image')" aria-pressed="false">🖼️ Image (13)</button>
+        <button class="filter-btn" onclick="filterPosts('utility')" aria-pressed="false">🛠️ Developer (9)</button>
+      </div>
     </div>
 
+    <!-- Article Cards Grid -->
     <div class="blog-grid" id="blogGrid" role="list">
 
-      <!-- PDF POSTS -->
+      <!-- Card: How to Compress PDF Free Without Losing Quality -->
       <a href="compress-pdf-free.html" class="blog-card" data-cat="pdf" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🗜️</div>
-          <span class="blog-tag tag-pdf">PDF</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🗜️</div>
+            <span class="blog-tag tag-pdf">PDF</span>
+          </div>
           <h3>How to Compress PDF Free Without Losing Quality</h3>
           <p>Reduce PDF file size by up to 80% in seconds. No software needed. Works on Windows, Mac, iPhone, Android.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 4 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 4 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Merge PDF Files Online for Free -->
       <a href="merge-pdf-free.html" class="blog-card" data-cat="pdf" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📎</div>
-          <span class="blog-tag tag-pdf">PDF</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📎</div>
+            <span class="blog-tag tag-pdf">PDF</span>
+          </div>
           <h3>How to Merge PDF Files Online for Free</h3>
           <p>Combine multiple PDF files into one document in seconds. Drag, reorder, and merge — no signup needed.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 3 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 3 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Split a PDF File Online for Free -->
       <a href="split-pdf-free.html" class="blog-card" data-cat="pdf" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">✂️</div>
-          <span class="blog-tag tag-pdf">PDF</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">✂️</div>
+            <span class="blog-tag tag-pdf">PDF</span>
+          </div>
           <h3>How to Split a PDF File Online for Free</h3>
           <p>Extract specific pages from a PDF or split it into individual pages — completely free, no account required.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 3 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 3 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Convert PDF to Word Free Online — Full Guide -->
       <a href="pdf-to-word-free.html" class="blog-card" data-cat="pdf" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📝</div>
-          <span class="blog-tag tag-pdf">PDF</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📝</div>
+            <span class="blog-tag tag-pdf">PDF</span>
+          </div>
           <h3>Convert PDF to Word Free Online — Full Guide</h3>
           <p>Turn any PDF into an editable Word document in seconds. Preserve formatting, tables, and images. No software needed.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 5 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 5 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Convert Word to PDF Free Online in Seconds -->
       <a href="word-to-pdf-free.html" class="blog-card" data-cat="pdf" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📄</div>
-          <span class="blog-tag tag-pdf">PDF</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📄</div>
+            <span class="blog-tag tag-pdf">PDF</span>
+          </div>
           <h3>Convert Word to PDF Free Online in Seconds</h3>
           <p>Convert DOC or DOCX files to PDF without Microsoft Word. Preserves formatting perfectly on all devices.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 3 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 3 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Convert PDF to JPG Images Free Online -->
       <a href="pdf-to-jpg-free.html" class="blog-card" data-cat="pdf" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📷</div>
-          <span class="blog-tag tag-pdf">PDF</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📷</div>
+            <span class="blog-tag tag-pdf">PDF</span>
+          </div>
           <h3>Convert PDF to JPG Images Free Online</h3>
           <p>Extract every page of a PDF as a high-quality JPG or PNG image. Batch download as ZIP. Free, no signup.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 3 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 3 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Convert JPG Images to PDF Free Online -->
       <a href="jpg-to-pdf-free.html" class="blog-card" data-cat="pdf" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🖼️</div>
-          <span class="blog-tag tag-pdf">PDF</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🖼️</div>
+            <span class="blog-tag tag-pdf">PDF</span>
+          </div>
           <h3>Convert JPG Images to PDF Free Online</h3>
           <p>Combine one or more JPG, PNG, WEBP images into a single PDF file instantly. Free, no account needed.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 3 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 3 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Unlock a Password-Protected PDF Free -->
       <a href="unlock-pdf-free.html" class="blog-card" data-cat="pdf" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🔓</div>
-          <span class="blog-tag tag-pdf">PDF</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🔓</div>
+            <span class="blog-tag tag-pdf">PDF</span>
+          </div>
           <h3>How to Unlock a Password-Protected PDF Free</h3>
           <p>Remove password protection from PDF files online for free — no software, no account. Works on all devices.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 3 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 3 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Add a Watermark to PDF Free Online -->
       <a href="add-watermark-to-pdf-free.html" class="blog-card" data-cat="pdf" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">💧</div>
-          <span class="blog-tag tag-pdf">PDF</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">💧</div>
+            <span class="blog-tag tag-pdf">PDF</span>
+          </div>
           <h3>How to Add a Watermark to PDF Free Online</h3>
           <p>Add text or image watermarks to PDF files instantly. Protect your documents with custom watermarks for free.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 4 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 4 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Convert PDF to Excel Free Online -->
       <a href="pdf-to-excel-free.html" class="blog-card" data-cat="pdf" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📊</div>
-          <span class="blog-tag tag-pdf">PDF</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📊</div>
+            <span class="blog-tag tag-pdf">PDF</span>
+          </div>
           <h3>Convert PDF to Excel Free Online</h3>
           <p>Extract tables from PDF files and convert them to Excel spreadsheets. Free, online, no signup required.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 4 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 4 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
-      <!-- IMAGE POSTS -->
+      <!-- Card: How to Remove Image Background Free Online -->
       <a href="remove-background-free.html" class="blog-card" data-cat="image" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🎭</div>
-          <span class="blog-tag tag-image">Image</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🎭</div>
+            <span class="blog-tag tag-image">Image</span>
+          </div>
           <h3>How to Remove Image Background Free Online</h3>
           <p>One-click AI background removal — get a transparent PNG in seconds. No Photoshop, no signup needed.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 4 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 4 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Compress Images Online Free — JPG, PNG, WEBP -->
       <a href="compress-image-free.html" class="blog-card" data-cat="image" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🗜️</div>
-          <span class="blog-tag tag-image">Image</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🗜️</div>
+            <span class="blog-tag tag-image">Image</span>
+          </div>
           <h3>Compress Images Online Free — JPG, PNG, WEBP</h3>
           <p>Reduce image file size by up to 90% without visible quality loss. Perfect for web, email, and social media.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 4 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 4 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Resize Images Online Free — Any Dimension -->
       <a href="image-resizer-free.html" class="blog-card" data-cat="image" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📐</div>
-          <span class="blog-tag tag-image">Image</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📐</div>
+            <span class="blog-tag tag-image">Image</span>
+          </div>
           <h3>Resize Images Online Free — Any Dimension</h3>
           <p>Resize photos to exact pixel dimensions or social media presets (Instagram, YouTube, Twitter, LinkedIn) for free.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 3 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 3 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Convert Image Formats Free — JPG, PNG, WEBP, GIF -->
       <a href="image-converter-free.html" class="blog-card" data-cat="image" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🔁</div>
-          <span class="blog-tag tag-image">Image</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🔁</div>
+            <span class="blog-tag tag-image">Image</span>
+          </div>
           <h3>Convert Image Formats Free — JPG, PNG, WEBP, GIF</h3>
           <p>Convert between image formats instantly. JPG to PNG, PNG to WEBP, GIF to MP4, and more — free online.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 3 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 3 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Convert Images to PDF Free Online -->
       <a href="image-to-pdf-free.html" class="blog-card" data-cat="image" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📑</div>
-          <span class="blog-tag tag-image">Image</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📑</div>
+            <span class="blog-tag tag-image">Image</span>
+          </div>
           <h3>Convert Images to PDF Free Online</h3>
           <p>Combine multiple photos into a single PDF document. Supports JPG, PNG, WEBP. Free, instant, no signup.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 3 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 3 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Resize Image Online Free — Exact Pixels Guide -->
       <a href="resize-image-free.html" class="blog-card" data-cat="image" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🔍</div>
-          <span class="blog-tag tag-image">Image</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🔍</div>
+            <span class="blog-tag tag-image">Image</span>
+          </div>
           <h3>Resize Image Online Free — Exact Pixels Guide</h3>
           <p>Step-by-step guide to resizing any image to specific pixel dimensions for websites, apps, and social media.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 4 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 4 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
-      <!-- AI POSTS -->
+      <!-- Card: Best Free AI Essay Writer Tools in 2026 -->
       <a href="best-ai-essay-writer-free.html" class="blog-card" data-cat="ai" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📝</div>
-          <span class="blog-tag tag-ai">AI Writing</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📝</div>
+            <span class="blog-tag tag-ai">AI Writing</span>
+          </div>
           <h3>Best Free AI Essay Writer Tools in 2026</h3>
           <p>Write complete essays in seconds using Google Gemini AI. Compare top free AI essay writers and pick the best one.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 6 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 6 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Free AI Grammar Checker — Full Guide 2026 -->
       <a href="ai-grammar-checker-free.html" class="blog-card" data-cat="ai" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">✍️</div>
-          <span class="blog-tag tag-ai">AI Writing</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">✍️</div>
+            <span class="blog-tag tag-ai">AI Writing</span>
+          </div>
           <h3>Free AI Grammar Checker — Full Guide 2026</h3>
           <p>Fix grammar, spelling, and punctuation with AI instantly. Complete guide to the best free grammar checkers online.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 5 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 5 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Best Free AI Content Writer Tools Online 2026 -->
       <a href="ai-content-writer-free.html" class="blog-card" data-cat="ai" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🤖</div>
-          <span class="blog-tag tag-ai">AI Writing</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🤖</div>
+            <span class="blog-tag tag-ai">AI Writing</span>
+          </div>
           <h3>Best Free AI Content Writer Tools Online 2026</h3>
           <p>Write blog posts, product descriptions, emails and more with free AI content writing tools powered by Gemini.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 5 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 5 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Best Free AI Paraphrasing Tool Online 2026 -->
       <a href="ai-paraphraser-free.html" class="blog-card" data-cat="ai" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">💬</div>
-          <span class="blog-tag tag-ai">AI Writing</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">💬</div>
+            <span class="blog-tag tag-ai">AI Writing</span>
+          </div>
           <h3>Best Free AI Paraphrasing Tool Online 2026</h3>
           <p>Rephrase any text in multiple styles — formal, casual, academic, creative. Complete guide to free paraphrasing tools.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 4 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 4 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Free AI Text Summarizer — Summarize Any Article -->
       <a href="ai-text-summarizer-free.html" class="blog-card" data-cat="ai" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📋</div>
-          <span class="blog-tag tag-ai">AI Writing</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📋</div>
+            <span class="blog-tag tag-ai">AI Writing</span>
+          </div>
           <h3>Free AI Text Summarizer — Summarize Any Article</h3>
           <p>Condense long articles, documents and research papers into key points in seconds with AI. Free, no signup.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 4 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 4 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Translate Text Free Online — 50+ Languages -->
       <a href="translate-text-free.html" class="blog-card" data-cat="ai" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🌐</div>
-          <span class="blog-tag tag-ai">AI Writing</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🌐</div>
+            <span class="blog-tag tag-ai">AI Writing</span>
+          </div>
           <h3>Translate Text Free Online — 50+ Languages</h3>
           <p>Translate any text to 50+ languages instantly using AI. Better than Google Translate for longer passages.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 3 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 3 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
-      <!-- UTILITY POSTS -->
+      <!-- Card: Free QR Code Generator — Complete Guide 2026 -->
       <a href="qr-code-generator-free.html" class="blog-card" data-cat="utility" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📱</div>
-          <span class="blog-tag tag-utility">Utility</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📱</div>
+            <span class="blog-tag tag-utility">Utility</span>
+          </div>
           <h3>Free QR Code Generator — Complete Guide 2026</h3>
           <p>Create QR codes for URLs, WiFi, contacts, and more. Download PNG or SVG. Full guide to QR code creation.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 5 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 5 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Generate a Strong Password — Security Guide -->
       <a href="strong-password-generator.html" class="blog-card" data-cat="utility" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🔐</div>
-          <span class="blog-tag tag-utility">Utility</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🔐</div>
+            <span class="blog-tag tag-utility">Utility</span>
+          </div>
           <h3>How to Generate a Strong Password — Security Guide</h3>
           <p>Create secure, random passwords for all your accounts. Learn what makes a password uncrackable in 2026.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 5 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 5 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Free Word Counter — Count Words, Characters & More -->
       <a href="word-count-tool-free.html" class="blog-card" data-cat="utility" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🔢</div>
-          <span class="blog-tag tag-utility">Utility</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🔢</div>
+            <span class="blog-tag tag-utility">Utility</span>
+          </div>
           <h3>Free Word Counter — Count Words, Characters & More</h3>
           <p>Count words, characters, sentences, and reading time instantly. Essential for writers, students, and SEO.</p>
-          <div class="blog-meta"><span>📅 June 2025</span><span>⏱️ 3 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 June 2025</span>
+              <span>⏱️ 3 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
-      <!-- NEWLY ADDED 20 POSTS -->
+      <!-- Card: How to Convert Excel to PDF Free Online -->
       <a href="excel-to-pdf-free.html" class="blog-card" data-cat="pdf" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📊</div>
-          <span class="blog-tag tag-pdf">PDF</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📊</div>
+            <span class="blog-tag tag-pdf">PDF</span>
+          </div>
           <h3>How to Convert Excel to PDF Free Online</h3>
           <p>Learn how to turn messy Excel spreadsheets into clean, easy-to-read PDFs for free. I share my favorite tips for keeping your formatting intact.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 10 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 10 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Create a Fillable PDF Form Free -->
       <a href="fillable-pdf-form-free.html" class="blog-card" data-cat="pdf" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📋</div>
-          <span class="blog-tag tag-pdf">PDF</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📋</div>
+            <span class="blog-tag tag-pdf">PDF</span>
+          </div>
           <h3>How to Create a Fillable PDF Form Free</h3>
           <p>Stop dealing with messy printed forms. Here is how to easily turn any document into a professional, fillable PDF form for free without expensive software.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 11 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 11 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Best Free Online Tools for Freelancers in 2026 -->
       <a href="best-free-tools-freelancers-2026.html" class="blog-card" data-cat="utility" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">💼</div>
-          <span class="blog-tag tag-utility">UTILITY</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">💼</div>
+            <span class="blog-tag tag-utility">UTILITY</span>
+          </div>
           <h3>Best Free Online Tools for Freelancers in 2026</h3>
           <p>Stop paying for expensive software subscriptions. Discover the absolute best free tools for freelancers in 2026 to manage time, invoices, and design.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 12 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 12 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Reduce PDF Size on iPhone for Free -->
       <a href="reduce-pdf-size-iphone-free.html" class="blog-card" data-cat="pdf" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📱</div>
-          <span class="blog-tag tag-pdf">PDF</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📱</div>
+            <span class="blog-tag tag-pdf">PDF</span>
+          </div>
           <h3>How to Reduce PDF Size on iPhone for Free</h3>
           <p>Struggling to email a massive PDF from your iPhone? Learn the simplest ways to compress large PDF files directly on your iOS device for free.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 9 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 9 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Crop an Image Free Online -->
       <a href="crop-image-free-online.html" class="blog-card" data-cat="image" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">✂️</div>
-          <span class="blog-tag tag-image">IMAGE</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">✂️</div>
+            <span class="blog-tag tag-image">IMAGE</span>
+          </div>
           <h3>How to Crop an Image Free Online</h3>
           <p>Learn how to quickly and easily crop any photo directly in your browser. Remove messy backgrounds and perfectly frame your images for free.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 8 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 8 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Convert WebP to JPG Free Online -->
       <a href="webp-to-jpg-free.html" class="blog-card" data-cat="image" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🔄</div>
-          <span class="blog-tag tag-image">IMAGE</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🔄</div>
+            <span class="blog-tag tag-image">IMAGE</span>
+          </div>
           <h3>How to Convert WebP to JPG Free Online</h3>
           <p>Learn how to quickly change WebP files to JPG formats online for free. We walk you through simple steps to get normal image files working everywhere.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 10 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 10 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Add Text to an Image Free Online -->
       <a href="add-text-to-image-free.html" class="blog-card" data-cat="image" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">✍️</div>
-          <span class="blog-tag tag-image">IMAGE</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">✍️</div>
+            <span class="blog-tag tag-image">IMAGE</span>
+          </div>
           <h3>How to Add Text to an Image Free Online</h3>
           <p>Need to put text on a photo? Find out how to add words, captions, and quotes to your images for free without learning complicated design software.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 10 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 10 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Make Image Background Transparent Free -->
       <a href="transparent-background-image-free.html" class="blog-card" data-cat="image" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">👤</div>
-          <span class="blog-tag tag-image">IMAGE</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">👤</div>
+            <span class="blog-tag tag-image">IMAGE</span>
+          </div>
           <h3>How to Make Image Background Transparent Free</h3>
           <p>Erase messy backgrounds in seconds. Discover how to make your image backgrounds completely transparent for free without installing huge design apps.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 10 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 10 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Humanize AI-Generated Text Free Online -->
       <a href="humanize-ai-text-free.html" class="blog-card" data-cat="ai" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🤖</div>
-          <span class="blog-tag tag-ai">AI</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🤖</div>
+            <span class="blog-tag tag-ai">AI</span>
+          </div>
           <h3>How to Humanize AI-Generated Text Free Online</h3>
           <p>AI sounds like a robot. Learn how to humanize your AI text for free so it reads naturally, connects with people, and passes detection filters.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 10 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 10 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Check for Plagiarism Free Online -->
       <a href="check-plagiarism-free-online.html" class="blog-card" data-cat="ai" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🔍</div>
-          <span class="blog-tag tag-ai">AI</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🔍</div>
+            <span class="blog-tag tag-ai">AI</span>
+          </div>
           <h3>How to Check for Plagiarism Free Online</h3>
           <p>Make sure your work is 100% original. Here is exactly how to check for plagiarism online for free before you submit your paper or publish your blog.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 10 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 10 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Generate Hashtags for Instagram Free -->
       <a href="generate-hashtags-instagram-free.html" class="blog-card" data-cat="ai" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">#️⃣</div>
-          <span class="blog-tag tag-ai">AI</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">#️⃣</div>
+            <span class="blog-tag tag-ai">AI</span>
+          </div>
           <h3>How to Generate Hashtags for Instagram Free</h3>
           <p>Stop guessing which hashtags work. Learn how to generate the best Instagram hashtags for free and get your posts seen by more people.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 10 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 10 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Convert PNG to PDF Free Online -->
       <a href="png-to-pdf-free-online.html" class="blog-card" data-cat="pdf" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🖼️</div>
-          <span class="blog-tag tag-pdf">PDF</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🖼️</div>
+            <span class="blog-tag tag-pdf">PDF</span>
+          </div>
           <h3>How to Convert PNG to PDF Free Online</h3>
           <p>Struggling to send multiple images as one file? Learn how to quickly convert your PNG files into a clean, easy-to-share PDF document for free.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 10 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 10 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Extract Text From an Image Free (OCR) -->
       <a href="extract-text-from-image-ocr-free.html" class="blog-card" data-cat="ai" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🔍</div>
-          <span class="blog-tag tag-ai">AI</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🔍</div>
+            <span class="blog-tag tag-ai">AI</span>
+          </div>
           <h3>How to Extract Text From an Image Free (OCR)</h3>
           <p>Stop retyping everything. Learn how to instantly extract text from images and screenshots for free using simple online OCR tools.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 10 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 10 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Flip and Rotate an Image Free Online -->
       <a href="flip-rotate-image-free-online.html" class="blog-card" data-cat="image" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🔄</div>
-          <span class="blog-tag tag-image">IMAGE</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🔄</div>
+            <span class="blog-tag tag-image">IMAGE</span>
+          </div>
           <h3>How to Flip and Rotate an Image Free Online</h3>
           <p>Did your photo save upside down? Learn how to easily flip, mirror, or rotate any image for free directly in your web browser.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 10 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 10 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Make a Photo Black and White Free -->
       <a href="black-white-photo-free-online.html" class="blog-card" data-cat="image" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🖤</div>
-          <span class="blog-tag tag-image">IMAGE</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🖤</div>
+            <span class="blog-tag tag-image">IMAGE</span>
+          </div>
           <h3>How to Make a Photo Black and White Free</h3>
           <p>Give your photos a timeless, moody feel. Learn how to quickly convert any color image to striking black and white for free online.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 10 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 10 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Encode and Decode Base64 Free Online -->
       <a href="base64-encode-decode-free.html" class="blog-card" data-cat="utility" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🔣</div>
-          <span class="blog-tag tag-utility">UTILITY</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🔣</div>
+            <span class="blog-tag tag-utility">UTILITY</span>
+          </div>
           <h3>How to Encode and Decode Base64 Free Online</h3>
           <p>Learn how to easily encode and decode Base64 data for free online. We explain what Base64 is, why developers use it, and how you can convert data quickly.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 10 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 10 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Pick a Color From Any Image Free -->
       <a href="color-picker-from-image-free.html" class="blog-card" data-cat="image" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">🎨</div>
-          <span class="blog-tag tag-image">IMAGE</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">🎨</div>
+            <span class="blog-tag tag-image">IMAGE</span>
+          </div>
           <h3>How to Pick a Color From Any Image Free</h3>
           <p>Need to find the exact hex code from a picture? Learn how to pick a color from any image for free using simple online tools. Perfect for design projects.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 9 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 9 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: Best Free SEO Tools for Beginners in 2026 -->
       <a href="best-free-seo-tools-beginners-2026.html" class="blog-card" data-cat="utility" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📈</div>
-          <span class="blog-tag tag-utility">UTILITY</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📈</div>
+            <span class="blog-tag tag-utility">UTILITY</span>
+          </div>
           <h3>Best Free SEO Tools for Beginners in 2026</h3>
           <p>Discover the best free SEO tools for beginners in 2026. Optimize your website, find the right keywords, and track your ranking without spending a dime.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 12 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 12 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Make Your Resume Stand Out in 2026 -->
       <a href="how-to-make-resume-stand-out-2026.html" class="blog-card" data-cat="utility" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📄</div>
-          <span class="blog-tag tag-utility">UTILITY</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📄</div>
+            <span class="blog-tag tag-utility">UTILITY</span>
+          </div>
           <h3>How to Make Your Resume Stand Out in 2026</h3>
           <p>Learn how to make your resume stand out in 2026. We share practical tips on formatting, keywords, and structuring your experience to get hired faster.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 11 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 11 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Card: How to Reduce Image Size Without Losing Quality -->
       <a href="reduce-image-size-without-losing-quality.html" class="blog-card" data-cat="image" role="listitem">
         <div class="blog-card-body">
-          <div class="blog-card-emoji">📉</div>
-          <span class="blog-tag tag-image">IMAGE</span>
+          <div class="blog-card-header">
+            <div class="blog-card-emoji">📉</div>
+            <span class="blog-tag tag-image">IMAGE</span>
+          </div>
           <h3>How to Reduce Image Size Without Losing Quality</h3>
           <p>Learn how to reduce image size without losing quality. Discover the best free methods to compress photos for faster website loading and easier sharing.</p>
-          <div class="blog-meta"><span>📅 August 2026</span><span>⏱️ 10 min read</span></div>
-          <span class="blog-read-more">Read guide →</span>
+          <div class="blog-card-footer">
+            <div class="blog-meta">
+              <span>📅 August 2026</span>
+              <span>⏱️ 10 min read</span>
+            </div>
+            <span class="blog-read-more">Read Guide →</span>
+          </div>
         </div>
       </a>
 
+      <!-- Empty State -->
+      <div class="blog-empty-state" id="blogEmptyState">
+        <div class="empty-icon">🔍</div>
+        <h3>No matching guides found</h3>
+        <p>We couldn't find any articles matching your search query. Try another keyword or view all guides.</p>
+        <button class="reset-filter-btn" onclick="resetFilters()">View All Guides</button>
+      </div>
+
     </div>
 
-    <!-- NEWSLETTER / CTA -->
-    <div style="background:linear-gradient(135deg,#6c47ff,#ff6b47);border-radius:16px;padding:40px;text-align:center;color:#fff;margin-top:60px">
-      <h2 style="font-size:1.5rem;font-weight:900;margin-bottom:8px">⚡ Try Nexkittool Free</h2>
-      <p style="opacity:.9;margin-bottom:24px">35+ free tools — PDF converter, image editor, AI essay writer, QR code generator and more. No signup needed.</p>
-      <a href="../" style="background:#fff;color:#6c47ff;padding:14px 32px;border-radius:12px;font-weight:800;font-size:1rem;text-decoration:none;display:inline-block">Start Using Free Tools →</a>
+    <!-- Free Tools CTA Banner -->
+    <div class="blog-cta-banner">
+      <h2>⚡ Experience All 35+ Free Tools</h2>
+      <p>Convert PDFs, edit images, humanize AI text, generate QR codes, and more — instant processing, no signup required.</p>
+      <a href="/" class="cta-button">Explore Free Tools →</a>
     </div>
   </div>
-</section>
+</main>
 
+<!-- ===== FOOTER ===== -->
 <footer class="footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
   <div class="container">
     <!-- Brand Info & Socials -->
@@ -625,7 +1549,7 @@
           <span class="logo-icon">⚡</span>
           <span class="logo-text">NexKitTool</span>
         </a>
-        <p class="footer-brand-desc">Explore 35+ free online tools for PDF conversion, image formatting, Google Gemini AI content generations, and developer utilities. Private, fast, and 100% free.</p>
+        <p class="footer-brand-desc">Explore 35+ free online tools for PDF conversion, image formatting, Google Gemini AI content generations, and developer utilities. Private, fast, and 100% free forever.</p>
       </div>
       <div class="footer-social-links" aria-label="Social media profiles">
         <a href="https://github.com/nexkittool" class="footer-social-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">📁</a>
@@ -719,13 +1643,13 @@
     <div class="footer-trust-strip">
       <h3 class="footer-trust-title">Why Choose NexKitTool?</h3>
       <div class="footer-trust-grid">
-        <div class="footer-trust-item"><span class="footer-trust-icon">✓</span><span class="footer-trust-label">No Signup Required</span></div>
-        <div class="footer-trust-item"><span class="footer-trust-icon">✓</span><span class="footer-trust-label">Free Forever</span></div>
-        <div class="footer-trust-item"><span class="footer-trust-icon">✓</span><span class="footer-trust-label">Secure Processing</span></div>
-        <div class="footer-trust-item"><span class="footer-trust-icon">✓</span><span class="footer-trust-label">Mobile Friendly</span></div>
-        <div class="footer-trust-item"><span class="footer-trust-icon">✓</span><span class="footer-trust-label">Privacy Focused</span></div>
-        <div class="footer-trust-item"><span class="footer-trust-icon">✓</span><span class="footer-trust-label">Fast Processing</span></div>
-        <div class="footer-trust-item"><span class="footer-trust-icon">✓</span><span class="footer-trust-label">Works on All Devices</span></div>
+        <div class="footer-trust-item"><span class="footer-trust-icon">✓</span><span>No Signup Required</span></div>
+        <div class="footer-trust-item"><span class="footer-trust-icon">✓</span><span>Free Forever</span></div>
+        <div class="footer-trust-item"><span class="footer-trust-icon">✓</span><span>Secure Processing</span></div>
+        <div class="footer-trust-item"><span class="footer-trust-icon">✓</span><span>Mobile Friendly</span></div>
+        <div class="footer-trust-item"><span class="footer-trust-icon">✓</span><span>Privacy Focused</span></div>
+        <div class="footer-trust-item"><span class="footer-trust-icon">✓</span><span>Fast Processing</span></div>
+        <div class="footer-trust-item"><span class="footer-trust-icon">✓</span><span>Works on All Devices</span></div>
       </div>
     </div>
 
@@ -748,27 +1672,64 @@
 </footer>
 
 <script>
-// Filter blog posts by category
-function filterPosts(cat) {
-  document.querySelectorAll('.filter-btn').forEach(b => {
-    b.classList.toggle('active', b.textContent.toLowerCase().includes(cat) || (cat === 'all' && b.textContent.includes('All')));
-    b.setAttribute('aria-pressed', b.classList.contains('active'));
-  });
-  document.querySelectorAll('.blog-card').forEach(c => {
-    c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'flex' : 'none';
-  });
+// Responsive mobile drawer toggle
+function toggleMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburger');
+  const isOpen = nav.style.display === 'flex';
+  nav.style.display = isOpen ? 'none' : 'flex';
+  btn.setAttribute('aria-expanded', !isOpen);
+  nav.setAttribute('aria-hidden', isOpen);
 }
 
-// Live search
-document.getElementById('blogSearch').addEventListener('input', function() {
-  const q = this.value.toLowerCase().trim();
-  document.querySelectorAll('.blog-card').forEach(c => {
-    const text = c.textContent.toLowerCase();
-    c.style.display = (!q || text.includes(q)) ? 'flex' : 'none';
+// Filter blog posts by category
+let currentCategory = 'all';
+function filterPosts(cat) {
+  currentCategory = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    const text = b.textContent.toLowerCase();
+    const isActive = (cat === 'all' && text.includes('all')) || (cat !== 'all' && text.includes(cat));
+    b.classList.toggle('active', isActive);
+    b.setAttribute('aria-pressed', isActive);
   });
-});
+  applyFilters();
+}
 
-// Sticky header
+// Search & Filter combined handler
+function applyFilters() {
+  const q = document.getElementById('blogSearch').value.toLowerCase().trim();
+  const cards = document.querySelectorAll('.blog-card');
+  let visibleCount = 0;
+
+  cards.forEach(c => {
+    const matchesCat = (currentCategory === 'all' || c.dataset.cat === currentCategory);
+    const text = c.textContent.toLowerCase();
+    const matchesSearch = (!q || text.includes(q));
+
+    if (matchesCat && matchesSearch) {
+      c.style.display = 'flex';
+      visibleCount++;
+    } else {
+      c.style.display = 'none';
+    }
+  });
+
+  const emptyState = document.getElementById('blogEmptyState');
+  if (emptyState) {
+    emptyState.style.display = (visibleCount === 0) ? 'block' : 'none';
+  }
+}
+
+// Live search listener
+document.getElementById('blogSearch').addEventListener('input', applyFilters);
+
+// Reset filters button in empty state
+function resetFilters() {
+  document.getElementById('blogSearch').value = '';
+  filterPosts('all');
+}
+
+// Sticky header shadow
 window.addEventListener('scroll', () => {
   document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
 }, {passive: true});
